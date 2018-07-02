@@ -31,6 +31,21 @@
  * @var $this Mage_Customer_Block_Form_Register
  */
 ?>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=renderReCaptcha&render=explicit" async defer></script>
+<script type="text/javascript">
+    function renderReCaptcha() {
+        grecaptcha.render('re_captcha', {
+            sitekey: '6Lf8ETMUAAAAABFt-dcvV3Z5zz6xhRYHfEtA0IK9',
+            theme: 'light',
+            lang: 'pt'
+        });
+    }
+    function enableBtn(){
+        document.getElementById("send2").disabled  = false;
+    }
+</script>
+
 <div id="full" class="no-home">
                             
     <div id="colunas12" class="page-title">
@@ -631,11 +646,18 @@
                         </div>
                         <?php endif ?>            
                     </li>
-                </ul>              
+                </ul>  
+                <ul class="form-list clear">
+                    <li class="wide">
+                        <div class="input-box">
+                            <div id="re_captcha" data-callback="enableBtn"></div>
+                        </div>
+                    </li>
+                </ul>            
             </div>
             <div class="buttons-set">
                 <p class="f-l required">*Campos Obrigatórios</p><br />
-                <button type="submit" title="Enviar" class="bt fs-14 d-b bold tt-u radius td-n"><span><span class="cor-sec">Enviar</span></span></button>
+                <button type="submit" title="Enviar" class="bt fs-14 d-b bold tt-u radius td-n" id="send2" disabled><span><span class="cor-sec">Enviar</span></span></button>
             </div>
         </div>
     </form>
