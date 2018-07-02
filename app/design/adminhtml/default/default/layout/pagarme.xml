@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Pagarme
+ * @author     Suporte <suporte@inovarti.com.br>
+ *
+ * UPDATED:
+ *
+ * @copyright   Copyright (C) 2015 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author     Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+
+<layout>
+    <!-- Pagarme Info Handle -->
+    <pagarme_info_handle>
+        <reference name="head">
+            <action method="addJs"><script>prototype/window.js</script></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+            <action method="addCss"><name>lib/prototype/windows/themes/magento.css</name></action>
+
+            <action method="addCss"><name>pagarme/css/styles.css</name></action>
+            <action method="addJs"><script>pagarme/pagarme.js</script></action>
+        </reference>
+    </pagarme_info_handle>
+
+    <pagarme_invoice_fee_handle>
+        <reference name="invoice_totals">
+            <block type="adminhtml/sales_order_totals_item" name="fee" template="pagarme/fee/total.phtml" />
+        </reference>
+    </pagarme_invoice_fee_handle>
+
+    <pagarme_creditmemo_fee_handle>
+        <reference name="creditmemo_totals">
+            <block type="adminhtml/sales_order_totals_item" name="fee" template="pagarme/fee/total.phtml" />
+        </reference>
+    </pagarme_creditmemo_fee_handle>
+
+	<adminhtml_sales_order_view>
+        <update handle="pagarme_info_handle"/>
+
+        <reference name="order_totals">
+            <block type="adminhtml/sales_order_totals_item" name="fee" template="pagarme/fee/total.phtml" />
+            <block type="adminhtml/sales_order_totals_item" name="fee.refunded" template="pagarme/fee/refunded.phtml">
+                <action method="setDisplayArea"><area>footer</area></action>
+                <action method="setAfterCondition"><condition>last</condition></action>
+            </block>
+        </reference>
+
+        <reference name="sales_order_tabs">
+            <action method="addTab">
+                <name>order_view_tab_splitorder</name>
+                <block>pagarme/adminhtml_order_view_tab_SplitOrder</block>
+            </action>
+        </reference>
+
+    </adminhtml_sales_order_view>
+
+    <adminhtml_sales_order_invoice_new>
+        <update handle="pagarme_info_handle"/>
+        <update handle="pagarme_invoice_fee_handle"/>
+    </adminhtml_sales_order_invoice_new>
+
+    <adminhtml_sales_order_invoice_updateqty>
+        <update handle="pagarme_invoice_fee_handle"/>
+    </adminhtml_sales_order_invoice_updateqty>
+
+    <adminhtml_sales_order_invoice_view>
+        <update handle="pagarme_info_handle"/>
+        <update handle="pagarme_invoice_fee_handle"/>
+    </adminhtml_sales_order_invoice_view>
+
+    <adminhtml_sales_order_creditmemo_new>
+        <update handle="pagarme_info_handle"/>
+        <update handle="pagarme_creditmemo_fee_handle"/>
+    </adminhtml_sales_order_creditmemo_new>
+
+    <adminhtml_sales_order_creditmemo_updateqty>
+        <update handle="pagarme_creditmemo_fee_handle"/>
+    </adminhtml_sales_order_creditmemo_updateqty>
+
+    <adminhtml_sales_order_creditmemo_view>
+        <update handle="pagarme_info_handle"/>
+
+        <reference name="creditmemo_totals">
+            <block type="adminhtml/sales_order_totals_item" name="fee.refunded" template="pagarme/fee/refunded.phtml">
+                <action method="setDisplayArea"><area>footer</area></action>
+            </block>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+
+    <adminhtml_sales_order_shipment_new>
+        <update handle="pagarme_info_handle"/>
+    </adminhtml_sales_order_shipment_new>
+
+    <adminhtml_sales_order_shipment_view>
+        <update handle="pagarme_info_handle"/>
+    </adminhtml_sales_order_shipment_view>
+
+    <adminhtml_pagarme_transaction_view>
+    	<update handle="popup"/>
+    	<remove name="footer" />
+    	<reference name="head">
+            <action method="addCss"><name>pagarme/css/styles.css</name></action>
+            <action method="addItem"><type>skin_js</type><name>pagarme/js/script.js</name><params/></action>
+        </reference>
+    	<reference name="content">
+			<block type="pagarme/adminhtml_transaction_view" name="pagarme.transaction.view" template="pagarme/transaction/view.phtml"></block>
+        </reference>
+    </adminhtml_pagarme_transaction_view>
+</layout>
+

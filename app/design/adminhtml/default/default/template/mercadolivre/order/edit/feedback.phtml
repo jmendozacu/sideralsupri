@@ -1,0 +1,384 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+?>
+
+
+<?php
+$buyer = $this -> getBuyerFeedback();
+$seller = $this -> getSellerFeedback();
+$order = $this -> getOrder();
+?>	
+
+<script src="<?php echo $this -> getJsUrl('jquery/jquery.js'); ?>"></script>
+<script type="text/javascript">
+	//<![CDATA[
+var $j = jQuery.noConflict();
+
+
+ 		$j(document).ready(function() {
+		
+		
+		$j("#btreply").click(function() {
+		    $j("#replyfeedform").show();
+		    $j("#btreply").hide();
+		});
+		
+		$j("#btfeedback").click(function() {
+			$j("#buyer_info").hide();
+			$j("#error_info").hide();
+		    $j("#givefeedform").show();
+		});
+		
+		$j("#btreplybackback").click(function() {
+			$j("#replyfeedform").hide();
+			$j("#btreply").show();
+		});
+		
+		$j("#btreplybacksave").click(function() {
+			
+				order = "<?php echo $order['mercadolivre_order_id'] ?>";
+				message = $j("#reply").val();
+
+				var request = $j.ajax({
+				url: "<?php echo $this->getSaveReplyUrl(); ?>",
+				type: "get",
+				dataType: "html",
+				data: {'order': order, 'message': message},
+				dataType: "html",
+				beforeSend: function () {
+				$j("#loading-mask-reply").show();
+				}});
+
+				request.success(function(html) {
+				$j("#replyfeedform").hide();
+				$j("#seller_info").attr(html);
+				$j("#loading-mask").hide();
+				});
+
+				request.fail(function(){
+				$j("#btreply").show();
+				$j("#replyfeedform").hide();
+				$j("#error_info_seller").show();
+				$j("#loading-mask").hide();
+				});
+		});
+		
+		
+		
+		$j(".changefeedback").click(function() {
+				changefeedback();
+		});
+		
+		$j("#btfeedbackback").click(function() {
+			$j("#buyer_info").show();
+		    $j("#givefeedform").hide();
+		});
+		
+		$j("#btfeedbacksave").click(function() {
+
+				order = "<?php echo $order['mercadolivre_order_id'] ?>";
+				message = $j("#message").val();
+				rating =  $j("#rating").val();
+				fulfilled =  $j("#fulfilled").val();
+				type =  $j("#type").val();
+
+				var request = $j.ajax({
+				url: "<?php echo $this -> getSaveFeedBackUrl(); ?>",
+				type: "get",
+				dataType: "html",
+				data: {'order': order, 'message': message, 'rating':rating , 'fulfilled': fulfilled, 'type':type},
+				dataType: "html",
+				beforeSend: function () {
+				$j("#loading-mask").show();
+				}});
+
+				request.success(function(html) {
+				$j("#givefeedform").hide();
+				$j("#answerWrapGiven").html(html);
+				$j("#loading-mask").hide();
+				});
+
+				request.fail(function(){
+				$j("#givefeedform").hide();
+				$j("#buyer_info").show();
+				$j("#error_info").show();
+				$j("#loading-mask").hide();
+				});
+		});
+
+	});
+
+				function changefeedback(){
+				$j("#buyer_info").hide();
+				$j("#givefeedform").show();
+				$j("#error_info").hide();
+				}
+
+				//]]>
+</script>
+
+	<div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Feedback given') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+  	<div id="error_info" style="display: none;">
+  	<div id="messages">
+	<ul class="messages">
+	<li class="error-msg">
+	<ul>
+	<li>
+	<span><?php echo Mage::helper('mercadolivre')->__('Was not possible to give or change the feedback. Perhaps you need to wait a answer from the buyer, or this ordem is expired to give or change feedback') ?></span>
+	</li>
+	</ul>
+	</li>
+	</ul>
+	</div>	
+  	</div>
+    <div id="answerWrapGiven">
+    <div id="buyer_info" >
+    <?php if($seller != null):?>
+    	<table>
+    		   <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Date') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $seller['date_create']; ?>  
+               </td>
+            </tr>
+     		<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Rating') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $seller['rating']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Completed') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo($seller['fulfilled'] ? Mage::helper('mercadolivre') -> __('Yes') : Mage::helper('mercadolivre') -> __('No')); ?>  
+               </td>
+            </tr>
+            <?php if (isset($seller['reason']) && $seller['reason'] != '' &&  $seller['reason'] != null):?>
+          	<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Reason') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $seller['reason']; ?>  
+               </td>
+            </tr>
+            <?php endif; ?>
+              <?php if ( isset($seller['message']) && $seller['message'] != '' && $seller['message'] != null):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Message') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $seller['message']; ?>  
+               </td>
+            </tr>
+            <?php endif; ?>
+            <?php if ($seller['reply'] != '' && $seller['reply'] != null):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Reply') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $seller['reply']; ?>  
+               </td>
+            </tr>
+            <?php endif; ?>
+            <tr><td><br /></td></tr>
+            <tr><td>
+            <button type="button" id="changefeedback" title="change Feedback" class="scalable save changefeedback">
+			<?php echo Mage::helper('mercadolivre') -> __('Change FeedBack'); ?>
+   			</button>	
+            </td>
+            </tr>
+            </table>
+     </div>
+    <?php else: ?>	
+    <div id="buyer_info">
+	<?php echo Mage::helper('mercadolivre')->__('Not Given') ?><br /><br />
+	<button type="button" id="btfeedback" title="Give Feedback" class="scalable save" >
+	<?php echo Mage::helper('mercadolivre') -> __('Give FeedBack'); ?>
+   	</button>
+   	</div>
+   	<?php endif; ?>
+	
+	<!-- wrap emd -->
+	</div>
+	<div id="givefeedform" style="display:none;">
+	<table class="form-list" cellspacing="0">
+	<tr><td class="label">
+	<label for="fulfilled"><?php echo Mage::helper('mercadolivre') -> __('Fulfilled'); ?></label>
+	</td><td class="value"> 
+	<select name="fulfilled" id="fulfilled">
+	<option value="true"><?php echo Mage::helper('mercadolivre') -> __('Yes'); ?></option>
+	<option value="false"><?php echo Mage::helper('mercadolivre') -> __('No'); ?></option>	
+	</select>
+	</td></tr><tr><td class="label">
+	<label for="fulfilled"><?php echo Mage::helper('mercadolivre') -> __('Rating'); ?></label>
+	</td><td class="value"> 
+	<select name="rating" id="rating">
+	<option value="positive"><?php echo Mage::helper('mercadolivre') -> __('Positive'); ?></option>
+	<option value="neutral"><?php echo Mage::helper('mercadolivre') -> __('Neutral'); ?></option>
+	<option value="negative"><?php echo Mage::helper('mercadolivre') -> __('Negative'); ?></option>
+	</select>
+	</td></tr><tr><td class="label">
+	<label for="message"><?php echo Mage::helper('mercadolivre') -> __('Message'); ?></label>
+	</td><td class="value"> 
+	<textarea name="message" id="message"></textarea>
+	
+	</td></tr>
+	<tr><td>
+	<input type='hidden' id='type' value="<?php echo($seller != null ? 'change' : 'give'); ?>">
+	<button type="button" id="btfeedbackback" title="Back Feedback" class="scalable back" ><?php echo Mage::helper('mercadolivre') -> __('Cancel'); ?></button>
+	<button type="button" id="btfeedbacksave" title="Save Feedback" class="scalable save" ><?php echo Mage::helper('mercadolivre') -> __('Save'); ?></button>
+	</td></tr>
+	</table>
+	</div>
+	<div id="loading-mask" style="display:none">
+    <p class="loader" id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>" alt="<?php echo Mage::helper('adminhtml')->__('Loading...') ?>"/><br/><?php echo Mage::helper('adminhtml')->__('Please wait...') ?></p>
+	</div>
+    </fieldset>
+    </div>
+	
+	<div class="entry-edit">
+    <div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Feedback Received') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+    <div id="error_info_seller" style="display: none;">
+  	<div id="messages">
+	<ul class="messages">
+	<li class="error-msg">
+	<ul>
+	<li>
+	<span><?php echo Mage::helper('mercadolivre')->__('Was not possible to give or change the reply. Perhaps you need to wait a answer from the buyer, or this ordem is expired to give or change reply') ?></span>
+	</li>
+	</ul>
+	</li>
+	</ul>
+	</div>	
+  	</div>
+    <div id="answerWrapReceved">
+    <div id="seller_info" >
+    <?php if($buyer != null):?>
+    	<table>
+    		   <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Date') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $buyer['date_create']; ?>  
+               </td>
+            </tr>
+     		<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Rating') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $buyer['rating']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Completed') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo($buyer['fulfilled'] ? Mage::helper('mercadolivre') -> __('Yes') : Mage::helper('mercadolivre') -> __('No')); ?>  
+               </td>
+            </tr>
+            <?php if ($buyer['reason'] != '' && $buyer['reason'] != null):?>
+          	<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Reason') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $buyer['reason']; ?>  
+               </td>
+            </tr>
+            <?php endif; ?>
+              <?php if ($buyer['message'] != '' && $buyer['message'] != null):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Message') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $buyer['message']; ?>  
+               </td>
+            </tr>
+            	<?php endif; ?>
+            	 <?php if ($buyer['reply'] != '' && $buyer['reply'] != null):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Reply') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $buyer['reply']; ?>  
+               </td>
+            </tr>
+            	<?php else: ?>
+            <tr>
+            	<td><br /></td>
+            </tr>
+            <tr>
+            <td>
+            
+             
+		    <button type="button" id="btreply" title="Give Reply" class="scalable save" >
+			<?php echo Mage::helper('mercadolivre') -> __('Give Reply'); ?>
+		   	</button>
+		   	
+            	</td>
+            </tr>
+            <?php endif; ?>
+            </table>
+            
+            <!-- form reply -->
+            <div id="replyfeedform" style="display:none;">
+            <table>
+            <tr><td class="label">
+			<label for="message"><?php echo Mage::helper('mercadolivre') -> __('Reply Message'); ?></label>
+			</td><td class="value"> 
+			<textarea name="reply" id="reply" style="height: 100px; width: 350px;"></textarea>
+			</td></tr>
+			<tr><td><br/></td></tr>
+			<tr><td>
+	<button type="button" id="btreplybackback" title="Back reply" class="scalable back" ><?php echo Mage::helper('mercadolivre') -> __('Cancel'); ?></button>
+	<button type="button" id="btreplybacksave" title="Save reply" class="scalable save" ><?php echo Mage::helper('mercadolivre') -> __('Save'); ?></button>
+	</td></tr>
+		    </table>
+            </div>
+               <!-- form reply  end -->
+            <?php else: ?>	
+    <div id="seller_info">
+	<?php echo Mage::helper('mercadolivre')->__('Not Given') ?><br /><br />
+   	</div>
+   	<?php endif; ?>
+	<!-- wrap emd -->
+	</div></div>
+	<div id="loading-mask" style="display:none">
+    <p class="loader" id="loading_mask_loader"><img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>" alt="<?php echo Mage::helper('adminhtml')->__('Loading...') ?>"/><br/><?php echo Mage::helper('adminhtml')->__('Please wait...') ?></p>
+	</div>
+    </fieldset>
+    </div>
+
+

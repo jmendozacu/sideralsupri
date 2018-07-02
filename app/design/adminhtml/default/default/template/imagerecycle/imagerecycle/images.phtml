@@ -1,0 +1,371 @@
+<?php 
+
+// Images to show
+$images = $this->getImages();
+ $totalImages = count($images);
+// Get current url without page param
+$requestParams = $this->getRequest()->getParams();
+if( isset($requestParams['page']) ){
+	unset($requestParams['page']);
+}
+$order_by = isset($requestParams['order_by'])? $requestParams['order_by']: "" ;
+if(isset($requestParams['dir']) && $requestParams['dir']=='desc') { 
+    $dir = 'desc';
+    $new_dir = 'asc';
+}else {
+    $dir = 'asc';
+    $new_dir = 'desc';
+}
+
+$url = Mage::helper("adminhtml")->getUrl("*/*/index");
+if($order_by != '') {
+    $sortedUrl = $url . "order_by/".$order_by."/dir/".$dir.'/';
+}else {
+    $sortedUrl = $url;
+}
+
+?>
+
+<div class="content-header">	
+	<h3 class="icon-head" style="color: #009999">
+		<?php echo Mage::helper('imagerecycle')->__('Images Recycle Manager') ?>
+	</h3>
+</div>
+
+<div>
+ <div style="float:right; margin-top: -45px; position: relative">
+		<a id="ir-setting" href="javascript:void(0)">Setting<i class="icon-setting"></i></a>		
+		<div class="ir-setting hidden">
+			<p style="margin-top: 8px; color: #6565cb; font-weight: bold"><?php echo Mage::helper('imagerecycle')->__('Image recycle setttings') ?></p>
+			<table class="form-table">
+				<tbody>	
+                                       <input id="installed_time" class="formData"  name="_mageio_settings[installed_time]" type="hidden" value="<?php echo $this->settings['installed_time'] ; ?>" size="50"/>                                        
+					<tr>
+						<th scope="row"><?php echo Mage::helper('imagerecycle')->__('API key : ') ?></th>
+						<td colspan="2">						
+                                                    <input id="api_key" class="formData"  name="_mageio_settings[api_key]" type="text" value="<?php echo $this->escapeHtml($this->settings['api_key']) ; ?>" size="50"/>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php echo Mage::helper('imagerecycle')->__('API secret : ') ?></th>
+						<td colspan="2">							
+                                                    <input id="api_secret" class="formData" name="_mageio_settings[api_secret]" type="text" value="<?php echo $this->escapeHtml($this->settings['api_secret']) ; ?>" size="50"/>
+						</td>
+					</tr>
+                                        <tr>
+						<th scope="row"><?php echo Mage::helper('imagerecycle')->__('Exclude folders : ') ?></th>
+						<td colspan="2">
+                                                    <?php $exclude_folders = !empty($this->settings['exclude_folders'])? $this->settings['exclude_folders']: "app,var,cache,adminhtml"; ?>
+                                                    <input id="exclude_folders" class="formData" name="_mageio_settings[exclude_folders]" type="text" value="<?php echo $this->escapeHtml($exclude_folders) ; ?>" size="50"/>
+						</td>
+					</tr>
+                                        <tr>
+						<th scope="row" ><?php echo Mage::helper('imagerecycle')->__('Image resize') ?></th>
+						<td colspan="2">
+                                                    <?php 
+                                                    $resize_auto = !is_null($this->settings['resize_auto'])? $this->settings['resize_auto']: 0;                                                       
+                                                    ?>
+                                                    <select id="resize_auto"  name="_mageio_settings[resize_auto]">
+                                                        <option value="0" <?php if($resize_auto==0) { echo 'selected="selected"';}?> >No</option>
+                                                        <option value="1" <?php if($resize_auto==1) { echo 'selected="selected"';}?> >Yes</option>
+                                                    </select>                                                    
+						</td>
+					</tr>
+                                        <tr>
+                                            <td colspan="3">
+                                             <?php echo Mage::helper('imagerecycle')->__('<strong>Use with caution!</strong> All new images will size more than setting will be resized automatically on upload') ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+						<th scope="row" colspan="2"><?php echo Mage::helper('imagerecycle')->__('Image resize, max size (px)') ?></th>
+						<td>
+							<?php $resize_image = !is_null($this->settings['resize_image'])?$this->settings['resize_image'] : 1600; ?>
+                                                    <input id="resize_image" class="formData" name="_mageio_settings[resize_image]" type="text" value="<?php echo $this->escapeHtml($resize_image) ; ?>" size="10"/>
+						</td>
+					</tr>
+                                        <tr>
+                                            <th scope="row" colspan="2">
+                                                <?php echo Mage::helper('imagerecycle')->__('Min file size to optimize (Kb)') ?></th>
+                                                <td>
+                                                    <?php $minSize = !is_null($this->settings['min_size'])?$this->settings['min_size'] : 1; ?>
+                                                    <input id="min_size" class="formData" name="_mageio_settings[min_size]" type="text" value="<?php echo $this->escapeHtml($minSize) ; ?>" size="10"/>
+						</td>                                                
+                                            </th>					
+					</tr>
+                                         <tr>
+                                            <th scope="row" colspan="2">
+                                                <?php echo Mage::helper('imagerecycle')->__('Max file size to optimize (Kb)') ?></th>
+                                                <td>
+                                                    <?php $maxSize = !is_null($this->settings['max_size'])?$this->settings['max_size'] : 10000; ?>
+                                                    <input id="max_size" class="formData" name="_mageio_settings[max_size]" type="text" value="<?php echo $this->escapeHtml($maxSize) ; ?>" size="10"/>
+						</td>                                                
+                                            </th>					
+					</tr>
+                                        <tr>
+                                            <th scope="row" colspan="2">
+                                               <input id="compression_type" class="formData"  name="_mageio_settings[compression_type]" type="hidden" value="lossy" size="50"/>
+                                                <?php echo Mage::helper('imagerecycle')->__('Compression type - PDF:') ?> </th>
+                                                <td>
+                                                    <select id="compression_type_pdf"  class="formData" name="_mageio_settings[compression_type_pdf]" >                                                        
+                                                        <option value="lossy" <?php if($this->settings['compression_type_pdf']=='lossy') echo 'selected="selected"';?> >Best saving</option>
+                                                        <option value="lossless" <?php if($this->settings['compression_type_pdf']=='lossless') echo 'selected="selected"';?>>Original quality</option>
+                                                        <option value="none" <?php if($this->settings['compression_type_pdf']=='none') echo 'selected="selected"';?>>No compression</option>
+                                                    </select>                                                  
+						</td>                                                
+                                            </th>					
+					</tr>                                      
+                                        <tr>
+                                            <th scope="row" colspan="2">                                            
+                                                <?php echo Mage::helper('imagerecycle')->__('Compression type - PNG:') ?> </th>
+                                                <td>
+                                                    <select id="compression_type_png"  class="formData" name="_mageio_settings[compression_type_png]" >                                                        
+                                                        <option value="lossy" <?php if($this->settings['compression_type_png']=='lossy') echo 'selected="selected"';?> >Best saving</option>
+                                                        <option value="lossless" <?php if($this->settings['compression_type_png']=='lossless') echo 'selected="selected"';?>>Original quality</option>
+                                                        <option value="none" <?php if($this->settings['compression_type_png']=='none') echo 'selected="selected"';?>>No compression</option>
+                                                    </select>                                                  
+						</td>                                                
+                                            </th>					
+					</tr>
+                                        <tr>
+                                            <th scope="row" colspan="2">                                            
+                                                <?php echo Mage::helper('imagerecycle')->__('Compression type - JPG:') ?> </th>
+                                                <td>
+                                                    <select id="compression_type_jpg"  class="formData" name="_mageio_settings[compression_type_jpg]" >                                                        
+                                                        <option value="lossy" <?php if($this->settings['compression_type_jpg']=='lossy') echo 'selected="selected"';?> >Best saving</option>
+                                                        <option value="lossless" <?php if($this->settings['compression_type_jpg']=='lossless') echo 'selected="selected"';?>>Original quality</option>
+                                                        <option value="none" <?php if($this->settings['compression_type_jpg']=='none') echo 'selected="selected"';?>>No compression</option>
+                                                    </select>                                                  
+						</td>                                                
+                                            </th>					
+					</tr>
+                                         <tr>
+                                            <th scope="row" colspan="2">                                            
+                                                <?php echo Mage::helper('imagerecycle')->__('Compression type - GIF:') ?> </th>
+                                                <td>
+                                                    <select id="compression_type_gif"  class="formData" name="_mageio_settings[compression_type_gif]" >                                                        
+                                                        <option value="lossy" <?php if($this->settings['compression_type_gif']=='lossy') echo 'selected="selected"';?> >Best saving</option>
+                                                        <option value="lossless" <?php if($this->settings['compression_type_gif']=='lossless') echo 'selected="selected"';?>>Original quality</option>
+                                                        <option value="none" <?php if($this->settings['compression_type_gif']=='none') echo 'selected="selected"';?>>No compression</option>
+                                                    </select>                                                  
+						</td>                                                
+                                            </th>					
+					</tr>
+					<tr>
+						<th scope="row"></th>
+                                                <td width="50%" style="text-align:center">
+							<a id="ir-setting-save" class="button ir-action" style="padding: 0 15px 1px" href="#"><?php echo Mage::helper('imagerecycle')->__('Save') ?>
+								<span id="ir-setting-loader">
+									<img src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>" width="18px" height="18px" />
+								</span>
+							</a>
+							<span id="ir-setting-msg"></span>
+						</td>
+                                                <td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>   
+<div class="scan-msg-box" style="display: none">
+	<div>
+		<p><?php echo Mage::helper('imagerecycle')->__("It may takes a few minutes for the first time of using Mage Image Recycle.") ?></p>
+		<p>
+			<?php echo Mage::helper('imagerecycle')->__("Images finder processing..") ?>
+		</p>
+		<p style="margin-top: 25px">	
+			<img class="ir-loader" src="<?php echo $this->getSkinUrl('images/ajax-loader-tr.gif') ?>" width="50" height="50" />
+			<p class="ir-scan-msg"></p>
+		</p>
+	</div>
+</div>
+
+<form id="irForm" method="post" action="<?php echo Mage::helper("adminhtml")->getUrl("imagerecycle/index/optimize", array('page' => $this->page)) ?>">
+	<p class="msg-warning bulk-action-error" style="display:none"><?php echo Mage::helper('imagerecycle')->__("Please select one Action") ?></p>
+	<div class="clear-left"></div>
+	
+	<div class="row row1">
+		<div style="float: left">
+			<select class="ir-bulk-action" name="bulk_action">
+				<option value="-1"><?php echo Mage::helper('imagerecycle')->__("Bulk Action") ?></option>
+				<option value="optimize_selected"><?php echo Mage::helper('imagerecycle')->__("Optimize selsected") ?></option>
+				<option value="optimize_all"><?php echo Mage::helper('imagerecycle')->__("Optimize all") ?></option>
+			</select>
+			<button class="button do-bulk-action"><?php echo Mage::helper('imagerecycle')->__("Apply") ?></button>
+		</div>
+
+		<div class="pagination-wrapper">
+			<span style="float:left; margin-right: 8px; margin-top: 8px">
+				<i>Total <?php echo (!$totalImages ? "0 item" : ($this->totalImages > 1 ?  "$this->totalImages items" : "1 item")) ?></i>
+			</span>
+			<?php if($pagination = $this->pagination): ?>
+			<ul class="pagination">
+		    	<li class="<?php if ($this->page == $pagination->start): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->start" ?>">Start</a></li>
+		        <li class="<?php if ($this->page == $pagination->start): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->prev" ?>">Prev</a></li>
+		        <?php foreach($pagination->range as $page): ?>
+		        <li class="<?php if ($page == $pagination->current): ?>active<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$page" ?>"><?php echo $page ?></a></li>
+		        <?php endforeach ?>
+		        <li class="<?php if ($this->page == $pagination->end): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->next" ?>">Next</a></li>
+		        <li class="<?php if ($this->page == $pagination->end): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->end" ?>">End</a></li>
+		    </ul>
+			<?php endif ?>
+		</div>
+	</div>
+	
+	<table class="image-recycle">
+		<thead>
+			<tr>
+				<th colspan="1" class="check-column"><input type="checkbox" class="ir-checkbox check-all" name="check_all" /></th>
+				<th colspan="2"><?php echo Mage::helper('imagerecycle')->__('Image') ?></th>
+				<th colspan="5">
+                                     <?php if($order_by=='filename') :?>
+                                        <a href="<?php echo $url . "order_by/filename/dir/".$new_dir;?>">
+                                             <?php echo Mage::helper('imagerecycle')->__('Filename') ?>
+                                            <span class="<?php if($new_dir == 'desc'): ?>ir-arrow-up<?php else: ?>ir-arrow-down<?php endif ?>"></span></a>
+                                    <?php else:?>
+                                        <a href="<?php echo $url . "order_by/filename/dir/asc";?>">
+                                            <?php echo Mage::helper('imagerecycle')->__('Filename') ?>
+                                        </a>
+                                    <?php endif ?>
+                                  
+                                </th>
+				<th colspan="2">                                   
+                                    <?php if($order_by=='size') :?>
+                                        <a href="<?php echo $url . "order_by/size/dir/".$new_dir;?>">
+                                             <?php echo Mage::helper('imagerecycle')->__('Size') ?>
+                                            <span class="<?php if($new_dir == 'desc'): ?>ir-arrow-up<?php else: ?>ir-arrow-down<?php endif ?>"></span></a>
+                                    <?php else:?>
+                                        <a href="<?php echo $url . "order_by/size/dir/asc";?>">
+                                            <?php echo Mage::helper('imagerecycle')->__('Size') ?>
+                                        </a>
+                                    <?php endif ?>(Kb)
+				</th>
+				<th colspan="2">
+                                     <?php if($order_by=='status') :?>
+                                        <a href="<?php echo $url . "order_by/status/dir/".$new_dir;?>">
+                                             <?php echo Mage::helper('imagerecycle')->__('Status') ?>
+                                            <span class="<?php if($new_dir == 'desc'): ?>ir-arrow-up<?php else: ?>ir-arrow-down<?php endif ?>"></span></a>
+                                    <?php else:?>
+                                        <a href="<?php echo $url . "order_by/status/dir/asc";?>">
+                                            <?php echo Mage::helper('imagerecycle')->__('Status') ?>
+                                        </a>
+                                    <?php endif ?>
+                                </th>
+				<th colspan="2"><?php echo Mage::helper('imagerecycle')->__('Action') ?></th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th colspan="1" class="check-column"><input type="checkbox" class="ir-checkbox check-all" name="check_all" /></th>
+				<th colspan="2"><?php echo Mage::helper('imagerecycle')->__('Image') ?></th>
+				<th colspan="5">
+                                     <?php if($order_by=='filename') :?>
+                                        <a href="<?php echo $url . "order_by/filename/dir/".$new_dir;?>">
+                                             <?php echo Mage::helper('imagerecycle')->__('Filename') ?>
+                                            <span class="<?php if($new_dir == 'desc'): ?>ir-arrow-up<?php else: ?>ir-arrow-down<?php endif ?>"></span></a>
+                                    <?php else:?>
+                                        <a href="<?php echo $url . "order_by/filename/dir/asc";?>">
+                                            <?php echo Mage::helper('imagerecycle')->__('Filename') ?>
+                                        </a>
+                                    <?php endif ?>
+                                  
+                                </th>
+				<th colspan="2">                                   
+                                    <?php if($order_by=='size') :?>
+                                        <a href="<?php echo $url . "order_by/size/dir/".$new_dir;?>">
+                                             <?php echo Mage::helper('imagerecycle')->__('Size') ?>
+                                            <span class="<?php if($new_dir == 'desc'): ?>ir-arrow-up<?php else: ?>ir-arrow-down<?php endif ?>"></span></a>
+                                    <?php else:?>
+                                        <a href="<?php echo $url . "order_by/size/dir/asc";?>">
+                                            <?php echo Mage::helper('imagerecycle')->__('Size') ?>
+                                        </a>
+                                    <?php endif ?>(Kb)
+				</th>
+				<th colspan="2">
+                                     <?php if($order_by=='status') :?>
+                                        <a href="<?php echo $url . "order_by/status/dir/".$new_dir;?>">
+                                             <?php echo Mage::helper('imagerecycle')->__('Status') ?>
+                                            <span class="<?php if($new_dir == 'desc'): ?>ir-arrow-up<?php else: ?>ir-arrow-down<?php endif ?>"></span></a>
+                                    <?php else:?>
+                                        <a href="<?php echo $url . "order_by/status/dir/asc";?>">
+                                            <?php echo Mage::helper('imagerecycle')->__('Status') ?>
+                                        </a>
+                                    <?php endif ?>
+                                </th>
+				<th colspan="2"><?php echo Mage::helper('imagerecycle')->__('Action') ?></th>
+			</tr>
+		</tfoot>
+		<tbody>
+			
+	<?php foreach($images as $k => $image): ;?>
+			<?php if($k > 50) break; ?>
+			<?php $alternate = ($k%2==0) ? 'even' : ''; ?>
+			<tr class="<?php echo $alternate ?>">
+				<th colspan="1" class="check-column">
+					<input type="checkbox" value="<?php echo $image['filename'] ?>" name="images[]" class="ir-checkbox" />
+				</th>
+				<th colspan="2" class="item-image">
+                                    <?php if($image['filetype']=='pdf') { ?>
+                                        <img class="image-small" src="<?php echo $this->getBaseUrl();?>/skin/adminhtml/default/default/imagerecycle/imagerecycle/images/pdf.png" />
+                                    <?php }else { ?>
+					<img class="image-small" src="<?php echo $this->getBaseUrl().$image['filename'] ?>" />
+					<img class="image-origin" src="<?php echo $this->getBaseUrl().$image['filename'] ?>" /> 
+                                    <?php } ?>
+				</th>
+				<td colspan="5" style="font-size:14px"><?php echo $image['filename'] ?></td>
+                                <td colspan="2" style="font-size:15px"><span class="filesize"><?php echo number_format($image['size']/1000, 2, '.', ''); ?></span></td>
+				<td colspan="2" class="ir-status">
+                                    <?php if($image['optimized']) : $file = realpath($image['filename']);  ?>
+                                        <span class="optimizationStatus">Optimized at <?php echo round(($image['optimized_datas']['size_before']-filesize($file))/$image['optimized_datas']['size_before']*100,2);?>%</span>
+                                    <?php endif; ?>
+      		    
+				</td>
+				<td colspan="2">
+                                    <?php if($image['optimized']) { ?>
+                                        <a class="button revert ir-action" href="#" data-image-realpath="<?php echo $image['filename'] ?>"><?php echo Mage::helper('imagerecycle')->__('Revert to original') ?></a>
+                                    <?php } else { ?>
+                                        <a class="button optimize ir-action" href="#" data-image-realpath="<?php echo $image['filename'] ?>"><?php echo Mage::helper('imagerecycle')->__('Optimize') ?></a>
+                                    <?php } ?>
+                                    </td>
+			</tr>
+	<?php endforeach ?>
+		</tbody>
+	</table>
+	
+	<div class="row row2" style="margin-top: 15px; padding: 0">
+		<div style="float: left">
+			<select class="ir-bulk-action" name="bulk_action">
+				<option value="-1"><?php echo Mage::helper('imagerecycle')->__("Bulk Action") ?></option>
+				<option value="optimize_selected"><?php echo Mage::helper('imagerecycle')->__("Optimize selsected") ?></option>
+				<option value="optimize_all"><?php echo Mage::helper('imagerecycle')->__("Optimize all") ?></option>
+			</select>
+			<button class="button do-bulk-action"><?php echo Mage::helper('imagerecycle')->__("Apply") ?></button>
+		</div>
+		
+		<div class="pagination-wrapper">
+			<span style="float:left; margin-right: 8px; margin-top: 8px">
+				<i>Total <?php echo (!$totalImages ? "0 item" : ($this->totalImages > 1 ?  "$this->totalImages items" : "1 item")) ?></i>
+			</span>
+			<?php if($pagination = $this->pagination): ?>
+			<ul class="pagination">
+		    	<li class="<?php if ($this->page == $pagination->start): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->start" ?>">Start</a></li>
+		        <li class="<?php if ($this->page == $pagination->start): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->prev" ?>">Prev</a></li>
+		        <?php foreach($pagination->range as $page): ?>
+		        <li class="<?php if ($page == $pagination->current): ?>active<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$page" ?>"><?php echo $page ?></a></li>
+		        <?php endforeach ?>
+		        <li class="<?php if ($this->page == $pagination->end): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->next" ?>">Next</a></li>
+		        <li class="<?php if ($this->page == $pagination->end): ?>disabled<?php endif ?>"><a href="<?php echo $sortedUrl . "page/$pagination->end" ?>">End</a></li>
+		    </ul>
+			<?php endif ?>
+		</div>
+	</div>
+	<!--  Form_key is required -->
+	<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />	
+</form>
+</div>
+
+<script type="text/javascript">
+    var optimize_url = '<?php echo Mage::helper("adminhtml")->getUrl("imagerecycle/index/optimize") ?>';
+    var optimizeall_url = '<?php echo Mage::helper("adminhtml")->getUrl("imagerecycle/index/optimizeAll") ?>';    
+    var revert_url = '<?php echo Mage::helper("adminhtml")->getUrl("imagerecycle/index/revert") ?>';	
+    var saveConfig_url = '<?php echo Mage::helper("adminhtml")->getUrl("imagerecycle/index/saveConfig") ?>?isAjax=true'   ;
+</script>        

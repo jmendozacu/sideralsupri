@@ -1,0 +1,132 @@
+<div id="full" class="news-bg">
+	<div id="wrapper">
+		<div id="colunas12" class="no-bottom">
+			<?php echo $this->getChildHtml('newsletter') ?>
+		</div>
+	</div>
+</div>
+
+<div id="full" class="footer-bg">
+	<div id="wrapper">
+		
+		<div id="colunas3">
+			<h3 class="footer-h cor-sec info">Informa&ccedil;&otilde;es</h3>
+			<?php echo $this->getChildHtml('footer_links') ?>
+		</div>
+
+		<div id="colunas3">
+			<h3 class="footer-h cor-sec pag">Formas de pagamento</h3>
+			<ul id="menu-footer-flag">
+				<li class="trans opacity-1-5 c-boleto"></li>
+				<li class="trans opacity-1-5 c-deposito"></li>
+				<li class="trans opacity-1-5 c-visa"></li>
+				<li class="trans opacity-1-5 c-master"></li>
+				<li class="trans opacity-1-5 c-amex"></li>
+				<li class="trans opacity-1-5 c-bradesco"></li>
+				<li class="trans opacity-1-5 c-itau"></li>
+				<li class="trans opacity-1-5 c-bb"></li>
+				<li class="trans opacity-1-5 c-bcash"></li>
+			</ul>
+		</div>
+		
+		<div id="colunas3">
+			<h3 class="footer-h cor-sec social">Certificados</h3>
+			<ul id="menu-footer-flag2">
+				<li class="trans opacity-1-5"><a id="seloEbit" href="http://www.ebit.com.br/#sideral-suprimentos" target="_blank" onclick="redir(this.href);">Avaliação de Lojas e-bit</a>
+				<script type="text/javascript" id="getSelo" src="https://a248.e.akamai.net/f/248/52872/0s/img.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?12692" ></script></li>
+				<li class="trans opacity-1-5"><a id="google-safe" href="http://www.google.com/safebrowsing/diagnostic?site=www.sideralsupri.com.br" target="_blank"><img src="<?php echo $this->getSkinUrl('images/google_safe.png'); ?>" width="100" height="42" alt="Sideral - Google Safe" /></a></li>
+				<li class="trans opacity-1-5"><a id="clube" href="#" target="_blank"><img src="<?php echo $this->getSkinUrl('images/clube-ecommerce.png'); ?>" alt="Clube E-commerce" /></a></li>							<li class="trans opacity-1-5"><a id="clube" href="http://perfil.mercadolivre.com.br/SIDERALSUPRI" target="_blank"><img src="<?php echo $this->getSkinUrl('images/mercado-livre.jpg'); ?>" alt="Mercado Livre" /></a></li>	
+			</ul>
+		</div>
+		
+		<div id="colunas3" class="fb">
+			<h3 class="footer-h cor-sec news">Fale Conosco</h3>
+			<ul id="menu-footer-flag" class="menu-footer-contato">
+				<li class="mfc"><span class="d-b f-l cor-sec fs-14">televendas: 011 4428-2300 </span></li>
+				<li class="mfc"><span class="d-b f-l cor-sec fs-14">De 2&ordm; a 6&ordm; feira. Das 8 &agrave;s 18 horas.</span></li>
+				<li class="mfmsn"><p class="cor-sec fs-14">msn: loja@sideralsupri.com.br</p></li>
+				<li class="mfsk"><p class="cor-sec fs-14">skype: sideralsupri</p></li>
+				<li class="mffb"><p class="cor-sec fs-14"><a href="http://www.facebook.com/sideralsuprimentos" target="_blank" title="Facebook - Sideral">facebook: sideralsuprimentos</a></p></li>
+				<li class="mfgp"><p class="cor-sec fs-14"><a href="https://plus.google.com/+SideralsupriBr" target="_blank" title="GooglePlus - Sideral">google plus: sideralsupribr</a></p></li>
+				<li class="mfyt"><p class="cor-sec fs-14"><a href="http://www.youtube.com/sideralsuprimentos" target="_blank" title="Youtube - Sideral">youtube: sideralsuprimentos</a></p></li>
+			</ul>
+		</div>
+
+	</div>
+</div>
+
+<div id="full" class="foot-bg">
+	<div id="wrapper">
+		<div id="colunas12" class="no-bottom cor-sec fs-12 bold">
+			Sideral Suprimentos de Impress&atilde;o - CNPJ 57605289/0001-90<br/>
+			Rua Maria Ortiz, 158 - Santo Andr&eacute; - SP - 09070-270<br />
+			&copy;<?php echo date('Y'); ?> Todos os direitos reservados. Marcas registradas de terceiro, n&atilde;o representadas e sem v&iacute;nculo com a Sideral.<br />
+			Desenvolvido por <a target="_blank" href="https://mucciestudio.com.br">Mucci Est&uacute;dio</a>.
+			<div id="mucci"><a target="_blank" href="https://mucciestudio.com.br" class="trans opacity-1-5"></a></div>
+			<div id="dispositivos"></div>
+		</div>		
+	</div>
+</div>
+
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script type="text/javascript">
+	(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript">
+	(function(d){
+	  var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+	  p.type = 'text/javascript';
+	  p.async = true;
+	  p.src = '//assets.pinterest.com/js/pinit.js';
+	  f.parentNode.insertBefore(p, f);
+	}(document));
+</script>
+
+
+<!-- Google Remarketing -->
+<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 1039572706;
+	var google_custom_params = window.google_tag_params;
+	var google_remarketing_only = true;
+	/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">;
+</script>
+<noscript>
+	<div style="display:inline;">
+		<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1039572706/?value=0&amp;guid=ON&amp;script=0"/>
+	</div>
+</noscript>
+
+<!-- Cloudfront -->
+<script type="text/javascript">
+	setTimeout(function(){var a=document.createElement("script");
+	var b=document.getElementsByTagName("script")[0];
+	a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0014/3455.js?"+Math.floor(new Date().getTime()/3600000);
+	a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-KNPPPT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KNPPPT');</script>
+
+<!-- Site Control -->
+<script>
+  (function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);
+    t.async=1;t.src=e;s=i.getElementsByTagName(g)[0];s.parentNode.insertBefore(t, s);
+  })(window, document, '_gscq','script','//widgets.getsitecontrol.com/95302/script.js');
+</script>
+

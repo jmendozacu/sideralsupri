@@ -1,0 +1,91 @@
+<script type='text/javascript'>
+Adroll = function() { ; }
+Adroll.whats_this = function() {
+    window.alert("In order for the extension to function properly, your store's configuration cache must be cleared. By leaving this box checked, you acknowledge that AdRoll will automatically clear your configuration cache. If unchecked, the extension will not function until cache is cleared manually. For more information on Magento cache: http://www.magentocommerce.com/wiki/modules_reference/english/mage_adminhtml/system_cache/index");
+    }
+</script>
+<div id="adroll">
+    <div id="adroll-header">
+        <h1>AdRoll</h1>
+        <h2>LiquidAds</h2>
+        <h3>Magento Connect Extension</h3>
+        <div class="clear"></div>
+    </div>
+
+    <div id="adroll-signup">
+        <form method='post' action="<?php echo $this->getUrl('*/*/post')?>">
+            <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+            <input name="form" type="hidden" value="new" />
+            <h1>Create An AdRoll Account</h1>
+
+            <ul>
+                <li>
+                    <label for="email">Email Address</label>
+                    <input type="text" name="email" id="email" /> 
+                </li>
+                <li>
+                    <label for="password">Create A Password</label>
+                    <input type="password" name="password" id="password" /> 
+                </li>
+                <li>
+                    <label for="password_confirm" class="adroll-error">Confirm Your Password</label>
+                    <input type="password" name="password_confirm" id="password_confirm" class="adroll-error"/> 
+                </li>
+                
+                <li>
+                    <input class="adroll-checkbox" type="checkbox" name="flush_cache" checked="checked" /> 
+                    <label class="adroll-checkbox">Clear Magento Cache <em>(<a href="#" onclick="Adroll.whats_this();">what's this?</a>)</em></label>
+                    <div class="clear"></div>
+                </li>
+                <li id="adroll-terms">
+                    <p>
+                        By submitting this form and creating an account, 
+                        you accept our 
+                        <a href="http://www.adroll.com/about/terms" target="_blank">Terms and Conditions</a>.
+                    </p>
+                </li>
+            </ul>
+        
+            <div id="adroll-form-footer">
+                <input type="submit" id="adroll-submit" value="Create My Account" /> 
+                <div class="clear"></div>
+            </div>
+        </form>
+
+        <a class="adroll-subtle-button" style="margin-top: 30px;"  href="<?php echo $this->getUrl('*/*/existing')?>">Already a customer? Sign in to your account.</a>
+    </div>
+
+
+    <div id="adroll-showcase">
+        <div id="adroll-liquid-box">
+            <h2>Example LiquidAd</h2>
+            
+            <!-- LIQUID AD -->
+             <object
+                classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+                codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"
+                width="300"
+                height="250"
+                id="eyefly">
+                <param name="movie" value="https://s.adroll.com/magento/LiquidAdExample.swf" />
+                <param name="FlashVars" value="demo=1"/>
+                <embed
+                    src="https://s.adroll.com/magento/LiquidAdExample.swf"
+                    width="300"
+                    height="250"
+                    name="eyefly"
+                    type="application/x-shockwave-flash"
+                    pluginspage="http://www.adobe.com/go/getflashplayer"
+                    FlashVars="demo=1"
+                    />
+              </object>
+        </div>
+        
+        <p>
+            <strong>AdRoll LiquidAds</strong> seamlessly integrate your site's product 
+            images and branding into a personalized ad unit that looks 
+            as incredible as it performs.
+        </p>
+    </div>
+    <div class="clear"></div>
+</div>

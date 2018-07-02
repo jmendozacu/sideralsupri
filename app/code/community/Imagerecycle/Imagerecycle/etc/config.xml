@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Imagerecycle_Imagerecycle>
+			<version>1.0.4</version>
+		</Imagerecycle_Imagerecycle>
+	</modules>
+	
+	<admin>
+		<routers>
+			<imagerecycle>
+				<use>admin</use>
+				<args>
+					<module>Imagerecycle_Imagerecycle</module>
+					<frontName>imagerecycle</frontName>
+				</args>
+			</imagerecycle>
+		</routers>
+	</admin>
+	
+	<adminhtml>
+		<layout>
+	        <updates>
+	            <imagerecycle_imagerecycle>
+	                <file>imagerecycle_imagerecycle.xml</file>
+	            </imagerecycle_imagerecycle>
+	        </updates>
+	    </layout>
+	</adminhtml>
+	
+	<global>
+		<models>
+			<imagerecycle>
+				<class>Imagerecycle_Imagerecycle_Model</class>
+				<resourceModel>imagerecycle_resource</resourceModel>
+			</imagerecycle>
+			<imagerecycle_resource>
+				<class>Imagerecycle_Imagerecycle_Model_Resource</class>
+				<entities>
+					<images>
+						<table>images_recycle</table>
+					</images>
+				</entities>
+			</imagerecycle_resource>
+		</models>
+		 <events>
+            <catalog_product_gallery_upload_image_after>
+                <observers>
+                    <imagerecycle_imagerecycle_model_observer>
+                        <type>singleton</type>
+                        <class>Imagerecycle_Imagerecycle_Model_Observer</class>
+                        <method>imageuploaded</method>
+                    </imagerecycle_imagerecycle_model_observer>
+                </observers>
+            </catalog_product_gallery_upload_image_after> 
+            
+            <catalog_product_save_commit_after>
+                <observers>
+                    <imagerecycle_imagerecycle_model_observer>
+                        <type>singleton</type>
+                        <class>Imagerecycle_Imagerecycle_Model_Observer</class>
+                        <method>productsaved</method>
+                    </imagerecycle_imagerecycle_model_observer>
+                </observers>
+            </catalog_product_save_commit_after> 
+            
+             <catalog_category_save_commit_after>
+                <observers>
+                    <imagerecycle_imagerecycle_model_observer>
+                        <type>singleton</type>
+                        <class>Imagerecycle_Imagerecycle_Model_Observer</class>
+                        <method>categorySaved</method>
+                    </imagerecycle_imagerecycle_model_observer>
+                </observers>
+            </catalog_category_save_commit_after> 
+            
+        </events>
+		<resources>
+			<imagerecycle_setup>
+				<setup>
+					<module>Imagerecycle_Imagerecycle</module>
+					<class>Imagerecycle_Imagerecycle_Model_Resource_Setup</class>
+				</setup>
+			</imagerecycle_setup>
+		</resources>
+		
+		<blocks>
+            <imagerecycle>
+            	<class>Imagerecycle_Imagerecycle_Block</class>
+            </imagerecycle>
+            <!--<core>-->
+                <!--<rewrite>-->
+                    <!--<text>Imagerecycle_Imagerecycle_Block_Core_Text</text>-->
+                <!--</rewrite>-->
+            <!--</core>-->
+        </blocks>
+		
+		<helpers>
+			<imagerecycle>
+				<class>Imagerecycle_Imagerecycle_Helper</class>
+			</imagerecycle>
+		</helpers>
+		
+	</global>
+	
+</config>

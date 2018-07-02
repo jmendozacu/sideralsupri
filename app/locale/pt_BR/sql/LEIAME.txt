@@ -1,0 +1,18 @@
+=============================================================
+LEIAME
+=============================================================
+
+Sugiro antes de executar o script "magento-db-pt_br.sql" sugiro que seja feito o backup do seu projeto
+
+Sugiro tambem analisar o script "magento-db-pt_br.sql" e executar somente oque for necessário
+
+
+=============================================================
+BACKUP PROJETO
+=============================================================
+
+Segue comandos que deve ser executado no terminal do seu servidor para o processo do backup
+
+mysqldump -h 'HOST' -u 'USER' -p'PASS' 'DBNAME' > 'COMPANY-mysql-20-04-2012.sql'
+
+tar -cvpzf 'COMPANY-files-20-04-2012.tgz' /DIRETORIO

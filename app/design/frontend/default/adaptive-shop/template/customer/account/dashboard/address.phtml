@@ -1,0 +1,22 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+	<h3 class="fs-14 txt bold"><?php echo $this->__('Address Book') ?></h3>
+	<a class="fs-12 cor" href="<?php echo $this->getAddressBookUrl() ?>">(<?php echo $this->__('Manage Addresses') ?>)</a>
+	<br /><br />
+	<h4 class="txt fs-14 bold"><?php echo $this->__('Default Billing Address') ?></h4>
+    <span class="txt fs-14"><?php echo $this->getPrimaryBillingAddressHtml() ?></span>
+    <br />
+    <a class="fs-12 cor" href="<?php echo $this->getPrimaryBillingAddressEditUrl() ?>">(<?php echo $this->__('Edit Address') ?>)</a>
+    <br /><br />
+    <h4 class="fs-14 txt bold"><?php echo $this->__('Default Shipping Address') ?></h4>
+    <span class="txt fs-14"><?php echo $this->getPrimaryShippingAddressHtml() ?></span>
+    <br />
+    <a class="fs-12 cor" href="<?php echo $this->getPrimaryShippingAddressEditUrl() ?>">(<?php echo $this->__('Edit Address') ?>)</a>
+    

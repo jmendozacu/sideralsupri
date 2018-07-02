@@ -1,0 +1,38 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+
+$data = $this->getData();
+?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Your order is completed') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<p><strong><?php echo $this->__('Thank you for your purchase!') ?></strong></p>
+<?php if ($this->canPrint()) :?>
+    <p><?php echo $this->__('Your order # is: <a href="%s">%s</a>', $this->getViewOrderUrl(), $data['order_incremental_id']) ?>.</p>
+<?php  else :?>
+    <p><?php echo $this->__('Your order # is: %s', $data['order_incremental_id']) ?>.</p>
+<?php endif;?>
+    <p><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+    <div id="colunas9">
+        <h1 class="cor bold"><?php echo $this->__('My Dashboard') ?></h1>
+    </div>
+    	<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <div id="colunas9">
+    	<?php echo $this->getChildHtml('hello') ?>
+    </div>
+    	<?php //echo $this->getChildHtml('top') ?>
+    <div id="colunas9">
+    	<h2 class="cor bold"><?php echo $this->__('Account Information') ?></h2>
+    	<br />
+    	<?php /* Extensions placeholder */ ?>
+    	<?php echo $this->getChildHtml('customer.account.dashboard.extra') ?>
+    	<?php echo $this->getChildHtml('info') ?>
+    	<?php echo $this->getChildHtml('address') ?>
+    	<?php echo $this->getChildHtml('info1') ?>
+    	<?php echo $this->getChildHtml('info2') ?>
+    </div>
+

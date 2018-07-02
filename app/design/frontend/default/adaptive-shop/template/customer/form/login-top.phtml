@@ -1,0 +1,30 @@
+<?php
+/**
+ * Customer login form template
+ *
+ * @see Mage_Customer_Block_Form_Login
+ */
+?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php /* Extensions placeholder */ ?>
+    <?php echo $this->getChildHtml('customer.form.login.extra')?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form2">
+	     <?php echo $this->getBlockHtml('formkey'); ?>
+							<ul>
+								<li>
+								<label for="email" class="required">E-mail:</label><br />
+								<input type="text" name="login[username]" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" id="email" class="radius cor fs-13" title="Endere&ccedil;o de Email" placeholder="Digite seu email">
+								<label for="pass" class="required">Senha:</label><br />
+                                <input type="password" name="login[password]" class="radius cor fs-13" id="pass" title="Senha" placeholder="Digite sua senha">
+								<div class="bt-login">
+								<input type="submit" class="f-l bt2 d-b cor-sec bold tt-u radius td-n fs-13" title="Entrar" value="entrar" name="send" id="send2" />
+								<a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-r cor-sec">Esqueci a minha senha</a>
+                				</div>                        		
+                				</li>
+                        	</ul>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form2', true);
+    //]]>
+    </script>

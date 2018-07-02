@@ -1,0 +1,109 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php
+$product = $this->getProduct();
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Product Information') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+    	
+    	 <?php if($product instanceof Mage_Catalog_Model_Product){ ?>
+    	 	
+			<table class="form-list" cellspacing="0">    
+				    
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Product Name') ?></label>    
+                </td>
+                <td class="value">
+                  <?php echo $product->getName()?>         
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Product Sku') ?></label>    
+                </td>
+                <td class="value">
+                	<?php echo $product->getSku()?>             
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Product Id') ?></label>    
+                </td>
+                <td class="value">
+                	<input type="text"  name='product_id' value="<?php echo $product->getEntityId()?>" />                
+               </td>
+            </tr>
+              
+         </table>
+    <?php  } elseif (is_array($product)) { ?>
+         
+         <table class="form-list" cellspacing="0">    
+				    
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Select a variation') ?></label>    
+                </td>
+                <td class="value">
+                   <select id="variation" class="required-entry select" title="Variation" name='product_id'>
+                 <?php        
+    		
+                    foreach ($product as $option){
+			        if($option['qtd'] > 0){ ?>
+                    <option value="<?php echo $option['id'] ?>">
+                    	
+                    	<?php 
+                    	$title = array();
+                    	foreach ($option['att'] as $att):
+						if($att['value'] != null || $att['value'] != '') $title[] = $att['code'] . ': '. $att['value'];
+						endforeach; 
+						?>
+	
+                    	<?php echo implode(', ', $title) ?>     	
+                    </option> 
+                    <?php }}; ?>
+ 
+                        
+                </select>     
+               </td>
+            </tr>
+            
+            </table>
+         
+         
+         
+         
+        <?php } else { ?>
+        	
+        	<table class="form-list" cellspacing="0">    
+			
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Insert the product Id') ?></label>    
+                </td>
+                <td class="value">
+                	<input type="text" name='product_id'  value="" />                
+               </td>
+            </tr>
+              
+         </table>
+        	
+        	<?php } ?>
+        	
+    </fieldset>
+</div>

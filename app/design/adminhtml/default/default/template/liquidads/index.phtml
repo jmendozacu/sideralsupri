@@ -1,0 +1,70 @@
+<div id="adroll">
+    <div id="adroll-header">
+        <h1>AdRoll</h1>
+        <h2>LiquidAds</h2>
+        <h3>Magento Connect Extension</h3>
+        <div class="clear"></div>
+    </div>
+
+    <div id="adroll-choose-user-type">
+        <h1> Setup Your Account</h1>
+        <p>
+            Get started with AdRoll LiquidAds by choosing one the options below.
+        </p>
+
+        <section id="adroll-account-type-options">
+            <ul>
+                <li>
+                    <a href="<?php echo $this->getUrl('*/*/existing')?>" class="adroll-setup-button adroll-existing">
+                        <span>
+                            <strong>Existing AdRoll Users</strong>
+                            <em>Link your existing AdRoll account</em>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo $this->getUrl('*/*/new')?>" class="adroll-setup-button adroll-new-user">
+                        <span>
+                            <strong>New AdRoll Users</strong>
+                            <em>Create a new AdRoll Account</em>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </section>            
+    </div>
+
+
+    <div id="adroll-showcase">
+        <div id="adroll-liquid-box">
+            <h2>Example LiquidAd</h2>
+            
+            <!-- LIQUID AD -->
+             <object
+                classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+                codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"
+                width="300"
+                height="250"
+                id="eyefly">
+                <param name="movie" value="https://s.adroll.com/magento/LiquidAdExample.swf" />
+                <param name="FlashVars" value="demo=1"/>
+                <embed
+                    src="https://s.adroll.com/magento/LiquidAdExample.swf"
+                    width="300"
+                    height="250"
+                    name="eyefly"
+                    type="application/x-shockwave-flash"
+                    pluginspage="http://www.adobe.com/go/getflashplayer"
+                    FlashVars="demo=1"
+                    />
+              </object>
+        </div>
+        
+        <p>
+            <strong>AdRoll LiquidAds</strong> seamlessly integrate your site's product 
+            images and branding into a personalized ad unit that looks 
+            as incredible as it performs.
+        </p>
+    </div>
+    <div class="clear"></div>
+</div>

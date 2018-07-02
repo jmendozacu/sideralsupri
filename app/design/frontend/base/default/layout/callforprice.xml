@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Mageplace_Callforprice
+ */
+-->
+<layout version="0.1.0">
+	<default>
+            <reference name="head">
+        	<action method="addItem"><type>skin_css</type><name>css/callforprice.css</name></action>
+            </reference>
+	</default>
+</layout>

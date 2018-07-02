@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+-->
+<layout>
+
+    <mercadolivre_auth_index>
+        <reference name="content">
+            <block type="mercadolivre/auth" name="front_auth_page" template="mercadolivre/auth.phtml"
+                   output="toHtml"></block>
+        </reference>
+    </mercadolivre_auth_index>
+
+    <mercadolivre_auth_sucess>
+        <reference name="content">
+            <block type="mercadolivre/sucess" name="front_auth_page_success" template="mercadolivre/sucess.phtml"
+                   output="toHtml"></block>
+        </reference>
+    </mercadolivre_auth_sucess>
+
+
+    <mercadolivre_auth_invalid>
+        <reference name="content">
+            <block type="mercadolivre/invalid" name="front_auth_invalid" template="mercadolivre/invalid.phtml"></block>
+        </reference>
+    </mercadolivre_auth_invalid>
+
+
+    <mercadolivre_public_shippingrates>
+
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/popup.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="mercadolivre/public_shipping" name="mercadolivre_shipping.popup"
+                   template="mercadolivre/shipping.phtml"/>
+        </reference>
+    </mercadolivre_public_shippingrates>
+
+
+    <mercadolivre_cart_login>
+        <label>Mercadolivre Chechout Login></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="mercadolivre/cart_login" name="mercadolivre.cart.login"
+                   template="mercadolivre/cart/login.phtml"/>
+        </reference>
+
+    </mercadolivre_cart_login>
+
+    <mercadolivre_cart_list>
+        <label>Mercadolivre Chechout List></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="mercadolivre/cart_list" name="mercadolivre.cart.list" template="mercadolivre/cart/list.phtml"/>
+        </reference>
+    </mercadolivre_cart_list>
+
+
+    <mercadolivre_cart_pay>
+        <label>Mercadolivre Chechout pay></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="content">
+            <block type="mercadolivre/cart_pay" name="mercadolivre.cart.pay" output="toHtml"/>
+        </reference>
+    </mercadolivre_cart_pay>
+
+
+    <mercadolivre_cart_address>
+        <label>Mercadolivre Chechout List></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="mercadolivre/cart_address" name="mercadolivre.cart.address"
+                   template="mercadolivre/cart/address.phtml"/>
+        </reference>
+    </mercadolivre_cart_address>
+
+    <mercadolivre_cart_shipping>
+        <label>Mercadolivre Chechout Shipping></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="mercadolivre/cart_shipping" name="mercadolivre.cart.shipping"
+                   template="mercadolivre/cart/shipping.phtml"/>
+        </reference>
+    </mercadolivre_cart_shipping>
+
+
+    <mercadolivre_cart_product>
+        <label>Mercadolivre Select Product></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="mercadolivre/cart_product" name="mercadolivre.cart.product"
+                   template="mercadolivre/cart/product.phtml"/>
+        </reference>
+    </mercadolivre_cart_product>
+
+    <mercadolivre_cart_review>
+        <label>Mercadolivre Chechout Review></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="mercadolivre/cart_review" name="mercadolivre.cart.review"
+                   template="mercadolivre/cart/review.phtml">
+                <block type="page/html_notices" name="global_notices" as="global_notices"
+                       template="page/html/notices.phtml"/>
+                <block type="core/messages" name="global_messages" as="global_messages"/>
+            </block>
+        </reference>
+
+    </mercadolivre_cart_review>
+
+    <mercadolivre_cart_complete>
+        <label>Mercadolivre Chechout Complete></label>
+        <remove name="left"/>
+        <remove name="right"/>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="mercadolivre/cart_complete" name="mercadolivre.cart.complete"
+                   template="mercadolivre/cart/complete.phtml"/>
+        </reference>
+    </mercadolivre_cart_complete>
+</layout>

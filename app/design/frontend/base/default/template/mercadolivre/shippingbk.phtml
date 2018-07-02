@@ -1,0 +1,51 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+ 
+ 
+
+$rates = $this->getShippingRates();
+
+if(is_array($rates)){
+foreach($rates as $key => $value): 
+	 
+	 ?>  	
+
+    	<dt><b><?php echo($value['title']);?></b></dt>    		
+    		<?php if(isset($value['methods'])): ?>
+    			<ul>
+		    	<?php foreach ($value['methods'] as $subkey => $subvalue):?>
+		  		<li><dd><label>	
+		  		<?php echo $subvalue['title'] . '( '. $subvalue['price_formatted']  . ' )'; ?>
+		  		</label>	
+		  		</dd></li>
+		  		<?php endforeach; ?>
+		  		</ul>
+		  	<?php else: ?>
+		  		<ul class="messages"><li class="error-msg"><?php echo $value['error'] ; ?></li></ul>
+		  	<?php endif;?>
+    	 	<br />
+   <?php endforeach;
+   
+   } else {
+   echo '<ul class="messages"><li class="error-msg">'.$rates.'</li></ul>';
+   }
+ ?>
+
+
+
+
+
+
+
+

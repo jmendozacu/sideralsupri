@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="root">
+            <remove name="global_messages" />
+            <remove name="return_link"/>
+        </reference>
+        <reference name="after_body_start">
+            <block type="core/template" name="adaptive_global_messages" template="core/adaptive_global_messages.phtml" before="-" />
+        </reference>
+    </default>
+</layout>

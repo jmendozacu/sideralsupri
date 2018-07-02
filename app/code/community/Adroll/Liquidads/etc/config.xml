@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Adroll
+ * @package    Adroll_Liquidads
+ * @author     mitch@adroll.com
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Adroll_Liquidads>
+            <version>2.1.2</version>
+        </Adroll_Liquidads>
+    </modules>
+    <admin>
+        <routers>
+			<liquidads>
+				<use>admin</use>
+				<args>
+					<module>Adroll_Liquidads</module>
+					<frontName>liquidads</frontName>
+				</args>
+			</liquidads>
+        </routers>
+    </admin>
+    <frontend>
+        <routers>
+            <liquidads>
+                <use>standard</use>
+                <args>
+                    <module>Adroll_Liquidads</module>
+                    <frontname>liquidads</frontname>
+                </args>
+            </liquidads>
+        </routers>
+    </frontend>
+    <adminhtml>
+		<menu>
+			<liquidads module="liquidads">
+				<title>AdRoll</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="liquidads">
+						<title>Liquid Ads</title>
+						<sort_order>0</sort_order>
+						<action>liquidads/adminhtml_liquidads</action>
+					</items>
+				</children>
+			</liquidads>
+		</menu>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Adroll_Liquidads>
+							<title>Liquidads Module</title>
+							<sort_order>10</sort_order>
+						</Adroll_Liquidads>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<liquidads>
+					<file>liquidads.xml</file>
+				</liquidads>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <blocks>
+            <liquidads>
+                <class>Adroll_Liquidads_Block</class>
+            </liquidads>
+        </blocks>
+        <helpers>
+            <liquidads>
+                <class>Adroll_Liquidads_Helper</class>
+            </liquidads>
+        </helpers>
+    </global>
+</config>

@@ -1,0 +1,38 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="colunas9">
+    <h1 class="cor bold">Promo&ccedil;&otilde;es</h1>
+</div>
+<div id="colunas9">
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php echo $this->getChildHtml('form_before')?>
+<form action="<?php echo $this->getAction() ?>" method="post" id="form-validate">
+    <div class="fieldset">
+        <?php echo $this->getBlockHtml('formkey')?>
+        <ul class="form-list">
+            <li class="control"><input type="checkbox" name="is_subscribed" id="subscription" value="1" title="<?php echo $this->__('General Subscription') ?>"<?php if($this->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" /><label class="txt fs-12" for="subscription">Quero receber promo&ccedil;&otilde;es e ofertas exclusivas.</label></li>
+            <?php /* Extensions placeholder */ ?>
+            <?php echo $this->getChildHtml('customer.form.newsletter.extra')?>
+        </ul>
+        <br />
+    </div>
+    <button type="submit" title="<?php echo $this->__('Save') ?>" class="button bt radius cor-sec tt-u fs-14 bold td-n"><?php echo $this->__('Save') ?></button>
+</form>
+</div>
+<div id="colunas9">
+	<!--<a class="cor fs-12" href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a>-->
+</div>
+
+<?php /* Extensions placeholder */ ?>
+<?php echo $this->getChildHtml('customer.form.newsletter.extra2')?>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>

@@ -1,0 +1,453 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to suporte.developer@buscape-inc.com so we can send you a copy immediately.
+ *
+ * @category   Buscape
+ * @package    Buscape_PagamentoDigital
+ * @copyright  Copyright (c) 2010 Buscapé Company (http://www.buscapecompany.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <tabs>
+        <buscape translate="label" module="pagamentodigital">
+            <label>Buscapé Company</label>
+            <sort_order>100</sort_order>
+        </buscape>
+    </tabs>      
+    <sections>
+        <pagamentodigital translate="label" module="pagamentodigital">
+            <label>Bcash</label>
+            <tab>buscape</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+             <groups>
+                <settings translate="label" module="pagamentodigital">
+                    <label>Configurações</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                     <fields>
+                        <masklabel>
+                            <label>Exibição do WebCheckout</label>
+                            <!-- <comment>descriptionnnnnn.</comment> -->
+                            <!-- <button_label>Adicionar</button_label> -->
+                            <frontend_model>pagamentodigital/adminhtml_system_config_fieldset_label</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </masklabel>                                                  
+                        <exibitionmodal translate="label">
+                            <label>Tipo de exibição</label>
+                            <comment><![CDATA[Veja as opções disponíveis: <a href="#" onclick="openModalBcash('/skin/frontend/base/default/buscape/pagamentodigital/images/print-modal.jpg', 'WebCheckout - Modal');"> Modal </a>, <a href="#" onclick="openModalBcash('/skin/frontend/base/default/buscape/pagamentodigital/images/print-iframe.jpg', 'WebCheckout - Iframe');"> Iframe </a>, <a href="#" onclick="openModalBcash('/skin/frontend/base/default/buscape/pagamentodigital/images/print-redirect2.jpg', 'WebCheckout - Redirect');"> Redirect </a>.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pagamentodigital/source_webcheckout</source_model>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                            
+                        </exibitionmodal>
+                    </fields>
+                </settings>
+            </groups>
+        </pagamentodigital>
+        <payment translate="label" module="pagamentodigital">
+            <groups>
+                <pagamentodigital_geral translate="label">
+                    <label>Bcash - Todas as Formas de Pagamento</label>
+                    <sort_order>670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Título</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>Status dos novos pedidos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <emailID translate="label">
+                            <label>Conta (e-mail) do Bcash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </emailID>
+                        <lojaID translate="label">
+                            <label>Código da loja no Bcash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </lojaID>
+                        <token translate="label">
+                            <label>Token</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </token>
+                        <retorno translate="label">
+                            <label>Ativar Retorno Automático</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </retorno>
+                        <validacaoDados translate="label">
+                            <label>Ativar Validação dos Dados (Hash)?</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </validacaoDados>
+                        <acaopadraovirtual translate="label">
+                            <label>Gerar Fatura automaticamente para pedidos com produtos virtuais? (Completar)</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>8</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </acaopadraovirtual>
+                        <qtdParcelas translate="label">
+                                <label>Quantidade Máxima de Parcelas</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>7</sort_order>
+                                <source_model>pagamentodigital/source_parcelas</source_model>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                        </qtdParcelas>
+                        <allowspecific translate="label">
+                            <label>Tipos de Países Permitidos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>pagamentodigital/source_specificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Permitir Pagamento de Países Específicos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>pagamentodigital/source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificcountry>
+                        <prefixo translate="label">
+                            <label>Prefixo do Pedido</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefixo>
+                        <sort_order translate="label">
+                            <label>Ordem de Exibição</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                    </fields>
+                </pagamentodigital_geral>
+                <pagamentodigital_prazo translate="label">
+                    <label>Bcash - Somente Pagamentos à Prazo</label>
+                    <sort_order>670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Título</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>Status dos novos pedidos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <emailID translate="label">
+                            <label>Conta (e-mail) do Bcash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </emailID>
+                        <lojaID translate="label">
+                            <label>Código da loja no Bcash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </lojaID>
+                        <token translate="label">
+                            <label>Token</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </token>
+                        <retorno translate="label">
+                            <label>Ativar Retorno Automático</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </retorno>
+                        <validacaoDados translate="label">
+                            <label>Ativar Validação dos Dados (Hash)?</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </validacaoDados>
+                        <acaopadraovirtual translate="label">
+                            <label>Gerar Fatura automaticamente para pedidos com produtos virtuais? (Completar)</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>8</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </acaopadraovirtual>
+                        <qtdParcelas translate="label">
+                                <label>Quantidade Máxima de Parcelas</label>
+                                <frontend_type>select</frontend_type>
+                                <sort_order>7</sort_order>
+                                <source_model>pagamentodigital/source_parcelas</source_model>
+                                <show_in_default>1</show_in_default>
+                                <show_in_website>1</show_in_website>
+                                <show_in_store>0</show_in_store>
+                        </qtdParcelas>
+                        <allowspecific translate="label">
+                            <label>Tipos de Países Permitidos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>pagamentodigital/source_specificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Permitir Pagamento de Países Específicos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>pagamentodigital/source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificcountry>
+                        <prefixo translate="label">
+                            <label>Prefixo do Pedido</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefixo>
+                        <sort_order translate="label">
+                            <label>Ordem de Exibição</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                    </fields>
+                </pagamentodigital_prazo>
+                <pagamentodigital_vista translate="label">
+                    <label>Bcash - Somente Pagamentos à Vista</label>
+                    <sort_order>670</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Título</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>Status dos novos pedidos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <emailID translate="label">
+                            <label>Conta (e-mail) do Bcash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </emailID>
+                        <lojaID translate="label">
+                            <label>Código da loja no Bcash</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </lojaID>
+                        <token translate="label">
+                            <label>Token</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </token>
+                        <retorno translate="label">
+                            <label>Ativar Retorno Automático</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </retorno>
+                        <validacaoDados translate="label">
+                            <label>Ativar Validação dos Dados (Hash)?</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>7</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </validacaoDados>
+                        <acaopadraovirtual translate="label">
+                            <label>Gerar Fatura automaticamente para pedidos com produtos virtuais? (Completar)</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>8</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </acaopadraovirtual>
+                        <allowspecific translate="label">
+                            <label>Tipos de Países Permitidos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>pagamentodigital/source_specificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Permitir Pagamento de Países Específicos</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>11</sort_order>
+                            <source_model>pagamentodigital/source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificcountry>
+                        <prefixo translate="label">
+                            <label>Prefixo do Pedido</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefixo>
+                        <sort_order translate="label">
+                            <label>Ordem de Exibição</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                    </fields>
+                </pagamentodigital_vista>
+            </groups>
+        </payment>
+    </sections>
+</config>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Mageplace_Callforprice
+ */
+-->
+<layout>
+   
+        <adminhtml_catalog_product_edit>
+            <reference name="product_tabs">
+                <action method="addTab">
+                    <name>callforprice</name>
+                    <block>mageplace_callforprice/adminhtml_catalog_product_tab</block>
+                </action>
+            </reference>
+        </adminhtml_catalog_product_edit>
+        
+        <adminhtml_catalog_product_simple>
+            <reference name="product_tabs">
+                <action method="addTab">
+                    <name>callforprice</name>
+                    <block>mageplace_callforprice/adminhtml_catalog_product_tab</block>
+                </action>
+            </reference>
+        </adminhtml_catalog_product_simple>
+        
+        <adminhtml_catalog_product_grouped>
+            <reference name="product_tabs">
+                <action method="addTab">
+                    <name>callforprice</name>
+                    <block>mageplace_callforprice/adminhtml_catalog_product_tab</block>
+                </action>
+            </reference>
+        </adminhtml_catalog_product_grouped>
+            
+        <adminhtml_catalog_product_virtual>
+            <reference name="product_tabs">
+                <action method="addTab">
+                    <name>callforprice</name>
+                    <block>mageplace_callforprice/adminhtml_catalog_product_tab</block>
+                </action>
+            </reference>
+        </adminhtml_catalog_product_virtual>
+        
+        <adminhtml_catalog_product_bundle>
+            <reference name="product_tabs">
+                <action method="addTab">
+                    <name>callforprice</name>
+                    <block>mageplace_callforprice/adminhtml_catalog_product_tab</block>
+                </action>
+            </reference>
+        </adminhtml_catalog_product_bundle>
+        
+        <adminhtml_catalog_product_downloadable>
+            <reference name="product_tabs">
+                <action method="addTab">
+                    <name>callforprice</name>
+                    <block>mageplace_callforprice/adminhtml_catalog_product_tab</block>
+                </action>
+            </reference>
+        </adminhtml_catalog_product_downloadable>
+        
+        <adminhtml_catalog_product_configurable>
+            <reference name="product_tabs">
+                <action method="addTab">
+                    <name>callforprice</name>
+                    <block>mageplace_callforprice/adminhtml_catalog_product_tab</block>
+                </action>
+            </reference>
+        </adminhtml_catalog_product_configurable>
+  
+</layout>

@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <mercadolivre translate="title" module="mercadolivre">
+            <title>Mercado Livre</title>
+            <sort_order>88</sort_order>
+            <children>
+                <itens translate="title" module="mercadolivre">
+                    <title>Manage Ads</title>
+                    <sort_order>1</sort_order>
+                    <action>mercadolivre/adminhtml_item/index</action>
+                </itens>
+                <order translate="title" module="mercadolivre">
+                    <title>Manage Sales</title>
+                    <sort_order>2</sort_order>
+                    <action>mercadolivre/adminhtml_order/index</action>
+                </order>
+                <question translate="title" module="mercadolivre">
+                    <title>Answer Questions</title>
+                    <sort_order>3</sort_order>
+                    <action>mercadolivre/adminhtml_question/index</action>
+                </question>
+                <template translate="title" module="mercadolivre">
+                    <title>Manage Templates</title>
+                    <sort_order>4</sort_order>
+                    <action>mercadolivre/adminhtml_template/index</action>
+                </template>
+                <service translate="title" module="mercadolivre">
+                    <title>Other Tasks</title>
+                    <sort_order>5</sort_order>
+                    <action>mercadolivre/adminhtml_service/index</action>
+                </service>
+                <!--<config translate="title" module="mercadolivre">-->
+                    <!--<title>Module Configuration</title>-->
+                    <!--<sort_order>6</sort_order>-->
+                    <!--<action>system_config/edit/section/mercadolivre</action>-->
+                <!--</config>-->
+            </children>
+        </mercadolivre>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mercadolivre translate="title">
+                                        <title>Mercado Livre Configuration</title>
+                                        <sort_order>100</sort_order>
+                                    </mercadolivre>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <mercadolivre>
+                        <title>Mercadolivre Menu</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <itens>
+                                <title>Manage Ads</title>
+                                <sort_order>1</sort_order>
+                            </itens>
+                            <order>
+                                <title>Manage Sales</title>
+                                <sort_order>2</sort_order>
+                            </order>
+                            <question>
+                                <title>Asnwer Questions</title>
+                                <sort_order>3</sort_order>
+                            </question>
+                            <template>
+                                <title>Manage Templates</title>
+                                <sort_order>4</sort_order>
+                            </template>
+                            <service>
+                                <title>Other Tasks</title>
+                                <sort_order>5</sort_order>
+                            </service>
+                            <!--<config>-->
+                                <!--<title>Module Configuration</title>-->
+                                <!--<sort_order>6</sort_order>-->
+                            <!--</config>-->
+                        </children>
+                    </mercadolivre>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

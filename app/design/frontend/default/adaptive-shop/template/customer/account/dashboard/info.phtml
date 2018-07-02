@@ -1,0 +1,33 @@
+<?php
+/**
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+    	<h3 class="txt bold fs-14"><?php echo $this->__('Contact Information') ?></h3>
+    	<span class="txt bold fs-14">Nome: </span><span class="txt fs-14"><?php echo $this->htmlEscape($this->getCustomer()->getName()) ?> <a class="cor fs-12" href="<?php echo $this->getUrl('customer/account/edit') ?>"></span>(<?php echo $this->__('Edit') ?>)</a>
+    	<br />
+        <span class="txt bold fs-14">Email: </span><span class="txt fs-14"><?php echo $this->htmlEscape($this->getCustomer()->getEmail()) ?></span>
+        <br />
+        <span class="txt fs-14">Deseja mudar sua senha? </span><a class="cor fs-12" href="<?php echo $this->getChangePasswordUrl() ?>">(<?php echo $this->__('Change Password') ?>)</a>
+        <br /><br />
+    
+        <?php if( $this->isNewsletterEnabled() ): ?>
+        <h3 class="txt bold fs-14"><?php echo $this->__('Newsletters') ?></h3>
+        <span class="txt fs-14">
+        <?php if( $this->getIsSubscribed() ): ?>
+           	<?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?>
+            <?php else: ?>
+            <?php echo $this->__('You are currently not subscribed to any newsletter.') ?>
+        <?php endif; ?>
+        </span>
+        <a class="cor fs-12" href="<?php echo $this->getUrl('newsletter/manage') ?>">(<?php echo $this->__('Edit') ?>)</a>
+        <br /><br />
+        <?php /* Extensions placeholder */ ?>
+        <?php echo $this->getChildHtml('customer.account.dashboard.info.extra')?>
+        <?php endif; ?>
+

@@ -1,0 +1,33 @@
+<?php
+/**
+ * @var $this Mage_Tax_Block_Checkout_Subtotal
+ * @see Mage_Tax_Block_Checkout_Subtotal
+ */
+?>
+<?php if ($this->displayBoth()):?>
+<tr>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->helper('tax')->__('Subtotal (Excl. Tax)') ?>
+    </td>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueExclTax()) ?>
+    </td>
+</tr>
+<tr>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->helper('tax')->__('Subtotal (Incl. Tax)') ?>
+    </td>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueInclTax()) ?>
+    </td>
+</tr>
+<?php else : ?>
+<tr>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <span class="txt fs-14"><?php echo $this->getTotal()->getTitle() ?></span>
+    </td>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo Mage::helper('checkout')->formatPrice(Mage::helper('checkout/cart')->getQuote()->getSubtotalWithDiscount()) ?>
+    </td>
+</tr>
+<?php endif;?>

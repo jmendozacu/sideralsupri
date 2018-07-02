@@ -1,0 +1,18 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<div class="short">
+	<label for="<?php echo $this->getFieldId('gender')?>" class="txt f-l fs-12<?php if ($this->isRequired()) echo ' required' ?>"><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo $this->__('Gender') ?>&nbsp;</label>
+    <select id="<?php echo $this->getFieldId('gender')?>" name="<?php echo $this->getFieldName('gender')?>" title="<?php echo $this->__('Gender') ?>"  class="f-l <?php if ($this->isRequired()):?> validate-select<?php endif; ?>" <?php echo $this->getFieldParams() ?> style="width:auto;">
+        <?php $options = Mage::getResourceSingleton('customer/customer')->getAttribute('gender')->getSource()->getAllOptions();?>
+        <?php $value = $this->getGender();?>
+        <?php foreach ($options as $option):?>
+            <option value="<?php echo $option['value'] ?>"<?php if ($option['value'] == $value) echo ' selected="selected"' ?>><?php echo $this->__($option['label']) ?></option>
+        <?php endforeach;?>
+    </select>
+</div>

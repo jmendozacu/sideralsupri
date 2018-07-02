@@ -1,0 +1,38 @@
+<?php if($this->getMessagesBlock()->getMessageCollection()->count()): ?>
+    <div id="adaptive_global_messages" style="display: none">
+        <?php echo $this->getMessagesBlock()->getGroupedHtml(); ?>
+    </div>
+<?php $this->getMessagesBlock()->getMessageCollection()->clear(); ?>
+
+<script type="text/javascript">
+;(function($, window, document, undefined) {
+    var $win = $(window);
+    var $doc = $(document);
+
+    $win.load(function() {
+        
+        $("#adaptive_global_messages").slideDown(600);
+        $('#barra-topo').addClass('active');
+		if($('.success-msg ul').html() != '<li><span>Seu comentário aguarda aprovação.</span></li>'){
+			$('.success-msg ul').append('<li><a href="#" id="adaptive_global_messages_close" title="<?php echo $this->__('Hide messages') ?>">×</a></li>');
+		$('.error-msg ul').append('<li><a href="#" id="adaptive_global_messages_close" title="<?php echo $this->__('Hide messages') ?>">×</a></li>');
+		}
+		
+		
+		$('#adaptive_global_messages_close').click(function(event){
+	    	event.preventDefault();
+	    	$("#adaptive_global_messages").slideUp(600);
+	    	$('#barra-topo').animate({ 'marginTop': '0px' }, 600);
+	    	$('.nova-menu').animate({ 'top': '52px' }, 600);
+	    	$('#barra-topo').removeClass('active');
+	    
+	    });
+	    	
+    	
+    });
+    		
+
+    
+})(jQuery, window, document);
+</script>
+<?php endif; ?>

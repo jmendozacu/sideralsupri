@@ -1,0 +1,218 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php
+$order = $this->getOrderData();
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Order Information') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+         <table class="form-list" cellspacing="0">        
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Mercadolivre Order Id') ?></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['mercadolivre_order_id']; ?>  
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Status') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['order_status']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Is Free Shipping') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['is_free_shipping']; ?>  
+               </td>
+            </tr>
+     		 <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Date Created') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['date_created']; ?>  
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Order Subtotal') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo  Mage::helper('core')->currency($order['order_subtotal'], true, false) ; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Shipping paid at Mercadolivre') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo  Mage::helper('core')->currency($order['order_shipping_cost'], true, false) ; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Total paid at Mercadolivre') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo Mage::helper('core')->currency($order['order_total'], true, false) ;  ?>  
+               </td>
+            </tr>
+           <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Shipping Method') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['shipping_description']; ?>  
+               </td>
+            </tr>
+ 			<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Subtotal paid at Store') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php echo Mage::helper('core')->currency($order['store_subtotal'], true, false) ; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Shipping paid at Store') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo  Mage::helper('core')->currency($order['store_shipping_cost'], true, false) ;?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Total paid at Store') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo Mage::helper('core')->currency($order['store_total'], true, false) ;  ?>  
+               </td>
+            </tr>
+          
+            
+         
+            </table>
+          
+    </fieldset>
+</div>
+<?php if(isset($order['shipping_mercadolivre_id'])):?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+    	<?php if($order['shipping_mode'] == 'me1' || $order['shipping_mode'] == 'me2' ): ?>
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Meli Envios') ?></h4>
+        <?php else: ?>
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Informações da Entrega') ?></h4>
+        <?php endif; ?>
+    </div>
+    <fieldset id="grop_fields">
+         <table class="form-list" cellspacing="0">  
+         	  
+         	<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Shipping Mercadolivre Id') ?></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['shipping_mercadolivre_id']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Status') ?></label>    
+                </td>
+                <td class="value">
+                <?php echo Mage::helper('mercadolivre')->formatStatus($order['shipping_status']); ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Data de Criação') ?></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['shipping_date_created']; ?>  
+               </td>
+            </tr>
+            <?php if( $order['shipping_date_handling']  != null ):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Solicitação de autorização') ?></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['shipping_date_handling']; ?>  
+               </td>
+            </tr>
+          <?php endif; ?>  
+           <?php if($order['shipping_date_shipped']  != null ):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Data de envio') ?></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['shipping_date_shipped']; ?>  
+               </td>
+            </tr>
+          <?php endif; ?>  
+            <?php if($order['shipping_date_delivered'] != null):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Data de entrega') ?></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['shipping_date_delivered']; ?>  
+               </td>
+            </tr>
+          <?php endif; ?>  
+            <?php if($order['shipping_date_cancelled'] != null ):?>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Data de cancelamento') ?></label>    
+                </td>
+                <td class="value">
+                <?php  echo $order['shipping_date_cancelled']; ?>  
+               </td>
+            </tr>
+          <?php endif; ?> 
+          <?php if($order['shipping_status'] == 'shipping_date_handling'):?>
+          	<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Etiqueta') ?></label>    
+                </td>
+                <td class="value">
+                <?php echo Mage::helper('mercadolivre')->__('Aguardando Autorização'); ?>
+               </td>
+            </tr>
+          <?php endif ;?>
+          <?php if($order['shipping_status'] == 'ready_to_ship'):?>
+          	<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Etiqueta') ?></label>    
+                </td>
+                <td class="value">
+                 <a href="<?php echo $this->getPrintLink();?>" alt="<?php echo Mage::helper('mercadolivre')->__('Imprimir Etiqueta'); ?>"><?php echo Mage::helper('mercadolivre')->__('Imprimir Etiqueta'); ?></a>
+               </td>
+            </tr>
+          <?php endif ;?>
+         </table>
+    </fieldset>
+</div>
+<?php endif; ?>

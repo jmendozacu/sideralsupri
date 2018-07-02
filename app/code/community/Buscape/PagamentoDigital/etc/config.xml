@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to suporte.developer@buscape-inc.com so we can send you a copy immediately.
+ *
+ * @category   Buscape
+ * @package    Buscape_PagamentoDigital
+ * @copyright  Copyright (c) 2010 Buscapé Company (http://www.buscapecompany.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Buscape_PagamentoDigital>
+            <version>0.1.15</version>
+        </Buscape_PagamentoDigital>
+    </modules>
+    <global>
+        <models>
+            <pagamentodigital>
+                <class>Buscape_PagamentoDigital_Model</class>
+                <resourceModel>pagamentodigital_mysql4</resourceModel>
+            </pagamentodigital>
+            <pagamentodigital_mysql4>
+                <class>Buscape_PagamentoDigital_Model_Mysql4</class>
+                <entities>
+                    <api_debug>
+                        <table>pagamentodigital_api_debug</table>
+                    </api_debug>
+                </entities>
+            </pagamentodigital_mysql4>
+        </models>
+        <resources>
+             <pagamentodigital_setup>
+                <setup>
+                    <module>Buscape_PagamentoDigital</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </pagamentodigital_setup>
+            <pagamentodigital_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </pagamentodigital_write>
+            <pagamentodigital_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </pagamentodigital_read>
+        </resources>
+	<blocks>
+            <pagamentodigital>
+                <class>Buscape_PagamentoDigital_Block</class>
+            </pagamentodigital>
+        </blocks>
+	<helpers>
+            <pagamentodigital>
+                <class>Buscape_PagamentoDigital_Helper</class>
+            </pagamentodigital>
+	</helpers>
+        <events>
+            <checkout_onepage_controller_success_action>
+                <observers>
+                    <pagamentodigital_observer>
+                        <type>singleton</type>
+                        <class>pagamentodigital/observer</class>
+                        <method>sendEmailFrontend</method>
+                    </pagamentodigital_observer>
+                </observers>
+            </checkout_onepage_controller_success_action>
+            <checkout_multishipping_controller_success_action>
+                <observers>
+                    <pagamentodigital_observer>
+                        <type>singleton</type>
+                        <class>pagamentodigital/observer</class>
+                        <method>sendEmailFrontend</method>
+                    </pagamentodigital_observer>
+                </observers>
+            </checkout_multishipping_controller_success_action>
+        </events>
+    </global>
+    <frontend>
+        <secure_url>
+            <pagamentodigital>/pagamentodigital/standard</pagamentodigital>
+        </secure_url>   
+        <routers>
+            <pagamentodigital>
+                <use>standard</use>
+                <args>
+                    <module>Buscape_PagamentoDigital</module>
+                    <frontName>pagamentodigital</frontName>
+                </args>
+            </pagamentodigital>
+        </routers>
+        <translate>
+            <modules>
+                <pagamentodigital>
+                    <files>
+                        <default>Buscape_PagamentoDigital.csv</default>
+                    </files>
+                </pagamentodigital>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <pagamentodigital>
+                    <file>buscape_pagamentodigital.xml</file>
+                </pagamentodigital>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <pagamentodigital>
+                    <files>
+                        <default>Buscape_PagamentoDigital.csv</default>
+                    </files>
+                </pagamentodigital>
+            </modules>
+        </translate>        
+        <layout>
+            <updates>
+                <pagamentodigital>
+                    <file>buscape_pagamentodigital.xml</file>
+                </pagamentodigital>
+            </updates>
+        </layout>        
+    </adminhtml>
+    <default>
+        <!-- incluir as configurações de acordo com cada modelo -->
+        <payment>
+            <pagamentodigital_geral>
+                  <active>0</active>
+                  <model>Buscape_PagamentoDigital_Model_Geral</model>
+                  <order_status>pending</order_status>
+                  <title>Bcash</title>
+                  <allowspecific>1</allowspecific>
+                  <retorno>http://www.urldoseusite.com.br/index.php/PagamentoDigital_PdGeral/standard/success/</retorno>
+            </pagamentodigital_geral>
+            <pagamentodigital_vista>
+                <active>0</active>
+                <model>Buscape_PagamentoDigital_Model_Vista</model>
+                <order_status>pending</order_status>
+                <title>Bcash - à Vista</title>
+                <allowspecific>1</allowspecific>
+                <retorno>http://www.urldoseusite.com.br/index.php/PagamentoDigital_PdVista/standard/success/</retorno>
+            </pagamentodigital_vista>
+            <pagamentodigital_prazo>
+                  <active>0</active>
+                  <model>Buscape_PagamentoDigital_Model_Prazo</model>
+                  <order_status>pending</order_status>
+                  <title>Bcash - à Prazo</title>
+                  <allowspecific>1</allowspecific>
+                  <retorno>http://www.urldoseusite.com.br/index.php/PagamentoDigital_PdPrazo/standard/success/</retorno>
+            </pagamentodigital_prazo>
+        </payment>
+        <pagamentodigital>
+            <settings>
+                <exibitionmodal>1</exibitionmodal>
+            </settings>
+        </pagamentodigital>
+    </default>
+</config>

@@ -1,0 +1,103 @@
+/**
+ * Magmodules.eu
+ * http://www.magmodules.eu
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@magmodules.eu so we can send you a copy immediately.
+ *
+ * @category    Magmodules
+ * @package     Magmodules_Snippets
+ * @author      Magmodules <info@magmodules.eu)
+ * @copyright   Copyright (c) 2014 (http://www.magmodules.eu)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+.snippets {
+	border:1px solid #ccc;
+	margin:5px 0;
+	overflow:auto
+}
+
+.snippets p {
+	margin-bottom:0
+}
+
+.snippets .product-name {
+	font-weight:700
+}
+
+.snippets .prod-thumb {
+	float:left;
+	padding:8px
+}
+
+.snippets img {
+	display:block;
+	margin-right:5px;
+	margin-left:10px
+}
+
+.snippets .content {
+	padding:5px
+}
+
+.snippets .content i {
+	display:-webkit-inline-box
+}
+
+.snippets .rating-box {
+	float:left;
+	margin-bottom:5px
+}
+
+.snippets-footer {
+	margin-top:-5px;
+	color:#666;
+	font-style:normal
+}
+
+.snippets-fields {
+	font-size:x-small
+}
+
+.snippets-fields ul {
+	display:inline
+}
+
+.snippets-fields li {
+	display:inline;
+	color:#000;
+	background:none!important;
+	padding-left:0!important;
+	font-size:11px
+}
+
+.snippets-fields li + li::before {
+	content:"- "
+}
+
+.snippets-sidebar .rating-box {
+	margin-right:5px;
+	margin-top:5px;
+	width:75px;
+	height:15px;
+	font-size:0;
+	background:url(images/bkg_rating.gif) repeat-x;
+	background-size:15px;
+	text-indent:-999em;
+	overflow:hidden
+}
+
+.snippets-sidebar .rating {
+	float:left;
+	height:13px;
+	background:url(images/bkg_rating.gif)repeat-x;
+	background-position-y:100%;
+	background-size:15px
+}

@@ -1,0 +1,19 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php /* @var $this Mage_Sales_Block_Recurring_Profiles */ ?>
+<div id="colunas9">
+    <h1 class="cor bold"><?php echo $this->__('Recurring Profiles') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div id="colunas9" class="recurring-profiles">
+    <?php echo $this->getChildHtml('grid')?>
+</div>
+<div id="colunas9">
+	<a class="cor fs-12" href="<?php echo $this->escapeHtml($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a>
+</div>

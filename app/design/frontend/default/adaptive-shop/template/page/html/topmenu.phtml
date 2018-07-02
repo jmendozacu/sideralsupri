@@ -1,0 +1,16 @@
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+?>
+<ul id="menu" class="fs-15 cor f-l bold">
+<?php
+	  $_helper = Mage::helper('catalog/category');
+      $children = Mage::getModel('catalog/category')->getCategories(214);
+      foreach ($children as $category):
+      echo '<li class="level0 nav-1 first level-top parent"><a href="' . $_helper->getCategoryUrl($category) . '"><span>' . $category->getName() . '</span></a></li>';
+      endforeach;
+?>
+</ul>

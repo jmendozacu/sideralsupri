@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Mageplace_Callforprice
+ */
+-->
+<config>
+    <modules>
+        <Mageplace_Callforprice>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Mageplace_Callforprice>
+    </modules>
+</config>

@@ -1,0 +1,54 @@
+<div id="colunas3" class="p-top">
+<?php if (Mage::registry('current_category')):?>
+
+<?php // categorias internas - sub ?>
+	<ul id="cat" class="d-b fs-16 banner-bg">
+		<li><span class="cor f-l bold"><?php echo $_category=Mage::registry('current_category')->getName(); ?></span>
+			<?php $_categories = $this->getCurrentChildCategories() ?>
+			<?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
+			<?php if($_count): ?>
+			<ul>
+				<?php foreach ($_categories as $_category): ?>
+				<?php if($_category->getIsActive()): ?>
+				<li>
+            		<a href="<?php echo $this->getCategoryUrl($_category) ?>"><?php echo $this->htmlEscape($_category->getName()) ?><span class="f-r"><?php echo $_category->getProductCount() ?></span></a>
+            	</li>
+            	<?php endif; ?>
+            	<?php endforeach ?>
+            </ul>
+            <?php endif; ?>
+		</li>
+	</ul>
+<?php // categorias internas - sub ?>
+
+<?php else: //menu home ?>
+
+<?php $_helper = Mage::helper('catalog/category') ?>
+<?php $_categories = $_helper->getStoreCategories() ?>
+<?php $currentCategory = Mage::registry('current_category') ?>
+<?php if (count($_categories) > 0): ?>
+	<ul id="cat" class="d-b fs-16 banner-bg">
+        <?php foreach($_categories as $_category): ?>
+            <li>
+                <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                <a href="<?php echo $_helper->getCategoryUrl($_category) ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>" class="cor f-l bold" ><?php echo $_category->getName() ?><span class="f-r"><?php echo $_category->getProductCount() ?></span></a>
+                <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                <?php if (count($_subcategories) > 0): ?>
+                    <ul>
+                        <?php foreach($_subcategories as $_subcategory): ?>
+                            <li>
+                                <a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>"><?php echo $_subcategory->getName() ?><span class="f-r"><?php echo $_subcategory->getProductCount() ?></span></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<?php endif; //end menu ?>
+
+</div>

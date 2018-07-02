@@ -1,0 +1,410 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+
+$category = $this->getCategory();
+if (isset($category['mercadolivre_id'])) {
+	$categoryname = $category['description'];
+	$categoryid = $category['mercadolivre_id'];
+	$mode = $category['buying_modes'];
+} else {
+	$categoryname = null;
+	$categoryid = null;
+	$mode = null;
+}
+
+$attributes = $this->getAttributes();
+
+?>
+<script src="<?php echo $this -> getJsUrl('jquery/jquery.js'); ?>"></script>
+<script src="<?php echo $this -> getJsUrl('jstree/jquery.jstree.js'); ?>"></script>
+<script type="text/javascript">
+	//<![CDATA[
+
+		var $j = jQuery.noConflict();
+    
+             $j("#tree").jstree({
+	        	"html_data" : {
+	            "data" : "<li class='jstree-closed' alt='root' id='root' desc='Nenhuma'><a href='#'><?php echo Mage::helper('mercadolivre')->__('Category Tree') ?>
+				</a></li>",
+				"ajax" : {
+				"type": "GET",
+				"dataType": 'html',
+				"crossDomain":'false',
+				"url" : "<?php echo $this->getLinkCat(); ?>",
+				"data" : function (n) {
+					return { id : n.attr("alt") };
+				}
+							}
+								},
+								"ui" : {
+								"select_limit" : 1
+								},
+
+								"plugins" : [ "themes", "html_data","ui"]
+								})
+
+								.bind("select_node.jstree", function (event, data) {
+								getinfo(data.rslt.obj.attr("alt"));
+								})
+
+								
+
+								function getinfo(cat){
+
+								$j.ajax({
+								timeout:10000,
+								type: "GET",
+								dataType: 'json',
+								url: "https://api.mercadolibre.com/categories/"+cat
+								}).done(function(data) {
+
+								var path = ' ';
+								for (var i=0; i < data.path_from_root.length ;i++)
+								{
+
+								if(i==0){
+								path = data.path_from_root[i].name;
+								} else {
+								path = path + ' > ' + data.path_from_root[i].name;
+								}
+								}
+								$j('#catname').html(path);
+																
+				if(data.children_categories.length > 0) {
+								$j('#catid').attr('value','');
+								$j('#catname').css('color', 'red' );
+								$j('#cateid').css('color', 'red' );
+								$j('#errormensagem').show();
+								$j('#catvalid').attr('value','0');
+				} else {
+								$j('#catid').attr('value',data.id);
+								$j('#catname').css('color', 'green' );
+								$j('#cateid').css('color', 'green' );
+								$j('#errormensagem').hide();
+								$j('#catvalid').attr('value','1');
+								$j('#categname').attr('value',path);
+								$j('#mode').attr('value',data.settings.buying_modes);
+								$j('#cateid').html(data.id);
+
+								if(data.attribute_types == 'variations'){
+
+								$j.ajax({
+								timeout:1000000,
+								type: "GET",
+								dataType: 'html',
+								url: "<?php echo $this->getMercadolivreAttributeUrl(); ?>id/"+data.id,
+			         			beforeSend: function () {
+						    	$j( "#loading-mask" ).show();    
+						  		}
+			            		}).done(function(data) {   
+			            		$j("#loading-mask" ).hide();
+			            		$j("#mlatt").show();	
+			            		$j("#attributes_value").html(data);		
+			            		});
+			            		
+			            		
+                  				} else if (data.attribute_types == 'attributes'){
+                  				
+                  				$j.ajax({
+								timeout:1000000,
+								type: "GET",
+								dataType: 'html',
+								url: "<?php echo $this->getMercadolivreClassAttributesUrl(); ?>id/"+data.id,
+			         			beforeSend: function () {
+						    	$j( "#loading-mask" ).show();    
+						  		}
+			            		}).done(function(data) {   
+			            		$j("#loading-mask" ).hide();
+			            		$j("#mlatt").show();	
+			            		$j("#attributes_value").html(data);		
+			            		});
+                  				
+                  				} else {
+			                  	$j("#attributes_value").html('');		
+			                  	$j("#mlatt").hide();	
+			                  	}
+             	}
+             	
+             });
+        }
+        
+        function getValues(id){
+        	
+           selectedelement = "#attribute_"+id;
+        	
+           valor = $j(selectedelement).val();
+           
+           store = valor.split("-"); 
+           storeid = store[0];
+           place = "#attributes_value_"+id;
+           
+           cat = $j('#catid').attr('value');
+        	
+        	if(storeid == ''){
+        	 	$j(place).html('');	
+        	} else {
+        	$j.ajax({	   				
+			            timeout:1000000,
+			            type: "GET",
+			            dataType: 'html',
+			      	  	url: "<?php echo $this -> getMercadolivreAttributeValueUrl(); ?>mlid/"+id+"/catid/"+cat+"/storeid/"+storeid,
+			      	    beforeSend: function () {
+						    	$j( "#loading-mask" ).show();    
+						  } 
+			            }).done(function(data) {  
+			            		$j( "#loading-mask" ).hide();           		
+					       		$j(place).html(data);		
+			
+			            });
+        	}
+      
+        }
+      
+        
+        //]]>
+        
+        
+</script>
+
+
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Mercadolivre Related Category') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+         <table class="form-list" cellspacing="0">
+          
+            <tr>
+               <td class="label">
+                <label for="mercadolivre_category_id"><?php echo Mage::helper('mercadolivre') -> __('Category'); ?></label>
+                </td>
+                <td class="value">
+                <div id="catname" style="position:relative;float:left;"><?php echo $categoryname ?></div><div id="cateid" style="position:relative;float:right;margin-left:3px;"><?php echo $categoryid; ?></div>
+                <input id="categname" type="hidden" name="item_category_name" value="<?php echo $categoryname ?>" />
+                <input id="catid" type="hidden" name="mercadolivre_category_id" value="<?php echo $categoryid ?>" /><br />
+                <input id="catvalid"  class="catisvalid" type="hidden" name="catisvalid" value="0" /><br />
+                <input id="mode"  class="mode" type="hidden" name="mode" value="<?php echo $mode ?>" /><br />
+                <div id="errormensagem" style="display:none;color:red;"><?php echo Mage::helper('mercadolivre') -> __('You need to select a subcategory'); ?></div>
+                </td>
+            </tr>
+            
+            
+            <?php 
+            
+            if(isset($category['mercadolivre_id']) && $category['mercadolivre_id'] != null && count($this->getMlattributes($category['mercadolivre_id'])) > 0){ ?>
+             <tr id='mlatt'>
+               <td class="label">
+                <label for="mercadolivre_category_id"><?php echo Mage::helper('mercadolivre') -> __('Attributes'); ?></label>
+                </td>
+                <td class="value" id='attributes_value'>
+                	<div class="custom-options">
+                	<input type="hidden" name="has_var" value="1">
+      
+                	<?php foreach ($this->getMlattributes($category['mercadolivre_id']) as $attribute): 
+                		
+						$tags = array();
+						foreach ($attribute['tags'] as $key => $value){
+								
+							if ($value == true){
+									$tags[] = $key;
+								}
+							}
+						
+					
+						$required = 0;
+                		if(in_array('required',$tags)){
+                		$required = 1;	
+                		}
+						
+						$fixed = 0;
+						if(in_array('fixed',$tags)){
+                		$fixed = 1;	
+                		}
+						
+                		?>
+     					
+     					
+     					
+						<div id="option_<?php echo $attribute['id'] ?>" class="option-box">
+						<table id="ml_atribute_<?php echo $attribute['id'] ?>" class="option-header" cellpadding="0" cellspacing="0">
+						<input name="attribute[<?php echo $attribute['id'] ?>][mlname]" value="<?php echo $attribute['name'] ?>" type="hidden">
+						<input name="attribute[<?php echo $attribute['id'] ?>][type]" value="<?php echo $attribute['value_type']; ?>" type="hidden">
+						<input name="attribute[<?php echo $attribute['id'] ?>][required]" value="<?php echo $required; ?>" type="hidden">
+						<input name="attribute[<?php echo $attribute['id'] ?>][fixed]" value="<?php echo $fixed; ?>" type="hidden">
+						<thead>
+						<tr>
+						<th></th>
+						<th class="opt-title"><?php echo Mage::helper('mercadolivre')->__('Selecte a relative Attribute from your store')?>	
+						<?php if($required){ ?>
+						<span class="required">*</span></th>							
+						<?php } ?>
+						</tr>
+						</thead>
+						<tbody id="attribute_value_<?php echo $attribute['id'] ?>">
+						<tr>
+						<td><?php echo $attribute['name'] . ' ('.$attribute['value_type'].')';?></td>
+						<td><select name="attribute[<?php echo $attribute['id'] ?>][store]" attribte="<?php echo $attribute['id'] ?>" id="attribute_<?php echo $attribute['id'] ?>" class="select select-product-option-type mlattributeselect" onchange="getValues('<?php echo $attribute['id'] ?>')" title="">
+						
+						<?php
+						
+				
+						
+						$att = $this->getAllAttributes();	
+					
+						
+						?>
+						
+								<?php 
+								
+								
+								
+									if(count($att)>0): ?>
+									 <option value=""><?php echo Mage::helper('mercadolivre') ->__('-- Select --'); ?></option>
+									<?php foreach ($att as $storeatt): ?>
+										
+										
+										
+							<?php		if(isset($attributes[$attribute['id']]) && $storeatt->getAttributeId() == $attributes[$attribute['id']]['attribute_store_id']): ?>
+											<option selected="selected" value="<?php echo $storeatt->getAttributeId().'-'.$storeatt->getAttributeCode().'">'.$storeatt->getAttributeCode()?></option>	
+										<?php else: ?>
+											<option value="<?php echo $storeatt->getAttributeId().'-'.$storeatt->getAttributeCode().'">'.$storeatt->getAttributeCode()?></option>	
+										<?php endif; ?>
+									<?php endforeach; ?>
+							
+							<?php else: ?>
+								<option value=""><?php echo Mage::helper('mercadolivre') -> __('-- Your Store do not have any allowed attribute to use --'); ?></option>
+							<?php endif; ?>
+							
+							
+							<select/></td></tr>
+							
+						
+							
+							<tr id="attributes_value_<?php echo $attribute['id']; ?>">
+								
+							<?php 
+							
+						
+							if(isset($attributes[$attribute['id']]['attribute_store_id'])){
+								
+								
+										if(isset($attribute['values']) && $attribute['value_type'] != 'boolean'){
+									
+									
+								 ?>
+								
+								
+								
+									
+								<td></td><td>
+								<div id="product_option_1_type_select" class="grid tier form-list">
+								<table cellspacing="0" cellpadding="0" class="border">
+								<input type="hidden" name="validation_1_result" value="">
+								<thead>
+								<tr class="headings">
+								<th class="type-title"><?php echo Mage::helper('mercadolivre')->__('Mercadolivre'); ?><span class="required">*</span></th>
+								<th class="type-title"><?php echo Mage::helper('mercadolivre')->__('Loja'); ?><span class="required">*</span></th>
+								</tr>
+								</thead>
+								<tbody>
+
+								<?php 
+								
+								
+								$atriopt = $this->getAttributeOptions($attributes[$attribute['id']]['attribute_store_id']);
+									
+								foreach($attribute['values'] as $value):
+								
+					
+								 ?>	
+
+									
+									<tr><td><input name="attribute[<?php echo $attribute['id'] ?>][opt][<?php echo $value['id'] ?>][name]" value="<?php echo $value['name'] ?>" type="hidden"><?php echo $value['name'] ?></td>
+									<td><select name="attribute[<?php echo $attribute['id'] ?>][opt][<?php echo $value['id'] ?>][store]" title="<?php echo $value['name'] ?>" class="select">
+			
+									
+										<?php if(count($atriopt) < 1){ ?>
+									
+											<option value=""><?php echo Mage::helper('mercadolivre') -> __('-- Your Store do not have any value to use --'); ?></option>
+											
+										<?php }else{ ?>
+											
+											<option value=""><?php echo Mage::helper('mercadolivre') -> __('-- Please select --'); ?></option>
+											
+											<?php 
+											
+										
+											foreach ($atriopt as $storevalue){ ?>
+												
+											<?php if(isset($attributes[$attribute['id']]['opt'][$value['id']]['value_store_id']) && $storevalue['id'] == $attributes[$attribute['id']]['opt'][$value['id']]['value_store_id']): ?>
+												
+													<option selected="selected" value="<?php echo $storevalue['id'].'-'.$storevalue['label']; ?>"><?php echo $storevalue['label']; ?></option>		
+													<?php else: ?>							
+													<option value="<?php echo $storevalue['id'].'-'.$storevalue['label']; ?>"><?php echo $storevalue['label']; ?></option>	
+													<?php endif; ?>
+													
+												<?php } ?>	
+												
+											
+										<?php } ?>
+										
+										<select/></td></tr>	
+									
+					
+                					<?php endforeach;?>
+                			
+								</tbody></table></div></td>
+							
+							
+						<?php }} ?>
+						
+						</tr></tbody></table></div>
+						
+						<?php endforeach; ?>
+						<div>
+						</td>
+						</tr>
+						
+					
+            	
+            		
+            <?php } else { ?>
+            	
+            <tr id='mlatt' style="display: none">
+               <td class="label">
+                <label for="mercadolivre_category_id"><?php echo Mage::helper('mercadolivre') -> __('Attributes'); ?></label>
+                </td>
+                <td class="value" id='attributes_value'>
+                </td>
+            </tr> 
+            
+            <?php } ?>
+            </table>
+           <br/><br/> 
+           <table class="form-list" cellspacing="0">
+           <tr>
+           <td class="label" ><?php echo Mage::helper('mercadolivre')->__('Browser the tree until reach the the <b>last possible</b> sub-category and become green') ?>
+           </td> 
+           <td class="tree">
+           <div id="tree" class="tree"></div> 
+           </td>
+           </tr>
+           </table>
+      
+
+    </fieldset>
+</div>
+
+

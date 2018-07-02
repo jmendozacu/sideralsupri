@@ -1,0 +1,165 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>">
+	
+<head>
+	<?php echo $this->getChildHtml('head') ?>
+</head>
+
+<body>
+	
+	<?php echo $this->getChildHtml('after_body_start') ?>   
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <?php echo $this->getChildHtml('header') ?>
+	<?php echo $this->getChildHtml('global_messages') ?>
+    
+	<div id="full" class="no-home">
+		<div id="wrapper">
+			<?php
+				$routeName = Mage::app()->getRequest()->getRouteName();
+				$identifier = Mage::getSingleton('cms/page')->getIdentifier();
+			?>	
+			<?php if($routeName != 'cms' && $identifier != 'home') { ?>
+				<div id="colunas12">
+					<?php echo $this->getChildHtml('breadcrumbs') ?>
+				</div>
+				<?php echo $this->getChildHtml('content') ?>
+		</div>
+	</div>
+
+	<?php }else{ ?>
+			<link href="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/css/owl.carousel.css" rel="stylesheet" type="text/css">
+			<link href="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/css/owl.theme.css" rel="stylesheet" type="text/css">
+			<link href="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/css/owl.transitions.css" rel="stylesheet" type="text/css">
+			<script src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/js/owl.carousel.min.js"></script>
+			<div id="colunas12"></div>
+			<div id="colunas4">
+				<div class="new-box4">
+					<a href="<?php echo $this->getUrl('') ?>menu/cartucho-de-toner"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-cartuchos-toner.png" title="Cartuchos de Toner" width="363" height="300" /></a>
+				</div>
+			</div>
+			<div id="colunas4">
+				<div class="new-box4">
+					<a href="<?php echo $this->getUrl('') ?>menu/toner-po-refil"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-toner-refil.png" title="Toner Pó Refil" width="363" height="300" /></a>
+				</div>			
+			</div>
+			<div id="colunas4">
+				<div class="new-box4">
+					<a href="<?php echo $this->getUrl('') ?>menu/cilindro"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-cilindros.png" title="Cilindros" width="363" height="300" /></a>
+				</div>							
+			</div>
+			<div id="colunas12">
+				<ul class="new-list-box4">
+					<li><a href="<?php echo $this->getUrl('') ?>menu/lamina"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-laminas.png" title="Lâminas" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>menu/ferramentas"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-ferramentas.png" title="Ferramentas" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>menu/rolo-fusor"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-rolos-fusor.png" title="Rolos Fusor" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>menu/pecas"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-pecas.png" title="Peças" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>menu/rolo-de-pressao"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-rolos-pressao.png" title="Rolos de Pressão" width="218" height="180" /></a></li>
+				</ul>
+				<ul class="new-list-box4">
+					<li><a href="<?php echo $this->getUrl('') ?>menu/cartucho-de-tinta"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-cartuchos-tintas.png" title="Cartuchos de Tintas" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>3m"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-aspiradores.png" title="Aspiradores de Toner" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>menu/embalagens"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-embalagens.png" title="Embalagens" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>livros"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-livros.png" title="Livros Digitais" width="218" height="180" /></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>outlet"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/b-outlet.png" title="Outlet" width="218" height="180" /></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div id="full" class="no-home">
+		<div id="wrapper">
+			<div id="colunas12" class="product-info">
+				<h2 class="bold fs-20 d-b ta-c m-top new-title-home">Produtos em destaque</h2>
+				<div class="h-r f-l d-b"></div>
+	        </div>
+	        <div id="newcarrousel-home">
+		        <?php
+				$categoryid = 211;
+				$category = new Mage_Catalog_Model_Category();
+				$category->load($categoryid);
+				$collection = $category->getProductCollection();
+				$collection->addAttributeToSelect('*');
+				foreach ($collection as $_product) { ?>
+			        <div id="colunas3" class="prod">
+			        	<div class="tag-label"></div>
+			        	<a href="<?php echo $_product->getProductUrl() ?>" class="product-image trans opacity-1-5 prod">
+			        		<img class="img-prod" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(263); ?>" alt="<?php echo $_product->getName(); ?>" width="263" height="263">
+			        	</a>
+						<div id="info-prod">
+							<a class="fs-14 txt d-b" href="<?php echo $_product->getProductUrl() ?>"><h2><?php echo $_product->getName(); ?></h2></a>
+							<?php echo $this->getPriceHtml($_product, true) ?>		
+							<p class="cor fs-16 bold">					    
+								<?php
+									$Preco = $_product->getFinalPrice();
+									if($Preco >= 999){
+										$Parcelamento = 3; 
+										$Resultado = $Preco / $Parcelamento;
+										echo $Parcelamento . 'x</strong> de <strong>R$'.number_format($Resultado, 2, ',', '').'</strong> sem juros.';
+									}
+								?>
+							</p>
+							<a class="vermais" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image trans opacity-1-5">ver mais</a>
+						</div>
+					</div>
+				<?php } ?>
+	        </div>
+	        <script>
+		        var $j = jQuery;
+				$j(document).ready(function() {
+					$j("#newcarrousel-home").owlCarousel({
+						items : 3,
+						itemsDesktop : [1200,3],
+						itemsDesktopSmall : [1024,3],
+						itemsTablet: [798,3],
+						itemsMobile : false,
+						pagination : false,
+						navigation : true,
+						navigationText : ["<img class='trans opacity-1-5' src='<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/al-destaques.png' width='32' height='32' />","<img class='trans opacity-1-5' src='<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/ar-destaques.png' width='32' height='32' />"],
+						transitionStyle : "fade"
+					});
+				});
+			</script>
+		</div>
+	</div>
+
+	<?php } ?>
+
+	<?php echo $this->getChildHtml('footer') ?>
+    
+    <?php echo $this->getChildHtml('before_body_end') ?>
+    <?php echo $this->getAbsoluteFooter() ?>
+ 
+</body>
+</html>

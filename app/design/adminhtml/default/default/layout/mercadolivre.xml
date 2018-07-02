@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+   <block type="mercadolivre/modal" name="body_ml" as="body_ml" template="mercadolivre/jquery.phtml" />
+           <block type="mercadolivre/modal" name="body_ml" as="body_ml" template="mercadolivre/modal.phtml" after="-"/>
+-->
+<layout>
+
+
+
+    <!--
+     <adminhtml_cache_index>
+        <reference name="content">
+            <block type="mercadolivre/cache_sincronizar" name="cache.mercadolivre" after="cache.additional" template="mercadolivre/cache/sincronizar.phtml" />
+        </reference>
+    </adminhtml_cache_index>
+    -->
+    
+    <mercadolivre_adminhtml_item_edit>
+        
+        <reference name="head">
+            <action method="addCss" after="-" >
+                <stylesheet>css/chico/mercadolivre.css</stylesheet>
+            </action>
+        </reference>
+       
+    </mercadolivre_adminhtml_item_edit>         
+              
+    <mercadolivre_adminhtml_item_index>
+        <reference name="content">
+            <block type="mercadolivre/item_listar" name="mercadolivre_item.grid.container"></block>
+        </reference>
+    </mercadolivre_adminhtml_item_index>
+  
+  
+   <mercadolivre_adminhtml_order_index>
+        <reference name="content">
+            <block type="mercadolivre/order_listar" name="mercadolivre_order.grid.container"></block>
+        </reference>
+   </mercadolivre_adminhtml_order_index>
+   
+   <mercadolivre_adminhtml_order_grid>
+        <reference name="content">
+            <block type="mercadolivre/order_grid" name="mercadolivre_order.grid.container" ></block>
+        </reference>
+    </mercadolivre_adminhtml_order_grid>
+   
+    <mercadolivre_adminhtml_item_category>
+        <reference name="content">
+            <block type="mercadolivre/item_category" name="mercadolivre_item_category_ajax.container" output="toHtml"></block>
+        </reference>
+    </mercadolivre_adminhtml_item_category>
+    
+    <mercadolivre_adminhtml_order_edit>
+        
+        <reference name="content">
+        	<block type="mercadolivre/order_edit" name="mercadolivre_order_edit"></block>  
+        </reference>
+       
+        <reference name="left">
+            <block type="mercadolivre/order_edit_tabs" name="item_edit_tabs">
+                <block type="mercadolivre/order_edit_tab_info" name="mercadolivre_order_edit_tab_info" />
+                <block type="mercadolivre/order_edit_tab_customer" name="mercadolivre_order_edit_tab_customer" />
+                <block type="mercadolivre/order_edit_tab_product" name="mercadolivre_order_edit_tab_product" />
+                <block type="mercadolivre/order_edit_tab_order" name="mercadolivre_order_edit_tab_order" />
+                <block type="mercadolivre/order_edit_tab_feedback" name="mercadolivre_order_edit_tab_feedback" />           
+                <action method="addTab">
+                    <name>order_info</name>
+                    <block>mercadolivre_order_edit_tab_info</block>
+                </action>
+                <action method="addTab">
+                    <name>customer_section</name>
+                    <block>mercadolivre_order_edit_tab_customer</block>
+                </action> 
+                 <action method="addTab">
+                    <name>product_section</name>
+                    <block>mercadolivre_order_edit_tab_product</block>
+                </action> 
+                <action method="addTab">
+                    <name>order_section</name>
+                    <block>mercadolivre_order_edit_tab_order</block>
+                </action>    
+                <action method="addTab">
+                    <name>feedback_section</name>
+                    <block>mercadolivre_order_edit_tab_feedback</block>
+                </action>                
+            </block>
+        </reference>
+
+        <reference name="before_body_end">
+            <block type="mercadolivre/modal" name="body_ml" as="body_ml" template="mercadolivre/modal.phtml" />
+        </reference>
+        
+        <reference name="head">
+            <action method="addCss" after="-" >
+                <stylesheet>css/chico/mercadolivre.css</stylesheet>
+            </action>
+        </reference>
+        
+    </mercadolivre_adminhtml_order_edit>
+    
+    
+    
+    <mercadolivre_adminhtml_service_index>
+        
+        <reference name="head">
+            <action method="addCss" after="-" >
+                <stylesheet>css/chico/mercadolivre.css</stylesheet>
+            </action>
+        </reference>
+        
+        <reference name="content">
+        	<block type="mercadolivre/service_view_index" name="mercadolivre_service_index"></block>  
+        </reference>
+       
+        <reference name="left">
+          		<block type="mercadolivre/service_view_tabs" name="service_tabs">
+                <block type="mercadolivre/service_view_tab_info" name="service_tab_info" />
+                <block type="mercadolivre/service_view_tab_authentication" name="mercadolivre_service_tab_authentication" />
+                <block type="mercadolivre/service_view_grid" name="mercadolivre_service_tab_grid" />   
+                 <action method="addTab">
+                    <name>service_log</name>
+                    <block>mercadolivre_service_tab_grid</block>
+                </action>     
+                 <action method="addTab">
+                    <name>service_authentication</name>
+                    <block>mercadolivre_service_tab_authentication</block>
+                </action>      
+                <action method="addTab">
+                    <name>service_info</name>
+                    <block>service_tab_info</block>
+                </action>
+           
+            </block>
+        </reference>
+ 
+    </mercadolivre_adminhtml_service_index>
+    
+    <mercadolivre_adminhtml_item_edit>
+        <update handle="editor"/>
+        <reference name="content">
+        	<block type="mercadolivre/item_edit" name="mercadolivre_item_edit"></block>  
+        </reference>
+       
+        <reference name="left">
+            <block type="mercadolivre/item_edit_tabs" name="item_edit_tabs">
+                <block type="mercadolivre/item_edit_tab_main" name="mercadolivre_item_edit_tab_main" />
+                <block type="mercadolivre/item_edit_tab_product" name="mercadolivre_item_edit_tab_product" />
+                <block type="mercadolivre/item_edit_tab_category" name="mercadolivre_item_edit_tab_category" />
+                <block type="mercadolivre/item_edit_tab_description" name="mercadolivre_item_edit_tab_description" />           
+                <action method="addTab">
+                    <name>main_section</name>
+                    <block>mercadolivre_item_edit_tab_main</block>
+                </action>
+                <action method="addTab">
+                    <name>product_section</name>
+                    <block>mercadolivre_item_edit_tab_product</block>
+                </action>
+                <action method="addTab">
+                    <name>category_section</name>
+                    <block>mercadolivre_item_edit_tab_category</block>
+                </action>    
+                <action method="addTab">
+                    <name>description_section</name>
+                    <block>mercadolivre_item_edit_tab_description</block>
+                </action>                
+            </block>
+        </reference>
+
+        <reference name="before_body_end">
+            <block type="mercadolivre/modal" name="body_ml" as="body_ml" template="mercadolivre/modal.phtml" />
+        </reference>
+    </mercadolivre_adminhtml_item_edit>
+    
+    <mercadolivre_adminhtml_template_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="mercadolivre/template_edit" name="mercadolivre_template_edit"></block>
+        </reference>
+        <reference name="left">
+            <block type="mercadolivre/template_edit_tabs" name="template_edit_tabs">
+                <block type="mercadolivre/template_edit_tab_info" name="mercadolivre_template_edit_tab_info" /> 
+                <block type="mercadolivre/template_edit_tab_design" name="mercadolivre_template_edit_tab_design" />      
+                <action method="addTab">
+                    <name>info_section</name>
+                    <block>mercadolivre_template_edit_tab_info</block>
+                </action>
+                <action method="addTab">
+                    <name>design_section</name>
+                    <block>mercadolivre_template_edit_tab_design</block>
+                </action>                        
+            </block>
+        </reference>
+    </mercadolivre_adminhtml_template_edit>
+    
+    <mercadolivre_adminhtml_question_edit>
+        <reference name="content">
+            <block type="mercadolivre/question_edit" name="mercadolivre_question_edit" template="mercadolivre/question/main.phtml"></block>
+        </reference>
+ </mercadolivre_adminhtml_question_edit>
+    
+    <mercadolivre_adminhtml_auth_index>
+        <reference name="content">
+            <block type="mercadolivre/auth" name="auth_page" template="mercadolivre/auth.phtml" ></block>   
+        </reference>
+    </mercadolivre_adminhtml_auth_index>   
+    
+    
+    
+    <mercadolivre_adminhtml_item_grid>
+        <reference name="content">
+            <block type="mercadolivre/item_grid" name="mercadolivre_item.grid.container" ></block>
+        </reference>
+    </mercadolivre_adminhtml_item_grid>
+    
+    <mercadolivre_adminhtml_template_index>
+        <reference name="content">
+            <block type="mercadolivre/template_listar" name="mercadolivre_template.grid.container"></block>
+        </reference>
+    </mercadolivre_adminhtml_template_index>
+    
+    <mercadolivre_adminhtml_template_grid>
+        <reference name="content">
+            <block type="mercadolivre/template_grid" name="mercadolivre_template.grid.container"></block>
+        </reference>
+    </mercadolivre_adminhtml_template_grid>
+    
+    <mercadolivre_adminhtml_question_index>
+        <reference name="content">
+            <block type="mercadolivre/question_listar" name="mercadolivre_template.grid.container"></block>
+        </reference>
+    </mercadolivre_adminhtml_question_index>
+    
+    <mercadolivre_adminhtml_question_grid>
+        <reference name="content">
+            <block type="mercadolivre/question_grid" name="mercadolivre_template.grid.container"></block>
+        </reference>
+    </mercadolivre_adminhtml_question_grid>
+    
+    <mercadolivre_adminhtml_item_new>
+        <reference name="content">
+            <block type="mercadolivre/product_listar" name="mercadolivre_item_new_product.grid.container"></block>
+        </reference>
+    </mercadolivre_adminhtml_item_new>
+    
+    <mercadolivre_adminhtml_product_grid>
+        <reference name="content">
+            <block type="mercadolivre/product_grid" name="mercadolivre_item_product.grid.container"></block>
+        </reference>
+    </mercadolivre_adminhtml_product_grid>
+        
+    <mercadolivre_adminhtml_item_import>
+          <reference name="content">
+            <block type="mercadolivre/item_import" name="mercadolivre_item_import" template="mercadolivre/item/import.phtml"></block>
+        </reference>
+    </mercadolivre_adminhtml_item_import>
+    
+
+    
+</layout>

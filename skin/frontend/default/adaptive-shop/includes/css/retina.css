@@ -1,0 +1,135 @@
+/*
+Retina displays
+*/
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+
+#dispositivos {
+	background-image: url(../../images/responsive-icon-retina.png);
+	background-size: 79px auto;
+}
+
+#mucci a {
+	background-image: url(../../images/mucci-retina.png);
+	background-size: 17px 17px;
+}
+
+.logotipo a{
+	background: url(../../images/logotipo-2x.png) no-repeat scroll 0 0 transparent;
+	background-size: 356px 84px;
+}
+
+.form-search > .search{
+	background-image: url(../../images/lupa-2x.png);
+	background-size: 13px 13px;
+}
+
+.form-news{
+	background: url(../../images/icone-newsletter-2x.png) center left no-repeat;
+	background-size: 31px 31px;
+}
+
+#nav-top #cart, .product-info .bt-buy, .bt-buy{
+	background-image: url(../../images/cart-2x.png);
+	background-size: 27px 23px;
+}
+
+#nav-top li .login, #nav-top li .cart{
+	background-image: url(../../images/arrow-2x.png);
+	background-size: 10px 6px;
+}
+
+.info{
+	background: url(../../images/info-2x.png) no-repeat scroll left center transparent;
+	background-size: 18px 17px;
+}
+
+.pag{
+	background: url(../../images/pag-2x.png) no-repeat scroll left center transparent;
+	background-size: 17px 17px;
+}
+
+.social{
+	background: url(../../images/social-2x.png) no-repeat scroll left center transparent;
+	background-size: 18px 17px;
+}
+
+.news{
+	background: url(../../images/news-2x.png) no-repeat scroll left center transparent;
+	background-size: 17px 17px;
+}
+
+.cart-table .edit-cart{
+	background-image: url(../../images/edit-2x.png);
+	background-size: 19px 20px;
+}
+
+.cart-table .btn-remove{
+	background-image: url(../../images/del-2x.png);
+	background-size: 15px 20px;
+}
+
+.box-cart ul li .icons a {
+    background-image: url(../../images/del-t-2x.png);
+	background-size: 12px 16px;
+}
+.c-visa{
+	background: url(../../images/flag/i-visa-2x.png);
+	background-size: 37px 25px;
+}
+.c-master{
+	background: url(../../images/flag/i-master-2x.png);
+	background-size: 37px 25px;
+}
+.c-amex{
+	background: url(../../images/flag/i-amex-2x.png);
+	background-size: 37px 25px;
+}
+.c-bradesco{
+	background: url(../../images/flag/i-bradesco-2x.png);
+	background-size: 37px 25px;
+}
+.c-itau{
+	background: url(../../images/flag/i-itau-2x.png);
+	background-size: 37px 25px;	
+}
+.c-bb{
+	background: url(../../images/flag/i-bb-2x.png);
+	background-size: 37px 25px;	
+}
+.c-boleto{
+	background: url(../../images/flag/i-boleto-2x.png);
+	background-size: 52px 25px;	
+}
+
+.c-deposito{
+	background: url(../../images/flag/i-deposito-2x.png);
+	background-size: 52px 25px;	
+}
+.c-bcash{
+	background: url(../../images/flag/i-bcash-2x.png);
+	background-size: 37px 25px;	
+}
+
+
+.economia{
+	background: #f5f5f5 url(../../images/flag-view/cofre-2x.png) no-repeat 10px top;
+	background-size: 26px 35px;
+}
+.i-flag-view .i-prod-deposito{background: url(../../images/flag-view/i-deposito-2x.png) no-repeat center center;background-size: 56px 25px;}
+.i-flag-view .i-prod-boleto{background: url(../../images/flag-view/i-boleto-2x.png) no-repeat center center;background-size: 56px 25px;}
+.i-flag-view .i-prod-visa{background: url(../../images/flag-view/i-visa-2x.png) no-repeat center center;background-size: 37px 25px;}
+.i-flag-view .i-prod-master{background: url(../../images/flag-view/i-master-2x.png) no-repeat center center;background-size: 37px 25px;}
+.i-flag-view .i-prod-amex{background: url(../../images/flag-view/i-amex-2x.png) no-repeat center center;background-size: 37px;}
+.i-flag-view .i-prod-bradesco{background: url(../../images/flag-view/i-bradesco-2x.png) no-repeat center center;background-size: 37px 25px;}
+.i-flag-view .i-prod-itau{background: url(../../images/flag-view/i-itau-2x.png) no-repeat center center;background-size: 37px 25px;}
+.i-flag-view .i-prod-bb{background: url(../../images/flag-view/i-bb-2x.png) no-repeat center center;background-size: 37px 25px;}
+.i-flag-view .i-prod-bcash{background: url(../../images/flag-view/i-bcash-2x.png) no-repeat center center;background-size: 37px 25px;}
+
+.menu-footer-contato{background: url(../../images/flag/telefone-2x.png) top left no-repeat;background-size: 21px 23px;}
+.menu-footer-contato .mfmsn{background: url(../../images/flag/chat-2x.png) top left no-repeat;background-size: 21px 23px;}
+.menu-footer-contato .mfsk{background: url(../../images/flag/skype-2x.png) top left no-repeat;background-size: 21px 23px;}
+.menu-footer-contato .mffb{background: url(../../images/flag/facebook-2x.png) top left no-repeat;background-size: 21px 23px;}
+.menu-footer-contato .mfgp{background: url(../../images/flag/googleplus-2x.png) top left no-repeat;background-size: 21px 23px;}
+.menu-footer-contato .mfyt{background: url(../../images/flag/youtube-2x.png) top left no-repeat;background-size: 21px 23px;}
+
+}

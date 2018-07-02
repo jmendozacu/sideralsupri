@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Mageplace_Callforprice
+ */
+-->
+<config>
+
+    <modules>
+        <Mageplace_Callforprice>
+            <version>1.7.14</version>
+        </Mageplace_Callforprice>
+    </modules>
+
+    <global>
+        <blocks>
+            <mageplace_callforprice>
+                <class>Mageplace_Callforprice_Block</class>
+            </mageplace_callforprice>
+        </blocks>
+
+        <models>
+            <mageplace_callforprice>
+                <class>Mageplace_Callforprice_Model</class>
+                <resourceModel>callforprice_resource_mysql4</resourceModel>
+            </mageplace_callforprice>
+
+            <callforprice_resource_mysql4>
+                <class>Mageplace_Callforprice_Model_Mysql4</class>
+                <entities>
+                    <callforprice>
+                        <table>cfp_table</table>
+                    </callforprice>
+                </entities>
+            </callforprice_resource_mysql4>
+        </models>
+
+        <helpers>
+            <mageplace_callforprice>
+                <class>Mageplace_Callforprice_Helper</class>
+            </mageplace_callforprice>
+        </helpers>
+
+        <resources>
+            <callforprice_setup>
+                <setup>
+                    <module>Mageplace_Callforprice</module>
+                </setup>
+
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </callforprice_setup>
+
+            <callforprice_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </callforprice_write>
+
+            <callforprice_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </callforprice_read>
+        </resources>
+
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <mageplace_callforprice>
+                        <type>singleton</type>
+                        <class>mageplace_callforprice/observer</class>
+                        <method>processCoreBlockAbstractToHtmlAfter</method>
+                    </mageplace_callforprice>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+
+    </global>
+
+    <frontend>
+        <layout>
+            <updates>
+                <mageplace_callforprice>
+                    <file>callforprice.xml</file>
+                </mageplace_callforprice>
+            </updates>
+        </layout>
+    </frontend>
+
+    <adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <callforprice>
+                                            <title>Call For Price</title>
+                                        </callforprice>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+
+        <layout>
+            <updates>
+                <mageplace_callforprice>
+                    <file>mageplace/callforprice.xml</file>
+                </mageplace_callforprice>
+            </updates>
+        </layout>
+
+        <events>
+            <catalog_product_save_after>
+                <observers>
+                    <callforprice_save_product_data>
+                        <type>singleton</type>
+                        <class>mageplace_callforprice/observer_product</class>
+                        <method>saveTabData</method>
+                    </callforprice_save_product_data>
+                </observers>
+            </catalog_product_save_after>
+
+            <adminhtml_catalog_category_tabs>
+                <observers>
+                    <callforprice_add_category_tab>
+                        <type>singleton</type>
+                        <class>mageplace_callforprice/observer_category</class>
+                        <method>addTab</method>
+                    </callforprice_add_category_tab>
+                </observers>
+            </adminhtml_catalog_category_tabs>
+
+            <catalog_category_save_after>
+                <observers>
+                    <callforprice_save_category_data>
+                        <type>singleton</type>
+                        <class>mageplace_callforprice/observer_category</class>
+                        <method>saveTabData</method>
+                    </callforprice_save_category_data>
+                </observers>
+            </catalog_category_save_after>
+
+        </events>
+    </adminhtml>
+
+    <default>
+        <callforprice>
+            <options>
+                <text_message>CALL FOR PRICE</text_message>
+                <global>1</global>
+            </options>
+            <regular_expressions>
+                <active_cat_price_category_page>&lt;span[^&gt;]*class=\"price\"[^&gt;]*&gt;[^&lt;]*&lt;\/span&gt;</active_cat_price_category_page>
+                <active_cat_price_product_page>&lt;span[^&gt;]*id=[^&gt;]*%d[^&gt;]*&gt;[^&lt;]*&lt;span[^&gt;]*class=\"price\"[^&gt;]*&gt;.*?&lt;\/span&gt;[^&lt;]*&lt;\/span&gt;</active_cat_price_product_page>
+                <active_cat_grouped_price_product_page>&lt;span[^&gt;]*id=[^&gt;]*%d[^&gt;]*&gt;[^&lt;]*&lt;span[^&gt;]*class=\"price\"[^&gt;]*&gt;.*?&lt;\/span&gt;[^&lt;]*&lt;\/span&gt;</active_cat_grouped_price_product_page>
+                <active_cat_tier_price_product_page>&lt;ul[^&gt;]*class=[^&gt;]*tier-prices[^&gt;]*&gt;.+?&lt;\/ul&gt;</active_cat_tier_price_product_page>
+                <active_cat_price_notice_product_page>&lt;span[^&gt;]*class=\"price-notice\"[^&gt;]*&gt;.*?&lt;span[^&gt;]*class=\"price\"[^&gt;]*&gt;.*?&lt;\/span&gt;.*?&lt;\/span&gt;</active_cat_price_notice_product_page>
+                <active_cat_price_box_bundle_product_page>&lt;div[^&gt;]*class=\"price-box-bundle\"[^&gt;]*&gt;.*?&lt;div[^&gt;]*class=\"price-box\"[^&gt;]*&gt;.*?&lt;\/div&gt;.*?&lt;\/div&gt;</active_cat_price_box_bundle_product_page>
+                <active_cat_full_price_bundle_product_page>&lt;span[^&gt;]*class=\"price\"[^&gt;]*id\=[^&gt;]*%s[^&gt;]*&gt;[^&lt;]*&lt;\/span&gt;</active_cat_full_price_bundle_product_page>
+                <active_cat_qty_product_page>&lt;input[^&gt;]*class=\"input-text qty[^&gt;]*&gt;</active_cat_qty_product_page>
+                <active_cat_qty_label_product_page>&lt;label for="qty"&gt;.*?&lt;\/label&gt;</active_cat_qty_label_product_page>
+                <active_cat_addtocart_product_page_and_category_page>&lt;button[^&gt;]*btn-cart[^&gt;]*&gt;(.*?)&lt;\/button&gt;</active_cat_addtocart_product_page_and_category_page>
+                <active_prod_price_category_page>&lt;span[^&gt;]*id\=\"[^(0-9)]+%d"[^&gt;]*&gt;[^&lt;]*&lt;span[^&gt;]*class\=\"price\"[^&gt;]*&gt;[^&lt;]*&lt;\/span&gt;[^&lt;]*&lt;\/span&gt;</active_prod_price_category_page>
+                <active_prod_addtocart_category_page>&lt;button[^&gt;]*onclick\="\S+\/product\/%d\/[^&gt;]+&gt;.*?&lt;\/button&gt;</active_prod_addtocart_category_page>
+                <active_prod_addtocart_for_configurable_category_page>&lt;button[^&gt;]*btn\-cart[^&gt;]*%s[^&gt;]*&gt;.*?&lt;\/button&gt;</active_prod_addtocart_for_configurable_category_page>
+                <active_prod_price_for_bundle_category_page>(&lt;h2 class="product-name"&gt;\W*&lt;a[^&gt;]+%s[^&gt;]+&gt;.+?&lt;\/a&gt;\W*&lt;\/h2&gt;)\W*&lt;div[^&gt;]*class="price-box"[^&gt;]*&gt;.+?&lt;\/div&gt;</active_prod_price_for_bundle_category_page>
+                <active_prod_addtocart_for_bundle_category_page>&lt;button[^&gt;]+onclick="\S+%s[^&gt;]+&gt;.*?&lt;\/button&gt;</active_prod_addtocart_for_bundle_category_page>
+                <active_prod_price_product_page>&lt;span[^&gt;]*id\=[^&gt;]*%d[^&gt;]*&gt;[^&lt;]*&lt;span[^&gt;]*class\=\"price\"[^&gt;]*&gt;[^&lt;]*&lt;\/span&gt;[^&lt;]*&lt;\/span&gt;</active_prod_price_product_page>
+                <active_prod_tier_price_product_page>&lt;ul[^&gt;]*class\=[^&gt;]*tier-prices[^&gt;]*&gt;.+?&lt;\/ul&gt;</active_prod_tier_price_product_page>
+                <active_prod_price_notice_product_page>&lt;span[^&gt;]*class\=\"price-notice\"[^&gt;]*&gt;.*?&lt;span[^&gt;]*class\=\"price\"[^&gt;]*&gt;.*?&lt;\/span&gt;.*?&lt;\/span&gt;</active_prod_price_notice_product_page>
+                <active_prod_price_box_bundle_product_page>&lt;div[^&gt;]*class\=\"price-box-bundle\"[^&gt;]*&gt;.*?&lt;div[^&gt;]*class\=\"price-box\"[^&gt;]*&gt;.*?&lt;\/div&gt;.*?&lt;\/div&gt;</active_prod_price_box_bundle_product_page>
+                <active_prod_full_price_bundle_product_page>&lt;span[^&gt;]*class\=\"price\"[^&gt;]*id\=[^&gt;]*%d[^&gt;]*&gt;[^&lt;]*&lt;\/span&gt;</active_prod_full_price_bundle_product_page>
+                <active_prod_grouped_price_product_page>&lt;span[^&gt;]*id\=[^&gt;]*%d[^&gt;]*&gt;[^&lt;]*&lt;span[^&gt;]*class\=\"price\"[^&gt;]*&gt;.*?&lt;\/span&gt;[^&lt;]*&lt;\/span&gt;</active_prod_grouped_price_product_page>
+                <active_prod_qty_product_page>&lt;input[^&gt;]*class=\"input-text qty.*?\"[^&gt;]*&gt;</active_prod_qty_product_page>
+                <active_prod_qty_label_product_page>&lt;label for="qty"&gt;.*?&lt;\/label&gt;</active_prod_qty_label_product_page>
+                <active_prod_addtocart_product_page>&lt;button[^&gt;]*btn-cart[^&gt;]*&gt;.*?&lt;\/button&gt;</active_prod_addtocart_product_page>
+                <price_compare_product_page>&lt;span[^&gt;]*id\=\"[^(0-9)]+%d[^&gt;]*&gt;[^&lt;]*&lt;span[^&gt;]*class\=\"price\"[^&gt;]*&gt;[^&lt;]*&lt;\/span&gt;[^&lt;]*&lt;\/span&gt;</price_compare_product_page>
+                <addtocart_compare_product_page>&lt;button[^&gt;]*onclick\="\S+\/product\/%d[^&gt;]+&gt;.*?&lt;\/button&gt;</addtocart_compare_product_page>
+            </regular_expressions>
+
+            <selectors>
+                <!--<product_list_cell><![CDATA[.products-grid .item]]></product_list_cell>-->
+                <product_list_price><![CDATA[div.price-box]]></product_list_price>
+                <product_list_addtocart><![CDATA[button.btn-cart]]></product_list_addtocart>
+                <product_link><![CDATA[.product-name > a]]></product_link>
+
+                <product_view_price><![CDATA[div.product-essential div.price-box]]></product_view_price>
+                <product_view_tier_price><![CDATA[div.product-essential ul.tier-prices]]></product_view_tier_price>
+                <product_view_price_notice><![CDATA[div.product-essential span.price-notice]]></product_view_price_notice>
+                <product_view_price_bundle><![CDATA[div.product-essential div.price-box-bundle]]></product_view_price_bundle>
+                <product_view_qty><![CDATA[div.product-essential label[for="qty"]]]></product_view_qty>
+                <product_view_qtylabel><![CDATA[div.product-essential input#qty]]></product_view_qtylabel>
+                <product_view_addtocart><![CDATA[div.product-essential button.btn-cart]]></product_view_addtocart>
+
+
+                <upsell_product_link><![CDATA[h3.product-name > a]]></upsell_product_link>
+                <upsell_product_price><![CDATA[div.price-box]]></upsell_product_price>
+                <!--<upsell_product_cell><![CDATA[.products-grid .item]]></upsell_product_cell>-->
+
+                <related_product_link><![CDATA[p.product-name > a]]></related_product_link>
+                <related_product_price><![CDATA[div.price-box]]></related_product_price>
+                <!--<related_product_cell><![CDATA[.products-grid .item]]></related_product_cell>-->
+
+                <!--<compare_product_cell_top><![CDATA[table.compare-table tr.product-shop-row td]]></compare_product_cell_top>-->
+                <!--<compare_product_cell_bottom><![CDATA[table.compare-table tr.add-to-row td]]></compare_product_cell_bottom>-->
+                <compare_product_link><![CDATA[h2.product-name > a]]></compare_product_link>
+                <compare_product_price><![CDATA[div.price-box]]></compare_product_price>
+                <compare_product_addtocart><![CDATA[button.btn-cart]]></compare_product_addtocart>
+
+                <!--<wishlist_product_cell><![CDATA[table.data-table tbody tr]]></wishlist_product_cell>-->
+                <wishlist_product_link><![CDATA[h2.product-name > a]]></wishlist_product_link>
+                <wishlist_product_price><![CDATA[div.price-box]]></wishlist_product_price>
+                <wishlist_product_addtocart><![CDATA[button.btn-cart]]></wishlist_product_addtocart>
+                <wishlist_product_all_addtocart><![CDATA[button.btn-add]]></wishlist_product_all_addtocart>
+
+                <my_wishlist_product_cell><![CDATA[ol.mini-products-list li]]></my_wishlist_product_cell>
+                <my_wishlist_product_link><![CDATA[p.product-name > a]]></my_wishlist_product_link>
+                <my_wishlist_product_price><![CDATA[div.price-box]]></my_wishlist_product_price>
+                <my_wishlist_product_addtocart><![CDATA[a.link-cart]]></my_wishlist_product_addtocart>
+
+                <viewed_product_link><![CDATA[li.item > a]]></viewed_product_link>
+                <viewed_product_price><![CDATA[div.price-box]]></viewed_product_price>
+
+                <new_product_link><![CDATA[h3.product-name > a]]></new_product_link>
+                <new_product_price><![CDATA[div.price-box]]></new_product_price>
+                <new_product_addtocart><![CDATA[button.btn-cart]]></new_product_addtocart>
+            </selectors>
+
+            <advanced>
+                <processor>zendquery</processor>
+            </advanced>
+        </callforprice>
+    </default>
+</config>

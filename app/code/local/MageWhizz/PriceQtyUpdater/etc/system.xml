@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<tabs>
+        <magewhizz_config translate="label">
+            <label>MageWhizz Extensions</label>
+            <sort_order>999</sort_order>
+        </magewhizz_config>
+    </tabs>
+	<sections>
+		<priceqtyupdater_options translate="label" module="priceqtyupdater">
+			<label>Price and Qty Updater</label>
+			<tab>magewhizz_config</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>0</show_in_website>
+			<show_in_store>0</show_in_store>
+			<groups>
+				<priceqtyupdater_config translate="label">
+					<label>Export for editing</label>
+					<frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+					<fields>
+						<export>
+							<label>Export product prices and qty to Excel/CSV file.</label>
+							<frontend_type>button</frontend_type>
+							<frontend_model>priceqtyupdater/button_export</frontend_model>
+							<sort_order>2</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<comment>By clicking this button CSV file with all products (id, sku, title, price, qty) will be downloaded.</comment>
+						</export>
+					</fields>
+				</priceqtyupdater_config>
+				
+				<priceqtyupdater_config_import translate="label">
+					<label>Import edited</label>
+					<frontend_type>text</frontend_type>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+					<fields>
+						<import_file>
+							<label>CSV file with product price and qty changes</label>
+							<frontend_type>import</frontend_type>
+							<backend_model>priceqtyupdater/import</backend_model>
+							<comment>Choose CSV file that was previously exported and edited and after saving the form data will be uploaded.</comment>
+							<sort_order>1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+						</import_file>
+					</fields>
+				</priceqtyupdater_config_import>	
+				
+				
+			</groups>
+		</priceqtyupdater_options>
+	</sections>
+</config>

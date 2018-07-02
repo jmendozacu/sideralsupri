@@ -1,0 +1,99 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to suporte.developer@buscape-inc.com so we can send you a copy immediately.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2010 Buscapé Company (http://www.buscapecompany.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<fieldset class="form-list">
+    <?php 
+          $_code = $this->getMethodCode();
+          $_standardPD = Mage::getSingleton('pagamentodigital/geral');
+          
+          $totals = Mage::getSingleton('checkout/session')->getQuote()->collectTotals();  
+          //$shippingAmount = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount();  
+                    
+    ?>
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+        <ul class="forma_pagamento">
+          <li>
+            <ul>
+              <li style="margin:2px 0!important;">
+              <span class="txt fs-12"> Você será redirecionado para o BCash após a confirmação do pedido.<label class="required"><em>*</em> Selecione uma Forma de Pagamento </label></span></li>
+            </ul>
+          </li>
+          <li style="float:left;;">
+            <ul>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                  <input type="radio" name="payment[cc_type]" value="10" class="bcash_in" id="bcash_boleto" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';"/><label for="bcash_boleto" class="radiolabel boleto"><span>boleto</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="58" class="bcash_in" id="bcash_bb" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_bb" class="radiolabel bb"><span>banco do brasil</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="59" class="bcash_in" id="bcash_bradesco" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_bradesco" class="radiolabel bradesco"><span>bradesco</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="60" class="bcash_in" id="bcash_itau" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_itau" class="radiolabel itau"><span>itau</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="61" class="bcash_in" id="bcash_banrisul" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_banrisul" class="radiolabel banrisul"><span>banrisul</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="62" class="bcash_in" id="bcash_hsbc" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_hsbc" class="radiolabel hsbc"><span>hsbc</span></label>
+              </li>
+       <!--     </ul>
+          </li>
+          <li style="float:left;">
+            <ul> -->
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="1" class="bcash_in" id="bcash_visa" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_visa" class="radiolabel visa"><span>visa</span></label>
+
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                  <input type="radio" name="payment[cc_type]" value="2" class="bcash_in" id="bcash_master" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_master" class="radiolabel master"><span>master</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="37" class="bcash_in" id="bcash_amex" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_amex" class="radiolabel amex"><span>american express</span></label>
+
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="45" class="bcash_in" id="bcash_aura" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_aura" class="radiolabel aura"><span>aura</span></label>
+
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="55" class="bcash_in" id="bcash_diners" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_diners" class="radiolabel diners"><span>diners</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="56" class="bcash_in" id="bcash_hiper" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_hiper" class="radiolabel hiper"><span>hipercard</span></label>
+              </li>
+              <li style="float:left;width:60px;height:44px;text-align:center;">
+                <input type="radio" name="payment[cc_type]" value="63" class="bcash_in" id="bcash_elo" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><label for="bcash_elo" class="radiolabel elo"><span>elo</span></label>
+              </li>
+            </ul>
+          </li>
+          <li style="float:left;">      
+            <ul>
+              <li><input id="campo_obrigatorio_pdgeral" type="hidden" class="required-entry" /></li>
+            </ul>
+          </li>
+          <li style="clear:both;"></li>
+          <li id="simulador_geral" style="display:none;padding-top:15px\9;*padding-top:5px;margin-bottom:15px;">
+              <a class="cor fs-14" href='javascript://' onclick="window.open('https://www.bcash.com.br/site/calcula_parcelamento_cliente.php?valor=<?php echo $totals->getData('grand_total') ?>&key=<?php echo $_standardPD->getConfigData('lojaID') ?>&nmp=<?php echo $_standardPD->getConfigData('qtdParcelas') ?>','', 'top=110,left=180,width=430,height=340,maximize=no,toolbar=no, location=no,status=no,menubar=no,scrollbars=auto,scrolling=yes,resizable=no');" >Simulador de Parcelas</a>
+          </li>
+        </ul>
+    </ul>
+</fieldset>

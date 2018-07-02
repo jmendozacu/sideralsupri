@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Mageplace_Callforprice
+ */
+-->
+<config>
+    <sections>
+        <callforprice>
+            <label>Call For Price</label>
+            <tab>amasty</tab>       
+            <sort_order>900</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <options>
+                    <label>Call For Price Options</label>
+					<sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <text_message>
+                            <label>Link Text</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </text_message>
+                        <href>
+                            <label>Link Url</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </href>
+                        <global>
+                            <label>Enable Global</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </global>
+                    </fields> 
+                </options>
+
+                <selectors>
+                    <label>Prototype-like css selectors (advanced options for custom templates)</label>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <!-- Product List block -->
+                        <product_list_cell>
+                            <label>Product list. Product cell</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_list_cell>
+                        <product_list_price>
+                            <label>Product list. Price box</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_list_price>
+                        <product_list_addtocart>
+                            <label>Product list. "Add to cart" button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_list_addtocart>
+                        <product_link>
+                            <label>Product list. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_link>
+
+                        <!-- Product View Block -->
+                        <product_view_price>
+                            <label>Product view. Price box</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_price>
+                        <product_view_tier_price>
+                            <label>Product view. Tier price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_tier_price>
+                        <product_view_price_notice>
+                            <label>Product view. Price notice</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_price_notice>
+                        <product_view_price_bundle>
+                            <label>Product view. Price label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_price_bundle>
+                        <product_view_qty>
+                            <label>Product view. Qty input</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_qty>
+                        <product_view_qtylabel>
+                            <label>Product view. Qty label</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_qtylabel>
+                        <product_view_addtocart>
+                            <label>Product view. "Add to cart" button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_view_addtocart>
+
+                        <!-- Upsell products block-->
+                        <upsell_product_link>
+                            <label>Upsell products. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </upsell_product_link>
+                        <upsell_product_price>
+                            <label>Upsell products. Product price box</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </upsell_product_price>
+                        <upsell_product_cell>
+                            <label>Upsell products. Product cell</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>125</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </upsell_product_cell>
+
+                        <!-- Related products block-->
+                        <related_product_link>
+                            <label>Related products. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </related_product_link>
+                        <related_product_price>
+                            <label>Related products. Product price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </related_product_price>
+                        <related_product_cell>
+                            <label>Related products. Product cell</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>145</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </related_product_cell>
+
+                        <!-- Compare product link -->
+                        <compare_product_cell_top>
+                            <label>Compare products. Product cell top</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>150</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </compare_product_cell_top>
+                        <compare_product_cell_bottom>
+                            <label>Compare products. Product cell bottom</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>151</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </compare_product_cell_bottom>
+                        <compare_product_link>
+                            <label>Compare products. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>152</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </compare_product_link>
+                        <compare_product_price>
+                            <label>Compare products. Product price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>153</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </compare_product_price>
+                        <compare_product_addtocart>
+                            <label>Compare products. "Add to cart" button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>154</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </compare_product_addtocart>
+
+                        <!-- Wishlist link -->
+                        <wishlist_product_cell>
+                            <label>Wishlist products. Product cell</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </wishlist_product_cell>
+                        <wishlist_product_link>
+                            <label>Wishlist products. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>181</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </wishlist_product_link>
+                        <wishlist_product_price>
+                            <label>Wishlist products. Product price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>182</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </wishlist_product_price>
+                        <wishlist_product_addtocart>
+                            <label>Wishlist products. "Add to Cart" button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>183</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </wishlist_product_addtocart>
+                        <wishlist_product_all_addtocart>
+                            <label>Wishlist products. "Add All to Cart" button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>184</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </wishlist_product_all_addtocart>
+
+                        <my_wishlist_product_cell>
+                            <label>My Wishlist sidebar products. Product cell</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>190</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </my_wishlist_product_cell>
+                        <my_wishlist_product_link>
+                            <label>My Wishlist sidebar products. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>191</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </my_wishlist_product_link>
+                        <my_wishlist_product_price>
+                            <label>My Wishlist sidebar products. Product price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>192</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </my_wishlist_product_price>
+                        <my_wishlist_product_addtocart>
+                            <label>My Wishlist sidebar products. "Add to Cart" link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>193</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </my_wishlist_product_addtocart>
+
+                        <!-- Recently viewed products block-->
+                        <viewed_product_link>
+                            <label>Recently viewed products. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </viewed_product_link>
+                        <viewed_product_price>
+                            <label>Recently viewed products. Product price box</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </viewed_product_price>
+
+                        <!-- Compare product link -->
+                        <new_product_link>
+                            <label>New products. Product link</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>250</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </new_product_link>
+                        <new_product_price>
+                            <label>New products. Product price</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>260</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </new_product_price>
+                        <new_product_addtocart>
+                            <label>New products. "Add to cart" button</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>270</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </new_product_addtocart>
+                    </fields>
+                </selectors>
+            </groups>
+        </callforprice>
+    </sections>
+</config>
+    

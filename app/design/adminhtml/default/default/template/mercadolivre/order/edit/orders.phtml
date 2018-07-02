@@ -1,0 +1,76 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php
+
+$mlorder = $this->getMlOrder();
+$storeorder = $this->getStoreOrder();
+
+?>
+
+    <div class="grid">
+    				<div class="hor-scroll">
+   						 <table cellspacing="0" id="mercadolivre_item_toimport_table" class="data">
+   							 
+                			<thead>
+                                    <tr class="headings">
+                                         
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="item_id" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Order #'); ?></span></a></span></th>
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="entity_id" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Date Created'); ?></span></a></span></th>
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="sku" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Total'); ?></span></a></span></th>
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="sku" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Status'); ?></span></a></span></th>
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="item_title" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Action'); ?></span></a></span></th>
+                                   </tr>                 
+                            </thead>
+                            <tbody id="">
+                          <?php if($mlorder == null && $storeorder == null){?>
+                          <tr class="even">
+						  <td class="empty-text a-center" colspan="100"><?php echo Mage::helper('mercadolivre') -> __('No records found.'); ?></td>
+						  </tr>  	
+                          <?php } else { ?>  	
+                            	
+                          <?php if($mlorder != null){ ?>
+                          	
+                            <tr class="" id="">
+                        	<td class=""><?php echo $mlorder['increment_id']; ?></td>
+                        	<td class=""><?php echo $mlorder['created_at']; ?></td>
+                        	<td class=""><?php echo  Mage::helper('core')->currency($mlorder['grand_total'], true, false); ?></td>
+                        	<td class=""><?php echo $mlorder['status']; ?></td>
+                        	<td class=""><a href="<?php echo $this->getUrl('adminhtml/sales_order/view', array(
+            'order_id'   => $mlorder['entity_id']
+        ));?>" alt="view order"><?php echo Mage::helper('mercadolivre') -> __('View'); ?></a>
+        
+        </td>
+                        	</tr>
+                       	  <?php } ?>
+                       	  <?php if($storeorder != null){ ?>
+                       	  	 <tr class="" id="">
+                        	<td class=""><?php echo $storeorder['increment_id']; ?></td>
+                        	<td class=""><?php echo $storeorder['created_at']; ?></td>
+                        	<td class=""><?php echo Mage::helper('core')->currency($storeorder['grand_total'], true, false); ?></td>
+                        	<td class=""><?php echo $storeorder['status']; ?></td>
+                        	<td class=""><a href="<?php echo $this->getUrl('adminhtml/sales_order/view', array(
+            'order_id'   => $storeorder['entity_id']
+        ));?>" alt="view order"><?php echo Mage::helper('mercadolivre') -> __('View'); ?></a>
+        
+        </td>
+                        	</tr>
+                       	  <?php } ?>
+                       	  <?php } ?>
+                        	</tbody>
+                        	</table>
+                        	</div>
+
+
+

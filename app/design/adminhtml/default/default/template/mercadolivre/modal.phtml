@@ -1,0 +1,33 @@
+<?php
+
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+
+<div id="md"></div>
+<script src="<?php echo $this->getJsUrl('chico/chico-min-0.11.js'); ?>"></script>
+<script type="text/javascript">
+//<![CDATA[
+ 
+var modal = jQuery("#md").modal({
+                "content": "<div id='mpmodal'><iframe src='<?php echo $this->getLink();?>' width='100%' height='800px' frameborder='0' scrolling='no'></iframe></div>",
+                "width": "850px",
+                "height": "600px",
+                "closable" : true
+});
+
+<?php if($this->getCode()){ ?>
+	window.onload = modal.show();
+<?php } ?>
+//]]>
+</script>

@@ -1,0 +1,120 @@
+/* Styles for the CoverPop.js plugin */
+body {
+    position: relative;
+}
+
+.CoverPop-open,
+.CoverPop-open body {
+    overflow: hidden;
+}
+
+#CoverPop-cover {
+    display: none;
+    position: fixed;
+    overflow-y: scroll;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99000;
+    -webkit-animation: fade-in .25s ease-in;
+    -moz-animation-name: fade-in .25s ease-in;
+    -ms-animation-name: fade-in .25s ease-in;
+    -o-animation-name: fade-in .25s ease-in;
+    animation-name: fade-in .25s ease-in;
+}
+
+.CoverPop-open #CoverPop-cover {
+    display: block;
+}
+.pop-title{  
+  font-size: 35px!important;
+  font-weight: bold;
+  color: #fd9800!important;
+  background: #343839;
+  display: inline-block;
+  padding: 8px 35px 8px;
+  position: relative;
+  left: -41px;
+  margin-bottom: 20px;
+}
+.pop-title span{
+	display: inline-block;
+	height: 15px;
+	width: 21px;
+	position: absolute;
+	top: 57px;
+	left: 0;
+	background: transparent url(../../images/pop-aba.png) center center no-repeat;
+}
+
+@-webkit-keyframes fade-in {
+    0% { opacity: 0; }
+    25% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.splash {
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.5);
+}
+
+.splash-center {
+	max-width: 521px;
+	margin: 10% auto 0;
+	background: #e6e6e6;
+	border-top: 5px solid #fd9800;
+	border-bottom: 5px solid #fd9800;
+}
+
+.splash-center .splash-box{ margin: 35px 20px;}
+.splash-center .splash-box p{color: #343839;font-size: 20px;letter-spacing: 0.5px;}
+.splash-center img{
+	width: 100%;
+}
+
+@media screen and (max-width: 550px) {
+    .splash-center {
+        margin: 40px 25px;
+    }
+}
+
+.splash-box .CoverPop-close, .splash-box .CoverPop-site{
+	color: #343839;
+	font-weight: bold;
+	display: inline-block;
+	position: relative;
+	padding: 0 5px 0 28px;
+	margin: 15px 90px 0 0;
+	text-decoration: none;
+}
+
+.splash-box .CoverPop-close span, .splash-box .CoverPop-site span{
+	display: inline-block;
+	width: 17px;
+	height: 17px;
+	border-radius: 3px;
+	border: 2px solid #fd9800;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.splash-box .CoverPop-close:hover span, .splash-box .CoverPop-site:hover span{
+	background: #fd9800;
+}
+.close-splash{
+	position: relative;
+}
+
+.close-splash .CoverPop-close{
+	width: 30px;
+	height: 30px;
+	background-color: gray;
+	display: block;
+	position: absolute;
+	right: -15px;
+	margin-top: -15px;
+	background: url(../../images/close.png) no-repeat;
+	cursor: pointer;
+}

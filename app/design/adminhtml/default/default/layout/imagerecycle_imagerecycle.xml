@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout>
+	<imagerecycle_index_index>
+            <reference name="content">
+		<block type="imagerecycle/images" name="recycleimage" template="imagerecycle/imagerecycle/images.phtml" />
+            </reference>
+            <reference name="head">
+                <action method="addJs"><script>imagerecycle/imagerecycle/jquery.min.js</script></action>
+                <action method="addJs"><script>imagerecycle/imagerecycle/script.js</script></action>                                       
+                <action method="addCss"><name>imagerecycle/imagerecycle/imagerecycle.css</name></action>
+            </reference>
+	</imagerecycle_index_index>
+</layout>

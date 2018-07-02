@@ -1,0 +1,70 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2016 Amasty (https://www.amasty.com)
+ * @package Mageplace_Callforprice
+ */
+?>
+<?php /** @var $this Mageplace_Callforprice_Block_Adminhtml_Catalog_Category_Tab */ ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend">Call For Price</h4>
+    </div>
+    <fieldset>
+        <legend>Call for price</legend>
+        <?php $cfpModel = $this->getCallForPriceModel(); ?>
+        <table class="form-list">
+            <tbody>
+            <tr>
+                <td class="label"><label for="checkbox_field_CFP">Enable Call For Price </label></td>
+                <td class="value">
+                    <input type="checkbox" class="input-text" name="checkbox_field_CFP" id="checkbox_field_CFP"
+                        <?php if($cfpModel->isCallforprice()): ?>
+                        checked="checked"
+                        <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><label for="">Allowed Customer Groups</label></td>
+                <?php $customerGroups = $this->getCustomerGroups();?>
+                <?php $selectedGroups = $cfpModel->getCustomerGroups(); ?>
+                <td class="value">
+                    <select id='groups' style="width: 279px; " multiple="multiple" name="group_ids[]">
+                        <?php foreach($customerGroups as $group):?>
+                            <?php $isSelected = in_array($group['value'], $selectedGroups); ?>
+                            <option <?php if($isSelected): ?> selected="selected" <?php endif; ?> value="<?php echo $group['value'];?>"><?php echo $group['label'];?></option>
+                        <?php endforeach;?>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><label for="">Allowed Customer's Ids</label></td>
+                <td class="value">
+                    <input style="width: 274px;" type="text" name="customer_ids" value="<?php echo implode(',', $cfpModel->getCustomerIds()); ?>"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="label"><label for="">Allowed Stores</label></td>
+                <?php $stores = Mage::app()->getStores();?>
+                <?php $selectedStores = $cfpModel->getStoreIds(); ?>
+                <td class="value">
+                    <select id='stores' style="width: 279px; " multiple="multiple" name="stores_id[]">
+                        <?php $used_stores = array();?>
+                        <?php foreach($stores as $store):?>
+                            <?php if(!in_array($store->getGroup()->getId(), $used_stores)):?>
+                                <?php $isSelected = in_array($store->getGroup()->getId(), $selectedStores); ?>
+                                <option <?php if($isSelected): ?> selected="selected" <?php endif; ?>
+                                    value="<?php echo $store->getGroup()->getId();?>">
+                                    <?php echo $store->getGroup()->getName();?>
+                                </option>
+                                <?php array_push($used_stores, $store->getGroup()->getId());?>
+                            <?php endif;?>
+                        <?php endforeach;?>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+

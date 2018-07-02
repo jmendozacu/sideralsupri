@@ -1,0 +1,77 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+
+$reason = $this->getReason();
+
+// Interpret response
+
+switch ($reason) {
+
+         case "old": ?>
+
+        <div class="page-title">
+         <h1><?php echo Mage::helper('mercadolivre')->__('Ocorreu um erro com a licença do módulo'); ?></h1>
+        </div>
+        <h3><?php echo Mage::helper('mercadolivre')->__('Entre em contato com a thirdlevel através do email suporte@thirdlevel.com.br'); ?></h3>
+        <br /><br />
+        <?php
+        break;
+        case "Invalid": ?>
+
+        <div class="page-title">
+            <h1><?php echo Mage::helper('mercadolivre')->__('Chave de lincença Inválida'); ?></h1>
+        </div>
+        <h3><?php echo Mage::helper('mercadolivre')->__('A chave de licença do módulo está invalida'); ?></h3>
+        <br /><br />
+        <a href="http://my.thirdlevel.com.br/" target="_self"><?php echo Mage::helper('mercadolivre')->__('Verifique a chave correta em nosso sistema, indo em Serviços > Meus Serviços'); ?></a>
+        <?php
+        break;
+    case "Expired":
+        ?>
+        <div class="page-title">
+            <h1><?php echo Mage::helper('mercadolivre')->__('Licença expirada'); ?></h1>
+        </div>
+        <h3><?php echo Mage::helper('mercadolivre')->__('A chave de licença do módulo está expirada'); ?></h3>
+        <br /><br />
+        <a href="http://my.thirdlevel.com.br/" target="_self"><?php echo Mage::helper('mercadolivre')->__('Adquira uma nova licença para continuar utilizando o módulo, indo em Serviços > Assina Já'); ?></a>
+        <?php
+        break;
+    case "Suspended":
+        ?>
+
+        <div class="page-title">
+            <h1><?php echo Mage::helper('mercadolivre')->__('Licença suspensa'); ?></h1>
+        </div>
+        <h3><?php echo Mage::helper('mercadolivre')->__('A licença de uso do módulo Mercadolivre está suspensa'); ?></h3>
+        <br /><br />
+        <a href="http://my.thirdlevel.com.br/" target="_self"><?php echo Mage::helper('mercadolivre')->__('Clique aqui pode administrar sua licença e efetuar o pagamento caso necessário.'); ?></a>
+        <?php
+        break;
+    default:?>
+        <div class="page-title">
+            <h1><?php echo Mage::helper('mercadolivre')->__('Erro de licença'); ?></h1>
+        </div>
+        <h3><?php echo Mage::helper('mercadolivre')->__('Ocorre um erro desconhecido ao verificar a licença do módulo Mercadolivre.'); ?></h3>
+        <br /><br />
+        <a href="http://my.thirdlevel.com.br/" target="_self"><?php echo Mage::helper('mercadolivre')->__('Clique aqui para acessar a área de suporte.'); ?></a>
+    <?php       break;
+}
+
+
+
+?>
+
+
+
+

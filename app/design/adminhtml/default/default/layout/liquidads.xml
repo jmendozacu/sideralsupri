@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<layout version="0.2.0">
+    <default>
+        <reference name="head">
+            <action method="addCss">
+                <name>Adroll/css/liquidads.css</name>
+            </action>
+         </reference>
+    </default>
+    <liquidads_adminhtml_liquidads_index>
+        <update handle='liquidads_liquidads_index'/>
+        <reference name="content">
+            <block type="adminhtml/template" name="main" template="liquidads/index.phtml" />
+        </reference>
+    </liquidads_adminhtml_liquidads_index>
+    <liquidads_adminhtml_liquidads_new>
+        <update handle='liquidads_liquidads_new'/>
+        <reference name="content">
+            <block type="adminhtml/template" name="main" template="liquidads/new.phtml" />
+        </reference>
+    </liquidads_adminhtml_liquidads_new>
+    <liquidads_adminhtml_liquidads_existing>
+        <update handle='liquidads_liquidads_existing'/>
+        <reference name="content">
+            <block type="adminhtml/template" name="main" template="liquidads/existing.phtml" />
+        </reference>
+    </liquidads_adminhtml_liquidads_existing>
+    <liquidads_adminhtml_liquidads_advertisables>
+        <update handle='liquidads_liquidads_advertisables'/>
+        <reference name="content">
+            <block type="adminhtml/template" name="liquidads" template="liquidads/advertisables.phtml" />
+        </reference>
+    </liquidads_adminhtml_liquidads_advertisables>
+    <liquidads_adminhtml_liquidads_success>
+        <update handle='liquidads_liquidads_success'/>
+        <reference name="content">
+            <block type="adminhtml/template" name="success" template="liquidads/success.phtml" />
+        </reference>
+    </liquidads_adminhtml_liquidads_success>
+</layout>

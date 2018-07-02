@@ -1,0 +1,58 @@
+<?php
+/**
+ * Shoping cart top
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+?>
+<?php if ($this->getIsNeedToDisplaySideBar()):?>
+
+    <?php $_cartQty = $this->getSummaryCount() ?>
+
+    <?php if ($_cartQty>0): ?>
+
+            <?php if ($_cartQty==1): ?>
+                <span class="bold cart cor-sec"><?php echo $this->__('<a href="%s">Carrinho 1 item</a>', $this->getUrl('checkout/cart')) ?></span>
+            <?php else: ?>
+                <span class="bold cart cor-sec"><?php echo $this->__('<a href="%s">Carrinho %s itens</a>', $this->getUrl('checkout/cart'), $_cartQty) ?></span>
+            <?php endif ?>
+    <?php else: ?>
+       	<span class="bold cart cor-sec"><a href="#" title="Carrinho Vazio">Carrinho Vazio</a> </span>
+    <?php endif ?>
+    <div class="box-hover2">
+    <div class="box-cart cor-sec fs-12">
+    <?php $_items = $this->getRecentItems() ?>
+    <?php if(count($_items)): ?>
+        <ul id="cart-sidebar" class="mini-products-list">
+        <?php foreach($_items as $_item): ?>
+            <?php echo $this->getItemHtml($_item) ?>
+        <?php endforeach; ?>
+        	<li>
+        	<?php if ($this->canApplyMsrp()): ?>
+        		<span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+            <?php else: ?>
+            	<span class="f-l d-b cor-sec"><?php echo $this->__('Cart Subtotal:') ?> <span class="bold fs-14 cor-sec"><?php echo Mage::helper('checkout')->formatPrice(Mage::helper('checkout/cart')->getQuote()->getSubtotalWithDiscount()) ?></span></span>
+            <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+            	<br />
+            	(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+            <?php endif; ?>
+            <?php endif; ?>
+            
+            <?php //if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+            	<?php echo $this->getChildHtml('extra_actions') ?>
+            	<button type="button" title="<?php echo $this->__('Checkout') ?>" class="f-r bt2 d-b cor-sec bold tt-u radius td-n" onclick="setLocation('<?php echo $this->getCheckoutUrl() ?>')"><?php echo $this->__('Checkout') ?></button>
+   	        	<span><a class="f-r" href="<?php echo $this->getUrl('checkout/cart')?>" title="Editar carrinho">Editar carrinho</a></span>
+   	        <?php //endif ?>
+	       	</li>
+        </ul>
+        <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+    <?php else: ?>
+    <ul>
+    	<li>
+        <span class="cor-sec fs-14 bold d-b cart-empty">Nenhum item foi adicionado!<?php //echo $this->__('You have no items in your shopping cart.') ?></span>
+    	</li>
+    </ul>
+    <?php endif ?>
+    </div>
+    </div>
+<?php endif;?>

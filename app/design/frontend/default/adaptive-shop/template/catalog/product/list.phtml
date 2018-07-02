@@ -1,0 +1,108 @@
+<?php
+/**
+ * AdaptiveShop - Mucci Estudio
+ * marcelo@mucciestudio.com.br
+**/
+ 
+/** Product list template 
+* @see Mage_Catalog_Block_Product_List 
+**/
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+	
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+    <div id="colunas9">
+    	<div class="h-r f-l d-b"></div><br />
+    	<?php echo $this->getToolbarHtml() ?>
+    	<div class="h-r f-l d-b"></div>
+    </div>
+    <?php // Grid Mode ?>
+    <?php $_collectionSize = $_productCollection->count() ?>
+    <?php $_columnCount = 3; ?>    
+    <?php $i=0; foreach ($_productCollection as $_product): $reqProductId = $_product->getId(); ?>
+        <?php if ($i++%$_columnCount==0): ?>
+        <?php endif ?>
+            <div id="colunas3" class=" prod <?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">      
+            <div class="tag-label">
+            <?php if($_product->isSaleable()): ?>
+            <?php else: ?>
+                <p class="novo">esgotado</p>
+            <?php endif; ?>
+
+            <?php //label promoção por atributo ?>
+            <?php //if ($_product->getAttributeText('destaque') == "Sim"): ?>
+				<!--<p style="position:absolute;">destaque</p>-->
+			<?php //endif; ?>                
+            <?php // flag novo produto ?>
+			<?php // Limit dates for newness
+			$newFromDate = Mage::getModel('catalog/product')->load($_product->getID())->getNewsFromDate();
+			$newToDate = Mage::getModel('catalog/product')->load($_product->getID())->getNewsToDate();
+			// Date and time (now)
+			$now = date("Y-m-d");
+			if($newFromDate < $now && $newToDate >= $now): ?>
+				<p class="novo">novidade</p>
+			<?php endif; ?>
+            <?php // flag promoção ?>
+			<?php
+    		// Get the Special Price
+    		$specialprice = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialPrice(); 
+    		// Get the Special Price FROM date
+    		$specialPriceFromDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialFromDate();
+    		// Get the Special Price TO date
+    		$specialPriceToDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialToDate();
+    		// Get Current date
+    		$today =  time(); 
+    		if ($specialprice):
+        		if($today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) || $today >=
+strtotime( $specialPriceFromDate) && is_null($specialPriceToDate)): ?>
+				<p class="oferta">promo&ccedil;&atilde;o</p>
+			<?php  
+        		endif;
+    		endif; 
+    		?>
+            </div>
+    		<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image trans opacity-1-5">
+           <img class="img-prod" src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(263); ?>" width="263" height="263" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+           
+           		<div id="info-prod">
+						<a class="fs-14 txt d-b" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><h2><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2></a>
+						
+						<!--R$ <?php //echo number_format($_product->getFinalPrice(), '2', '.', ','); ?>-->
+						<?php echo $this->getPriceHtml($_product, true) ?>
+						
+						<p class="cor fs-16 bold">
+	    <?php //parcelamento ?>
+		<?php
+			$Preco = $_product->getFinalPrice();
+			if($Preco >= 999){
+				$Parcelamento = 3; 
+				$Resultado = $Preco / $Parcelamento;
+				echo $Parcelamento . 'x</strong> de <strong>R$'.number_format($Resultado, 2, ',', '').'</strong> sem juros.';
+			}
+			?>
+        <?php //parcelamento ?>
+						</p>
+					<a class="vermais" href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image trans opacity-1-5">ver mais</a>
+				</div>
+            </div><?php //END COLUNAS3 ?>
+        <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+        <div id="colunas9"><div class="h-r f-l d-b"></div></div>
+        <?php endif ?>
+        <?php endforeach ?>
+        <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
+        <div id="colunas9">
+	        <?php 
+	        // manually get the toolbar block so we can do the page navigation  
+	        $toolbar = $this->getToolbarBlock();  
+	        $toolbar->setCollection($_productCollection);  
+	        if($toolbar->getCollection()->getSize() > 0):  
+	        echo $toolbar->getPagerHtml(); //Pager  
+	        endif;  
+	        ?>
+        </div>
+<?php endif; ?>

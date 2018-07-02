@@ -1,0 +1,107 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+
+$data = $this -> getData();
+$dateTimestamp = Mage::getModel('core/date') -> timestamp(strtotime($data['date_created']));
+$date = date('d/m/Y', $dateTimestamp);
+?>
+<form action="<?php echo $this -> getpostpage(); ?>" id="questionForm"  method="post" name="questionForm">
+    <input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+<div class="content-header">
+   <h3 class="icon-head head-item"><?php echo $this->getHeaderText() . ' ' . $data['item_title'] .  ' ('. $data['status']. ')'?></h3> 
+   <p class="form-buttons">
+   <button id="back" title="Back" type="button" class="scalable back" onclick="setLocation('<?php echo $this->getBackUrl(); ?>')" style="">
+
+
+<span>Back</span>
+
+</button>
+<button id="delete" type="button" class="scalable delete" onclick="confirmSetLocation('Are you sure?', '<?php echo $this->_getDelete(); ?>')" style="">
+<span><?php echo Mage::helper('mercadolivre') -> __('Delete'); ?></span>
+</button>
+
+<?php if($data['status'] != 'ANSWERED') { ?>
+<button id="answer" title="Answer" type="submit" class="scalable save" style="">
+
+<span><?php echo Mage::helper('mercadolivre') -> __('Answer'); ?></span>
+   
+</button>
+<?php } ?>
+   </p>
+</div>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Answer Questions') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+        <table class="form-list" cellspacing="0">
+            
+            <tr>
+                <td class="label">
+                    <label for="mercadolivre_question_id"><b><?php echo Mage::helper('mercadolivre') -> __('Created'); ?></b></label>
+                </td>
+                <td class="value">
+                    <p><?php echo $date; ?></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label for="mercadolivre_question_id"><b><?php echo Mage::helper('mercadolivre') -> __('User information'); ?></b></label>
+                </td>
+                <td class="value">
+                    <a href='http://perfil.mercadolivre.com.br/<?php echo $data['user_nick']; ?>' target="_blank" ><?php echo $data['user_nick']; ?></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label for="mercadolivre_question_id"><b><?php echo Mage::helper('mercadolivre') -> __('Ad information'); ?></b></label>
+                </td>
+                <td class="value">
+                    <a href='<?php echo $this -> getLink(); ?>' target="_blank" ><?php echo $data['item_title']; ?></a>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label for="mercadolivre_question_id"><b><?php echo Mage::helper('mercadolivre') -> __('Question'); ?></b></label>
+                </td>
+                <td class="value">
+                    <p><?php echo $data['text']; ?></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">
+                    <label for="answer"><b><?php echo Mage::helper('mercadolivre') -> __('Answer'); ?></b></label>
+                </td>
+                <td class="value">
+                    <?php if($data['status'] != 'ANSWERED') { ?>
+                    <textarea rows="4" cols="50" name="answer" id="answer" class="input-text required-entry"></textarea>
+                     <?php } else { ?>
+                     <p><?php echo $data['answer']; ?></p>
+                    <?php } ?>
+                </td>
+            </tr> 
+        </table>
+        <br/><br/> 
+
+
+    </fieldset>
+</div>
+</form>
+<script type="text/javascript">
+	//< ![CDATA[
+	var questionForm = new VarienForm('questionForm', true);
+
+	//]]>
+</script>

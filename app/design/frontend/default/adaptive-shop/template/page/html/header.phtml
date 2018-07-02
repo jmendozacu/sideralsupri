@@ -1,0 +1,96 @@
+<?php
+/**
+	ADAPTIVE SHOP - MUCCI ESTUDIO
+	@var Mage_Page_Block_Html_Header $this
+**/
+?>
+<div id="full" class="top-bar-bg white">
+	<div id="wrapper">
+		<div id="colunas12" class="no-bottom">
+			<ul id="nav-top" class="f-l cor-sec fs-12">
+				<?php if ($this->helper('customer')->isLoggedIn() ) { ?>
+				<li class="f-l no-p"> 
+				<a class="bold cor-sec" href="<?php echo $this->getUrl('customer/account')?>" title="Minha conta">Minha conta</a>
+				</li>
+				<li class="f-l no-p"> 
+				<a class="bold cor-sec" href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>" title="sair">Sair&nbsp;</a>
+				</li>
+				<?php } else { ?>
+				<li class="f-l"id="touch"><span class="bold login cor-sec" href="#" title=""><a href="#" title="login">Login</a></span>
+					<div class="box-hover">
+						<div class="box-login">
+							<?php echo $this->getChildHtml('login') ?>
+						</div>
+					</div>
+				</li>
+				<li class="f-l no-p"><a href="<?php echo Mage::getBaseUrl(); ?>customer/account/create/" title="Cadastre-se">Cadastre-se</a></li>
+				<?php } ?>
+				<li id="cart" class="f-r">
+				<?php echo $this->getChildHtml('cart_top') ?>
+				</li>
+				<li class="f-r no-bg"><span class="cor-sec">Compre pelo telefone <span class="bold cor-sec">(11) 4428-2300</span></span></li>
+				<li class="f-r no-bg"><a href="<?php echo Mage::getBaseUrl(); ?>contacts/" title="">Central de atendimento</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="full">
+	<div id="wrapper">
+		
+		<div id="colunas4" class="no-bottom">
+			<h1 class="logotipo">
+			<a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo d-b trans opacity-1-5">
+				<span><?php echo $this->getLogoAlt() ?></span>
+			</a>
+			</h1>
+		</div>
+		
+		<div id="colunas8">
+			<div class="i-new-home">
+				<img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/i-entrega-todo-brasil.png" title="Entrega em todo o Brasil" width="101" height="57" />&nbsp;<img class="img-ee" src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/i-entrega-sp.png" title="Entrega expressa em São Paulo" width="118" height="57" />&nbsp;<img class="img-sg" src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/new-home/i-satisfacao-garantida.png" title="Satisfação Garantida" width="159" height="57" />
+			</div>
+		</div>
+
+		<div id="colunas12" class="no-bottom">
+			<ul id="menu" class="new-menu f-l">
+				<li><a href="<?php echo $this->getUrl('') ?>samsung" class="trans opacity-1-5 i-samsung"><span>samsung</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>canon" class="trans opacity-1-5 i-canon"><span>canon</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>sharp" class="trans opacity-1-5 i-sharp"><span>sharp</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>brother" class="trans opacity-1-5 i-brother"><span>brother</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>hp" class="trans opacity-1-5 i-hp"><span>hp</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>ricoh" class="trans opacity-1-5 i-ricoh"><span>ricoh</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>lexmark" class="trans opacity-1-5 i-lexmark"><span>lexmark</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>3m" class="trans opacity-1-5 i-3m"><span>3M</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>xerox" class="trans opacity-1-5 i-xerox"><span>xerox</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>kyocera" class="trans opacity-1-5 i-kyocera"><span>kyocera</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>konica-minolta" class="trans opacity-1-5 i-konica"><span>konica minolta</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>riso" class="trans opacity-1-5 i-riso"><span>riso</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>epson" class="trans opacity-1-5 i-epson"><span>epson</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>toshiba" class="trans opacity-1-5 i-toshiba"><span>toshiba</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>katun" class="trans opacity-1-5 i-katun"><span>katun</span></a></li>
+				<li><a href="<?php echo $this->getUrl('') ?>katun-select" class="trans opacity-1-5 i-kselect"><span>katun select</span></a></li>
+			</ul>
+		</div>
+
+		<div id="colunas12">
+	        <?php echo $this->getChildHtml('topSearch') ?>
+		</div>
+		
+	</div>
+</div>
+
+<?php 
+	$routeName = Mage::app()->getRequest()->getRouteName();
+	$identifier = Mage::getSingleton('cms/page')->getIdentifier();
+?>
+
+<?php if($routeName == 'cms' && $identifier == 'home'): ?>
+	<div id="full" class="banner-bg">
+		<div id="wrapper">
+			<div id="colunas12" class="no-bottom">
+				<?php echo $this->getChildHtml('bannerslider') ?>
+			</div>			
+		</div>
+	</div>
+<?php endif ?>

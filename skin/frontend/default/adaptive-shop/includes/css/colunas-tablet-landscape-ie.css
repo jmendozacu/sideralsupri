@@ -1,0 +1,101 @@
+/*
+tablet landscape
+*/
+
+#wrapper{
+	padding: 0 20px;
+	width: 984px;
+}
+
+#colunas12{
+	width: 956px;
+}
+
+#wrapper-colunas9{
+	width: 738px;
+}
+
+#colunas9{
+	width: 710px
+}
+
+#wrapper-colunas8{
+	width: 656px;
+}
+
+#colunas8{
+	width: 628px
+}
+
+#colunas6{
+	width: 464px;
+}
+
+#colunas4{
+	width: 300px;
+}
+
+#colunas3, .colunas3{
+	width: 218px;
+}
+
+.footer-h{
+	font-size: 14px;
+}
+
+.news-i{
+	width: 480px;
+}
+.form-news > form{width: 60%}
+
+#gallery, #slide-images{
+	height: 252px!important;
+}
+.product-image-zoom a, .product-image-zoom a img, .product-image-zoom .mousetrap{
+	width: 460px!important;
+	height: 460px!important;
+}
+.fb iframe {width: 218px!important;}
+
+.form-search > .search{
+	width: 282px;
+}
+
+.cart-success1{
+	height: 50px;
+}
+.cart-success2{
+	height: 115px;
+}
+
+.cart-empty1{
+	height: 40px;
+}
+.cart-empty2{
+	height: 105px;
+}
+
+.i-flag-view li {margin: 15px 3px 0 0;}
+.i-flag-view2 li {margin: 15px 28px 0 0;}
+.i-flag-view .i-prod-amex {margin-left: 0;}
+.i-flag-view2 .i-prod-entrega-sp {background-size: 115px 51px;width: 115px;}
+.i-flag-view2 .i-prod-entrega {background-size: 99px 51px;width: 99px;}
+.i-flag-view2 .i-prod-e-sedex {background-size: 87px 51px;width: 87px;}
+.new-form-search #search {width: 866px;}
+.new-menu li > a{margin: 0 15px;}
+.img-sg, .img-ee{display: inline-block;}
+.new-list-box4 li{width: 182px;height: 150px;}
+
+.c-banner-toner-po-refil ul li{width: 114px;height:75px;margin: 0px;}
+.c-banner-toner-po-refil ul li .c-samsung{background-size: 100px auto;}
+.c-banner-toner-po-refil ul li .c-canon{background-size: 84px auto;}
+.c-banner-toner-po-refil ul li .c-sharp{background-size: 89px auto;}
+.c-banner-toner-po-refil ul li .c-brother{background-size: 84px auto;}
+.c-banner-toner-po-refil ul li .c-hp{background-size: 41px auto;}
+.c-banner-toner-po-refil ul li .c-ricoh{background-size: 79px auto;}
+.c-banner-toner-po-refil ul li .c-lexmark{background-size: 92px auto;}
+.c-banner-toner-po-refil ul li .c-xerox{background-size: 90px auto;}
+.c-banner-toner-po-refil ul li .c-kyocera{background-size: 92px auto;}
+.c-banner-toner-po-refil ul li .c-konica-minolta{background-size: 104px auto;}
+.c-banner-toner-po-refil ul li .c-toshiba{background-size: 91px auto;}
+

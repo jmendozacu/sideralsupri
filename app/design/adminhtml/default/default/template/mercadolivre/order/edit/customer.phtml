@@ -1,0 +1,158 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php
+$order = $this->getOrderData();
+?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Customer Information') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+         <table class="form-list" cellspacing="0">        
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('First Name') ?></b></label>    
+                </td>
+                <td class="value">
+                <input type='text' value='<?php echo $order['buyer_name']; ?>' name='buyer_name' class="input-text" />
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Last Name') ?></b></label>    
+                </td>
+                <td class="value">
+                <input type='text' value='<?php echo $order['buyer_lastname']; ?>' name='buyer_lastname' class="input-text"/>
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Email') ?></b></label>    
+                </td>
+                <td class="value"> 
+                 <input type='text' value='<?php echo $order['buyer_email']; ?>' name='buyer_email' class="input-text"/>
+               </td>
+            </tr>
+     		 <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Address') ?></b></label>    
+                </td>
+                <td class="value">
+                <input type='text' value='<?php echo $order['buyer_address_line']; ?>' name='buyer_address_line' class="input-text"/>
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('City')?></b></label>    
+                </td>
+                <td class="value">
+                	 <input type='text' value='<?php echo $order['buyer_city']; ?>' name='buyer_city' class="input-text"/>
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('State') ?></b></label>    
+                </td>
+                <td class="value">
+                	 <input type='text' value='<?php echo $order['buyer_state_name']; ?>' name='buyer_state_name' class="input-text" />
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Postalcode') ?></b></label>    
+                </td>
+                <td class="value">
+                	 <input type='text' value='<?php echo $order['buyer_zipcode']; ?>' name='buyer_zipcode' class="input-text required-entry" />
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Country') ?></b></label>    
+                </td>
+                <td class="value">
+                	
+                	<select class="validate-select" name="buyer_country_id">
+                	<?php 
+           
+                	foreach ($this->getCountry() as $country){
+	                	if($country['value'] != ''){
+
+							if($country['value'] == $order['buyer_country_id']){
+							echo '<option value="'.$country['value'].'" selected>'.$country['label'].'</option>';
+							} elseif($country['value'] == Mage::getStoreConfig('general/country/default') && $order['buyer_country_id'] == null) {
+		                	echo '<option value="'.$country['value'].'" selected>'.$country['label'].'</option>';
+		                	} else {
+		                	echo '<option value="'.$country['value'].'">'.$country['label'].'</option>';	
+		                	}
+						}
+					} ?>
+					 </select> 
+
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Phone') ?></b></label>    
+                </td>
+                <td class="value">
+                	 <input type='text' value='<?php echo $order['buyer_phone_number']; ?>' name='buyer_phone_number' class="input-text" />
+               </td>
+            </tr>
+           <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Document Id') ?></b></label>    
+                </td>
+                <td class="value">
+                	 <input type='text' value='<?php echo $order['buyer_document']; ?>' name='buyer_document' class="input-text" />
+               </td>
+            </tr>
+ 			<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Document Type') ?></b></label>    
+                </td>
+                <td class="value">
+                	 <input type='text' value='<?php echo $order['buyer_document_type']; ?>' name='buyer_document_type' class="input-text"/>
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Mercadolivre Information') ?></b></label>    
+                </td>
+                <td class="value">
+                <a href="<?php echo $this->getUserLink() ?>" alt='userlink' target="_blank"><?php  echo $order['buyer_mercadolivre_id']; ?> </a>
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Store Id') ?></b></label>    
+                </td>
+                <td class="value">
+                <a href="<?php echo $this->getUrl('adminhtml/customer/edit', array('id'=> $order['customer_id']));?>" alt="view customer" target='_blank' >
+                <?php  echo $order['customer_id']; ?>  
+               </td>
+            </tr>
+    
+          
+            
+         
+            </table>
+          
+            
+   
+        
+    </fieldset>
+</div>
+
+

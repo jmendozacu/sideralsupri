@@ -1,0 +1,73 @@
+<?php
+/**
+ * Magmodules.eu - http://www.magmodules.eu - info@magmodules.eu
+ * =============================================================
+ * NOTICE OF LICENSE [Single domain license]
+ * This source file is subject to the EULA that is
+ * available through the world-wide-web at:
+ * http://www.magmodules.eu/license-agreement/
+ * =============================================================
+ * @category    Magmodules
+ * @package     Magmodules_Snippets
+ * @author      Magmodules <info@magmodules.eu>
+ * @copyright   Copyright (c) 2015 (http://www.magmodules.eu)
+ * @license     http://www.magmodules.eu/license-agreement/  
+ * =============================================================
+ */
+?>
+<?php if($crumbs && is_array($crumbs)): ?>
+	<?php if(Mage::getStoreConfig('snippets/system/breadcrumbs_markup') == 'schema'): ?>
+		<div class="grid-full breadcrumbs">
+			<ul itemscope itemtype="http://schema.org/BreadcrumbList">
+				<?php $i = 0; foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+					<li class="<?php echo $_crumbName ?>" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+						<?php if($_crumbInfo['first']): ?>
+							<?php $first_label = $this->htmlEscape($_crumbInfo['label']); ?>
+							<a itemprop="item" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><span itemprop="name"><?php echo Mage::helper('snippets')->getFirstBreadcrumbTitle($first_label) ?></span></a>
+						<?php else: ?>
+							<?php if($_crumbInfo['link']): ?>
+								<a itemprop="item" href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span></a>
+							<?php elseif($_crumbInfo['last']): ?>
+								<strong><span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span></strong>
+							<?php else: ?>
+								<span itemprop="name"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+							<?php endif; ?>
+						<?php endif; ?>
+						<?php if(!$_crumbInfo['last']): ?>
+							&nbsp; &raquo;
+						<?php endif; ?>
+						<meta property="position" content="<?php echo $i; ?>">				
+					</li>
+				<?php $i++; endforeach; ?>
+			</ul>
+		</div>
+	<?php else: ?>
+		<div class="grid-full breadcrumbs" >
+			<ul>
+				<?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+					<li class="<?php echo $_crumbName ?>">
+						<?php if($_crumbInfo['first']): ?>
+							<?php $first_label = $this->htmlEscape($_crumbInfo['label']); ?>
+							<span typeof="v:Breadcrumb">
+								<a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>" rel="v:url" property="v:title"><?php echo Mage::helper('snippets')->getFirstBreadcrumbTitle($first_label) ?></a>
+							</span>	
+						<?php else: ?>
+							<?php if($_crumbInfo['link']): ?>
+								<span typeof="v:Breadcrumb">
+									<a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>" rel="v:url" property="v:title"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>
+								</span>	
+							<?php elseif($_crumbInfo['last']): ?>
+								<strong><?php echo $this->htmlEscape($_crumbInfo['label']) ?></strong>
+							<?php else: ?>
+								<?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+							<?php endif; ?>
+						<?php endif; ?>											
+						<?php if(!$_crumbInfo['last']): ?>
+							&nbsp; &raquo;
+						<?php endif; ?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>

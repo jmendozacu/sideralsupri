@@ -1,0 +1,14 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+
+<label for="<?php echo $this->getFieldId('ie')?>" class="txt fs-12<?php if ($this->isRequired()) echo ' required' ?>"><?php if ($this->isRequired()) echo '<em>*</em>' ?><?php echo $this->__('IE (Inscrição Estadual)') ?></label> <label class="txt fs-10 f-l d-b"><input style="margin:0 3px;" type="checkbox" name="isento" title="Isento?" value="1" id="isento" class="f-l checkbox">Isento?</label>
+    <input for="isento" type="text" id="<?php echo $this->getFieldId('ie')?>" name="<?php echo $this->getFieldName('ie')?>" title="<?php echo $this->__('IE (Inscrição Estadual)') ?>" class="d-b op-i txt fs-14 input-text i-ie" value="<?php echo $this->getCustomer()->getIe(); ?>" />
+<script>
+    //inscricaoEstadual('suaInscricaoEstadual', '');
+</script>    

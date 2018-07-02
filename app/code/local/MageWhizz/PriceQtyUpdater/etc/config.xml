@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<MageWhizz_PriceQtyUpdater>
+			<version>1.0.0</version>
+		</MageWhizz_PriceQtyUpdater>
+	</modules>
+	
+	<admin>
+        <routers>
+            <priceqtyupdater>
+                <use>admin</use>
+                <args>
+                    <module>MageWhizz_PriceQtyUpdater</module>
+                    <frontName>priceqtyupdater</frontName>
+                </args>
+            </priceqtyupdater>
+        </routers>
+    </admin>
+	
+	<adminhtml>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <priceqtyupdater_options>
+                                            <title>MageWhizz Price and Qty Updater</title>
+                                        </priceqtyupdater_options>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+	
+	<global>
+	
+		<blocks>
+        	<priceqtyupdater>
+            	<class>MageWhizz_PriceQtyUpdater_Block</class>
+			</priceqtyupdater>
+        </blocks>	
+		<helpers>
+			<priceqtyupdater>
+				<class>MageWhizz_PriceQtyUpdater_Helper</class>
+			</priceqtyupdater>
+		</helpers>
+		<models>
+			<priceqtyupdater>
+				<class>MageWhizz_PriceQtyUpdater_Model</class>
+			</priceqtyupdater>
+		</models>
+		
+	</global>
+		
+</config>

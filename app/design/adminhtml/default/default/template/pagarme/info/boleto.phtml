@@ -1,0 +1,27 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Pagarme
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<img src="<?php echo $this->getSkinUrl('pagarme/images/logo.png'); ?>" width="125" /><br />
+<strong><?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?></strong>
+
+<?php if($this->getInfo()): ?>
+<br />
+<?php echo $this->__('Transaction') ?>: <a href="#" onclick="return Pagarme.load('<?php echo $this->getTransactionUrl() ?>');">#<?php echo $this->escapeHtml($this->getTransactionId()) ?></a>
+<br />
+<?php echo $this->__('Expiration Date') ?>: <?php echo $this->escapeHtml($this->getBoletoExpirationDate()) ?>
+
+<?php if(trim($this->getBoletoUrl()) != false): ?>
+<br />
+<a href="<?php echo $this->getBoletoUrl() ?>" target="_blank"><?php echo $this->__('Click here to print your Boleto') ?></a>
+<?php else: ?>
+<br />
+<?php echo $this->__('Your Boleto is being generated and will be ready soon') ?>
+<?php endif ?>
+
+
+<?php endif ?>

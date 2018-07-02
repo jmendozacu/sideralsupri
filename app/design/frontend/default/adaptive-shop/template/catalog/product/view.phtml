@@ -1,0 +1,294 @@
+<?php
+/**
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+<form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+
+<div class="no-display">
+    <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+    <input type="hidden" name="related_product" id="related-products-field" value="" />
+</div>
+
+<div id="colunas6">
+  <?php echo $this->getChildHtml('media') ?>
+</div>
+
+<div id="colunas6" class="product-info no-bottom">
+    <h1 class="bold cor fs-25 d-b"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+    <p class="fs-14 cod">C&oacute;d. do Produto: <?php echo $_product->getSku() ?></p>
+    <?php // flag novo produto ?>
+    <?php // Limit dates for newness
+        $newFromDate = Mage::getModel('catalog/product')->load($_product->getID())->getNewsFromDate();
+        $newToDate = Mage::getModel('catalog/product')->load($_product->getID())->getNewsToDate();
+        // Date and time (now)
+        $now = date("Y-m-d");
+        if($newFromDate < $now && $newToDate >= $now): ?>
+            <p class="novo">novidade</p>
+        <?php endif; ?>
+        <?php // flag promoção ?>
+        <?php
+        // Get the Special Price
+        $specialprice = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialPrice(); 
+        // Get the Special Price FROM date
+        $specialPriceFromDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialFromDate();
+        // Get the Special Price TO date
+        $specialPriceToDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialToDate();
+        // Get Current date
+        $today =  time(); 
+        if ($specialprice):
+            if($today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) || $today >=
+strtotime( $specialPriceFromDate) && is_null($specialPriceToDate)): ?>
+            <p class="oferta">promo&ccedil;&atilde;o</p>
+        <?php  
+            endif;
+        endif; 
+        ?>
+
+    
+
+    <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+    <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+    <?php endif;?>
+
+    <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+    <?php echo $this->getChildChildHtml('container2', '', true, true) ?><br />
+    <div class="h-r f-l d-b"></div><br />
+    <?php endif;?>
+
+        <?php if($_product->isSaleable()): ?>
+            <p class="fs-14 d-b txt bold f-r align-estoque">Em estoque</p>
+        <?php else: ?>
+            <p class="fs-14 d-b esgotado bold f-r align-estoque">Produto Esgotado</p>
+        <?php endif; ?>
+
+       
+
+<div class="h-r f-l d-b"></div><br />
+
+    <div id="colunas3" class="m-auto">
+    <br />
+        <?php //echo $this->getPriceHtml($_product, true) ?>
+            <?php
+            // Get the Special Price
+            $specialprice = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialPrice(); 
+            // Get the Special Price FROM date
+            $specialPriceFromDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialFromDate();
+            // Get the Special Price TO date
+            $specialPriceToDate = Mage::getModel('catalog/product')->load($_product->getId())->getSpecialToDate();
+            // Get Current date
+            $today =  time(); 
+            if ($specialprice):?>
+                
+
+                    <span class="price-de fs-16 f-l">De <?php echo Mage::helper('core')->currency($_product->getPrice(),true,false); ?></span>
+                    <span class="price fs-20 f-l">Por <?php echo Mage::helper('core')->currency($_product->getSpecialPrice(),true,false); ?></span>
+                
+            
+                
+            <?php else: ?>
+        
+
+        <span class="price fs-20 f-l">Por <?php echo Mage::helper('core')->currency($_product->getFinalPrice(),true,false); ?></span>
+        
+      <?php endif; ?>
+    </div>
+
+
+    <?php
+        function parcela($valor, $limite = 3) {
+            $parcela = 1;      
+
+            if ($valor >= 66) {        
+                while($valor/$parcela >= 33 && $parcela <= $limite) {
+                   $resultado = number_format($valor / $parcela, 2, ',', '.');
+                   $parcela++;
+                }
+                $parcela--;
+                echo 'At&#233; <span>'.$parcela.'x</span> de <span>R$ '.$resultado.' sem juros</span>';
+            }
+
+        }
+    ?>
+
+    <?php
+        function descontoBoleto($boleto) {
+            $boleto = $boleto * 0.95;
+            $boleto = number_format($boleto, 2, ',', '.');
+            echo $boleto;
+        }
+    ?>
+
+    <div class="pagamentos parcelamento">
+        <div class="forma-pgto boleto">
+            <div class="ico"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/ico-boleto.png" alt="Pagamento no Boleto Banc&#225;rio"></div>
+            <div class="desc-pgto">
+                <p>ou <span class="valorComDesconto">R$ <?php descontoBoleto($_product->getFinalPrice()); ?></span> no boleto banc&#225;rio ou <br>
+                transfer&#234;ncia banc&#225;ria <strong>(5% de desconto)</strong></p>
+            </div>
+        </div>        
+        <div class="forma-pgto cartao">
+            <div class="ico"><img src="<?php echo $this->getUrl('') ?>skin/frontend/default/adaptive-shop/images/ico-cartoes.png" alt="Pagamento no Cart&#227;o de Cr&#233;dito"></div>
+            <div class="desc-pgto">
+                <p> 
+                <?php parcela($_product->getFinalPrice(), 3); ?>
+                    <br>
+                    ou em at&#233; <span>12x com juros</span> no cart&#227;o de cr&#233;dito
+                </p>
+            </div>
+        </div>
+    </div>
+    <div id="product-price">
+        <div class="content-price">
+        <br />
+          <?php if($_product->isSaleable()): ?>
+          <input type="submit" value="Comprar &raquo;" class="bt-buy bt cor-sec d-b fs-20 radius bold validation-passed" onclick="productAddToCartForm.submit(this); return false;">
+          <?php else: ?>
+          <input type="submit" disabled="disabled" value="Comprar &rsaquo;" class="bt-buy no-bt cor-sec d-b fs-20 radius bold">
+          <?php endif; ?>  
+          <p class="txt fs-13 bold mt-10">SATISFA&Ccedil;&Atilde;O GARANTIDA!</p>
+          <p class="txt fs-12">&bull; 7 dias para troca &bull;</p>
+        </div>
+    </div>
+    <div class="qty-product">
+         <?php if($_product->isSaleable()): ?>
+            <p class="fs-14 f-r">Quantidade: <input name="qty" type="text" placeholder="1" class="input-text qty txt fs-14 op-i" id="qty" style="width:25px;" maxlength="3" value="<?php echo $this->getMinimalQty($_product) ?>" /></p>
+        <?php else: ?>
+            <p class="fs-14 f-r">Quantidade: <input name="qty" type="text" disabled="disabled" class="input-text qty txt fs-14 op-i" id="qty" style="width:25px;" maxlength="3" value="<?php echo $this->getMinimalQty($_product) ?>" /></p>
+        <?php endif; ?>
+    </div>
+
+    <?php echo $this->getChildHtml('getlowest'); ?>
+    
+    <?php if ($_product->getShortDescription()):?>
+    <div id="product-att">
+        <div style="width: 100%;height: auto;float: left;">
+        <table class="data-table" id="product-attribute-specs-table">
+        <colgroup><col width="120px">
+        </col>
+        </colgroup>
+        <tbody>
+        <?php echo $_product->getShortDescription(); ?>
+        </tbody>
+        </table>
+        </div>
+    </div>
+    <?php endif;?>
+
+    <div>
+       <ul class="i-flag-view">
+        <li><span class="txt bold fs-12">Aceitamos</span></li>
+        <li class="i-prod-deposito"></li>
+        <li class="i-prod-boleto"></li>
+        <li class="i-prod-visa"></li>
+        <li class="i-prod-master"></li>
+        <li class="i-prod-amex"></li>
+        <li class="i-prod-bradesco"></li>
+        <li class="i-prod-itau"></li>
+        <li class="i-prod-bb"></li>
+        <li class="i-prod-bcash"></li>
+       </ul>
+
+       <ul class="i-flag-view2">
+        <li><span class="txt bold fs-12 i-prod-title">Envio</span></li>
+        <li class="i-prod-entrega-sp"></li>
+        <li class="i-prod-e-sedex"></li>
+        <li class="i-prod-entrega"></li>
+       </ul>
+
+    </div>
+        
+</div><?php //end colunas6 ?>
+
+<div id="colunas12" class="product-info">
+    <div class="h-r f-l d-b"></div>
+    <h2 class="bold cor fs-20 d-b ta-c m-top">Detalhes</h2>
+    <div class="h-r f-l d-b"></div>
+    <?php echo $_product->getDescription(); ?>
+    <?php //echo $this->getChildHtml('upsell_products') ?>
+    <?php //echo $this->getChildHtml('product_additional_data') ?>
+</div>
+
+<?php foreach ($this->getChildGroup('detailed_info', 'getChildHtml') as $alias => $html): ?>
+    <?php echo $html; ?>
+<?php endforeach; ?>
+ 
+</form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+        productAddToCartForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                }
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToCartForm);
+
+        productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                // Remove custom datetime validators
+                for (var methodName in Validation.methods) {
+                    if (methodName.match(/^validate-datetime-.*/i)) {
+                        delete Validation.methods[methodName];
+                    }
+                }
+
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
+
+<script type="text/javascript">
+var google_tag_params = {
+ecomm_prodid: <?php echo $_product->getId() ?>, 
+ecomm_pagetype: "product",
+ecomm_totalvalue: <?php echo number_format($Preco, 2, '.', '') ?>
+};
+</script>
+
+</div><?php //end wrapper ?>
+</div><?php //end full para manter 100% do traço na tela ?>
+
+<div id="full" class="no-home">
+    <div id="wrapper">

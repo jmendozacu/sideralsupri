@@ -1,0 +1,51 @@
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->getLang() ?>">
+
+<head>
+	<?php echo $this->getChildHtml('head') ?>
+</head>
+
+<body>	
+	<?php echo $this->getChildHtml('after_body_start') ?>
+    <?php echo $this->getChildHtml('global_notices') ?>       
+    <?php echo $this->getChildHtml('header') ?>        
+    <?php echo $this->getChildHtml('global_messages') ?>	
+	<?php
+		$routeName = Mage::app()->getRequest()->getRouteName();
+		$identifier = Mage::getSingleton('cms/page')->getIdentifier();
+	?>	
+	<div id="full" <?php if($routeName != 'cms' && $identifier != 'home') { ?>class="no-home"<?php } ?>>
+		<div id="wrapper">
+			<div id="colunas12">
+				<?php echo $this->getChildHtml('breadcrumbs') ?>
+			</div>
+			<div id="colunas3" class="p-top">
+			<?php echo $this->getChildHtml('left') ?>
+			</div>
+			<div id="wrapper-colunas9">
+			<?php echo $this->getChildHtml('content') ?>
+			</div>
+		</div>
+	</div>
+
+	<?php if($routeName == 'cms' && $identifier == 'home') { ?>
+		<script type="text/javascript">
+			var google_tag_params = {
+				ecomm_pagetype: "home"
+			};
+		</script>
+	<?php } ?>
+
+   	<?php echo $this->getChildHtml('footer') ?>    
+    <?php echo $this->getChildHtml('before_body_end') ?>
+    <?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/**
+* Mageplace Callforprice
+*
+* @category      Mageplace
+* @package       Mageplace_Callforprice
+* @copyright     Copyright (c) 2011 Mageplace. (http://www.mageplace.com)
+* @license       http://www.mageplace.com/disclaimer.html
+*/
+
+
+/****CALL FOR PRICE*****/
+.callforprice{text-decoration:none;background:red;color:#ffffff;margin-top:10px;margin-bottom:5px;width:105px;padding:5px;border-radius:3px;display: none;}.compareCFP{margin-left:auto;margin-right:auto;}
+#info-prod{color: #6e6e6e;font-size: 14px;}

@@ -1,0 +1,98 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to suporte.developer@buscape-inc.com so we can send you a copy immediately.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2010 Buscapé Company (http://www.buscapecompany.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<fieldset class="form-list">
+    <?php 
+          $_code = $this->getMethodCode();
+          $_standardPD = Mage::getSingleton('pagamentodigital/geral');
+          
+          $totals = Mage::getSingleton('checkout/session')->getQuote()->collectTotals();  
+          //$shippingAmount = Mage::getSingleton('checkout/session')->getQuote()->getShippingAddress()->getShippingAmount();  
+                    
+    ?>
+    <ul id="payment_form_<?php echo $_code ?>" style="display:none">
+        <ul class="forma_pagamento">
+          <li>
+            <ul>
+              <li><label class="required"><em>*</em> Selecione uma Forma de Pagamento </label></li>
+            </ul>
+          </li>
+          <li style="float:left;;">
+            <ul>
+              <li style="float:left;width:65px;">
+                  <input type="radio" name="payment[cc_type]" value="10" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';"/><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_boleto.gif" alt="Pagável em qualquer agência bancária, correios ou casas lotéricas até a data de vencimento." title="Pagável em qualquer agência bancária, correios ou casas lotéricas até a data de vencimento." /> 
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="58" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_bb.gif" alt="Transferência on-line via Banco do Brasil" title="Transferência on-line via Banco do Brasil" />
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="59" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_bradesco.gif" alt="Transferência on-line via Banco Bradesco" title="Transferência on-line via Banco Bradesco" />
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="60" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_itau.gif" alt="Transferência on-line via Banco Itaú" title="Transferência on-line via Banco Itaú" />
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="61" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_banrisul.gif" alt="Transferência on-line via Banco Banrisul" title="Transferência on-line via Banco Banrisul" />
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="62" onclick="document.getElementById('simulador_geral').style.display = 'none';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_hsbc.gif" alt="Transferência on-line via Banco HSBC" title="Transferência on-line via Banco HSBC" />
+              </li>
+            </ul>
+          </li>
+          <li style="float:left;">
+            <ul>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="1" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_visa.gif" alt="Visa" title="Visa" />
+
+              </li>
+              <li style="float:left;width:65px;">
+                  <input type="radio" name="payment[cc_type]" value="2" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_master.gif" alt="Master" title="Master" />
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="37" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_americans.gif" alt="American Express" title="American Express" />
+
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="45" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_aura.gif" alt="Aura" title="Aura" />
+
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="55" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_diners.gif" alt="Diners" title="Diners" />
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="56" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_hipercard.gif" alt="Hipercard" title="Hipercard" />
+              </li>
+              <li style="float:left;width:65px;">
+                <input type="radio" name="payment[cc_type]" value="63" onclick="document.getElementById('simulador_geral').style.display = 'block';document.getElementById('campo_obrigatorio_pdgeral').value='YES';" /><img src="https://www.bcash.com.br/webroot/img/img_meios/pagamento_elo.gif" alt="Elo" title="Elo" />
+              </li>
+            </ul>
+          </li>
+          <li style="float:left;">      
+            <ul>
+              <li><input id="campo_obrigatorio_pdgeral" type="hidden" class="required-entry" /></li>
+            </ul>
+          </li>
+          <li style="clear:both;"></li>
+          <li id="simulador_geral" style="display:none;">
+              <a href='javascript://' onclick="window.open('https://www.bcash.com.br/site/calcula_parcelamento_cliente.php?valor=<?php echo $totals->getData('grand_total') ?>&key=<?php echo $_standardPD->getConfigData('lojaID') ?>&nmp=<?php echo $_standardPD->getConfigData('qtdParcelas') ?>','', 'top=110,left=180,width=430,height=340,maximize=no,toolbar=no, location=no,status=no,menubar=no,scrollbars=auto,scrolling=yes,resizable=no');" >Simulador de Parcelas</a>
+          </li>
+        </ul>
+    </ul>
+</fieldset>

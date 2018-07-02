@@ -1,0 +1,73 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php $datas = $this->getData();
+	 
+ ?>	
+<div class="my-account">
+    <div class="page-title">
+        <h1><?php echo Mage::helper('mercadolivre')->__('Mercadolivre Orders') ?></h1>
+    </div>
+     <?php echo $this->getMessagesBlock()->getGroupedHtml() ; ?>
+     
+     <?php if($datas == null) { ?>
+     <p><?php echo Mage::helper('mercadolivre')->__('Sorry, you have no pending MercadoLivre Orders') ?></p>	
+     <?php } else { ?>
+     <p><?php echo Mage::helper('mercadolivre')->__('We found more than one Order, select below the order that you want to complete') ?></p>
+ 	<table class="data-table" id="my-orders-table">
+ 		<thead>
+ 	 
+     <tr class="first last">
+		<th><?php echo Mage::helper('mercadolivre')->__('Order') ?> #</th>
+		<th><?php echo Mage::helper('mercadolivre')->__('Date') ?></th>
+		<th>
+		<span class="nobr"><?php echo Mage::helper('mercadolivre')->__('Order total'); ?></span>
+		</th>
+		<th>
+		<span class="nobr"><?php echo Mage::helper('mercadolivre')->__('Status'); ?></span>
+		<th/>
+		</tr>
+	
+	</thead>
+	<tbody>
+		<?php foreach ($datas as $data){?>
+		<tr class="first last odd">
+		<td><?php echo $data['id']; ?></td>
+		<td>
+		<span class="nobr"><?php echo $this->formatDate($data['date_created']); ?></span>
+		</td>
+	
+		<td>
+		<span class="price"><?php echo $data['order_total']; ?></span>
+		</td>
+		<td>
+		<em><?php echo $data['order_status']; ?></em>
+		</td>
+		<td class="a-center last">
+		<span class="nobr">
+		<a href="<?php echo Mage::getUrl('mercadolivre/cart/index',array('hash'=>$data['hash'] )) ?>"><?php echo Mage::helper('mercadolivre')->__('Complete'); ?></a>
+		<span class="separator">
+		</td>
+		</tr>
+		<?php }?>
+		</tbody>
+	</table>
+    <?php } ?>
+    <script type="text/javascript">decorateTable('my-orders-table');</script>
+</div>
+
+
+
+
+

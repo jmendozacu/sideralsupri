@@ -1,0 +1,247 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+
+$category = $this->getDefaultCategory();
+$model = $this->getModel();
+
+if (isset($model['item_category_id'])){
+    $categoryname = $model['item_category_name'];
+    $categoryid = $model['item_category_id'];
+	$mode = $category['buying_modes'];
+} else {
+	$default = $this->getDefaultCategory();
+	
+	if($default != null){
+    $categoryname = $default->getDescription();
+    $categoryid = $default->getMercadolivreId(); 
+	$mode = $default->getBuyingModes();  
+	} else {
+	$mode = '';	
+	$categoryname = Mage::helper('mercadolivre')->__('Select Below') ;
+	$categoryid = '';
+	}
+}
+
+if(isset($model['mercadolivre_id'])){
+    $edit = false; 
+} else {
+    $edit = true; 
+}
+ 
+$attributes = $this->getAttributes();
+
+?>
+<script src="<?php echo $this->getJsUrl('jquery/jquery.js'); ?>"></script>
+<script src="<?php echo $this->getJsUrl('jstree/jquery.jstree.js'); ?>"></script>
+<script type="text/javascript">
+	//<![CDATA[
+
+		var $j = jQuery.noConflict();
+
+        jQuery(function () {
+
+         
+             $j("#tree").jstree({
+	        	"html_data" : {
+	            "data" : "<li class='jstree-closed' alt='root' id='root' desc='Nenhuma'><a href='#'><?php echo Mage::helper('mercadolivre')->__('Category Tree') ?>
+				</a></li>",
+				"ajax" : {
+				"type": "GET",
+				"dataType": 'html',
+				"crossDomain":'false',
+				"url" : "<?php echo $this->getLinkCat(); ?>",
+				"data" : function (n) {
+					return { id : n.attr("alt") };
+				}
+							}
+								},
+								"ui" : {
+								"select_limit" : 1
+								},
+
+								"plugins" : [ "themes", "html_data","ui"]
+								})
+
+								.bind("select_node.jstree", function (event, data) {
+								getinfo(data.rslt.obj.attr("alt"));
+								})
+
+								});
+
+								function getinfo(cat){
+
+								$j.ajax({
+								timeout:10000,
+								type: "GET",
+								dataType: 'json',
+								url: "https://api.mercadolibre.com/categories/"+cat
+								}).done(function(data) {
+
+								var path = ' ';
+								for (var i=0; i < data.path_from_root.length ;i++)
+								{
+
+								if(i==0){
+								path = data.path_from_root[i].name;
+								} else {
+								path = path + ' > ' + data.path_from_root[i].name;
+								}
+								}
+								$j('#catname').html(path);
+
+				if(data.children_categories.length > 0) {
+								$j('#catid').attr('value','');
+								$j('#catname').css('color', 'red' );
+								$j('#cateid').css('color', 'red' );
+								$j('#errormensagem').show();
+								$j('#catvalid').attr('value','0');
+				} else {
+								$j('#catid').attr('value',data.id);
+								$j('#catname').css('color', 'green' );
+								$j('#cateid').css('color', 'green' );
+								$j('#errormensagem').hide();
+								$j('#catvalid').attr('value','1');
+								$j('#categname').attr('value',path);
+								$j('#mode').attr('value',data.settings.buying_modes);
+								$j('#cateid').html(data.id);
+								
+								
+								if(data.settings.buying_modes == 'classified'){
+						
+										$j.ajax({
+											timeout:10000,
+											type: "GET",
+											dataType: 'html',
+											url: "<?php echo $this->getMercadolivreContactFieldsUrl(); ?>",
+						         			beforeSend: function () {
+									    	$j( "#loading-mask" ).show();    
+									  		}
+						            		}).done(function(data) {   
+						            		
+						            		$j("#loading-mask" ).hide();
+						            		$j("#contact_value").show();	
+						            		$j("#contact_value").html(data);		
+						            		});
+											} else {
+												 $j("#contact_value").hide();
+											}
+								
+								if(data.attribute_types == 'variations'){
+
+								$j.ajax({
+								timeout:10000,
+								type: "GET",
+								dataType: 'html',
+								url: "<?php echo $this->getMercadolivreAttributeUrl(); ?>id/"+data.id,
+			         			beforeSend: function () {
+						    	$j( "#loading-mask" ).show();    
+						  		}
+			            		}).done(function(data) {   
+			            		$j("#loading-mask" ).hide();
+			            		$j("#mlatt").show();	
+			            		$j("#attributes_value").html(data);		
+			            		});
+                  	
+                  				} else {
+			                  	$j("#attributes_value").html('');		
+			                  	$j("#mlatt").hide();	
+			                  	}
+             	}
+             	
+             });
+        }
+        
+        function getValues(id){
+        	
+           selectedelement = "#attribute_"+id;
+        	
+           valor = $j(selectedelement).val();
+           
+           store = valor.split("-"); 
+           storeid = store[0];
+           place = "#attributes_value_"+id;
+           
+           cat = $j('#catid').attr('value');
+        	
+        	if(storeid == ''){
+        	 	$j(place).html('');	
+        	} else {
+        	$j.ajax({	   				
+			            timeout:10000,
+			            type: "GET",
+			            dataType: 'html',
+			      	  	url: "<?php echo $this -> getMercadolivreAttributeValueUrl(); ?>mlid/"+id+"/catid/"+cat+"/storeid/"+storeid,
+			      	    beforeSend: function () {
+						    	$j( "#loading-mask" ).show();    
+						  } 
+			            }).done(function(data) {  
+			            		$j( "#loading-mask" ).hide();           		
+					       		$j(place).html(data);		
+			
+			            });
+        	}
+      
+        }
+
+       
+     
+        
+        
+        //]]>
+        
+        
+</script>
+
+ <div id="contact_value"></div>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Item Category') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+         <table class="form-list" cellspacing="0">
+          
+            <tr>
+                <td class="label">
+               <label for="mercadolivre_category_id"><?php echo Mage::helper('mercadolivre')->__('Category'); ?></label>
+                </td>
+                <td class="value">
+                <div id="catname" style="position:relative;float:left;"><?php echo $categoryname ?></div><div id="cateid" style="position:relative;float:right;margin-left:3px;"><?php echo $categoryid;?></div>
+                <input id="categname" type="hidden" name="item_category_name" value="<?php echo $categoryname ?>" />
+                <input id="catid"  class="required-entry" type="hidden" name="item_category_id" value="<?php echo $categoryid ?>" /><br />
+                <input id="catvalid"  class="catisvalid" type="hidden" name="catisvalid" value="0" /><br />
+                 <input id="mode"  class="mode" type="hidden" name="mode" value="<?php echo $mode ?>" />
+                <div id="errormensagem" style="display:none;color:red;"><?php echo Mage::helper('mercadolivre')->__('You need to select a subcategory');  ?></div>
+                </td>
+            </tr> 
+            
+        
+            
+      </table>
+           <br/><br/> 
+           <?php if($edit){ ;?>
+           <table class="form-list" cellspacing="0">
+           <tr>
+           <td class="label" ><?php echo Mage::helper('mercadolivre')->__('Browser the tree until reach the the <b>last possible</b> sub-category and become green') ?>
+           </td> 
+           <td class="tree">
+           <div id="tree" class="tree"></div> 
+           </td>
+           </tr>
+           </table>
+           <?php };?>
+
+    </fieldset>
+</div>
+
+

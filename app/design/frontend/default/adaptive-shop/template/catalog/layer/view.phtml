@@ -1,0 +1,77 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @see Mage_Catalog_Block_Layer_View
+ */
+?>
+<?php if($this->canShowBlock()): ?>
+
+        <?php echo $this->getStateHtml() ?>
+        <?php if ($this->getLayer()->getState()->getFilters()): ?>
+            <div class="actions fs-12 cor"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+            <br />
+        <?php endif; ?>
+        <?php if($this->canShowOptions()): ?>
+
+<?php //ACORDION MENU ?>
+<script src="<?php echo Mage::getBaseUrl(); ?>js/jquery/jquery-1.8.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+/*jQuery time*/
+jQuery(document).ready(function(){
+	jQuery("#cat h3").click(function(){
+		//slide up all the link lists
+		jQuery("#cat ul").slideUp();
+		//slide down the link list below the h3 clicked - only if its closed
+		if(!jQuery(this).next().is(":visible"))
+		{
+			jQuery(this).next().slideDown();
+		}
+	})
+})
+</script>
+<style>#cat li h3{cursor:pointer;}#cat ul {display: none;}#cat li.active ul {display: block;}</style>
+<?php //END - ACORDION MENU ?>
+
+        	<ul id="cat" class="d-b fs-16 banner-bg">
+        	<span class="fs-14 txt currently d-b">Pesquise por:</span>
+        	<div class="h-r f-l d-b"></div>
+                <?php $_filters = $this->getFilters() ?>
+                <?php foreach ($_filters as $_filter): ?>
+                <?php if($_filter->getItemsCount()): ?>
+                    <li class="cor bold cat-search">
+                    <h3 class="cor bold harrow"><div class="harrow f-l"><?php echo $this->__($_filter->getName()) ?></div></h3>
+                    <?php echo $_filter->getHtml() ?></li>
+                <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+
+<?php endif; ?>

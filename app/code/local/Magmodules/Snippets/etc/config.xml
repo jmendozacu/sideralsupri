@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * Magmodules.eu - http://www.magmodules.eu - info@magmodules.eu
+ * =============================================================
+ * NOTICE OF LICENSE [Single domain license]
+ * This source file is subject to the EULA that is
+ * available through the world-wide-web at:
+ * http://www.magmodules.eu/license-agreement/
+ * =============================================================
+ * @category    Magmodules
+ * @package     Magmodules_Snippets
+ * @author      Magmodules <info@magmodules.eu>
+ * @copyright   Copyright (c) 2015 (http://www.magmodules.eu)
+ * @license     http://www.magmodules.eu/license-agreement/  
+ * =============================================================
+ */
+ -->
+<config>
+	<modules>
+		<Magmodules_Snippets>
+			<version>3.1.1</version>
+		</Magmodules_Snippets>
+	</modules>
+	<global>
+		<helpers>
+			<snippets>
+				<class>Magmodules_Snippets_Helper</class>
+			</snippets>
+		</helpers>
+		<blocks>
+			<snippets>
+				<class>Magmodules_Snippets_Block</class>
+			</snippets>
+		</blocks>		
+        <models>
+            <snippets>
+				<class>Magmodules_Snippets_Model</class>
+            </snippets>
+        </models>
+		<events>
+			<core_block_abstract_to_html_after>
+				<observers>
+					<snippets_core_block_abstract_to_html_after>
+                        <type>model</type>
+						<class>snippets/observer</class>
+						<method>setSnippetsData</method>
+					</snippets_core_block_abstract_to_html_after>
+				</observers>
+			</core_block_abstract_to_html_after>
+		</events>
+	</global>
+	<frontend>
+		<layout>
+			<updates>
+				<magmodules_snippets>
+					<file>magmodules_snippets.xml</file>
+				</magmodules_snippets>
+			</updates>
+		</layout>
+        <translate>
+            <modules>
+                <magmodules_snippets>
+                    <files>
+                        <default>Magmodules_Snippets.csv</default>
+                    </files>
+                </magmodules_snippets>
+            </modules>
+        </translate>		
+		<events>
+			<catalog_controller_product_init_after>
+				<observers>
+					<add_category_breadcrumb>
+						<class>snippets/observer</class>
+						<method>addFullBreadcrumb</method>
+					</add_category_breadcrumb>
+				</observers>
+			</catalog_controller_product_init_after>
+		</events>
+	</frontend>
+	<adminhtml>
+        <translate>
+            <modules>
+                <magmodules_snippets>
+                    <files>
+                        <default>Magmodules_Snippets.csv</default>
+                    </files>
+                </magmodules_snippets>
+            </modules>
+        </translate>
+        <events>				
+            <core_config_data_save_after>
+                <observers>
+                    <has_value_for_snippets_configuration_changed>
+                        <type>model</type>
+                        <class>Magmodules_Snippets_Model_System_Config_Model_Enable</class>
+                        <method>has_value_for_configuration_changed</method>
+                    </has_value_for_snippets_configuration_changed>
+                </observers>
+            </core_config_data_save_after>
+        </events>	
+    </adminhtml>
+	<default>
+		<snippets>
+			<general>
+				<enabled>0</enabled>
+			</general>
+			<system>
+				<sitename>0</sitename>
+				<breadcrumbs>0</breadcrumbs>
+				<breadcrumbs_markup>json</breadcrumbs_markup>
+				<breadcrumbs_overwrite>0</breadcrumbs_overwrite>
+				<breadcrumbs_detailed>0</breadcrumbs_detailed>
+				<breadcrumbs_custom>0</breadcrumbs_custom>
+				<organization>0</organization>
+				<sitelinkssearch>0</sitelinkssearch>
+			</system>
+			<products>
+				<enabled>0</enabled>			
+				<type>json</type>
+				<location>Mage_Catalog_Block_Product_View_Description</location>				
+				<position>after</position>								
+				<location_ft>Mage_Page_Block_Html_Footer</location_ft>				
+				<position_ft>before</position_ft>								
+				<description>1</description>
+				<description_att>description</description_att>
+				<description_lenght>0</description_lenght>				
+				<stock>1</stock>								
+				<reviews>1</reviews>
+				<reviews_type>votes</reviews_type>
+				<reviews_metric>100</reviews_metric>
+				<brand>1</brand>
+				<brand_attribute>manufacturer</brand_attribute>				
+				<color>0</color>
+				<color_attribute>color</color_attribute>								
+				<model>0</model>	
+				<model_attribute>model</model_attribute>	
+				<ean>0</ean>	
+				<ean_attribute>sku</ean_attribute>	
+				<ean_type>mpn</ean_type>	
+			</products>
+			<category>
+				<enabled>0</enabled>			
+				<type>json</type>
+				<location>Mage_Catalog_Block_Category_View</location>								
+				<position>after</position>								
+				<location_ft>Mage_Page_Block_Html_Footer</location_ft>				
+				<position_ft>before</position_ft>								
+				<description>0</description>
+				<description_lenght>0</description_lenght>							
+				<reviews>1</reviews>
+				<reviews_type>votes</reviews_type>
+				<reviews_metric>100</reviews_metric>
+				<noprice>1</noprice>
+			</category>			
+			<pinterest>
+				<product>0</product>
+				<category>0</category>				
+			</pinterest>
+			<twitter>
+				<product>0</product>
+				<category>0</category>				
+			</twitter>			
+		</snippets>
+	</default>
+</config>

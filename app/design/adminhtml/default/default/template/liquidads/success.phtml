@@ -1,0 +1,52 @@
+<div id="adroll">
+    <div id="adroll-header">
+        <h1>AdRoll</h1>
+        <h2>LiquidAds</h2>
+        <h3>Magento Connect Extension</h3>
+        <div class="clear"></div>
+    </div>
+
+    <div id="adroll-success-box">
+        <div id="adroll-check">Done</div>
+        <h1>Extension Installed Successfully</h1>
+        <p>
+            Congratulations! Your AdRoll account is now configured to run LiquidAds for Magento. Please login to AdRoll to start creating LiquidAds and launch your campaign.
+        </p>
+        
+        <a href="http://www.adroll.com/magento<?php echo($this->advertisable_eid ? "/index/" . $this->advertisable_eid : ""); ?>" target="_blank" id="adroll-button">Login To AdRoll</a>
+        <div class="clear"></div>
+    </div>
+
+    <div id="adroll-showcase">
+        <div id="adroll-liquid-box">
+            <h2>Example LiquidAd</h2>
+            
+            <!-- LIQUID AD -->
+             <object
+                classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+                codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"
+                width="300"
+                height="250"
+                id="eyefly">
+                <param name="movie" value="https://s.adroll.com/magento/LiquidAdExample.swf" />
+                <param name="FlashVars" value="demo=1"/>
+                <embed
+                    src="https://s.adroll.com/magento/LiquidAdExample.swf"
+                    width="300"
+                    height="250"
+                    name="eyefly"
+                    type="application/x-shockwave-flash"
+                    pluginspage="http://www.adobe.com/go/getflashplayer"
+                    FlashVars="demo=1"
+                    />
+              </object>
+        </div>
+        
+        <p>
+            <strong>AdRoll LiquidAds</strong> seamlessly integrate your site's product 
+            images and branding into a personalized ad unit that looks 
+            as incredible as it performs.
+        </p>
+    </div>
+    <div class="clear"></div>
+</div>

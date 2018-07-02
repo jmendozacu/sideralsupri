@@ -1,0 +1,249 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php
+$userinfo = $this->getUserInfo();
+
+?>
+<?php if($userinfo != null){
+	
+	$shipping =implode(" , ", $userinfo['shipping_modes']);
+	 ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('User Info') ?></h4>
+    </div>
+    
+ 	 <fieldset id="grop_fields">
+ 	 
+ 	 	<table class="form-list" cellspacing="0">        
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('User Id') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php echo $userinfo['id']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Nickname') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $userinfo['nickname']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Name') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $userinfo['first_name'] .' '.$userinfo['last_name']; ?>  
+               </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Email') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $userinfo['email']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Formas de entrega habilitadas') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $shipping; ?>  
+               </td>
+            </tr>
+        </table>
+ 	 </fieldset>
+ 	 </div>
+ 	 <div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Status') ?></h4>
+    </div>
+  
+ 	 <fieldset id="grop_fields">
+ 	 
+ 	 	<table class="form-list" cellspacing="0">     
+ 	 		<tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Conta'); ?></b></label>    
+                </td>
+                <td class="value">
+                <?php echo Mage::helper('mercadolivre')->__($userinfo['status']['site_status']) ; ?>  
+               </td>
+            </tr>   
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Permissão para vender'); ?></b></label>    
+                </td>
+                <td class="value">
+                <?php echo ($userinfo['status']['sell']['allow']? Mage::helper('mercadolivre')->__('Yes'):Mage::helper('mercadolivre')->__('No')); ?>  
+               </td>
+            </tr>
+        </table>
+ 	 </fieldset>
+ 	 </div>
+ 	 <div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Transactions as a Seller') ?></h4>
+    </div>
+
+ 	 <fieldset id="grop_fields">
+ 	 
+ 	 	<table class="form-list" cellspacing="0">        
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Total transactions') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php echo $userinfo['seller_reputation']['transactions']['total']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Completed') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo  $userinfo['seller_reputation']['transactions']['completed']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Canceled') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $userinfo['seller_reputation']['transactions']['canceled']; ?>  
+               </td>
+            </tr>
+        </table>
+ 	 </fieldset>
+ 	 </div>
+ 	  <div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Reputation as a Seller') ?></h4>
+    </div>
+  
+ 	 <fieldset id="grop_fields">
+ 	 
+ 	 	<table class="form-list" cellspacing="0">        
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Positive') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php echo $userinfo['seller_reputation']['transactions']['ratings']['positive']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Neutral') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $userinfo['seller_reputation']['transactions']['ratings']['neutral']; ?>  
+               </td>
+            </tr>
+            <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Negative') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $userinfo['seller_reputation']['transactions']['ratings']['negative']; ?>  
+               </td>
+            </tr>
+        </table>
+ 	 </fieldset>
+ 	 </div>
+	<?php } ?>
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Authentication') ?></h4>
+    </div>
+ 	 <fieldset id="grop_fields">
+    <?php if($userinfo == null){ ?>
+     <p><?php echo Mage::helper('mercadolivre')->__('To autorize this module at Mercadolivre click on the button below:');?></p>
+     <br />
+     <button id="authenticate" title="authorize" type="button" class="scalable save" style="">
+	 <span><?php echo Mage::helper('mercadolivre') -> __('Authenticate'); ?></span>
+  	 </button>
+  	 <?php } else {?>
+  	 	<table>
+  	 <tr>
+                <td class="label">
+                <label for="item_product_name"><b><?php echo Mage::helper('mercadolivre')->__('Access_Token:  ') ?></b></label>    
+                </td>
+                <td class="value">
+                <?php  echo $this->getAccessToken(); ?>  
+               </td>
+            </tr>
+     </table><br />
+  	 <p><?php echo Mage::helper('mercadolivre')->__('To reset previus authentication, click on the linke below');?></p>
+     <br />
+     <button id="reset" title="Reset" type="button" class="scalable delete" style="">
+	 <span><?php echo Mage::helper('mercadolivre') -> __('Reset Authorization'); ?></span>
+  	 </button>
+  	 <button id="disallow" title="Disallow" type="button" class="scalable delete" style="">
+	 <span><?php echo Mage::helper('mercadolivre') -> __('Disallow this store to act for this user'); ?></span>
+  	 </button>
+  	 <?php } ?>
+  	 <div id="md"></div>
+  	 <script src="<?php echo $this->getJsUrl('jquery/jquery.js'); ?>"></script>
+  	 <script src="<?php echo $this->getJsUrl('chico/chico-min-0.11.js'); ?>"></script>
+  	 <script type="text/javascript">
+	//<![CDATA[
+	var $j = jQuery.noConflict();
+
+	var modal = $j("#md").modal({
+                "content": "<div id='mpmodal'><iframe src='<?php echo $this->getLink();?>' width='100%' height='800px' frameborder='0' scrolling='no'></iframe></div>",
+                "width": "850px",
+                "height": "600px",
+                "closable" : true
+	});
+	
+ 	$j(document).ready(function () {
+ 		
+ 		modal.on("hide",function () {
+		location.reload(); 
+		});
+ 		
+ 		$j("#reset").click(function() {
+			window.location.href = '<?php echo $this->getResetUrl();?>';
+		});
+ 		
+		$j("#authenticate").click(function() {
+			modal.show();
+		});
+		
+		$j("#disallow").click(function() {
+			window.location.href = '<?php echo $this->getDisallowUrl();?>';
+		});
+		
+	
+	});
+	
+	
+	
+	
+
+		//]]>
+		</script>
+  	 
+             
+    </fieldset>
+</div>
+
+

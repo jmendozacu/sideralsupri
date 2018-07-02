@@ -1,0 +1,547 @@
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_iphone
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/* Theme options */
+
+/* Links Color */
+
+body, input, button {
+    font-family: "proxima-nova",sans-serif !important;
+}
+
+hr {
+    background-color: #CCCCCC;
+    border: none;
+    height: 1px;
+    margin: 20px 0;
+}
+
+.td-u{text-decoration: underline;}
+
+a { color:#fA9600; }
+
+.e-bit{
+	margin: 15px auto;
+	width: 300px;
+	height: auto;
+	padding-top: 14px;
+	background: url(../images/animado-ebit.gif) repeat-x center top;	
+}
+
+span, p, address{
+	color: #6e6e6e;
+}
+/* Main color */
+body > header,
+body > footer ul,
+body > address.copyright { background-color:#343839; }
+
+.copyright{
+	font-size: 13px;
+}
+
+address span{
+	display: none;
+}
+
+/* Button Color */
+.map-popup-checkout button,
+.more-button,
+.btn-checkout,
+.account-login button,
+.add-to-links > li > a,
+.cart-table tfoot button,
+.opc .buttons-set button,
+.checkout-success button,
+.box-reviews .buttons-set button,
+.my-account .form-buttons button,
+#contactForm .buttons-set button,
+.giftregistry .buttons-set button,
+.wishlist-view .buttons-set button,
+.send-to-friend .buttons-set button,
+.account-create .buttons-set button,
+.add-to-links > li .split-button strong,
+.catalog-product-gallery .buttons-set a,
+.my-account .my-rewards .buttons-set button,
+.my-account .my-wishlist .buttons-set button,
+.product-view .product-shop .add-to-box button,
+.popup-block .block-content .buttons-set button,
+.customer-account-forgotpassword .buttons-set button,
+.product-view .product-options-bottom .add-to-cart button,
+.my-account .billing-agreements .box-content .form-list select + button { background-color:#fA9600; border-radius: 10px 10px 10px 10px; }
+
+/* Main Page Navigation links color */
+#nav-container li a { color:#111; }
+
+/* Buttons background color */
+.form-subscribe button { background:green; }
+
+.copyright{
+	background-color: #1D4772 !important;
+}
+
+.btn-update {
+    font-size: 12px !important;
+    width: auto !important;
+    height: auto !important;
+    padding: 5px 10px !important;
+    margin: 0 !important;
+    line-height: 12px !important;
+    border-radius: 5px !important;
+    float: right !important;
+}
+
+#colunas12, #colunas4, #colunas6, #colunas3, #colunas9{padding: 10px;}
+.promocao-preco {color: #AAA;text-decoration: line-through;}
+.op-i{
+	-webkit-borde-radius: 5px!important;
+	-moz-border-radius: 5px!important;
+	-o-border-radius: 5px!important;
+	border-radius: 5px!important;
+	padding: 6px 10px 5px!important;
+	width: 98%!important;
+	/*max-width: 353px;*/
+	border-color: #f5f5f5!important;
+	background: #f5f5f5!important;
+	border: 1px solid #ddd!important;
+	margin-bottom: 8px!important;
+	max-width: 550px!important;
+}
+
+.op-t{
+	-webkit-borde-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	padding: 6px 10px 5px;
+	width: 98%;
+	/*max-width: 353px;*/
+	height: 150px;
+	border-color: #f5f5f5;
+	background: #f5f5f5;
+	border: 1px solid #ddd;
+	max-width: 550px;
+	margin-bottom: 8px;
+}
+
+.input-box .validation-advice, .validation-advice {
+	position: relative;
+	margin: 0 0 8px 2px;
+	font-size: 11px;
+	color: #ba0000;
+	clear: both;
+}
+
+#checkout-payment-method-load .error-msg, #checkout-coupon-discount-load .error-msg span, #checkout-shipping-method-load .error-msg{
+	color: #6e6e6e!important;
+}
+#checkout-payment-method-load .error-msg, #checkout-coupon-discount-load .error-msg, #checkout-shipping-method-load .error-msg{
+	border: 2px solid #ba0000!important;
+	background: none!important;
+	margin: 5px 0!important;
+	font-weight: normal;
+	padding: 10px 8px!important;
+	font-size: 14px!important;
+	border-radius: 5px;
+}
+
+.cor{
+	color: #fA9600!important;
+}
+.fs-12{
+	font-size: 12px;
+}
+
+.fs-14{
+	font-size: 14px;
+}
+.fs-16{
+	font-size: 16px;
+}
+.txt{
+	color: #424242;
+}
+.f-r{
+	float: right;
+}
+.bold{
+	font-weight: bold;
+}
+.bt, .bt2{
+	background-color: #0fb400;
+	border: none;
+	padding: 8px 10px 7px;	
+	color: #fff;
+}
+.bt2{
+	padding: 5px 10px 4px;
+}
+.bt3{
+	background-color: #bbb;
+	border: none;
+	padding: 3px 8px;
+}
+.radius{
+	-webkit-borde-radius: 5px;	
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+}
+#checkout-review-submit .button{
+	margin-bottom: 20px;
+}
+#menu-footer, #menu-footer-flag{
+	width: auto;
+	height: auto;
+	margin-top: 10px;
+}
+#menu-footer li{
+	margin: 3px;
+}
+
+#menu-footer-flag li{
+	margin: 3px 12px;
+	float: left;
+}
+.m-auto {
+	margin: 0 auto!important;
+}
+
+.ta-c{text-align: center;}
+
+.footer-h {
+	border-bottom: 1px dotted #fff;
+	padding: 6px 0 8px 22px;
+}
+.pag {
+	background: url(../images/pag-2x.png) center left no-repeat;
+	background-size: 18px 17px;
+}
+
+.info {
+	background: url(../images/info-2x.png) center left no-repeat;
+	background-size: 17px 17px;
+}
+
+.social{
+	background: url(../images/social-2x.png) center left no-repeat;
+	background-size: 18px 17px;
+}
+
+.news{
+	background: url(../images/news-2x.png) center left no-repeat;
+	background-size: 17px 17px;
+}
+.news-bg{background: #fA9600;padding: 5px 0;}
+
+#newsletter-validate-detail p{margin-bottom: 10px;}
+#newsletter{width: 250px;border: none;}
+#newsletter-validate-detail .btn{background:#343839;color: #fff;margin: 0 0 0 -5px;display: inline-block;position: absolute;border-radius: 3px;}
+.cor-sec, .cor-sec a{
+	color: #fff;
+}
+
+.top-bar-bg, .footer-bg {
+	background: #343839;
+}
+
+.menu-footer-contato .mfc:first-child{background: url(../images/flag/telefone.png) top left no-repeat;}
+.menu-footer-contato .mfc{padding-left: 30px;margin: 3px 0 0 0!important;}
+.menu-footer-contato .mfmsn{padding: 2px 0 2px 30px;background: url(../images/flag/chat.png) top left no-repeat;}
+.menu-footer-contato .mfsk{padding: 2px 0 2px 30px;background: url(../images/flag/skype.png) top left no-repeat;}
+.menu-footer-contato .mffb{padding: 2px 0 2px 30px;background: url(../images/flag/facebook.png) top left no-repeat;}
+.menu-footer-contato .mfyt{padding: 2px 0 5px 30px;background: url(../images/flag/youtube.png) top left no-repeat;}
+
+
+#menu-footer, #menu-footer-flag {
+	width: auto;
+	height: auto;
+	margin-top: 10px;
+}
+
+#menu-footer-flag li {
+	margin: 5px 5px 0 0;
+	float: left;
+}
+
+body > footer ul li a {
+	color: #fff;
+	display: block;
+	padding: 2px;
+	font-size: 13px;
+}
+
+.foot-bg {
+	background: none repeat scroll 0 0 #555;
+	padding: 20px 0 16px !important;
+}
+
+#mucci {
+display: inline;
+margin: 0 auto;
+}
+
+#mucci a {
+background-image: url("../images/mucci.png");
+clear: both;
+display: block;
+height: 17px;
+position: relative;
+width: 17px;
+z-index: 2;
+margin: 0 auto;
+}
+
+#dispositivos {
+background: url("../images/responsive-icon.png") repeat scroll center -60px transparent;
+display: block;
+height: 29px;
+text-align: center;
+width: 79px;
+margin: 0 auto;
+margin-bottom: 15px;
+margin-top: 15px;
+}
+
+.ta-c{
+	text-align: center;	
+}
+
+#product_addtocart_form #qty {
+    text-align: center;
+    width: 30px!important;
+    margin: -5px 0 12px;
+}
+.box-qty{
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	width: auto;
+	padding: 25px 0 12px;
+}
+
+.product-view .product-collateral .box-additional{
+	display: none;
+}
+
+.h-r {
+width: 100%;
+height: 1px;
+border-top: 1px solid #d9d9d9;
+}
+
+/* parametros das bandeiras de pagamentos bcash! */
+	.bcash_in {display:none;}
+    .radiolabel {display:inline-block!important;cursor:pointer;overflow: hidden;background: url(../images/icon_sprite.png);width: 51px;height: 33px;}
+    .radiolabel > span{display: none;}
+    .boleto{background-position: -155px -132px;}
+    #bcash_boleto:checked + label {background-position: 0 -132px;}
+    .bb{background-position: -155px -99px;}
+    #bcash_bb:checked + label {background-position: -103px -99px;}
+    .bradesco{background-position: -155px -165px;}
+    #bcash_bradesco:checked + label {background-position: -103px -165px;}
+    .itau{background-position: -155px -331px;}
+    #bcash_itau:checked + label {background-position: -103px -331px;}
+    .banrisul{background-position: -155px -66px;}
+    #bcash_banrisul:checked + label {background-position: -103px -66px;}
+    .hsbc{background-position: -155px -297px;}
+    #bcash_hsbc:checked + label {background-position: -103px -297px;}
+    .visa{background-position: -155px -397px;}
+    #bcash_visa:checked + label {background-position: -103px -397px;}
+    .master{background-position: -155px -364px;}
+    #bcash_master:checked + label {background-position: -103px -364px;}
+    .amex{background-position: -155px 0px;}
+    #bcash_amex:checked + label {background-position: -103px 0px;}
+    .aura{background-position: -155px -33px;}
+    #bcash_aura:checked + label {background-position: -103px -33px;}
+    .diners{background-position: -155px -198px;}
+    #bcash_diners:checked + label {background-position: -103px -198px;}
+    .hiper{background-position: -155px -264px;}
+    #bcash_hiper:checked + label {background-position: -103px -264px;}
+    .elo{background-position: -155px -231px;}
+    #bcash_elo:checked + label {background-position: -103px -231px;}
+    
+/* PAGSEGURO */
+#payment_form_pagseguro_hpp li{
+	font-size: 12px;
+	color: #767676;	
+}
+#payment_form_pagseguro_hpp li a{
+	color: #fA9600;
+	margin: 8px 0;
+	display: block;
+}
+#installments_table{
+	width: 100%;
+	margin: 10px 0;
+}
+
+.c-visa{background: url(../images/flag/i-visa.png);display: block;width: 37px;height: 25px;}
+.c-master{background: url(../images/flag/i-master.png);display: block;width: 37px;height: 25px;}
+.c-amex{background: url(../images/flag/i-amex.png);display: block;width: 37px;height: 25px;}
+.c-bradesco{background: url(../images/flag/i-bradesco.png);display: block;width: 37px;height: 25px;}
+.c-itau{background: url(../images/flag/i-itau.png);display: block;width: 37px;height: 25px;}
+.c-bb{background: url(../images/flag/i-bb.png);display: block;width: 37px;height: 25px;}
+.c-boleto{background: url(../images/flag/i-boleto.png);display: block;width: 52px;height: 25px;}
+.c-deposito{background: url(../images/flag/i-deposito.png);display: block;width: 52px;height: 25px;}
+.c-bcash{background: url(../images/flag/i-bcash.png);display: block;width: 37px;height: 25px;}
+
+.btn-boleto{
+	width: 100%;
+	padding-bottom: 15px;
+	text-align: center;
+	display: block;
+}
+
+.btn-boleto span{
+	background:#fff;
+	padding: 0 5px;
+}
+
+.btn-boleto span img{
+	margin:0 5px -15px; 
+}
+
+/*
+Retina displays
+*/
+@media all and (-webkit-min-device-pixel-ratio: 2) {
+
+#dispositivos {
+	background-image: url(../images/responsive-icon-retina.png);
+	background-size: 79px auto;
+}
+
+#mucci a {
+	background-image: url(../images/mucci-retina.png);
+	background-size: 17px 17px;
+}
+
+.pag {
+	background: url(../images/pag-2x.png) center left no-repeat;
+	background-size: 17px 17px;
+}
+
+.info {
+	background: url(../images/info-2x.png) center left no-repeat;
+	background-size: 18px 17px;
+}
+.c-visa{
+	background: url(../images/flag/i-visa-2x.png);
+	background-size: 37px 25px;
+}
+.c-master{
+	background: url(../images/flag/i-master-2x.png);
+	background-size: 37px 25px;
+}
+.c-amex{
+	background: url(../images/flag/i-amex-2x.png);
+	background-size: 37px 25px;
+}
+.c-bradesco{
+	background: url(../images/flag/i-bradesco-2x.png);
+	background-size: 37px 25px;
+}
+.c-itau{
+	background: url(../images/flag/i-itau-2x.png);
+	background-size: 37px 25px;	
+}
+.c-bb{
+	background: url(../images/flag/i-bb-2x.png);
+	background-size: 37px 25px;	
+}
+.c-boleto{
+	background: url(../images/flag/i-boleto-2x.png);
+	background-size: 52px 25px;	
+}
+
+.c-deposito{
+	background: url(../images/flag/i-deposito-2x.png);
+	background-size: 52px 25px;	
+}
+.c-bcash{
+	background: url(../images/flag/i-bcash-2x.png);
+	background-size: 37px 25px;	
+}
+
+.menu-footer-contato .mfc:first-child{background: url(../images/flag/telefone-2x.png);background-size: 21px 23px;background-repeat: no-repeat;}
+.menu-footer-contato .mfmsn{background: url(../images/flag/chat-2x.png);background-size: 21px 23px;background-repeat: no-repeat;}
+.menu-footer-contato .mfsk{background: url(../images/flag/skype-2x.png);background-size: 21px 23px;background-repeat: no-repeat;}
+.menu-footer-contato .mffb{background: url(../images/flag/facebook-2x.png);background-size: 21px 23px;background-repeat: no-repeat;}
+.menu-footer-contato .mfyt{background: url(../images/flag/youtube-2x.png);background-size: 21px 23px;background-repeat: no-repeat;}
+
+}
+
+#desc-box{border: 2px solid #f2f2f2;padding:160px 15px 15px 15px;text-align: center;}
+.desc-box1{	background: url(../images/desc/desc_01.jpg) center 25px no-repeat;}
+.desc-box2{	background: url(../images/desc/desc_02.jpg) center 25px no-repeat;}
+#box-silver{background: #eeeeee url(../images/desc/print.jpg) 15px center no-repeat;padding: 25px 15px 25px 75px;}
+#logo-n{position:absolute;background: url(../images/desc/ball.jpg) center center no-repeat;color: #fff;padding: 14px 18px;font-size: 35px;margin-right: 25px;}
+#duv-freq{padding: 0 10px 0 80px;min-height: 100px;}
+.col3box1{border: 2px solid #f2f2f2;padding: 160px 0 30px 0;text-align: center;margin: 0 0 15px 0;background: url(../images/desc/desc_03.jpg) center 30px no-repeat;}
+.col3box2{border: 2px solid #f2f2f2;padding: 160px 0 30px 0;text-align: center;margin: 0 0 15px 0;background: url(../images/desc/desc_04.jpg) center 30px no-repeat;}
+.col3box3{border: 2px solid #f2f2f2;padding: 160px 0 30px 0;text-align: center;margin: 0 0 15px 0;background: url(../images/desc/desc_05.jpg) center 30px no-repeat;}
+#box-silver2{background: #eeeeee url(../images/desc/desc_06.jpg) 15px center no-repeat;padding: 15px 40px 15px 40px;position: relative;}
+#box-silver3{background: url(../images/desc/desc_06.jpg) center center no-repeat;position: absolute;right: 15px;width: 16px;height: 100%;top:0;}
+
+.desc-img{width: 178px;height: auto;margin: 0 auto;}
+
+#desc-box4{border: 2px solid #f2f2f2;padding:70% 10px 15px 10px;}
+.desc-box4-1{background: url(../images/desc/desc_07.jpg) center 25px  no-repeat;}
+.desc-box4-2{background: url(../images/desc/desc_08.jpg) center 25px  no-repeat;}
+.desc-box4-3{background: url(../images/desc/desc_09.jpg) center 25px  no-repeat;}
+.desc-box4-1, .desc-box4-2, .desc-box4-3{background-size: 84.5% auto;}
+.desc-box-dot{border: 2px dotted #fa9600;padding: 120px 10px 25px 10px;background: url(../images/desc/desc_10.jpg) center top no-repeat;position: relative;}
+.desc-box-dot2{display: none;}
+.desc-arrow{margin: 0 3px 0 0;color:#fa9600 }
+
+#product-att #product-attribute-specs-table {
+width: 100%;
+text-align: left;
+line-height: 20px;
+color: #8f8f8f;
+margin-top: 5px;
+font-size: 14px;
+}
+#product-att #product-attribute-specs-table tr {
+background-color: #fff!important;
+border-bottom: 1px dashed!important;
+color: #6e6e6e;
+border-color: #eaeaea!important;
+}
+#product-att #product-attribute-specs-table th {
+background-color: #fff !important;
+border: medium none !important;
+font-size: 12px;
+font-weight: bold;
+letter-spacing: 1px;
+line-height: 14px;
+padding: 10px 0 !important;
+text-transform: uppercase;
+margin-right: 1px;
+}
+#product-att #product-attribute-specs-table td {
+font-size: 14px !important;
+padding: 5px 0 5px 25px !important;
+}
+#product-att #product-attribute-specs-table .last{border: none;}

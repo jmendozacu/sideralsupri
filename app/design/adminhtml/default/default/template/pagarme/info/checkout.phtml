@@ -1,0 +1,39 @@
+<?php
+/*
+ * @copyright   Copyright (C) 2015 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author     Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+?>
+
+<img src="<?php echo $this->getSkinUrl('pagarme/images/logo.png'); ?>" width="125" />
+<br />
+<strong><?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?></strong>
+<?php if($this->getInfo()): ?>
+<br />
+<?php echo $this->__('Transaction') ?>: <a href="#" onclick="return Pagarme.load('<?php echo $this->getTransactionUrl() ?>');">#<?php echo $this->escapeHtml($this->getTransactionId()) ?></a>
+<br />
+<?php $_paymentMethod = $this->getAdditionalInfo ('payment_method'); ?>
+<?php if (!strcmp ($_paymentMethod, 'boleto')): ?>
+<?php $_boletoUrl = $this->getAdditionalInfo ('boleto_url'); ?>
+<?php if(!empty ($_boletoUrl)): ?>
+<br />
+<a href="<?php echo $_boletoUrl; ?>" target="_blank"><?php echo $this->__('Click here to print your Boleto') ?></a>
+<br />
+<?php endif ?>
+<?php else: ?>
+<?php echo $this->__('Name on Card') ?>: <?php echo $this->escapeHtml($this->getCcOwner()) ?>
+<br />
+<?php echo $this->__('Credit Card Type') ?>: <?php echo $this->escapeHtml($this->getCcTypeName()) ?>
+<br />
+<?php echo $this->__('Credit Card Number') ?>: <?php echo $this->escapeHtml($this->getCcNumber()) ?>
+<br />
+<!--
+<?php // echo $this->__('Installments') ?>: <?php // echo $this->escapeHtml($this->getInstallmentDescription()) ?>
+-->
+<?php endif;?>
+<br />
+<?php if ($this->getInfo()->getPagarmeAntifraudScore()): ?>
+<?php echo $this->__('Antifraud Score') ?>: <strong class="emph"><?php echo $this->escapeHtml($this->getAntifraudScore()) ?>%</strong>
+<?php endif ?>
+<?php endif ?>
+

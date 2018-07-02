@@ -1,0 +1,27 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Pagarme
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+<img src="<?php echo $this->getSkinUrl('pagarme/images/logo.png'); ?>" width="125" /><br />
+<strong><?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?></strong>
+
+<?php if($this->getInfo()): ?>
+<br />
+<?php echo $this->__('Transaction') ?>: <a href="#" onclick="return Pagarme.load('<?php echo $this->getTransactionUrl() ?>');">#<?php echo $this->escapeHtml($this->getTransactionId()) ?></a>
+<br />
+<?php echo $this->__('Name on Card') ?>: <?php echo $this->escapeHtml($this->getCcOwner()) ?>
+<br />
+<?php echo $this->__('Credit Card Type') ?>: <?php echo $this->escapeHtml($this->getCcTypeName()) ?>
+<br />
+<?php echo $this->__('Credit Card Number') ?>: <?php echo $this->escapeHtml($this->getCcNumber()) ?>
+<br />
+<?php echo $this->__('Installments') ?>: <?php echo $this->escapeHtml($this->getInstallmentDescription()) ?>
+<br />
+<?php if ($this->getInfo()->getPagarmeAntifraudScore()): ?>
+<?php echo $this->__('Antifraud Score') ?>: <strong class="emph"><?php echo $this->escapeHtml($this->getAntifraudScore()) ?>%</strong>
+<?php endif ?>
+<?php endif ?>

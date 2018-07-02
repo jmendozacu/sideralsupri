@@ -1,0 +1,33 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company       ThirdLevel
+ * @package        MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright      Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+?>
+
+<fieldset class="form-list">
+
+    <?php  $_code = $this->getMethodCode(); ?>
+    <ul id="payment_form_<?php  echo $_code ?>">
+        <li>
+            <img src="<?php echo $this->getSkinUrl('images/mercadolivre/mercadolivre.jpg'); ?>" alt="Mercadolivre"
+                 title="Mercadolivre"/>
+        </li>
+        <li>
+            <?php echo Mage::helper('mercadolivre')->__('Pague sua conta pela administração do Mercadolivre, <b><span class="color:red;">adicione o valor do frete caso necessário</span></b>');?>
+        </li>
+    </ul>
+    <div>
+        <?php echo $this->getMethod()->getConfigData('message');?>
+    </div>
+
+
+

@@ -1,0 +1,18 @@
+<?php
+/*
+ * @copyright  Copyright (C) 2015 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author     Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+?>
+
+<?php $this->setPriceDataObject($this->getSource()) ?>
+
+<?php if ((float) $this->getSource()->getFeeAmount()): ?>
+    <tr>
+        <td class="label"><?php echo Mage::helper('pagarme')->__('Fee') ?></td>
+        <td>
+            <?php echo $this->displayPrices($this->getSource()->getBaseFeeAmount(), $this->getSource()->getFeeAmount()); ?>
+        </td>
+    </tr>
+<?php endif; ?>
+

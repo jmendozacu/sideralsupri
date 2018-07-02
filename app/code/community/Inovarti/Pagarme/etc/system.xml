@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Pagarme
+ * @author     Suporte <suporte@inovarti.com.br>
+ *
+ * UPDATED:
+ *
+ * @copyright   Copyright (C) 2015 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author     Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <pagarme_settings translate="label" module="pagarme">
+                    <label>Pagar.me - Settings</label>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a href="http://www.inovarti.com.br" target="_blank"><img title="Inovarti" alt="Inovarti" src="//www.inovarti.com.br/inovarti_logo.php"/></a></span>]]></comment>
+                    <fields>
+                        <about_us>
+                            <frontend_model>pagarme/about</frontend_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <sort_order>0</sort_order>
+                        </about_us>
+                        <mode translate="label">
+                            <label>Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pagarme/source_mode</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </mode>
+                        <apikey_test translate="label">
+                            <label>Api Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <mode>test</mode>
+                            </depends>
+                        </apikey_test>
+                        <encryptionkey_test translate="label">
+                            <label>Encryption Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <mode>test</mode>
+                            </depends>
+                        </encryptionkey_test>
+                        <apikey_live translate="label">
+                            <label>Api Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <mode>live</mode>
+                            </depends>
+                        </apikey_live>
+                        <encryptionkey_live translate="label">
+                            <label>Encryption Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <mode>live</mode>
+                            </depends>
+                        </encryptionkey_live>
+                        <marketplace_is_active translate="label">
+                            <label>Enable Marketplace Split</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </marketplace_is_active>
+                        <charge_processing_fee translate="label">
+                            <label>Charge Processing Fee</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>pagarme/system_config_validator_chargeProcessingFeeValidator</backend_model>
+                            <sort_order>62</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </charge_processing_fee>
+                        <liable translate="label">
+                            <label>Liable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <backend_model>pagarme/system_config_validator_liableValidator</backend_model>
+                            <sort_order>64</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </liable>
+                        <custom_cpf_field translate="label">
+                            <label>Custom Cpf Field</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </custom_cpf_field>
+                        <custom_cnpj_field translate="label">
+                            <label>Custom Cnpj Field</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </custom_cnpj_field>
+                    </fields>
+                </pagarme_settings>
+                <pagarme_boleto translate="label" module="pagarme">
+                    <label>Pagar.me - Boleto</label>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a href="http://www.inovarti.com.br" target="_blank"><img title="Inovarti" alt="Inovarti" src="//www.inovarti.com.br/inovarti_logo.php"/></a></span>]]></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <async translate="label">
+                            <label>Async</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </async>
+                        <instructions translate="label">
+                            <label>Instructions</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </instructions>
+                        <days_to_expire translate="label">
+                            <label>Days to expire</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry validate-number validate-greater-than-zero</validate>
+                            <comment><![CDATA[Days that will be added to expiration date.]]></comment>
+                        </days_to_expire>
+                        <allowspecific translate="label">
+                            <label>Payment Applicable From</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>100</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>101</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>validate-number</frontend_class>
+						</sort_order>
+						 <email_status_change translate="label">
+                            <label>Send status change notification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </email_status_change>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
+                    </fields>
+                </pagarme_boleto>
+                <pagarme_cc translate="label" module="pagarme">
+                    <label>Pagar.me - Credit Card</label>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a href="http://www.inovarti.com.br" target="_blank"><img title="Inovarti" alt="Inovarti" src="//www.inovarti.com.br/inovarti_logo.php"/></a></span>]]></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <order_status_paid translate="label">
+                            <label>Paid Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_paid>
+                        <payment_action translate="label">
+                            <label>Payment Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pagarme/source_paymentAction</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </payment_action>
+                        <async translate="label">
+                            <label>Async</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </async>
+                        <cctypes translate="label">
+                            <label>Credit Card Types</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>pagarme/source_cctype</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </cctypes>
+                        <max_installments translate="label">
+                            <label>Maximum Number of Installments</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-number</validate>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_installments>
+                        <min_installment_value translate="label">
+                            <label>Minimum Installment Value</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-number</validate>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_installment_value>
+                        <interest_rate translate="label">
+                            <label>Interest Rate</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_class>validate-number</frontend_class>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </interest_rate>
+                        <free_installments translate="label">
+                            <label>Free Installments</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_class>validate-number</frontend_class>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </free_installments>
+                        <invoice_email translate="label">
+                            <label>Invoice E-mail</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pagarme/source_invoice_email</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_email>
+                        <allowspecific translate="label">
+                            <label>Payment Applicable From</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>101</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>102</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_class>validate-number</frontend_class>
+                        </sort_order>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
+                    </fields>
+                </pagarme_cc>
+                <pagarme_checkout translate="label" module="pagarme">
+                    <label>Pagar.me - Checkout</label>
+                    <sort_order>103</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<a href="http://www.gamuza.com.br" target="_blank"><img title="Gamuza Technologies" alt="Gamuza Technologies" src="http://www.gamuza.com.br/img/gamuza/logo.png" /></a>]]></comment>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_new</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status>
+                        <order_status_paid translate="label">
+                            <label>Paid Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status_newprocessing</source_model>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </order_status_paid>
+                        <payment_action translate="label">
+                            <label>Payment Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pagarme/source_paymentAction</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payment_action>
+                        <payment_method translate="label">
+                            <label>Payment Method</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>pagarme/source_checkout_paymentmethod</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </payment_method>
+                        <!--
+                        <instructions translate="label">
+                            <label>Instructions</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </instructions>
+                        <days_to_expire translate="label">
+                            <label>Days to expire</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>required-entry validate-number validate-greater-than-zero</validate>
+                            <comment><![CDATA[Days that will be added to expiration date.]]></comment>
+                        </days_to_expire>
+                        -->
+                        <cctypes translate="label">
+                            <label>Credit Card Types</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>pagarme/source_cctype</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cctypes>
+                        <max_installments translate="label">
+                            <label>Maximum Number of Installments</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-number</validate>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_installments>
+                        <min_installment_value translate="label">
+                            <label>Minimum Installment Value</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-number</validate>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_installment_value>
+                        <interest_rate translate="label">
+                            <label>Interest Rate</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_class>validate-number</frontend_class>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </interest_rate>
+                        <free_installments translate="label">
+                            <label>Free Installments</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_class>validate-number</frontend_class>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </free_installments>
+                        <boleto_discount_amount translate="label">
+                            <label>Boleto Discount Amount</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_class>validate-number</frontend_class>
+                            <sort_order>120</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </boleto_discount_amount>
+                        <boleto_discount_percentage translate="label">
+                            <label>Boleto Discount Percentage</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_class>validate-number</frontend_class>
+                            <sort_order>130</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </boleto_discount_percentage>
+                        <invoice_email translate="label">
+                            <label>Invoice E-mail</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pagarme/source_invoice_email</source_model>
+                            <sort_order>140</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </invoice_email>
+                        <allowspecific translate="label">
+                            <label>Payment Applicable From</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>190</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Countries Payment Applicable From</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>191</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><allowspecific>1</allowspecific></depends>
+                        </specificcountry>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_class>validate-number</frontend_class>
+                        </sort_order>
+                        <checkout_payment_onclick_save translate="label">
+                            <label>Checkout payment onclick save</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </checkout_payment_onclick_save>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>210</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>220</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
+                    </fields>
+                </pagarme_checkout>
+            </groups>
+        </payment>
+    </sections>
+</config>

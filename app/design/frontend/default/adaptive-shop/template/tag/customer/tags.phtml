@@ -1,0 +1,27 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div id="colunas9">
+    <h1 class="cor bold"><?php echo $this->__('My Tags') ?></h1>
+</div>
+<div id="colunas9">
+<?php if($this->getTags()): ?>
+    <p><?php echo $this->__('Click on a tag to view your corresponding products.') ?></p>
+    <ul class="tags-list">
+        <?php foreach ($this->getTags() as $_tag): ?>
+            <li><a href="<?php echo $this->getUrl('tag/customer/view', array('tagId' => $_tag->getTagId())) ?>" style="font-size:<?php echo $_tag->getRatio()*70+75 ?>%;"><?php echo $this->htmlEscape($_tag->getName()) ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+<?php else: ?>
+    <p class="txt fs-14"><?php echo $this->__('You have not tagged any products yet.') ?></p>
+<?php endif; ?>
+</div>
+<div id="colunas9">
+    <a class="cor fs-12" href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a>
+</div>

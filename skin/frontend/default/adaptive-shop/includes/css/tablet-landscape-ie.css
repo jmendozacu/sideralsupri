@@ -1,0 +1,9 @@
+/*
+Tablet Landscape (já pega todas as configurações do desktop, usar essa mediaquery apenas para ajustes)
+*/
+
+
+#dispositivos {
+	background-position: center -30px;
+}
+

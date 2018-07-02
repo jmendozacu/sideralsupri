@@ -1,0 +1,62 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php $_orders = $this->getOrders(); ?>
+<div id="colunas9">
+    <h1 class="cor bold"><?php echo $this->__('My Orders') ?></h1>
+</div>
+<?php //echo $this->getPagerHtml(); ?>
+<?php if($_orders->getSize()): ?>
+<div id="colunas9">
+<table class="data-table" id="my-orders-table">
+    <col width="1" />
+    <col width="1" />
+    <col />
+    <col width="1" />
+    <col width="1" />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th><p class="cor-sec fs-14"><?php echo $this->__('Order #') ?></p></th>
+            <th><p class="cor-sec fs-14"><?php echo $this->__('Date') ?></p></th>
+            <th><p class="cor-sec fs-14"><?php echo $this->__('Ship To') ?></p></th>
+            <th><p class="cor-sec fs-14"><?php echo $this->__('Order Total') ?></p></th>
+            <th><p class="cor-sec fs-14"><?php echo $this->__('Order Status') ?></p></th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_orders as $_order): ?>
+        <tr>
+            <td><span class="txt bold fs-14"><?php echo $_order->getRealOrderId() ?></span></td>
+            <td><span class="txt fs-14 nobr"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+            <td><span class="txt fs-14"><?php echo $_order->getShippingAddress() ? $this->htmlEscape($_order->getShippingAddress()->getName()) : '&nbsp;' ?></span></td>
+            <td><span class="txt fs-14 nobr"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></span></td>
+            <td><span class="txt fs-14"><?php echo $_order->getStatusLabel() ?></span></td>
+            <td class="a-center">
+                <span class="cor fs-14 nobr"><a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
+                    <?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
+                    <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+                    <span class="separator">|</span> <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
+                <?php endif ?>
+                </span>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php //echo $this->getPagerHtml(); ?>
+<?php else: ?>
+<div id="colunas9">
+    <p class="txt fs-14"><?php echo $this->__('You have placed no orders.'); ?></p>
+</div>
+<?php endif ?>

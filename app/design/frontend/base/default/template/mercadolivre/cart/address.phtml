@@ -1,0 +1,152 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php
+	
+ $address = $this->getData();
+ $_countries = Mage::getResourceModel('directory/country_collection')
+                                    ->loadData()
+                                    ->toOptionArray(false)
+									 ?>
+<div class="my-account">
+    <div class="page-title">
+        <h1><?php echo Mage::helper('mercadolivre')->__('Mercadolivre Orders') ?></h1>
+    </div>
+     <?php echo $this->getMessagesBlock()->getGroupedHtml() ; ?>
+	<h3><?php echo Mage::helper('mercadolivre')->__('Fill Up your address information for the order ').$address['mercadolivre_order_id']; ?></h3>
+	
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<form action="<?php  echo $this->getSaveUrl() ?>" method="post" id="form-validate" name="address" >
+	<input name="id" type="hidden" value="<?php echo $address['id']; ?>" />
+    <div class="fieldset">
+    <?php echo $this->getBlockHtml('formkey')?>
+    <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+    <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+        <h2 class="legend"><?php echo $this->__('Address Information') ?></h2>
+        <ul class="form-list">
+            <li class="fields">
+            	
+                 <li class="fields">
+                <div class="field">
+            	<label for="name" class="required"><em>*</em><?php echo $this->__('Name') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_name" value="<?php echo $address['buyer_name']; ?>" title="<?php echo $this->__('Name') ?>" class="input-text required-entry" id="Name" />
+               	</div>
+               	 </div></li>
+                 <li class="fields">
+                <div class="field">
+               	<label for="lastname" class="required"><em>*</em><?php echo $this->__('Lastname') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_lastname" value="<?php echo $address['buyer_lastname']; ?>" title="<?php echo $this->__('Lastname') ?>" class="input-text required-entry" id="Lastname" />
+               	</div>
+               	 </div></li>
+               	  <li class="fields">
+                <div class="field">
+               	<label for="telephone" class="required"><em>*</em><?php echo $this->__('Telephone') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_phone_number" value="<?php echo $address['buyer_phone_number']; ?>" title="<?php echo $this->__('telephone') ?>" class="input-text required-entry" id="telephone" />
+               	</div>
+               	 </div></li>
+               	 <li class="fields">
+                <div class="field">
+              	
+               	<label for="Address" class="required"><em>*</em><?php echo $this->__('Email') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_email" value="<?php echo $address['buyer_email']; ?>" title="<?php echo $this->__('Email') ?>" class="input-text required-entry" id="email" />
+               	</div>
+               	 </div></li>
+                 <li class="fields">
+                <div class="field">
+              	
+               	<label for="Address" class="required"><em>*</em><?php echo $this->__('Full Address') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_address_line" value="<?php echo $address['buyer_address_line']; ?>" title="<?php echo $this->__('Address') ?>" class="input-text required-entry" id="Address" />
+               	</div>
+               	 </div></li>
+                 <li class="fields">
+                <div class="field">
+               	<label for="City" class="required"><em>*</em><?php echo $this->__('City') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_city" value="<?php echo $address['buyer_city'];?>" title="<?php echo $this->__('City') ?>" class="input-text required-entry" id="City" />
+               	</div>
+               	 </div></li>
+                 <li class="fields">
+                <div class="field">
+               	<label for="State" class="required"><em>*</em><?php echo $this->__('State') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_state_name" value="<?php  echo $address['buyer_state_name']; ?>" title="<?php echo $this->__('State') ?>" class="input-text required-entry" id="State" />
+               	</div>
+               	 </div></li>
+               	 
+                 <li class="fields">
+                <div class="field">
+              
+                            <label for="shipping:country_id" class="required"><em>*</em><?php echo $this->__('Country') ?></label>
+                            <div class="input-box">
+                                
+                                
+                                <?php if (count($_countries) > 0): ?>
+                                <select name="buyer_country_id" id="buyer_country_id" class="required-entry">
+                                    <option value="">-- Please Select --</option>
+                                    <?php foreach($_countries as $_country): ?>
+                                        
+                                        <?php if ($address['buyer_country_id'] == $_country['value']){
+                                            ?>
+                                    		<option selected="selected" value="<?php echo $_country['value'] ?>"><?php echo $_country['label'] ?></option>
+                                    		<?php } elseif($_country['value'] == Mage::getStoreConfig('general/country/default') && $address['buyer_country_id'] == null){?>
+                                    		<option selected="selected" value="<?php echo $_country['value'] ?>"><?php echo $_country['label'] ?></option>                                    		
+                                            <?php } else { ?>
+                                            <option value="<?php echo $_country['value'] ?>"><?php echo $_country['label'] ?></option>
+                                    <?php } endforeach; ?>
+                                </select>
+                              <?php endif; ?>
+                  
+                            </div>
+                  </div></li>
+                 <li class="fields">
+                <div class="field">
+               	<label for="zipcode" class="required"><em>*</em><?php echo $this->__('Zipcode') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_zipcode" value="<?php echo $address['buyer_zipcode']; ?>" title="<?php echo $this->__('Zipcode') ?>" class="input-text required-entry" id="Zipcode" />
+               	</div>
+               	</div></li>
+               	 <li class="fields">
+                <div class="field">
+               		<label for="zipcode" class="required"><em>*</em><?php echo $this->__('Document Id') ?></label>
+            	<div class="input-box">
+                        <input type="text" name="buyer_document" value="<?php echo $address['buyer_document']; ?>" title="<?php echo $this->__('DocumentId') ?>" class="input-text required-entry" id="documentid" />
+               	</div>
+               		</div></li>
+               	
+               
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo $this->__('Save Address') ?>" class="button"><span><span><?php echo $this->__('Save Address') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+  // new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+//]]>
+</script>
+</div>
+
+
+
+
+

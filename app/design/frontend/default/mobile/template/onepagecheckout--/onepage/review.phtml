@@ -1,0 +1,20 @@
+<div id="checkout-review" class="onepagecheckout_block">
+    <div class="op_block_title"><span class="cor fs-16 bold"><?php echo $this->__('Review Your Order') ?></span></div>
+    <br />
+    <div id="checkout-review-load">
+        <?php echo $this->getChildHtml('info') ?>
+    </div>
+    <br />
+    <div class="h-r f-l d-b"></div>
+    <br />
+    <div id="checkout-review-submit">    
+        <?php echo $this->getChildHtml('agreements') ?>
+        <div class="buttons-set" id="review-buttons-container">
+        <span><a style="margin:12px 0 0 5px;" class="f-l cor fs-12" href="<?php echo Mage::getBaseUrl(); ?>checkout/cart/" title="Editar carrinho">Editar carrinho</a></span>
+        <button type="submit" title="<?php echo $this->__('Place Order Now') ?>" class="f-r bt fs-16 d-b cor-sec bold tt-u radius td-n" onclick="checkout.save(); return false;"><?php echo $this->__('Place Order Now') ?></button>
+            <span class="txt fs-12 please-wait" id="review-please-wait" style="display: none; float: left; vertical-align: top; margin: 20px 0px 0px 5px;">
+                <img src="<?php echo $this->getSkinUrl('images/onepagecheckout/loader.gif') ?>" alt="<?php echo $this->__('Submitting order information...') ?>" title="<?php echo $this->__('Submitting order information...') ?>" class="v-middle" /> <?php echo $this->__('Submitting order information...') ?>
+            </span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,277 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+
+ $product = $this->getProduct();
+ $quantity = $this->getQuantity();
+ $model =  $this->getModel();
+ $typechange = $this->getTypeChange(); 
+
+ 
+ if(isset($model['item_id'])){
+     $item['daystoend'] =        $model['daystoend'];
+     $item['title'] =            $model['item_title'];
+     //$item['item_subtitle'] =    $model['item_subtitle'];
+     $item['price'] =            $model['item_price'];
+     $item['quantity'] =         $quantity;
+     $item['product_id'] =       $model['product_id'];
+     $item['status'] =           $model['item_status'];
+     $item['type'] =             $model['item_type'];
+     $item['auto_stock'] =       $model['item_use_product_quantity'];
+     //$item['item_subtitle'] =    $model['item_subtitle'];
+	 $item['warranty'] =  		 $model['warranty'];
+	 $item['auto_relist'] =  	 $model['auto_relist'];
+	 $item['free_shipping'] =    $model['free_shipping'];
+	 $item['local_pick_up'] =    $model['local_pick_up'];
+	 $item['condition'] =    	 $model['condition'];
+	 
+      $lock               =       true;
+     if($model['item_status'] == 'closed'){
+     	
+      $lock               =       false;
+      $lockclosed         =       true;
+	  
+      } else {
+ 
+		if($typechange){
+			$lock               =       false; 
+		} else {
+			$lock               =       true; 
+		}
+		    $lockclosed         =       false;
+       }
+	  
+	  
+	  
+	    
+ } else {
+ 	 $item['daystoend'] = false;
+     $item['title'] = $this->getTitle();
+     //$item['item_subtitle'] = '';
+     $item['price'] = $this->getProductPrice();
+     $item['quantity'] =  $quantity;
+     $item['product_id'] = $product['entity_id'];
+     $item['status'] = '';
+     $item['type'] = '';
+     $item['auto_stock'] = 1;
+     $lock = false;
+     $lockclosed         =       false;
+	 if(!isset($item['mercadolivre_warranty'])){
+ 	 $item['warranty'] = '';
+ 	 } else {
+	 $item['warranty'] =  		 $product['mercadolivre_warranty'];
+	 }
+	 $item['auto_relist'] =  	 $this->getDefaultAutoRelist();
+	 $item['free_shipping'] =    $this->getDefaultShipping();  
+	 $item['local_pick_up'] =    $this->getDefaultLocalpickup();  
+	 $item['condition'] =    	 $this->getDefaultCondition();  
+ } 
+
+
+?>
+
+
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('General information') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+         <table class="form-list" cellspacing="0">
+         	 <?php  if(isset($model['item_id'])){ ?>
+         	 <input type="hidden" value="<?php echo $model['item_id'];?>" name="item_id" />	
+			 <?php } ?>
+             <?php if (isset($model['mercadolivre_id'])) { ?>
+             
+             <?php if(isset($model['thumb'])){ ?>
+              <tr>
+                <td class="label">
+                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Thumbnail:') ?></label>    
+                </td>
+                <td class="value">
+                <img src="<?php echo $model['thumb'];?>" />
+                </td>
+              </tr>
+              <?php } ?>
+               <?php if(isset($model['permanent_link'])){ ?>
+              <tr>
+                <td class="label">
+                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('MercadoLivre Link:') ?></label>    
+                </td>
+                <td class="value">
+                <a href="<?php echo $model['permanent_link'];?>" target="_blank"><?php echo $model['permanent_link'];?></a>
+                </td>
+              </tr>
+              <tr>
+                   <?php } ?>
+                   <?php if(isset($model['mercadolivre_id'])){ ?>
+                <td class="label">
+                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('MercadoLivre Id:') ?></label>    
+                </td>
+                <td class="value">
+                <?php echo $model['mercadolivre_id'];?>
+                <input type='hidden' name='mercadolivre_id' value='<?php echo $model['mercadolivre_id']; ?>' />
+                
+                </td>
+              </tr>
+               <?php } ?>
+               <?php if(isset($model['item_sold'])){ ?>
+              <tr>
+                <td class="label">
+                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Sold Quantity:') ?></label>    
+                </td>
+                <td class="value">
+                <?php echo $model['item_sold'];?>
+                <input type="hidden" value="<?php echo $model['item_sold'];?>" name="item_sold" />
+                <input type="hidden" value="<?php echo $model['first_descrition_id'];?>" name="first_descrition_id" />
+                </td>
+              </tr>
+              <?php } else { ?>
+              	<input type="hidden" value="0" name="item_sold" />
+              <?php }?>
+               <?php if(isset($model['daystoend'])){ ?>
+              <tr>
+                <td class="label">
+                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Ends:') ?></label>    
+                </td>
+                <td class="value">
+                <?php echo $model['daystoend'] . ' ' .Mage::helper('mercadolivre')->__('days'); ?>
+                </td>
+              </tr>
+              <?php } ?>
+                 
+               <tr>
+                <td class="label">
+                <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Status:') ?></label>    
+                </td>
+                <td class="value">   
+               	<?php echo Mage::helper('mercadolivre')->__($item['status']); ?>
+               	<input  id="item_title" class="input-text" type="hidden" value="<?php echo $item['status']; ?>" name="item_item_status" />      
+                </td>
+            </tr>   
+                 
+            <?php } ?>
+             
+      
+            <tr>
+                <td class="label">
+                <label for="item_title"><?php echo Mage::helper('mercadolivre')->__('Item Title') ?></label>    
+                </td>
+                <td class="value">
+                <input  id="item_title" class="input-text required-entry" type="text" width="60px" value="<?php echo $item['title']; ?>" name="item_title" />
+                </td>
+            </tr>
+<!--             <tr>-->
+<!--                <td class="label">-->
+<!--                <label for="item_subtitle">--><?php //echo Mage::helper('mercadolivre')->__('Item Subtitle') ?><!--</label>    -->
+<!--                </td>-->
+<!--                <td class="value">-->
+<!--                <input  id="item_title" class="input-text" type="text" value="--><?php //echo $item['item_subtitle']; ?><!--" name="item_subtitle" />-->
+<!--                </td>-->
+<!--            </tr>-->
+
+            <tr>
+                <td class="label">
+                <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Item Type') ?></label>    
+                </td>
+                <td class="value">         
+                <select id="item_type" <?php if($lock)echo " disabled ";?>class=" required-entry select" title="Item Status" name="item_type">
+                 <?php        
+          
+                    foreach ($this->getTypes() as $type => $key): 
+                    if ($type == $item['type']) { ?>
+                    <option selected value="<?php echo $type ?>"><?php echo $key ?></option> 
+                   <?php   } elseif($item['type'] == '' && $this->getDefaultType() == $type) {  ?>
+                   <option selected value="<?php echo $type ?>"><?php echo $key ?></option> 
+                    <?php  } else {; ?>
+                    <option value="<?php echo $type ?>"><?php echo $key ?></option> 
+                    <?php  }; ?>
+             
+ 
+                <?php  endforeach; ?>
+                        
+                </select>
+                </td>
+            </tr>
+          
+            <tr>
+                <td class="label">
+                <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Warranty') ?></label>    
+                </td>
+                <td class="value">
+                <input type="text" name="warranty" class="input-text" value="<?php echo $item['warranty']?>" id="warranty>"/>     
+     
+                </td>
+                
+            </tr>
+          	 <tr>
+                <td class="label">
+                <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Free Shipping') ?></label>    
+                </td>
+                
+              <td class="value">         
+                <select id="free_shipping" class=" required-entry select" title="Free Shipping" name="free_shipping">      
+                    <option <?php  if ($item['free_shipping'] == '1'){ echo 'selected';} ?> value="<?php echo '1' ?>"><?php echo Mage::helper('mercadolivre')->__('Yes') ?></option>  
+				  	<option <?php  if ($item['free_shipping'] == '0'){ echo 'selected';} ?> value="<?php echo '0' ?>"><?php echo Mage::helper('mercadolivre')->__('No') ?></option> 
+                </select>                
+              </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Local Pickup') ?></label>    
+                </td>
+                
+              <td class="value">         
+                <select id="local_pick_up" class=" required-entry select" title="Local Pickup" name="local_pick_up">      
+                    <option <?php  if ($item['local_pick_up'] == '1'){ echo 'selected';} ?> value="<?php echo '1' ?>"><?php echo Mage::helper('mercadolivre')->__('Yes') ?></option>  
+				  	<option <?php  if ($item['local_pick_up'] == '0'){ echo 'selected';} ?> value="<?php echo '0' ?>"><?php echo Mage::helper('mercadolivre')->__('No') ?></option> 
+                </select>                
+              </td>
+            </tr>
+             <tr>
+                <td class="label">
+                <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Auto Relist (beta)') ?></label>    
+                </td>
+                <td class="value">         
+                <select id="auto-relist" class=" required-entry select" title="Auto Relist" name="auto_relist">
+                	<option <?php  if ($item['auto_relist'] == '1'){ echo 'selected';} ?> value="1"><?php echo Mage::helper('mercadolivre')->__('Yes') ?></option>  
+				  	<option <?php  if ($item['auto_relist'] == '0'){ echo 'selected';} ?> value="0"><?php echo Mage::helper('mercadolivre')->__('No') ?></option> 
+                </select>                
+              </td>
+            </tr>
+            
+            <tr>
+                <td class="label">
+                <label for="item_status"><?php echo Mage::helper('mercadolivre')->__('Condition') ?></label>    
+                </td>
+                <td class="value">         
+                <select id="condition" class="required-entry select" title="condition" name="condition">
+                	<option <?php  if ($item['condition'] == 'new'){ echo 'selected';} ?> value="new"><?php echo Mage::helper('mercadolivre')->__('New') ?></option>  
+				  	<option <?php  if ($item['condition'] == 'used'){ echo 'selected';} ?> value="used"><?php echo Mage::helper('mercadolivre')->__('Used') ?></option>
+                </select>                
+              </td>
+            </tr>
+           
+            
+          
+            
+         
+            </table>
+          
+            
+   
+        
+    </fieldset>
+</div>
+
+

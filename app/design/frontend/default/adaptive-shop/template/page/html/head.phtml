@@ -1,0 +1,101 @@
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<meta name="google-site-verification" content="DOr62pQdHsOkGygFLEr6Z0IVTt3CBmvOvijinxxlb28" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title><?php echo $this->getTitle() ?></title>
+
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<!--[if lt IE 7]>
+<script type="text/javascript">
+//<![CDATA[
+    var BLANK_URL = '<?php echo $this->helper('core/js')->getJsUrl('blank.html') ?>';
+    var BLANK_IMG = '<?php echo $this->helper('core/js')->getJsUrl('spacer.gif') ?>';
+//]]>
+</script>
+<![endif]-->
+
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+
+<script src="<?php echo $this->getUrl('') ?>js/jquery/jquery-1.12.4.min.js" type="text/javascript"></script>
+<script>$j = jQuery.noConflict();</script>
+<script src="<?php echo $this->getUrl('') ?>js/jquery/jquery-migrate-1.4.1.min.js" type="text/javascript"></script>
+
+<script data-cfasync="true" type="text/javascript" src="//use.typekit.net/aqf0ccd.js"></script>
+<script data-cfasync="true" type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<script> 
+	var $buoop = {c:2}; 
+	function $buo_f(){ 
+	 var e = document.createElement("script"); 
+	 e.src = "//browser-update.org/update.min.js"; 
+	 document.body.appendChild(e);
+	};
+	try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+	catch(e){window.attachEvent("onload", $buo_f)}
+</script> 
+
+<!-- Chat Script -->
+<script type="text/javascript">
+	window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+	d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+	_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+	$.src='//v2.zopim.com/?16pg9Mkn0m74BIbshJOTZu12v8jRRY4A';z.t=+new Date;$.
+	type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+</script>
+
+<!-- Facebook -->
+<script>
+	(function() {
+	  var _fbq = window._fbq || (window._fbq = []);
+	  if (!_fbq.loaded) {
+	    var fbds = document.createElement('script');
+	    fbds.async = true;
+	    fbds.src = '//connect.facebook.net/en_US/fbds.js';
+	    var s = document.getElementsByTagName('script')[0];
+	    s.parentNode.insertBefore(fbds, s);
+	    _fbq.loaded = true;
+	  }
+	  _fbq.push(['addPixelId', '1539551719659250']);
+	})();
+	window._fbq = window._fbq || [];
+	window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=1539551719659250&amp;ev=PixelInitialized" /></noscript>
+
+
+<?php $routeName = Mage::app()->getRequest()->getRouteName(); $identifier = Mage::getSingleton('cms/page')->getIdentifier(); ?>
+<?php if($routeName == 'cms' && $identifier == 'home'): ?>
+	<script>
+		(function() {
+			var _fbq = window._fbq || (window._fbq = []);
+			if (!_fbq.loaded) {
+				var fbds = document.createElement('script');
+				fbds.async = true;
+				fbds.src = '//connect.facebook.net/en_US/fbds.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(fbds, s);
+				_fbq.loaded = true;
+			}
+		})();
+		window._fbq = window._fbq || [];
+		window._fbq.push(['track', '6023307764216', {'value':'0.01','currency':'BRL'}]);
+	</script>
+	<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6023307764216&amp;cd[value]=0.01&amp…" /></noscript>
+<?php endif; ?>
+
+<!-- Alexa Certify -->
+<script type="text/javascript">
+	_atrk_opts = { atrk_acct:"EW30l1aoqAD2vg", domain:"sideralsupri.com.br",dynamic: true};
+	(function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=EW30l1aoqAD2vg" style="display:none" height="1" width="1" alt="" /></noscript>
+

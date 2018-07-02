@@ -1,0 +1,79 @@
+<!--<?php if (Mage::registry('current_category')):?>
+
+<?php // categorias internas - sub ?>
+	<ul id="cat" class="d-b fs-16 banner-bg">
+		<li><span class="cor f-l bold"><?php echo $_category=Mage::registry('current_category')->getName(); ?></span>
+			<?php $_categories = $this->getCurrentChildCategories() ?>
+			<?php $_count = is_array($_categories)?count($_categories):$_categories->count(); ?>
+			<?php if($_count): ?>
+			<ul>
+				<?php foreach ($_categories as $_category): ?>
+				<?php if($_category->getIsActive()): ?>
+				<li>
+            		<a href="<?php echo $this->getCategoryUrl($_category) ?>"><?php echo $this->htmlEscape($_category->getName()) ?><span class="f-r"><?php echo $_category->getProductCount() ?></span></a>
+            	</li>
+            	<?php endif; ?>
+            	<?php endforeach ?>
+            </ul>
+            <?php endif; ?>
+		</li>
+	</ul>
+<?php // categorias internas - sub ?>
+
+<?php else: //menu home ?>-->
+
+<?php //ACORDION MENU ?>
+<script src="<?php echo Mage::getBaseUrl(); ?>js/jquery/jquery-1.8.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+/*jQuery time*/
+jQuery(document).ready(function(){
+	jQuery("#cat h3").click(function(){
+		//slide up all the link lists
+		jQuery("#cat ul").slideUp();
+		//slide down the link list below the h3 clicked - only if its closed
+		if(!jQuery(this).next().is(":visible"))
+		{
+			jQuery(this).next().slideDown();
+		}
+	})
+})
+</script>
+<style>#cat li h3{cursor:pointer;}#cat ul {display: none;}#cat li.active ul {display: block;}</style>
+<?php //END - ACORDION MENU ?>
+
+<?php $_helper = Mage::helper('catalog/category') ?>
+<?php $_categories = $_helper->getStoreCategories() ?>
+<?php $currentCategory = Mage::registry('current_category') ?>
+<?php if (count($_categories) > 0): ?>
+	<ul id="cat"  class="d-b fs-16 banner-bg">
+        <?php foreach($_categories as $_category): ?>
+            <li>
+                <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                <!--<a href="<?php echo $_helper->getCategoryUrl($_category) ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>" class="cor f-l bold" ><?php echo $_category->getName() ?><span class="f-r"><?php echo $_category->getProductCount() ?></span></a>-->
+                <?php $_category = Mage::getModel('catalog/category')->load($_category->getId()) ?>
+                <?php $_subcategories = $_category->getChildrenCategories() ?>
+                <?php if (count($_subcategories) > 0): ?>
+                <h3 class="cor bold"><div class="harrow f-l"><?php echo $_category->getName() ?></div><span class="f-r"><?php echo $_category->getProductCount() ?></span></h3>
+                <?php else :?>
+                <a href="<?php echo $_helper->getCategoryUrl($_category) ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>" class="cor f-l bold" ><?php echo $_category->getName() ?><span class="f-r"><?php echo $_category->getProductCount() ?></span></a>              
+                <?php endif; ?>
+                <?php if (count($_subcategories) > 0): ?>
+                    <ul>
+                        <?php foreach($_subcategories as $_subcategory): ?>
+                            <li>
+                                <a href="<?php echo $_helper->getCategoryUrl($_subcategory) ?>"><?php echo $_subcategory->getName() ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                        <li>
+	                        <a href="<?php echo $_helper->getCategoryUrl($_category) ?>" title="<?php echo $this->htmlEscape($_category->getName()) ?>" class="cor f-l bold" >[+] mais</a>
+                        </li>
+                    </ul>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<!--<?php endif; //end menu ?>-->

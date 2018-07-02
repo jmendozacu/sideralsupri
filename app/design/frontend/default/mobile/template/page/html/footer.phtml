@@ -1,0 +1,97 @@
+<?php
+/**
+ */
+?>
+<footer>
+	<div id="full" class="news-bg">
+		<div id="wrapper">
+			<div id="colunas12" class="no-bottom">
+				<?php echo $this->getChildHtml('footer.newsletter') ?>
+			</div>
+		</div>
+	</div>
+
+	<div id="full" class="footer-bg">
+		<div id="wrapper">
+
+			<div id="colunas3">
+				<h3 class="footer-h cor-sec info">Informa&ccedil;&otilde;es</h3>
+				<?php echo $this->getChildHtml('footer_links-top') ?>
+			</div>
+
+			<div id="colunas3">
+				<h3 class="footer-h cor-sec pag">Formas de pagamento</h3>
+				<ul id="menu-footer-flag">
+					<li class="trans opacity-1-5 c-boleto"></li>
+					<li class="trans opacity-1-5 c-deposito"></li>
+					<li class="trans opacity-1-5 c-visa"></li>
+					<li class="trans opacity-1-5 c-master"></li>
+					<li class="trans opacity-1-5 c-amex"></li>
+					<li class="trans opacity-1-5 c-bradesco"></li>
+					<li class="trans opacity-1-5 c-itau"></li>
+					<li class="trans opacity-1-5 c-bb"></li>
+					<li class="trans opacity-1-5 c-bcash"></li>
+				</ul>
+			</div>
+			
+			<div id="colunas3">
+				<h3 class="footer-h cor-sec social">Certificados</h3>
+				<ul id="menu-footer-flag">
+					<li class="trans opacity-1-5"><a id="seloEbit" href="http://www.ebit.com.br/#sideral-suprimentos" target="_blank" onclick="redir(this.href);">Avaliação de Lojas e-bit</a>
+					<script type="text/javascript" id="getSelo" src="https://a248.e.akamai.net/f/248/52872/0s/img.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?12692" ></script></li>
+					<li class="trans opacity-1-5"><a id="google-safe" href="http://www.google.com/safebrowsing/diagnostic?site=www.sideralsupri.com.br" target="_blank"><img src="<?php echo $this->getSkinUrl('images/google_safe.png'); ?>" width="100" height="42" alt="Sideral - Google Safe" /></a></li>
+					<li class="trans opacity-1-5"><a id="clube" href="#" target="_blank"><img src="<?php echo $this->getSkinUrl('images/clube-ecommerce.png'); ?>" width="160" height="43" alt="Clube E-commerce" /></a></li>					
+				</ul>
+			</div>
+			
+			<div id="colunas3" class="fb">
+				<h3 class="footer-h cor-sec news">Fale Conosco</h3>
+				<ul id="menu-footer-flag" class="menu-footer-contato">
+					<li class="mfc"><p style="width:450px!important;" class="cor-sec fs-14 f-l">televendas: 011 4428-2300</p></li>
+					<li class="mfc"><p style="width:350px!important;display:block;" class="cor-sec fs-14">televendas: 021 2169-6176</p></li>
+					<li class="mfc"><p style="width:350px!important;display:block;" class="cor-sec fs-14">televendas: 085 3052-2352</p></li>
+					<li class="mfmsn"><p class="cor-sec fs-14">msn: loja@sideralsupri.com.br</p></li>
+					<li class="mfsk"><p class="cor-sec fs-14">skype: sideralsupri</p></li>
+					<li class="mffb"><p class="cor-sec fs-14"><a href="http://www.facebook.com/sideralsuprimentos" target="_blank" title="Facebook - Sideral">facebook: sideralsuprimentos</a></p></li>
+					<li class="mfyt"><p class="cor-sec fs-14"><a href="http://www.youtube.com/sideralsuprimentos" target="_blank" title="Youtube - Sideral">youtube: sideralsuprimentos</a></p></li>
+				</ul>
+			</div>
+
+			
+		</div><!-- end wrapper -->
+	</div>
+
+	<div id="full" class="foot-bg">
+		<div id="wrapper">
+			<div class="ta-c cor-sec fs-12">
+				&copy; <?php echo $today = date("Y"); ?> <?php echo $this->getCopyright(); ?><br />
+				Desenvolvido por <a class="td-u" target="_blank" href="http://www.mucciestudio.com.br">Mucci Est&uacute;dio</a>.
+				<div id="dispositivos"></div>
+				<div id="mucci"><a target="_blank" href="http://www.mucciestudio.com.br" class="trans opacity-1-5"></a></div>
+
+			</div>		
+		</div><!-- end wrapper -->
+	</div>
+</footer>
+
+<div style="display:none;">
+<!-- Código do Google para tag de remarketing -->
+<!--------------------------------------------------
+As tags de remarketing não podem ser associadas a informações pessoais de identificação nem inseridas em páginas relacionadas a categorias de confidencialidade. Veja mais informações e instruções sobre como configurar a tag em: http://google.com/ads/remarketingsetup
+--------------------------------------------------->
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 1039572706;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">;
+</script>
+<noscript>
+<div style="display:inline;">
+<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1039572706/?value=0&amp;guid=ON&amp;script=0"/>
+</div>
+</noscript>
+</div>
+

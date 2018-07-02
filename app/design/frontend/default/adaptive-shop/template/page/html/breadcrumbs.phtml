@@ -1,0 +1,22 @@
+<?php if($crumbs && is_array($crumbs)): ?>
+	<div class="breadcrumbs fs-12 txt">
+    	<ul>
+    	<li class="inicio">
+    		<span>&laquo;&nbsp;</span>
+    		<a href="javascript:history.back(1);" title="voltar para a p&aacute;gina anterior">voltar para a p&aacute;gina anterior</a><span>&nbsp;|&nbsp;</span>
+			<a href="<?php echo Mage::getBaseUrl(); ?>" title="<?php echo Mage::app()->getStore()->getName();?>"><?php echo Mage::app()->getStore()->getName();?></a><span>&nbsp;|&nbsp;</span>
+		</li>
+        <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
+            <li class="<?php echo $_crumbName ?>">
+            <?php if($_crumbInfo['link']): ?>
+                <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->htmlEscape($_crumbInfo['title']) ?>"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></a>&nbsp;&raquo;&nbsp;
+            <?php elseif($_crumbInfo['last']): ?>
+                <span class="bold"><?php echo $this->htmlEscape($_crumbInfo['label']) ?></span>
+            <?php else: ?>
+                <?php echo $this->htmlEscape($_crumbInfo['label']) ?>
+            <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

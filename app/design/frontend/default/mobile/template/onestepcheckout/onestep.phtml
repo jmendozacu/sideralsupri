@@ -1,0 +1,198 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Onestepcheckout
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+
+<div id="auth-show" style="display:none;" class="op_login_area">
+   	<div class='close_la' onclick='close_login();'></div>
+	<?php echo $this->getChildHtml('auth'); ?>
+</div>
+<div id="cover-box" style="display: none;"></div>
+<div class="col3-set">
+    <form id="onestepcheckout-general-form" method="post" action="#">
+        <div id="colunas4" class="col-1">
+			<?php 
+		    $logged = $this->isCustomerLoggedIn(); 
+			if ($logged): ?>
+			<p class="onepagecheckout_loginarea fs-16 cor bold">
+			Ol&aacute;, <?php echo $customerName = Mage::helper('customer')->getCustomerName(); ?>!<br />
+			</p>
+			<div class="h-r f-l d-b"></div>
+			<br />
+			<?php else: ?>		    
+		    <p class="onepagecheckout_loginarea"><a href="javascript:void(0)" class="onepagecheckout_loginlink" onclick="open_login();">Já é cliente? Clique aqui e poupe tempo!</a></p>
+			<div class="h-r f-l d-b"></div>
+			<br />
+			<p class="txt bold fs-14">Se for sua primeira vez, por favor, preencha os campos abaixo:</p>
+			<br />
+			<?php endif; ?>		    
+            <div class="opc">
+                <div class="section allow active">
+                    <?php echo $this->getChildHtml('address'); ?>
+                </div>
+            </div>
+        </div>
+        <div id="colunas4" class="col-2">
+            <div class="opc">
+                <div class="section allow active">
+                    <div id="onestepcheckout-shipping-method-wrapper">
+                        <?php echo $this->getChildHtml('shippingmethod'); ?>
+                    </div>
+                    <br />
+                    <div class="h-r f-l d-b"></div>
+                    <br />
+                    <div id="onestepcheckout-payment-method-wrapper">
+                        <?php echo $this->getChildHtml('paymentmethod'); ?>
+                    </div>
+                    <br />
+                    <div class="h-r f-l d-b"></div>
+                    <br />
+                    <div id="onestepcheckout-order-review-coupon-wrapper">
+                        <?php echo $this->getChildHtml('review.coupon'); ?>
+                    </div>
+                    <br />
+                    <div class="h-r f-l d-b"></div>
+                    <br />
+                    <div id="onestepcheckout-order-review-comments-wrapper">
+                        <?php echo $this->getChildHtml('review.comments'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="colunas4" class="col-3">
+            <div class="opc">
+                <div class="section allow active">
+                    <?php $blockNumberClass = (!is_null($this->getBlockNumber(false))) ? "onestepcheckout-number-4" : ""; ?>
+                    <?php if(Mage::getStoreConfig('onestepcheckout/general/is_show_titles')): ?><div class="step-title"><h2><?php echo $this->__('ORDER REVIEW'); ?></h2></div><?php endif; ?>
+                    <div class="step a-item">
+                        <div id="onestepcheckout-order-review">
+                            <div id="onestepcheckout-order-review-cart-wrapper">
+                                <?php echo $this->getChildHtml('review.cart'); ?>
+                            </div>
+                            <div id="onestepcheckout-order-review-terms-wrapper">
+                                <?php echo $this->getChildHtml('review.terms'); ?>
+                            </div>
+                            <div id="onestepcheckout-order-review-extra-wrapper">
+                                <?php echo $this->getChildHtml('review.extra'); ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section allow">
+                    <div id="onestepcheckout-order-review-newsletter-wrapper">
+                        <?php echo $this->getChildHtml('review.newsletter'); ?>
+                    </div>
+                    <div id="onestepcheckout-place-order">
+                        <button type="button" class="f-r bt fs-16 d-b cor-sec bold tt-u radius td-n btn-proceed-checkout btn-checkout" title="<?php echo $this->__('Place Order Now'); ?>" id="onestepcheckout-place-order-button"><?php echo $this->__('Place Order'); ?></button>
+                        <div class="onestepcheckout-place-order-please-wait"><img src="<?php echo $this->getSkinUrl('onestepcheckout/images/ajax-loader.gif') ?>" /><?php echo $this->__('Please wait, processing your order...') ?></div>
+                    </div>
+                    <a id="clube" class="f-r" href="http://perfil.mercadolivre.com.br/SIDERALSUPRI" target="_blank"><img src="<?php echo $this->getSkinUrl('images/mercado-livre.jpg'); ?>" alt="Mercado Livre" /></a>&nbsp;<a id="google-safe" class="f-r" href="http://www.google.com/safebrowsing/diagnostic?site=www.sideralsupri.com.br" target="_blank"><img src="<?php echo $this->getSkinUrl('images/google_safe.png'); ?>" width="100" height="42" alt="Sideral - Google Safe" /></a>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id="onestepcheckout-popup" class="onestepcheckout-popup" style="display:none">
+        <div id="onestepcheckout-popup-content" class="onestepcheckout-popup-content"></div>
+        <div id="onestepcheckout-popup-accept" class="onestepcheckout-popup-accept">
+            <button type="button"><?php echo $this->__('ACCEPT'); ?></button>
+            <a href="javascript:void(0)"><?php echo $this->__('Close'); ?></a>
+        </div>
+    </div>
+    <div id="onestepcheckout-overlay" class="onestepcheckout-popup-overlay" style="display:none"></div>
+    <script type="text/javascript">
+        var OSCForm = new OnestepcheckoutForm({
+            formId: 'onestepcheckout-general-form',
+            cartContainerSelector: "#onestepcheckout-order-review-cart-wrapper",
+            // validate shipping and payment
+            shippingMethodName: 'shipping_method',
+            shippingMethodAdvice: '#onestepcheckout-shipping-method .validation-advice',
+            shippingValidationMessage: '<?php echo $this->__('Please specify shipping method.'); ?>',
+            shippingMethodWrapperSelector: '#onestepcheckout-shipping-method .sp-methods',
+            paymentMethodName: 'payment[method]',
+            paymentMethodAdvice: '#onestepcheckout-payment-method dl+.validation-advice',
+            paymentValidationMessage: '<?php echo $this->__('Please specify payment method.'); ?>',
+            paymentMethodWrapperSelector: '#onestepcheckout-payment-method .sp-methods',
+            //place order functionality
+            placeOrderUrl: '<?php echo $this->getPlaceOrderUrl(); ?>',
+            successUrl: '<?php echo $this->getUrl('checkout/onepage/success'); ?>',
+            placeOrderButtonSelector: 'onestepcheckout-place-order-button',
+            pleaseWaitNoticeSelector: '.onestepcheckout-place-order-please-wait',
+            overlayId: 'onestepcheckout-place-order-overlay',
+            disabledClassName: 'onestepcheckout-place-order-button-disabled',
+            popup: {
+                overlaySelector: "#onestepcheckout-overlay",
+                containerSelector: "#onestepcheckout-popup",
+                contentContainerSelector: "#onestepcheckout-popup-content",
+                acceptContainerSelector: "#onestepcheckout-popup-accept",
+                buttons: {
+                    accept:{
+                        selector: "#onestepcheckout-popup-accept button",
+                        enabled: false
+                    },
+                    close:{
+                        selector: "#onestepcheckout-popup-accept a",
+                        enabled: false
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+
+<div id="colunas12">
+	<div class="checkout-info">
+		<p class="txt fs-13">
+			Você está prestes a realizar uma compra sob as condições acima. Seu pedido passará por aprovação da Sideral Supri, podendo ser cancelado em caso de:
+			<br /><br />
+			1) Não pagamento do pedido ou do ICMS ST, o não pagamento do boleto ou insuficiência de saldo ou crédito no cartão.<br />
+			2) Inconsistência de dados ou informações de cadastro.<br />
+			3) Erros do dispositivo do consumidor durante o fechamento do pedido.<br />
+			4) Motivos outros que impossibilitem o cumprimento do pedido.<br />
+			5) O consumidor tem 7 dias, contados a partir do recebimento do produto, para exercer o direito de arrependimento.<br />
+			6) O consumidor terá, nos casos de vício ou defeito do produto, o prazo de até 30 dias para bens não duráveis e até 90 dias para bens duráveis para solicitar a assistência técnica.<br />
+			7) Defeito técnico ou de fabricação o prazo de troca é de 7 (sete) dias a partir do recebimento do produto.
+			<br /><br />			
+			Os preços e condições deste site são válidos apenas para compras no site e não se aplicam para nossas lojas.
+			<br /><br />
+			Fique atento ao ICMS – ST de sua região. A venda de alguns de nossos produtos estão sujeitas ao pagamento pelo comprador do ICMS complementar nas operações intra-estaduais. Por essa razão, a Sideral pode contatar seus cliente para o pagamento dessa taxa antes do envio dos produtos. 
+			<br /><br />
+			Demais condições aplicáveis a esta compra e venda estão disponíveis nos <a href="http://www.sideralsupri.com.br/termos-de-uso" target="_blank" title="Termos de Uso">Termos de Uso</a>. 
+		</p>
+	</div>
+</div>
+<script type="text/javascript">
+    OnestepcheckoutCore.updateNumbers();
+    OnestepcheckoutCore.updater.setConfig({
+        loaderConfig: {
+            //'48px': 'onestepcheckout-overlay onestepcheckout-overlay-48',
+            //'24px': 'onestepcheckout-overlay onestepcheckout-overlay-24',
+            '16px': 'onestepcheckout-overlay onestepcheckout-overlay-16'
+        },
+        map: <?php echo Zend_Json::encode($this->getBlockMap()); ?>,
+        blocks: [
+            //['shipping_method', '#onestepcheckout-shipping-method-wrapper'],
+            ['shipping_method', '#onestepcheckout-shipping-method-wrapper'],
+            ['payment_method', '#onestepcheckout-payment-method-wrapper'],
+            ['review_cart', '#onestepcheckout-order-review-cart-wrapper'],
+            ['review_coupon', '#onestepcheckout-order-review-coupon-wrapper'],
+            //['review_points', '#onestepcheckout-order-review-points-wrapper'],
+            //['review_referafriend', '#onestepcheckout-order-review-referafriend-wrapper']
+        ],
+        loaderToBlockCssClass: 'onestepcheckout-add-loader-into-this-block'
+    });
+
+      
+	function open_login() {
+	    $('auth-show').show();
+	    $('cover-box').show();
+	    
+	}function close_login() {
+	    $('auth-show').hide();
+	    $('cover-box').hide();
+	}
+</script>
+

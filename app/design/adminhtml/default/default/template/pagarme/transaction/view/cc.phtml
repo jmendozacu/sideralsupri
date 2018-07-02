@@ -1,0 +1,62 @@
+<?php
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Pagarme
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+?>
+
+<?php $_transaction = $this->getTransaction(); ?>
+<div class="pagarme-transaction-view-content">
+	<div class="content-header">
+	    <table cellspacing="0">
+	        <tr>
+	            <td style="width:50%;"><h3 class="icon-head head-sales-order"><?php echo $this->__('Transaction #%s | %s', $_transaction->getId(),$this->formatDate($_transaction->getDateCreated(), 'medium', true)) ?></h3></td>
+	        </tr>
+	    </table>
+	</div>
+	<div class="entry-edit">
+		<div class="entry-edit-head">
+			<h4 class="icon-head head-account"><?php echo $this->__('Transaction Details') ?></h4>
+	    </div>
+	    <div class="fieldset">
+			<table cellspacing="0" class="form-list">
+				<tr>
+					<td class="label"><label><?php echo $this->__('Payment Method') ?></label></td>
+					<td class="value"><strong><?php echo $this->__('Credit Card') ?></strong></td>
+				</tr>
+				<tr>
+					<td class="label"><label><?php echo $this->__('Name on Card') ?></label></td>
+					<td class="value"><strong><?php echo $_transaction->getCardHolderName() ?></strong></td>
+				</tr>
+				<tr>
+					<td class="label"><label><?php echo $this->__('Credit Card Number') ?></label></td>
+					<td class="value"><strong><?php echo sprintf('xxxx-%s', $_transaction->getCardLastDigits()) ?></strong></td>
+				</tr>
+				<tr>
+					<td class="label"><label><?php echo $this->__('Credit Card Type') ?></label></td>
+					<td class="value"><strong><?php echo $_transaction->getCardBrand() ?></strong></td>
+				</tr>
+				<tr>
+					<td class="label"><label><?php echo $this->__('Number of Installments') ?></label></td>
+					<td class="value"><strong><?php echo $_transaction->getInstallments() ?></strong></td>
+				</tr>
+				<?php if ($_transaction->getAntifraudScore()): ?>
+				<tr>
+					<td class="label"><label><?php echo $this->__('Antifraud Score') ?></label></td>
+					<td class="value"><strong class="emph"><?php echo $_transaction->getAntifraudScore() ?>%</strong></td>
+				</tr>
+				<?php endif ?>
+				<tr>
+					<td class="label"><label><?php echo $this->__('Amount') ?></label></td>
+					<td class="value"><strong class="emph"><?php echo $this->getAmount() ?></strong></td>
+				</tr>
+				<tr>
+					<td class="label"><label><?php echo $this->__('Status') ?></label></td>
+					<td class="value"><strong class="pagarme-status <?php echo $_transaction->getStatus() ?>"><?php echo $this->escapeHtml($this->getStatusLabel()) ?></strong></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</div>

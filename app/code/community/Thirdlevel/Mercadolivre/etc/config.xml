@@ -1,0 +1,332 @@
+<?xml version="1.0"?>
+<config>
+
+    <modules>
+        <Thirdlevel_Mercadolivre>
+            <version>1.0.33</version>
+        </Thirdlevel_Mercadolivre>
+    </modules>
+
+    <global>
+        <template>
+            <email>
+                <mercadolivre_error_email>
+                    <label>Error Message Email</label>
+                    <file>mercadolivre_error_message.html</file>
+                    <type>html</type>
+                </mercadolivre_error_email>
+                <mercadolivre_welcome_order_email>
+                    <label>Welcome email order for new MercadoLivre user</label>
+                    <file>mercadolivre_welcome_order_email.html</file>
+                    <type>html</type>
+                </mercadolivre_welcome_order_email>
+                <mercadolivre_direct_order_email_old_customer>
+                    <label>Welcome email order for old MercadoLivre user and direct order</label>
+                    <file>mercadolivre_direct_order_email_old_customer.html</file>
+                    <type>html</type>
+                </mercadolivre_direct_order_email_old_customer>
+                <mercadolivre_direct_order_email>
+                    <label>Welcome email order for new MercadoLivre user and direct order</label>
+                    <file>mercadolivre_direct_order_email.html</file>
+                    <type>html</type>
+                </mercadolivre_direct_order_email>
+                <mercadolivre_new_existing_order_email>
+                    <label>Welcome email order for new MercadoLivre user and need finish order</label>
+                    <file>mercadolivre_new_existing_order_email.html</file>
+                    <type>html</type>
+                </mercadolivre_new_existing_order_email>
+            </email>
+        </template>
+
+        <events>
+
+
+            <sales_order_shipment_track_save_after>
+                <observers>
+                    <shipping_save>
+                        <type>singleton</type>
+                        <class>mercadolivre/observer</class>
+                        <method>sendTrack</method>
+                    </shipping_save>
+                </observers>
+            </sales_order_shipment_track_save_after>
+
+            <catalog_product_save_after>
+                <observers>
+                    <product_save_after>
+                        <type>singleton</type>
+                        <class>mercadolivre/observer</class>
+                        <method>updateItem</method>
+                    </product_save_after>
+                </observers>
+            </catalog_product_save_after>
+
+            <sales_order_place_after>
+                <observers>
+                    <item_update>
+                        <type>singleton</type>
+                        <class>mercadolivre/observer</class>
+                        <method>updateItemStock</method>
+                    </item_update>
+                </observers>
+            </sales_order_place_after>
+
+            <order_cancel_after>
+                <observers>
+                    <item_update>
+                        <type>singleton</type>
+                        <class>mercadolivre/observer</class>
+                        <method>updateItemStock</method>
+                    </item_update>
+                </observers>
+            </order_cancel_after>
+
+            <adminhtml_catalog_category_tabs>
+                <observers>
+                    <category_update>
+                        <type>singleton</type>
+                        <class>mercadolivre/observer</class>
+                        <method>addMercadolivreCategoryTab</method>
+                    </category_update>
+                </observers>
+            </adminhtml_catalog_category_tabs>
+
+
+            <admin_session_user_login_success>
+                <observers>
+                    <login>
+                        <type>singleton</type>
+                        <class>mercadolivre/observer</class>
+                        <method>login</method>
+                    </login>
+                </observers>
+            </admin_session_user_login_success>
+
+            <catalog_category_prepare_save>
+                <observers>
+                    <category_save>
+                        <type>singleton</type>
+                        <class>mercadolivre/observer</class>
+                        <method>saveMercadolivreCateogory</method>
+                    </category_save>
+                </observers>
+            </catalog_category_prepare_save>
+        </events>
+
+        <models>
+            <mercadolivre>
+                <class>Thirdlevel_Mercadolivre_Model</class>
+                <resourceModel>mercadolivre_mysql4</resourceModel>
+            </mercadolivre>
+            <mercadolivre_mysql4>
+                <class>Thirdlevel_Mercadolivre_Model_Mysql4</class>
+                <entities>
+                    <item>
+                        <table>thirdlevel_mercadolivre_item</table>
+                    </item>
+                    <question>
+                        <table>thirdlevel_mercadolivre_question</table>
+                    </question>
+                    <template>
+                        <table>thirdlevel_mercadolivre_template</table>
+                    </template>
+                    <general>
+                        <table>thirdlevel_mercadolivre_general</table>
+                    </general>
+                    <notification>
+                        <table>thirdlevel_mercadolivre_notifications_log</table>
+                    </notification>
+                    <request>
+                        <table>thirdlevel_mercadolivre_request</table>
+                    </request>
+                    <question>
+                        <table>thirdlevel_mercadolivre_question</table>
+                    </question>
+                    <order>
+                        <table>thirdlevel_mercadolivre_order</table>
+                    </order>
+                    <order_item>
+                        <table>thirdlevel_mercadolivre_order_item</table>
+                    </order_item>
+                    <category>
+                        <table>thirdlevel_mercadolivre_category</table>
+                    </category>
+                    <feedback>
+                        <table>thirdlevel_mercadolivre_feedback</table>
+                    </feedback>
+                    <attribute>
+                        <table>thirdlevel_mercadolivre_attribute</table>
+                    </attribute>
+                    <attribute_value>
+                        <table>thirdlevel_mercadolivre_attribute_value</table>
+                    </attribute_value>
+                    <category_attribute>
+                        <table>thirdlevel_mercadolivre_category_attribute</table>
+                    </category_attribute>
+                    <item_variation>
+                        <table>thirdlevel_mercadolivre_item_variation</table>
+                    </item_variation>
+                </entities>
+            </mercadolivre_mysql4>
+
+
+            <catalog_resource>
+                <rewrite>
+                    <product_collection>Thirdlevel_Mercadolivre_Model_Mysql4_Product_Collection</product_collection>
+                </rewrite>
+            </catalog_resource>
+
+
+        </models>
+
+
+        <resources>
+            <mercadolivre_setup>
+                <setup>
+                    <module>Thirdlevel_Mercadolivre</module>
+                    <class>Thirdlevel_Mercadolivre_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mercadolivre_setup>
+
+        </resources>
+
+        <helpers>
+            <mercadolivre>
+                <class>Thirdlevel_Mercadolivre_Helper</class>
+            </mercadolivre>
+        </helpers>
+
+
+        <blocks>
+            <mercadolivre>
+                <class>Thirdlevel_Mercadolivre_Block</class>
+            </mercadolivre>
+        </blocks>
+
+
+    </global>
+
+
+    <frontend>
+
+        <routers>
+            <mercadolivre>
+                <use>standard</use>
+                <args>
+                    <module>Thirdlevel_Mercadolivre</module>
+                    <frontName>mercadolivre</frontName>
+                </args>
+            </mercadolivre>
+        </routers>
+
+
+        <translate>
+            <modules>
+                <mercadolivre>
+                    <files>
+                        <default>mercadolivre.csv</default>
+                    </files>
+                </mercadolivre>
+            </modules>
+        </translate>
+
+        <layout>
+            <updates>
+                <mercadolivre>
+                    <file>mercadolivre.xml</file>
+                </mercadolivre>
+            </updates>
+        </layout>
+
+
+    </frontend>
+
+
+    <admin>
+        <routers>
+            <mercadolivre>
+                <use>admin</use>
+                <args>
+                    <module>Thirdlevel_Mercadolivre</module>
+                    <frontName>mercadolivre</frontName>
+                </args>
+            </mercadolivre>
+        </routers>
+    </admin>
+
+
+    <adminhtml>
+
+        <translate>
+
+            <modules>
+                <mercadolivre>
+                    <files>
+                        <default>mercadolivre.csv</default>
+                    </files>
+                </mercadolivre>
+            </modules>
+
+        </translate>
+
+        <layout>
+            <updates>
+                <mercadolivre>
+                    <file>mercadolivre.xml</file>
+                </mercadolivre>
+            </updates>
+        </layout>
+
+
+    </adminhtml>
+
+    <default>
+        <payment>
+            <mercadolivre>
+                <active>1</active>
+                <model>Thirdlevel_Mercadolivre_Model_Payment</model>
+                <active>true</active>
+                <order_status>pending</order_status>
+                <title>MercadoLivre</title>
+                <allowspecific>0</allowspecific>
+            </mercadolivre>
+        </payment>
+        <carriers>
+            <mercadolivre>
+                <active>1</active>
+                <model>Thirdlevel_Mercadolivre_Model_Carrier_Envios</model>
+                <title>Meli Envios</title>
+            </mercadolivre>
+        </carriers>
+    </default>
+
+    <crontab>
+        <jobs>
+            <mercadolivre_observer>
+                <schedule>
+                    <cron_expr>*/1 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>mercadolivre/observer::runNotification</model>
+                </run>
+            </mercadolivre_observer>
+            
+            <mercadolivre_autoqualify>
+            	<schedule>
+            		<cron_expr>
+            			30 1 * * *
+            		</cron_expr>
+            	</schedule>
+            	<run>
+            		<model>
+            			mercadolivre/qualification::autoQualify
+            		</model>
+            	</run>	
+            </mercadolivre_autoqualify>
+        </jobs>
+    </crontab>
+
+</config>

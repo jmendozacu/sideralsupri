@@ -1,0 +1,69 @@
+<?php
+/**
+ */
+?>
+<?php if($this->getItems()->getSize()): ?>
+
+    <div id="colunas12">
+        <p class="cor fs-20 bold m-auto ta-c m-top veja">Veja tamb&eacute;m<?php //echo $this->__('Related Products') ?></p>
+    </div>
+    <?php $_columnCount = 4; ?>
+    <?php $i=0; foreach($this->getItems() as $_item): ?>
+    <?php if ($i++%$_columnCount==0): ?>
+    <?php endif ?>
+
+    <div id="colunas3">
+        <div class="tag-label">
+            <?php // flag novo produto ?>
+			<?php // Limit dates for newness
+			$newFromDate = Mage::getModel('catalog/product')->load($_item->getID())->getNewsFromDate();
+			$newToDate = Mage::getModel('catalog/product')->load($_item->getID())->getNewsToDate();
+			// Date and time (now)
+			$now = date("Y-m-d");
+			if($newFromDate < $now && $newToDate >= $now): ?>
+				<p class="novo">novidade</p>
+			<?php endif; ?>
+            <?php // flag promo‹o ?>
+			<?php
+    		// Get the Special Price
+    		$specialprice = Mage::getModel('catalog/product')->load($_item->getId())->getSpecialPrice(); 
+    		// Get the Special Price FROM date
+    		$specialPriceFromDate = Mage::getModel('catalog/product')->load($_item->getId())->getSpecialFromDate();
+    		// Get the Special Price TO date
+    		$specialPriceToDate = Mage::getModel('catalog/product')->load($_item->getId())->getSpecialToDate();
+    		// Get Current date
+    		$today =  time(); 
+    		if ($specialprice):
+        		if($today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) || $today >=
+strtotime( $specialPriceFromDate) && is_null($specialPriceToDate)): ?>
+				<p class="oferta">promo&ccedil;&atilde;o</p>
+			<?php  
+        		endif;
+    		endif; 
+    		?>
+        </div>
+    	<a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" class="product-image trans opacity-1-5 prod">
+           <img class="img-prod" src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(263); ?>" width="263" height="263" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></a>
+           
+        <div id="info-prod">
+        	<a class="fs-14 txt d-b" href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $_item->getName() ?>"><h2><?php echo $_item->getName() ?></h2></a>
+        	<!--R$ <?php //echo number_format($_product->getFinalPrice(), '2', '.', ','); ?>-->
+			<?php echo $this->getPriceHtml($_item, true) ?>
+			<p class="cor fs-16 bold">
+	    <?php //parcelamento ?>
+		<?php
+			$Preco = $_item->getFinalPrice();
+			if($Preco >= 999){
+				$Parcelamento = 3; 
+				$Resultado = $Preco/$Parcelamento;
+				echo $Parcelamento . 'x</strong> de <strong>R$'.number_format($Resultado, 2, ',', '').'</strong> sem juros.';
+			}
+			?>
+        <?php //parcelamento ?>
+			</p>
+        </div>
+    </div>
+    <?php if($i%$_columnCount==0): ?><div id="colunas12"><div class="h-r f-l d-b"></div></div><?php endif ?>
+    <?php endforeach ?>
+
+<?php endif ?>

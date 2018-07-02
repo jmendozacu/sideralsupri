@@ -1,0 +1,133 @@
+/*
+Tablet portrait
+
+@media only screen and (min-width : 768px) {*/
+
+#wrapper{
+	padding: 0 9px;
+	width: 736px;
+}
+
+#colunas12,
+#wrapper-colunas9,
+#colunas9,
+#wrapper-colunas8,
+#colunas8,
+#colunas6,
+#colunas4,
+#colunas3,
+.colunas3{
+	margin: 0 14px 28px 0px;
+}
+
+
+#colunas12{
+	width: 708px;
+}
+
+#wrapper-colunas9{
+	margin: 0 0 28px !important;
+	width: 552px;
+}
+
+#colunas9{
+	width: 524px
+}
+
+#wrapper-colunas8{
+	margin: 0 0 28px !important;
+	width: 490px;
+}
+
+#colunas8{
+	width: 462px
+}
+
+#colunas6{
+	width: 340px;
+}
+
+#colunas4{
+	width: 217px;
+}
+
+#colunas3, .colunas3{
+	width: 156px;
+}
+
+.footer-h{
+	font-size: 11px;
+}
+
+.news-i{
+	width: 230px;
+}
+.form-news > form{width: 46%}
+
+
+#dispositivos {
+background-position: center -30px;
+float: right;
+margin: -20px 28px 0 0;
+}
+
+#mucci {
+display: inline;
+float: right;
+margin-bottom: 0;
+margin-top: -8px;
+}
+#gallery, #slide-images{
+	height: 187px!important;
+}
+
+.product-image-zoom a, .product-image-zoom a img, .product-image-zoom .mousetrap{
+	width: 340px!important;
+	height: 340px!important;
+}
+
+.form-search > .search{
+	width: 270px;
+}
+
+.cart-success1{
+	height: 95px;
+}
+
+.cart-success2{
+	height: 160px;
+}
+
+.cart-empty1{
+	height: 55px;
+}
+
+.cart-empty2{
+	height: 120px;
+}
+
+.i-flag-view .i-prod-amex {margin-left: 70px;}
+.i-flag-view2 li {margin: 15px 20px 0 0;}
+.i-flag-view2 .i-prod-entrega-sp {background: url(../../images/flag-view/entrega-sp.png) no-repeat center center!important;background-size: 80px auto;width: 80px;}
+.i-flag-view2 .i-prod-entrega {background: url(../../images/flag-view/entrega.png) no-repeat center center!important;background-size: 80px auto;width: 80px;}
+.i-flag-view2 .i-prod-e-sedex {background: url(../../images/flag-view/e-sedex.png) no-repeat center center!important;background-size: 60px auto;width: 60px;}
+#menu-footer-flag2 #clube img {max-width: 115px;height: auto;}
+.new-form-search #search {width: 618px;}
+.new-menu li > a{margin: 0 18px;}
+.img-sg, .img-ee{display: none;}
+.new-list-box4 li{width: 132px;height: 109px;}
+
+.c-banner-toner-po-refil ul li{width: 83px;height:55px;margin: 0px;}
+.c-banner-toner-po-refil ul li .c-samsung{background-size: 66px auto;}
+.c-banner-toner-po-refil ul li .c-canon{background-size: 57px auto;}
+.c-banner-toner-po-refil ul li .c-sharp{background-size: 63px auto;}
+.c-banner-toner-po-refil ul li .c-brother{background-size: 63px auto;}
+.c-banner-toner-po-refil ul li .c-hp{background-size: 25px auto;}
+.c-banner-toner-po-refil ul li .c-ricoh{background-size: 58px auto;}
+.c-banner-toner-po-refil ul li .c-lexmark{background-size: 63px auto;}
+.c-banner-toner-po-refil ul li .c-xerox{background-size: 67px auto;}
+.c-banner-toner-po-refil ul li .c-kyocera{background-size: 65px auto;}
+.c-banner-toner-po-refil ul li .c-konica-minolta{background-size: 76px auto;}
+.c-banner-toner-po-refil ul li .c-toshiba{background-size: 65px auto;}
+
+/*}*/

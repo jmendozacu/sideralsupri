@@ -1,0 +1,793 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Create account form template
+ *
+ * @var $this Mage_Customer_Block_Form_Register
+ */
+?>
+<div id="full" class="no-home">
+                            
+    <div id="colunas12" class="page-title">
+        <p class="cor bold fs-25">Criar Conta</p>
+    </div>
+    <?php echo $this->getChildHtml('form_fields_before')?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php /* Extensions placeholder */ ?>
+    <?php echo $this->getChildHtml('customer.form.register.extra')?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="form-validate">
+	     <?php echo $this->getBlockHtml('formkey'); ?>
+        <div id="colunas6" class="cad-osc">
+            <div class="fieldset">
+                <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+                <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+                <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
+               <!-- <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2> -->
+                <ul class="form-list">
+                    <li class="control fields tipopessoa">
+                        <div>
+                            <label for="fisica" class="f-l txt fs-12">
+                                <input type="radio" name="radio_tipopessoa" value="Física" id="fisica"
+                                class="radio" title="CPF">
+                                Pessoa Física
+                            </label>
+                        </div>
+                        <div>
+                            <label for="juridica" class="f-l txt fs-12">
+                                <input type="radio" name="radio_tipopessoa" value="Jurídica" id="juridica"
+                                class="radio" title="CNPJ">
+                                Pessoa Jurídica
+                            </label>
+                        </div>
+                        <div style="display:none;">
+                            <label for="tipopessoa">
+                                Tipo Pessoa
+                            </label>
+                            <div class="input-box">
+                                <select onchange="setTipopessoaArea(this.options[this.selectedIndex].innerHTML)"
+                                id="tipopessoa" name="tipopessoa" title="Tipo Pessoa">
+                                    <option value="" selected="selected">
+                                    </option>
+                                    <option value="1192">
+                                        Física
+                                    </option>
+                                    <option value="1193">
+                                        Jurídica
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="display:none;">
+                    </li>
+                    <li class="fields">
+                        <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
+                    </li>
+                    <li class="short clear">
+                        <label for="taxvat" class="txt fs-12 required">
+                            <em>
+                                *
+                            </em>
+                            CPF
+                        </label>
+                        <div class="input-box">
+                            <input type="text" id="taxvat" name="taxvat" value="" title="CPF" class="d-b op-i txt fs-14 input-text required-entry validate-taxvat"
+                            maxlength="14">
+                        </div>
+                    </li>
+
+                    <li id="ie-pf" class="short wide" style="display:none;">
+                        <label for="ie" class="txt fs-12">
+                            RG
+                        </label>
+                        <label class="txt fs-10 f-l d-b">
+                            <input style="margin:0 3px;" type="checkbox" name="isento" title="Isento?"
+                            value="1" id="isento" class="f-l checkbox">
+                            Isento?
+                        </label>
+                        <input for="isento" type="text" id="ie" name="ie" title="IE (Inscrição Estadual)"
+                        class="d-b op-i txt fs-14 input-text i-ie" value="" maxlength="30">
+                        <script>
+                            //inscricaoEstadual('suaInscricaoEstadual', '');
+                        </script>
+                    </li>
+
+                    <li class="short">
+                        <ul id="tipopessoa-area">
+                            <li>
+                                <label for="month" class="txt fs-12">
+                                    *Data de Nascimento
+                                </label>
+                                <div class="input-box customer-dob">
+                                    <div class="dob-day f-l" style="height:30px;margin:0 3px 1px 0;">
+                                        <select class="op-select-d validate-custom" name="day" id="day">
+                                            <option value="">
+                                                Dia
+                                            </option>
+                                            <option value="01">
+                                                01
+                                            </option>
+                                            <option value="02">
+                                                02
+                                            </option>
+                                            <option value="03">
+                                                03
+                                            </option>
+                                            <option value="04">
+                                                04
+                                            </option>
+                                            <option value="05">
+                                                05
+                                            </option>
+                                            <option value="06">
+                                                06
+                                            </option>
+                                            <option value="07">
+                                                07
+                                            </option>
+                                            <option value="08">
+                                                08
+                                            </option>
+                                            <option value="09">
+                                                09
+                                            </option>
+                                            <option value="10">
+                                                10
+                                            </option>
+                                            <option value="11">
+                                                11
+                                            </option>
+                                            <option value="12">
+                                                12
+                                            </option>
+                                            <option value="13">
+                                                13
+                                            </option>
+                                            <option value="14">
+                                                14
+                                            </option>
+                                            <option value="15">
+                                                15
+                                            </option>
+                                            <option value="16">
+                                                16
+                                            </option>
+                                            <option value="17">
+                                                17
+                                            </option>
+                                            <option value="18">
+                                                18
+                                            </option>
+                                            <option value="19">
+                                                19
+                                            </option>
+                                            <option value="20">
+                                                20
+                                            </option>
+                                            <option value="21">
+                                                21
+                                            </option>
+                                            <option value="22">
+                                                22
+                                            </option>
+                                            <option value="23">
+                                                23
+                                            </option>
+                                            <option value="24">
+                                                24
+                                            </option>
+                                            <option value="25">
+                                                25
+                                            </option>
+                                            <option value="26">
+                                                26
+                                            </option>
+                                            <option value="27">
+                                                27
+                                            </option>
+                                            <option value="28">
+                                                28
+                                            </option>
+                                            <option value="29">
+                                                29
+                                            </option>
+                                            <option value="30">
+                                                30
+                                            </option>
+                                            <option value="31">
+                                                31
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="dob-month f-l" style="height:30px;margin:0 3px 1px 0;">
+                                        <select class="op-select-d validate-custom" name="month" id="month">
+                                            <option value="">
+                                                Mês
+                                            </option>
+                                            <option value="01">
+                                                01
+                                            </option>
+                                            <option value="02">
+                                                02
+                                            </option>
+                                            <option value="03">
+                                                03
+                                            </option>
+                                            <option value="04">
+                                                04
+                                            </option>
+                                            <option value="05">
+                                                05
+                                            </option>
+                                            <option value="06">
+                                                06
+                                            </option>
+                                            <option value="07">
+                                                07
+                                            </option>
+                                            <option value="08">
+                                                08
+                                            </option>
+                                            <option value="09">
+                                                09
+                                            </option>
+                                            <option value="10">
+                                                10
+                                            </option>
+                                            <option value="11">
+                                                11
+                                            </option>
+                                            <option value="12">
+                                                12
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="dob-year f-l" style="height:30px;margin:0 0 1px 0;">
+                                        <select class="op-select-y validate-custom" name="year" id="year" style="width:52px;"
+                                        autocomplete="off">
+                                            <option value="">
+                                                Ano
+                                            </option>
+                                            <option value="2015">
+                                                2015
+                                            </option>
+                                            <option value="2014">
+                                                2014
+                                            </option>
+                                            <option value="2013">
+                                                2013
+                                            </option>
+                                            <option value="2012">
+                                                2012
+                                            </option>
+                                            <option value="2011">
+                                                2011
+                                            </option>
+                                            <option value="2010">
+                                                2010
+                                            </option>
+                                            <option value="2009">
+                                                2009
+                                            </option>
+                                            <option value="2008">
+                                                2008
+                                            </option>
+                                            <option value="2007">
+                                                2007
+                                            </option>
+                                            <option value="2006">
+                                                2006
+                                            </option>
+                                            <option value="2005">
+                                                2005
+                                            </option>
+                                            <option value="2004">
+                                                2004
+                                            </option>
+                                            <option value="2003">
+                                                2003
+                                            </option>
+                                            <option value="2002">
+                                                2002
+                                            </option>
+                                            <option value="2001">
+                                                2001
+                                            </option>
+                                            <option value="2000">
+                                                2000
+                                            </option>
+                                            <option value="1999">
+                                                1999
+                                            </option>
+                                            <option value="1998">
+                                                1998
+                                            </option>
+                                            <option value="1997">
+                                                1997
+                                            </option>
+                                            <option value="1996">
+                                                1996
+                                            </option>
+                                            <option value="1995">
+                                                1995
+                                            </option>
+                                            <option value="1994">
+                                                1994
+                                            </option>
+                                            <option value="1993">
+                                                1993
+                                            </option>
+                                            <option value="1992">
+                                                1992
+                                            </option>
+                                            <option value="1991">
+                                                1991
+                                            </option>
+                                            <option value="1990">
+                                                1990
+                                            </option>
+                                            <option value="1989">
+                                                1989
+                                            </option>
+                                            <option value="1988">
+                                                1988
+                                            </option>
+                                            <option value="1987">
+                                                1987
+                                            </option>
+                                            <option value="1986">
+                                                1986
+                                            </option>
+                                            <option value="1985">
+                                                1985
+                                            </option>
+                                            <option value="1984">
+                                                1984
+                                            </option>
+                                            <option value="1983">
+                                                1983
+                                            </option>
+                                            <option value="1982">
+                                                1982
+                                            </option>
+                                            <option value="1981">
+                                                1981
+                                            </option>
+                                            <option value="1980">
+                                                1980
+                                            </option>
+                                            <option value="1979">
+                                                1979
+                                            </option>
+                                            <option value="1978">
+                                                1978
+                                            </option>
+                                            <option value="1977">
+                                                1977
+                                            </option>
+                                            <option value="1976">
+                                                1976
+                                            </option>
+                                            <option value="1975">
+                                                1975
+                                            </option>
+                                            <option value="1974">
+                                                1974
+                                            </option>
+                                            <option value="1973">
+                                                1973
+                                            </option>
+                                            <option value="1972">
+                                                1972
+                                            </option>
+                                            <option value="1971">
+                                                1971
+                                            </option>
+                                            <option value="1970">
+                                                1970
+                                            </option>
+                                            <option value="1969">
+                                                1969
+                                            </option>
+                                            <option value="1968">
+                                                1968
+                                            </option>
+                                            <option value="1967">
+                                                1967
+                                            </option>
+                                            <option value="1966">
+                                                1966
+                                            </option>
+                                            <option value="1965">
+                                                1965
+                                            </option>
+                                            <option value="1964">
+                                                1964
+                                            </option>
+                                            <option value="1963">
+                                                1963
+                                            </option>
+                                            <option value="1962">
+                                                1962
+                                            </option>
+                                            <option value="1961">
+                                                1961
+                                            </option>
+                                            <option value="1960">
+                                                1960
+                                            </option>
+                                            <option value="1959">
+                                                1959
+                                            </option>
+                                            <option value="1958">
+                                                1958
+                                            </option>
+                                            <option value="1957">
+                                                1957
+                                            </option>
+                                            <option value="1956">
+                                                1956
+                                            </option>
+                                            <option value="1955">
+                                                1955
+                                            </option>
+                                            <option value="1954">
+                                                1954
+                                            </option>
+                                            <option value="1953">
+                                                1953
+                                            </option>
+                                            <option value="1952">
+                                                1952
+                                            </option>
+                                            <option value="1951">
+                                                1951
+                                            </option>
+                                            <option value="1950">
+                                                1950
+                                            </option>
+                                            <option value="1949">
+                                                1949
+                                            </option>
+                                            <option value="1948">
+                                                1948
+                                            </option>
+                                            <option value="1947">
+                                                1947
+                                            </option>
+                                            <option value="1946">
+                                                1946
+                                            </option>
+                                            <option value="1945">
+                                                1945
+                                            </option>
+                                            <option value="1944">
+                                                1944
+                                            </option>
+                                            <option value="1943">
+                                                1943
+                                            </option>
+                                            <option value="1942">
+                                                1942
+                                            </option>
+                                            <option value="1941">
+                                                1941
+                                            </option>
+                                            <option value="1940">
+                                                1940
+                                            </option>
+                                            <option value="1939">
+                                                1939
+                                            </option>
+                                            <option value="1938">
+                                                1938
+                                            </option>
+                                            <option value="1937">
+                                                1937
+                                            </option>
+                                            <option value="1936">
+                                                1936
+                                            </option>
+                                            <option value="1935">
+                                                1935
+                                            </option>
+                                            <option value="1934">
+                                                1934
+                                            </option>
+                                            <option value="1933">
+                                                1933
+                                            </option>
+                                            <option value="1932">
+                                                1932
+                                            </option>
+                                            <option value="1931">
+                                                1931
+                                            </option>
+                                            <option value="1930">
+                                                1930
+                                            </option>
+                                            <option value="1929">
+                                                1929
+                                            </option>
+                                            <option value="1928">
+                                                1928
+                                            </option>
+                                            <option value="1927">
+                                                1927
+                                            </option>
+                                            <option value="1926">
+                                                1926
+                                            </option>
+                                            <option value="1925">
+                                                1925
+                                            </option>
+                                            <option value="1924">
+                                                1924
+                                            </option>
+                                            <option value="1923">
+                                                1923
+                                            </option>
+                                            <option value="1922">
+                                                1922
+                                            </option>
+                                            <option value="1921">
+                                                1921
+                                            </option>
+                                            <option value="1920">
+                                                1920
+                                            </option>
+                                            <option value="1919">
+                                                1919
+                                            </option>
+                                            <option value="1918">
+                                                1918
+                                            </option>
+                                            <option value="1917">
+                                                1917
+                                            </option>
+                                            <option value="1916">
+                                                1916
+                                            </option>
+                                            <option value="1915">
+                                                1915
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="dob-full" style="display:none;">
+                                        <input type="hidden" id="dob" name="dob">
+                                    </div>
+                                    <div class="validation-advice" style="display:none;">
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                  //<![CDATA[
+                                  var DOBSelects = Class.create(Varien.DOB, {
+                                      initialize: function(selector, required, format) {
+                                          var el = $$(selector)[0];
+                                          var container = {};
+                                          container.day = Element.select(el, '.dob-day select')[0];
+                                          container.month = Element.select(el, '.dob-month select')[0];
+                                          container.year = Element.select(el, '.dob-year select')[0];
+                                          container.full = Element.select(el, '.dob-full input')[0];
+                                          container.advice = Element.select(el, '.validation-advice')[0];
+                                          new Varien.DateElement('container', container, required, format);
+                                      }
+                                  });
+                                  var customer_dob = new DOBSelects('.customer-dob', false, '%d/%m/%Y');
+                                  //]]>
+                                </script>
+                            </li>
+                            <!--<li class="short"></li>-->
+                        </ul>
+                    </li>
+                </ul>   
+
+                <ul class="form-list clear">
+                    <li class="short">
+                        <div>
+                            <label for="email_address" class="txt fs-12 required"><em>*</em>Email</label>
+                            <input type="text" name="email" id="email_address" value="" title="Email" class="d-b op-i txt fs-14 input-text validate-email validate-email-exist required-entry" />
+                        </div>
+                    </li>
+                    <li class="short">
+                        <div>
+                            <label for="password" class="txt fs-12 required"><em>*</em>Senha</label>
+                            <input type="password" name="password" id="password" title="Senha" class="nn-password d-b op-i txt fs-14 input-text required-entry validate-password" />
+                            <input style="display:none;" type="password" name="confirmation" title="Confirmar Senha" id="confirmation" class="nn-confirm-password d-b op-i txt fs-14 input-text required-entry validate-cpassword" />
+                        </div>
+                    </li>
+                    <li>
+                        <?php if ($this->isNewsletterEnabled()): ?>
+                        <div class="checkbox">
+                            <input type="checkbox" style="float: left;" name="is_subscribed" title="Desejo receber ofertas por email" value="1" id="is_subscribed" <?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
+                            <label for="is_subscribed" class="fs-12 txt bold f-l">Desejo receber ofertas por email</label>
+                            <?php /* Extensions placeholder */ ?>
+                            <?php echo $this->getChildHtml('customer.form.register.newsletter')?>
+                        </div>
+                        <?php endif ?>            
+                    </li>
+                </ul>              
+            </div>
+            <div class="buttons-set">
+                <p class="f-l required">*Campos Obrigatórios</p><br />
+                <button type="submit" title="Enviar" class="bt fs-14 d-b bold tt-u radius td-n"><span><span class="cor-sec">Enviar</span></span></button>
+            </div>
+        </div>
+    </form>
+
+        <script type="text/javascript">
+        //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        dataForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(dataForm);
+        $$("input[name*='radio_tipopessoa']").invoke('on', 'click', function() {
+            var sel = $('tipopessoa');
+            setTipopessoaArea(this.value);
+            for (var i = 0; i < sel.options.length; i++) {
+                if (sel.options[i].text == this.value) {
+                    sel.options[i].selected = true;
+                }
+            }
+
+        });
+
+        function setTipopessoaArea(arg) {
+            if (arg == 'Jurídica') {
+                if ($('taxvat')) {
+                    $('taxvat').maxLength = 18;
+                    $('ie').maxLength = 30;
+                    $$('label[for="ie"]').first().update('IE (Inscrição Estadual)');
+                    $$('label[for="taxvat"]').first().update('<em>*</em>CNPJ');
+                    $$('label[for="firstname"]').first().update('<em>*</em>Razão social');
+                    $$('label[for="lastname"]').first().update('<em>*</em>N. Fantasia');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CNPJ');
+                    $$('#ie-pf').first().show();
+                    //$$('input[name="ie"]').first().writeAttribute('title','IE (Inscrição Estadual)');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Razão social');
+                    $$('input[name="lastname"]').first().writeAttribute('title','N. Fantasia');
+                    $('tipopessoa-area').hide();
+                }
+            } else {
+                if ($('taxvat')) {
+                    $('taxvat').maxLength = 14;
+                    $('ie').maxLength = 30;
+                    $$('label[for="taxvat"]').first().update('<em>*</em>CPF');
+                    $$('label[for="ie"]').first().update('RG');
+                    $$('label[for="firstname"]').first().update('<em>*</em>Nome');
+                    $$('label[for="lastname"]').first().update('<em>*</em>Sobrenome');
+                    $$('input[name="taxvat"]').first().writeAttribute('title','CPF');
+                    $$('#ie-pf').first().hide();
+                    //$$('input[name="ie"]').first().writeAttribute('title','RG');
+                    $$('input[name="firstname"]').first().writeAttribute('title','Nome');
+                    $$('input[name="lastname"]').first().writeAttribute('title','Sobrenome');
+                    $('tipopessoa-area').show();
+                }
+            }
+        }
+            $$("input[name*='radio_tipopessoa']")[0].click();
+        Validation.add('validate-email-exist', 'Informe um endereço de email válido. Por exemplo, johndoe@domain.com.', function(value) {
+            if (checkMail(value)) {
+                var ok = false;
+                var url = '/onestepcheckout/ajax/check_email/';
+                new Ajax.Request(url, {
+                    method: 'post',
+                    asynchronous: false,
+                    parameters: 'email=' + encodeURIComponent(value),
+                    onSuccess: function(transport) {
+                        var obj = response = eval('(' + transport.responseText + ')');
+                        validateTrueEmailMsg = obj.status_desc;
+                            if (obj.result !== 'clean') {
+                                Validation.get('validate-email-exist').error = 'Email já cadastrado';
+                                ok = false;
+                            } else {
+                                ok = true;
+                            }
+                        },
+                        onComplete: function() {
+                            if ($('advice-validate-email-exist-email')) {
+                              $('advice-validate-email-exist-email').remove();
+                            }
+                        }
+                    });
+                return ok;
+            }else{
+                Validation.get('validate-email').error = 'Informe um endereço de email válido. Por exemplo, johndoe@domain.com.';
+            }
+        });
+        Validation.add('validate-taxvat', 'Campo obrigatório.', function(value) {
+            if (validaCPF(value,0)) {
+                var ok = false;
+                var url = '/onestepcheckout/ajax/check_taxvat/';
+                new Ajax.Request(url, {
+                    method: 'post',
+                    asynchronous: false,
+                    parameters: 'taxvat=' + encodeURIComponent(value),
+                    onSuccess: function(transport) {
+                        var obj = response = eval('(' + transport.responseText + ')');
+                        validateTrueEmailMsg = obj.status_desc;
+                        if (obj.result !== 'clean') {
+                            Validation.get('validate-taxvat').error = 'CPF/CNPJ já cadastrado';
+                            ok = false;
+                        } else {
+                            ok = true;
+                        }
+                    },
+                    onComplete: function() {
+                        if ($('advice-validate-taxvat-taxvat')) {
+                            $('advice-validate-taxvat-taxvat').remove();
+                        }
+                    }
+                });
+                return ok;
+             }else{
+                 Validation.get('validate-taxvat').error = 'O CPF/CNPJ informado \xE9 inválido';
+             }
+        });
+        Validation.add('validate-zip-br', 'Por favor insira um CEP válido. por exemplo 12345678.', function(v) {
+            return Validation.get('IsEmpty').test(v) || /(^\d{8}$)|(^\d{5}-\d{3}$)/.test(v);
+        });
+        Validation.add('validate-phone-br', 'Por favor insira um número de telefone válido. por exemplo (xx) x4567-8900.', function(v) {
+            return Validation.get('IsEmpty').test(v) || /^(\()?\d{2}(\))?(-|\s)?\d{5}(-|\s)\d{4}|(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/.test(v);
+        });
+
+        if ($('taxvat')) {
+            $('taxvat').addClassName('validate-taxvat');
+            $('taxvat').observe('keyup', function(event) {
+                mascara(this, mdocumento);
+            });
+        }
+
+        if ($('telephone')) {
+            $('telephone').addClassName('validate-phone-br');
+            $('telephone').observe('keyup', function(event) {
+                this.maxLength = 15;
+                mascara(this, mtel);
+            });
+        }
+        if ($('fax')) {
+            $('fax').addClassName('validate-phone-br');
+            $('fax').observe('keyup', function(event) {
+                this.maxLength = 15;
+                mascara(this, mtel);
+            });
+        }
+        //]]>
+
+        jQuery( ".nn-password" )
+          .keyup(function() {
+            var value = jQuery( this ).val();
+            jQuery( ".nn-confirm-password" ).val( value );
+        })
+        .keyup();
+    </script>   
+</div>

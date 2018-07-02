@@ -1,0 +1,57 @@
+/***
+ * Layout 2:Image Top *
+ ***/
+
+.modalContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+    background: #FFFFFF;
+}
+.modalContent__image{
+    position: absolute;
+    top: 0;
+    display: block;
+    clear:both;
+    min-height: 150px;
+    width:100%;
+
+    background-position: 50% 50%;
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.modalContent__content{
+    clear:both;
+    width: 90%;
+    padding: 150px 30px 30px 30px;
+    margin-left: auto;
+    margin-right:auto;
+}
+.content__titleDescription{
+    margin-bottom: 20px;
+}
+.content__button{
+    margin-bottom: 20px;
+    height: 36px;
+}
+/* Media Queries */
+@media only screen and (max-width:960px) {
+
+    .modalContent{
+        width: 100%;
+    }
+
+    .modalContent__content{
+        width: 100%;
+        padding-top: 30px;
+    }
+    .modalContent__image{
+        position:relative;
+        width: 100%;
+    }
+}

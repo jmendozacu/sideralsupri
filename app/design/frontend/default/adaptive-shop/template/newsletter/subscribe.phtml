@@ -1,0 +1,16 @@
+<?php
+/**
+ */
+?>
+	<div class="form-news d-b">
+		<span class="fs-14 bold cor-sec">Ofertas, Dicas e Truques em sua caixa de email!</span>
+    	<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail" class="f-r">
+           	<input type="text" name="email" id="newsletter" value="" class="f-l news-i txt fs-12 d-b input-text required-entry validate-email" autocomplete="off" placeholder="Escreva seu endere&ccedil;o de email aqui" maxlength="100">
+            <input type="submit" value="assinar" class="f-l bt fs-12 d-b bt-n cor-sec bold news-b">
+        </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+    //]]>
+    </script>
+	</div>

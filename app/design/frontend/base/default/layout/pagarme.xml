@@ -1,0 +1,151 @@
+<?xml version="1.0"?>
+<!--
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Pagarme
+ * @author     Suporte <suporte@inovarti.com.br>
+ *
+ * UPDATED:
+ *
+ * @copyright   Copyright (C) 2015 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author     Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+-->
+<layout>
+	<pagarme_checkout_handle>
+		<reference name="head">
+			<action method="addCss"><stylesheet>pagarme/css/styles.css</stylesheet></action>
+		</reference>
+        <reference name="after_body_start">
+            <block type="core/template" name="pagarme_checkout_loader">
+                <action method="setTemplate" ifconfig="payment/pagarme_cc/active">
+                    <template>pagarme/checkout/payment/loader.phtml</template>
+                </action>
+            </block>
+        </reference>
+        <reference name="before_body_end">
+            <block type="core/template" name="pagarme_checkout_js">
+                <action method="setTemplate" ifconfig="payment/pagarme_cc/active">
+                    <template>pagarme/checkout/payment/js.phtml</template>
+                </action>
+            </block>
+            <block type="core/text" name="pagarme.cdn.js.checkout" ifconfig="payment/pagarme_checkout/active">
+                <action method="setText">
+                    <text><![CDATA[<script src="https://assets.pagar.me/checkout/checkout.js" type="text/javascript"></script>]]></text>
+                </action>
+            </block>
+        </reference>
+	</pagarme_checkout_handle>
+
+	<checkout_onepage_index>
+		<update handle="pagarme_checkout_handle"/>
+	</checkout_onepage_index>
+
+	<onepagecheckout_index_index>
+		<update handle="pagarme_checkout_handle"/>
+	</onepagecheckout_index_index>
+
+    <onestepcheckout_index_index>
+            <update handle="pagarme_checkout_handle"/>
+    </onestepcheckout_index_index>
+
+    <typostores_onestepcheckout_index_index>
+        <update handle="pagarme_checkout_handle"/>
+    </typostores_onestepcheckout_index_index>
+
+	<opc_index_index>
+		<update handle="pagarme_checkout_handle"/>
+	</opc_index_index>
+
+	<aw_onestepcheckout_index_index>
+		<update handle="pagarme_checkout_handle"/>
+	</aw_onestepcheckout_index_index>
+
+	<idecheckoutvm_index_index>
+		<update handle="pagarme_checkout_handle"/>
+	</idecheckoutvm_index_index>
+
+	<checkoutsimplificado_index_index>
+		<update handle="pagarme_checkout_handle"/>
+	</checkoutsimplificado_index_index>
+
+	<firecheckout_index_index>
+		<update handle="pagarme_checkout_handle"/>
+	</firecheckout_index_index>
+
+    <checkout_multishipping_billing>
+        <update handle="pagarme_checkout_handle"/>
+    </checkout_multishipping_billing>
+
+    <checkout_onepage_success>
+        <reference name="content">
+            <block type="pagarme/checkout_success_payment" name="pagarme_checkout_success_payment">
+                <action method="addPaymentRender"><type>pagarme_boleto</type><block>pagarme/checkout_success_payment_boleto</block><template>pagarme/checkout/success/payment/boleto.phtml</template></action>
+            </block>
+        </reference>
+    </checkout_onepage_success>
+
+    <checkout_multishipping_success translate="label">
+        <reference name="content">
+            <block type="pagarme/checkout_success_payment" name="pagarme_checkout_success_payment">
+                <action method="addPaymentRender"><type>pagarme_boleto</type><block>pagarme/checkout_success_payment_boleto</block><template>pagarme/checkout/success/payment/boleto.phtml</template></action>
+            </block>
+        </reference>
+    </checkout_multishipping_success>
+
+	<pagarme_order_fee_handle>
+        <reference name="order_totals">
+            <block type="pagarme/sales_order_fee" name="fee" />
+        </reference>
+	</pagarme_order_fee_handle>
+
+	<pagarme_invoice_fee_handle>
+        <reference name="invoice_totals">
+            <block type="pagarme/sales_order_fee" name="fee" />
+        </reference>
+	</pagarme_invoice_fee_handle>
+
+	<pagarme_creditmemo_fee_handle>
+        <reference name="creditmemo_totals">
+            <block type="pagarme/sales_order_fee" name="fee" />
+        </reference>
+	</pagarme_creditmemo_fee_handle>
+
+    <sales_order_view>
+        <update handle="pagarme_order_fee_handle"/>
+    </sales_order_view>
+
+    <sales_order_print>
+        <update handle="pagarme_order_fee_handle"/>
+    </sales_order_print>
+
+    <sales_email_order_items>
+        <update handle="pagarme_order_fee_handle"/>
+    </sales_email_order_items>
+
+    <sales_order_invoice>
+        <update handle="pagarme_invoice_fee_handle"/>
+    </sales_order_invoice>
+
+    <sales_order_printinvoice>
+        <update handle="pagarme_invoice_fee_handle"/>
+    </sales_order_printinvoice>
+
+    <sales_email_order_invoice_items>
+        <update handle="pagarme_invoice_fee_handle"/>
+    </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <update handle="pagarme_creditmemo_fee_handle"/>
+    </sales_order_creditmemo>
+
+    <sales_order_printcreditmemo>
+        <update handle="pagarme_creditmemo_fee_handle"/>
+    </sales_order_printcreditmemo>
+
+    <sales_email_order_creditmemo_items>
+        <update handle="pagarme_creditmemo_fee_handle"/>
+    </sales_email_order_creditmemo_items>
+</layout>
+

@@ -1,0 +1,58 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<div class="my-account">
+    <div class="page-title">
+    	 <h1><?php echo Mage::helper('mercadolivre')->__('Escolha a variação do produto') ?></h1>
+    </div>
+     <?php echo $this->getMessagesBlock()->getGroupedHtml() ; ?>
+    <form action="<?php  echo $this->getSaveUrl() ?>" method="post" id="form-validate" name="variation" >
+
+ <dl class="mp-methods">
+    <div id="mperror" class="error-msg" style="display:none;"><?php echo $this->__('É necessário escolher uma variação') ;?></div>
+    
+
+    			
+    			  <select id="variation" class="required-entry select" title="Variation" name="variation">
+                 <?php        
+    		
+                    foreach ($this->getOptions() as $option){
+			        if($option['qtd'] > 0){ ?>
+                    <option value="<?php echo $option['id'] ?>">
+                    	
+                    	<?php 
+                    	$title = array();
+                    	foreach ($option['att'] as $att):
+						if($att['value'] != null || $att['value'] != '') $title[] = $att['code'] . ': '. $att['value'];
+						endforeach; 
+						?>
+	
+                    	<?php echo implode(', ', $title) ?>     	
+                    </option> 
+                    <?php }}; ?>
+ 
+                        
+                </select>
+		
+		  	
+
+<div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->getBackUrl(); ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo $this->__('Continue') ?>" class="button"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+    </div>
+
+</form> 
+</dl> 
+</div>
+

@@ -1,0 +1,10 @@
+/**
+ *
+ * @category   Inovarti
+ * @package    Inovarti_Pagarme
+ * @author     Suporte <suporte@inovarti.com.br>
+ */
+
+.pagarme-status { color: #eb5e00; }
+.pagarme-status.paid { color: #147C25; }
+.pagarme-transaction-view-content { padding: 14px; }

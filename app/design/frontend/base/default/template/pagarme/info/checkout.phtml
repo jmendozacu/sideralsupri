@@ -1,0 +1,16 @@
+<?php
+/*
+ * @copyright   Copyright (C) 2015 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author     Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+?>
+
+<?php echo $this->htmlEscape($this->getMethod()->getTitle()) ?>
+
+<?php if ($_info = $this->getInfo()):?>
+<br />
+<?php // echo $this->escapeHtml($this->getInstallmentDescription()) ?>
+<?php endif;?>
+
+<?php echo $this->getChildHtml(); ?>
+

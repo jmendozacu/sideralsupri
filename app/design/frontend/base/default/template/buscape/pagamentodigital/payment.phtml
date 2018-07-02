@@ -1,0 +1,203 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to suporte.developer@buscape-inc.com so we can send you a copy immediately.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2010 Buscapé Company (http://www.buscapecompany.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+
+<div class="page-head">
+    <h2 class="sub-title">Finalizando sua compra com Bcash</h2>
+</div>
+
+<?php $config = Mage::getModel('pagamentodigital/config')->getExibitionWebCheckout(); ?>
+
+<?php 
+    switch($config) 
+    { 
+        case 1:
+?>            
+        <script type="text/javascript">
+            var div_pd = document.createElement("div");
+            var center_frame = document.createElement("center");
+            var div_frame = document.createElement("div");
+            var img_close = document.createElement("img");
+            var frame_pd = document.createElement("iframe");
+
+            frame_pd.setAttribute("style","border:0px");
+            frame_pd.setAttribute("width","100%");
+            frame_pd.setAttribute("height","700");
+            frame_pd.setAttribute("name","pd_frame");
+
+            img_close.setAttribute("style","position: relative;margin-left: 99%;margin-top: -20px;");
+            img_close.setAttribute("src","<?php echo $this->getSkinUrl('buscape/pagamentodigital/images/close.png'); ?>");
+
+            div_frame.setAttribute("style","padding: 10px;background-color: #fff;width: 90%;margin-top: 50px");
+            div_frame.setAttribute("id","lightbox-bcash");
+
+            div_pd.setAttribute("id","overlay-pd");
+
+            div_frame.appendChild(img_close);
+            div_frame.appendChild(frame_pd);
+
+            center_frame.appendChild(div_frame);
+
+            div_pd.appendChild(center_frame);
+
+            document.body.appendChild(div_pd);
+        </script>
+        
+        <table style="width:100%;">
+            <tr>
+                <td style="width:100%">
+                    Sua compra est&aacute; em processo de finaliza&ccedil;&atilde;o.<br />
+                    Caso a p&aacute;gina de finaliza&ccedil;&atilde;o de pagamento n&atilde;o se inicie automaticamente, <a href="#" id="pd_lightbox">Clique Aqui</a>
+                    <br />
+                    <br />
+                    <object type="application/x-shockwave-flash" data="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" width="468" height="60">
+                        <param name="movie" value="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" />
+                        <param name="wmode" value="transparent"/>
+                    </object>
+                    <?php  $this->getPayment(); ?>
+                </td>
+            </tr>
+        </table>
+
+        <script type="text/javascript">
+            document.getElementById('pd_form').setAttribute("target", "pd_frame");
+            document.getElementById('pd_form').submit();
+            document.getElementById('overlay-pd').onclick = function (){
+                this.style.display = "none";
+            };
+            document.getElementById('pd_lightbox').onclick = function (){
+                document.getElementById('overlay-pd').style.display = "block";
+            };
+        </script>
+<?php
+            break;
+        case 2:
+?>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:100%">
+                    Sua compra est&aacute; em processo de finaliza&ccedil;&atilde;o.
+                    <br />
+                    <br />                    
+                    <iframe name="pd_frame" width="100%" height="900" style="border:0px; overflow-x:hidden" ></iframe>
+                    <object type="application/x-shockwave-flash" data="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" width="468" height="60">
+                        <param name="movie" value="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" />
+                        <param name="wmode" value="transparent"/>
+                    </object>
+                    <?php  $this->getPayment(); ?>
+                </td>
+            </tr>
+        </table>
+
+        <script type="text/javascript">
+            document.getElementById('pd_form').setAttribute("target", "pd_frame");
+            document.getElementById('pd_form').submit();
+        </script>        
+<?php
+            break;
+        case 3:
+?>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:100%">
+                    Sua compra est&aacute; em processo de finaliza&ccedil;&atilde;o.<br />
+                    Você será redirecionado para o Bcash. Caso a p&aacute;gina de finaliza&ccedil;&atilde;o de pagamento n&atilde;o se inicie automaticamente, <a href="#" id="pd_lightbox">Clique Aqui</a>
+                    <br />
+                    <br />
+                    <object type="application/x-shockwave-flash" data="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" width="468" height="60">
+                        <param name="movie" value="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" />
+                        <param name="wmode" value="transparent"/>
+                    </object>
+                    <?php  $this->getPayment(); ?>
+                </td>
+            </tr>
+        </table>
+
+        <script type="text/javascript">
+            document.getElementById('pd_form').setAttribute("target", "_blank");
+            document.getElementById('pd_form').submit();
+            document.getElementById('pd_lightbox').onclick = function (){
+                document.getElementById('pd_form').submit();
+            };
+        </script>        
+<?php        
+            break;
+        default:
+?>
+        <script type="text/javascript">
+            var div_pd = document.createElement("div");
+            var center_frame = document.createElement("center");
+            var div_frame = document.createElement("div");
+            var img_close = document.createElement("img");
+            var frame_pd = document.createElement("iframe");
+
+            frame_pd.setAttribute("style","border:0px");
+            frame_pd.setAttribute("width","100%");
+            frame_pd.setAttribute("height","700");
+            frame_pd.setAttribute("name","pd_frame");
+
+            img_close.setAttribute("style","position: relative;margin-left: 99%;margin-top: -20px;");
+            img_close.setAttribute("src","<?php echo $this->getSkinUrl('buscape/pagamentodigital/images/close.png'); ?>");
+
+            div_frame.setAttribute("style","padding: 10px;background-color: #fff;width: 90%;margin-top: 50px");
+            div_frame.setAttribute("id","lightbox-bcash");
+
+            div_pd.setAttribute("id","overlay-pd");
+
+            div_frame.appendChild(img_close);
+            div_frame.appendChild(frame_pd);
+
+            center_frame.appendChild(div_frame);
+
+            div_pd.appendChild(center_frame);
+
+            document.body.appendChild(div_pd);
+        </script>
+        
+        <table style="width:100%;">
+            <tr>
+                <td style="width:100%">
+                    Sua compra est&aacute; em processo de finaliza&ccedil;&atilde;o.<br />
+                    Caso a p&aacute;gina de finaliza&ccedil;&atilde;o de pagamento n&atilde;o se inicie automaticamente, <a href="#" id="pd_lightbox">Clique Aqui</a>
+                    <br />
+                    <br />
+                    <object type="application/x-shockwave-flash" data="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" width="468" height="60">
+                        <param name="movie" value="https://www.bcash.com.br/site/banner/campanhas/_24x/05/PD_Institucional_468x60.swf?oas=https://www.bcash.com.br" />
+                        <param name="wmode" value="transparent"/>
+                    </object>
+                    <?php  $this->getPayment(); ?>
+                </td>
+            </tr>
+        </table>
+
+        <script type="text/javascript">
+            document.getElementById('pd_form').setAttribute("target", "pd_frame");
+            document.getElementById('pd_form').submit();
+            document.getElementById('overlay-pd').onclick = function (){
+                this.style.display = "none";
+            };
+            document.getElementById('pd_lightbox').onclick = function (){
+                document.getElementById('overlay-pd').style.display = "block";
+            };
+        </script>     
+<?php        
+            break;
+    } 
+?>

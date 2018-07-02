@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Thirdlevel_Mercadolivre>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Sales/>
+            </depends>
+        </Thirdlevel_Mercadolivre>
+    </modules>
+</config>

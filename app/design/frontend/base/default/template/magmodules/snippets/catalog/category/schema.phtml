@@ -1,0 +1,70 @@
+<?php
+/**
+ * Magmodules.eu - http://www.magmodules.eu - info@magmodules.eu
+ * =============================================================
+ * NOTICE OF LICENSE [Single domain license]
+ * This source file is subject to the EULA that is
+ * available through the world-wide-web at:
+ * http://www.magmodules.eu/license-agreement/
+ * =============================================================
+ * @category    Magmodules
+ * @package     Magmodules_Snippets
+ * @author      Magmodules <info@magmodules.eu>
+ * @copyright   Copyright (c) 2015 (http://www.magmodules.eu)
+ * @license     http://www.magmodules.eu/license-agreement/  
+ * =============================================================
+ */
+?>
+<?php if($this->getSnippetsEnabled() && ($_snippets = $this->getSnippets())) { ?>	
+	<!--BEGIN: Rich Snippets-->	
+	<div class="std">
+		<div class="snippets">
+			<div itemscope itemtype="http://schema.org/Product">				
+				<?php if(isset($_snippets['thumbnail'])) { ?>
+					<div class="prod-thumb">
+						<img itemprop="image" src="<?php echo $_snippets['thumbnail']; ?>" height="50" alt="<?php echo $_snippets['name']; ?>">
+					</div>		
+				<?php } ?>				
+				<div class="content">
+					<p>
+						<span itemprop="name" class="product-name"><?php echo $_snippets['name']; ?></span>.					  		
+						<?php if(isset($_snippets['description'])) { ?>
+							<span itemprop="description"><?php echo $_snippets['description']; ?></span>
+						<?php } ?>
+					</p>
+					<?php if((isset($_snippets['rating']['count'])) && ($_snippets['rating']['percentage'] > 0)) { ?>
+						<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+							<div class="rating-box">
+								<div class="rating" style="width: <?php echo $_snippets['rating']['percentage']; ?>%"></div>
+							</div>
+							<?php if($_snippets['rating']['best'] > 5) { ?>
+								<?php echo '<i>' . Mage::helper('snippets')->__('Rating: %s based on %s review(s)', '<span itemprop="ratingValue">' . $_snippets['rating']['avg']  . '</span>/<span itemprop="bestRating">' . $_snippets['rating']['best'] . '</span>','<span itemprop="' .$_snippets['rating']['type'] . '">' . $_snippets['rating']['count'] . '</span>') . '</i>'; ?>
+							<?php } else { ?>
+								<?php echo '<i>' . Mage::helper('snippets')->__('Rating: %s based on %s review(s)', '<span itemprop="ratingValue">' . $_snippets['rating']['avg']  . '</span>/' . $_snippets['rating']['best'],'<span itemprop="' . $_snippets['rating']['type'] . '">' . $_snippets['rating']['count'] . '</span>') . '</i>'; ?>
+							<?php } ?>
+						</div>
+					<?php } ?>					
+					<div class="snippets-fields">
+						<span itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer">
+							<?php if(isset($_snippets['offers']['price_high'])) { ?>
+								<?php echo Mage::helper('snippets')->__('Prices from %s to %s', '<span itemprop="lowprice" content="' . $_snippets['offers']['clean_low'] . '">' . $_snippets['offers']['price_low'] . '</span>', '<span itemprop="highprice" content="' . $_snippets['offers']['clean_high'] . '">' . $_snippets['offers']['price_high'] . '</span>'); ?>
+							<?php } else { ?>
+								<?php echo Mage::helper('snippets')->__('Starting at:'); ?> <span itemprop="lowprice" content="<?php echo $_snippets['offers']['clean_low']; ?>"><?php echo $_snippets['offers']['price_low']; ?></span>
+							<?php } ?>					
+							<meta itemprop="priceCurrency" content="<?php echo $_snippets['offers']['currency']; ?>" />
+							<?php if(isset($_snippets['availability']['url'])) { ?>
+								<link itemprop="availability" href="<?php echo $_snippets['availability']['url']; ?>" />
+							<?php } ?>
+						</span>
+						<?php if(isset($_snippets['extra'])) { ?>
+							<?php foreach($_snippets['extra'] as $field) { ?>
+								<li><?php echo Mage::helper('snippets')->__($field['label']) . ': ' . $field['value']; ?></li>
+							<?php } ?>
+						<?php } ?>		
+					</div>			
+				</div>			
+			</div>
+		</div>
+	</div>
+	<!--END: Rich Snippets-->
+<?php } ?>

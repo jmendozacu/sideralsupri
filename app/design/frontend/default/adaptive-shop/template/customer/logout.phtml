@@ -1,0 +1,19 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="colunas12" class="m-top">
+    <h1 class="cor bold"><?php echo Mage::helper('customer')->__('You are now logged out') ?></h1>
+</div>
+<div id="colunas12">
+	<p class="txt fs-14"><?php echo Mage::helper('customer')->__('You have logged out and will be redirected to our homepage in 5 seconds.') ?></p>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    setTimeout(function(){ location.href = '<?php echo $this->getUrl() ?>'},5000);
+//]]>
+</script>

@@ -1,0 +1,8 @@
+a:5:{i:0;s:186:"Error in file: "/home/sideralsupri/www/app/code/core/Mage/Cms/data/cms_setup/data-install-1.6.0.0.php" - A block identifier with the same properties already exists in the selected store.";i:1;s:841:"#0 /home/sideralsupri/www/app/code/core/Mage/Core/Model/Resource/Setup.php(645): Mage::exception('Mage_Core', 'Error in file: ...')
+#1 /home/sideralsupri/www/app/code/core/Mage/Core/Model/Resource/Setup.php(391): Mage_Core_Model_Resource_Setup->_modifyResourceDb('data-install', '', '1.6.0.0.1')
+#2 /home/sideralsupri/www/app/code/core/Mage/Core/Model/Resource/Setup.php(289): Mage_Core_Model_Resource_Setup->_installData('1.6.0.0.1')
+#3 /home/sideralsupri/www/app/code/core/Mage/Core/Model/Resource/Setup.php(269): Mage_Core_Model_Resource_Setup->applyDataUpdates()
+#4 /home/sideralsupri/www/app/code/core/Mage/Core/Model/App.php(351): Mage_Core_Model_Resource_Setup::applyAllDataUpdates()
+#5 /home/sideralsupri/www/app/Mage.php(683): Mage_Core_Model_App->run(Array)
+#6 /home/sideralsupri/www/index.php(87): Mage::run('', 'store')
+#7 {main}";s:3:"url";s:71:"/rolo-inferior-de-press-o-para-ricoh-aficio-1013-katun-performance.html";s:11:"script_name";s:10:"/index.php";s:4:"skin";s:7:"default";}

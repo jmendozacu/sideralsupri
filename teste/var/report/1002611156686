@@ -1,0 +1,11 @@
+a:4:{i:0;s:63:"SQLSTATE[HY000]: General error: 2006 MySQL server has gone away";i:1;s:1431:"#0 /var/www/vhosts/sideralsupri.com.br/httpdocs/lib/Zend/Db/Adapter/Pdo/Abstract.php(305): PDO->beginTransaction()
+#1 /var/www/vhosts/sideralsupri.com.br/httpdocs/lib/Zend/Db/Adapter/Abstract.php(495): Zend_Db_Adapter_Pdo_Abstract->_beginTransaction()
+#2 /var/www/vhosts/sideralsupri.com.br/httpdocs/lib/Varien/Db/Adapter/Pdo/Mysql.php(219): Zend_Db_Adapter_Abstract->beginTransaction()
+#3 /var/www/vhosts/sideralsupri.com.br/httpdocs/app/code/core/Mage/Core/Model/Resource/Abstract.php(76): Varien_Db_Adapter_Pdo_Mysql->beginTransaction()
+#4 /var/www/vhosts/sideralsupri.com.br/httpdocs/app/code/core/Mage/Core/Model/Abstract.php(313): Mage_Core_Model_Resource_Abstract->beginTransaction()
+#5 /var/www/vhosts/sideralsupri.com.br/httpdocs/app/code/community/Aoe/Scheduler/Model/Observer.php(112): Mage_Core_Model_Abstract->save()
+#6 /var/www/vhosts/sideralsupri.com.br/httpdocs/app/code/core/Mage/Core/Model/App.php(1338): Aoe_Scheduler_Model_Observer->dispatch(Object(Varien_Event_Observer))
+#7 /var/www/vhosts/sideralsupri.com.br/httpdocs/app/code/core/Mage/Core/Model/App.php(1317): Mage_Core_Model_App->_callObserverMethod(Object(Aoe_Scheduler_Model_Observer), 'dispatch', Object(Varien_Event_Observer))
+#8 /var/www/vhosts/sideralsupri.com.br/httpdocs/app/Mage.php(447): Mage_Core_Model_App->dispatchEvent('default', Array)
+#9 /var/www/vhosts/sideralsupri.com.br/httpdocs/cron.php(46): Mage::dispatchEvent('default')
+#10 {main}";s:11:"script_name";s:54:"/var/www/vhosts/sideralsupri.com.br/httpdocs/index.php";s:4:"skin";s:5:"admin";}

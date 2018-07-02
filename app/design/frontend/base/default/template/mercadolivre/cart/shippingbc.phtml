@@ -1,0 +1,51 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php
+	// $datas = $this->getData();
+	 
+	 $rates = $this->getShippingRates();
+
+	 
+ ?>	
+<div class="my-account">
+    <div class="page-title">
+    	 <h1><?php echo Mage::helper('mercadolivre')->__('Escolha a forma de entrega') ?></h1>
+    </div>
+     <?php echo $this->getMessagesBlock()->getGroupedHtml() ; ?>
+    <form action="<?php  echo $this->getSaveUrl() ?>" method="post" id="form-validate" name="shipping" >
+
+<?php if (!($shipping = $this->getShippingRates())): ?>
+    <p><?php echo $this->__('Desculpe, não há formas de entrega disponível nesse momento') ?></p>
+<?php else: ?>
+ <dl>
+    <div id="mperror" class="error-msg" style="display:none;"><?php echo $this->__('É necessário escolher uma opção de envio') ;?></div>	
+    
+    	<?php foreach($shipping as $key => $value): ?>  	
+    	<dt><?php echo($value['title']);?></dt>    		
+	    	<?php foreach ($value['methods'] as $subkey => $subvalue):?>
+	  		<dd><input type=radio  value="<?php echo $key ."_". $subkey .'/'. $subvalue['price'];?>"><b><?php echo $subvalue['title'] . '( '. $subvalue['price_formatted']  . ' )'; ?></b></dd>
+	  		<?php endforeach; ?>
+    	 
+    <?php endforeach; ?>
+<div class="buttons-set">
+        <p class="back-link"><a href="<?php echo $this->getBackUrl(); ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+        <button type="submit" title="<?php echo $this->__('Continue') ?>" class="button"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+    </div>
+ 
+<?php endif ;?>
+</form> 
+</dl> 
+</div>
+

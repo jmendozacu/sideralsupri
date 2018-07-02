@@ -1,0 +1,73 @@
+<div id="adroll">
+    <div id="adroll-header">
+        <h1>AdRoll</h1>
+        <h2>LiquidAds</h2>
+        <h3>Magento Connect Extension</h3>
+        <div class="clear"></div>
+    </div>
+
+    <div id="adroll-container">
+        <p>
+            Select the correct Advertiser Profile for your Magento account.
+        </p>
+
+        <section id="adroll-container-content">
+            <h1>Choose An Advertiser Profile</h1>
+
+            <ul>
+                <?php foreach($this->advertisables as $advertisable) { ?>
+                <?php $form_key = Mage::getSingleton('core/session')->getFormKey(); ?>
+                <li>
+                    <strong><?php echo $advertisable->name?></strong>
+                    <form method='post' action="<?php echo $this->getUrl('*/*/post')?>">
+                        <input name="form_key" type="hidden" value="<?php echo $form_key ?>" />
+                        <input name="advertisable_eid" type="hidden" value="<?php echo $advertisable->eid ?>" />
+                        <input type="submit" value = "Choose" class="adroll-primary-button"/>
+                    </form>
+                    <div class="clear"></div>
+                </li>
+                <?php } ?>
+            </ul>
+        </section>            
+
+        <form method='post' action="<?php echo $this->getUrl('*/*/post')?>">
+            <input name="form_key" type="hidden" value="<?php echo $form_key ?>" />
+            <input name="advertisable_eid" type="hidden" value="NEW" />
+            <input type="submit" value="Create a new Advertiser Profile" class="adroll-subtle-button" style="height: 30px; width: 340px; margin: 0px auto;"/>
+        </form>
+    </div>
+
+
+    <div id="adroll-showcase">
+        <div id="adroll-liquid-box">
+            <h2>Example LiquidAd</h2>
+            
+            <!-- LIQUID AD -->
+             <object
+                classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+                codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab"
+                width="300"
+                height="250"
+                id="eyefly">
+                <param name="movie" value="https://s.adroll.com/magento/LiquidAdExample.swf" />
+                <param name="FlashVars" value="demo=1"/>
+                <embed
+                    src="https://s.adroll.com/magento/LiquidAdExample.swf"
+                    width="300"
+                    height="250"
+                    name="eyefly"
+                    type="application/x-shockwave-flash"
+                    pluginspage="http://www.adobe.com/go/getflashplayer"
+                    FlashVars="demo=1"
+                    />
+              </object>
+        </div>
+        
+        <p>
+            <strong>AdRoll LiquidAds</strong> seamlessly integrate your site's product 
+            images and branding into a personalized ad unit that looks 
+            as incredible as it performs.
+        </p>
+    </div>
+    <div class="clear"></div>
+</div>

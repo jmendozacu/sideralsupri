@@ -1,0 +1,62 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="colunas9">
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+
+    <h1 class="cor bold"><?php echo Mage::helper('contacts')->__('Contact Us') ?></h1>
+</div>
+<div id="colunas8">
+	<p class="txt fs-14">
+		Se voc&ecirc; deseja obter mais informa&ccedil;&otilde;es sobre algum de nossos produtos ou sobre alguma compra efetuada, por favor, entre em contato conosco pelo telefone <strong>(11) 4428-2300</strong>, pelo skype: <strong>sideralsupri</strong>, de segunda a sexta, das 8 &agrave;s 18 horas, escreva um email para <strong>loja@sideralsupri.com.br</strong> ou use o formul&aacute;rio abaixo.<br /><br /> Obrigado!
+	</p>
+	<br />
+<form action="<?php echo $this->getFormAction(); ?>" id="contactForm" method="post">
+    <div class="fieldset">
+        <ul class="form-list">
+            <li class="fields">
+                <div class="field">
+                    <label for="name" class="required txt fs-12"><em>*</em><?php echo Mage::helper('contacts')->__('Name') ?></label>
+                    <div class="input-box">
+                        <input name="name" id="name" title="<?php echo Mage::helper('contacts')->__('Name') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserName()) ?>" class="input-text required-entry d-b op-i txt fs-14" type="text" />
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="email" class="required txt fs-12"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
+                    <div class="input-box">
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email d-b op-i txt fs-14" type="text" />
+                    </div>
+                </div>
+            </li>
+            <li>
+                <label for="telephone" class="txt fs-12"><?php echo Mage::helper('contacts')->__('Telephone') ?></label>
+                <div class="input-box">
+                    <input name="telephone" id="telephone" title="<?php echo Mage::helper('contacts')->__('Telephone') ?>" value="" class="input-text d-b op-i txt fs-14" type="text" />
+                </div>
+            </li>
+            <li class="wide">
+                <label for="comment" class="required txt fs-12"><em>*</em><?php echo Mage::helper('contacts')->__('Comment') ?></label>
+                <div class="input-box">
+                    <textarea name="comment" id="comment" title="<?php echo Mage::helper('contacts')->__('Comment') ?>" class="required-entry input-text op-t txt fs-14" cols="5" rows="3"></textarea><br />
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="buttons-set">
+        <p class="required txt fs-11"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
+        <br />
+        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
+        <button type="submit" title="<?php echo Mage::helper('contacts')->__('Submit') ?>" class="button bt radius cor-sec tt-u fs-14 bold td-n"><?php echo Mage::helper('contacts')->__('Submit') ?></button>
+    </div>
+</form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    var contactForm = new VarienForm('contactForm', true);
+//]]>
+</script>

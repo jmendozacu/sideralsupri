@@ -1,0 +1,183 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$quote = Mage::getSingleton('checkout/session')->getQuote();
+$quote->delete();
+
+?>
+
+<?php
+$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+//$order_details = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+
+Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+//$order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+//if($order->getPayment()->getMethod() == "boleto_bancario"): /*caso tenha cido escolhido boleto como meio de pagamento exibe o botão abaixo*/
+?>
+
+  <?php
+		$order = Mage::getModel ( 'sales/order' );
+		$order->loadByIncrementId ( $this->getOrderId () );
+		$method = $order->getPayment ()->getMethod ();
+		$valortotal = $order->getGrandTotal();
+		$valorfrete = $order->getShippingAmount();
+
+?>
+<!--
+<div id="colunas12">
+	<div class="e-bit">
+	<a href="https://www.ebitempresa.com.br/bitrate/pesquisa1.asp?empresa=1126925">
+		<img border="0" name="banner" src="<?php echo $this->getSkinUrl('images/e-bit.png'); ?>" alt="O que voc&ecirc; achou da Sideral?" width="1120" height="81" /></a>
+	</div>
+</div>
+-->
+
+<?php
+//$orderId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
+
+//Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+//$order = Mage::getModel('sales/order')->loadByIncrementId($orderId);
+if (strpos ( $method, 'boleto_bancario' ) !== false):
+//if($order->getPayment()->getMethod() == "boleto_bancario"): /*caso tenha sido escolhido boleto como meio de pagamento exibe o botão abaixo*/
+?>
+<div id="colunas12">
+	<a href="javascript:void(0);" class="btn-boleto bold txt fs-16 d-b ta-c" title="Clique aqui para imprimir o Boleto" onclick="window.open('<?=$this->getUrl('boleto/standard/view/order_id/'.$order->getId())?>','_blank')"><span>Clique aqui!<img border="0" name="banner" src="<?php echo $this->getSkinUrl('images/botao-boleto2x.jpg'); ?>" alt="O que voc&ecirc; achou da Sideral?" width="33" height="40" />Para imprimir o Boleto!</span></a>
+</div>
+<?php endif; ?>
+
+<div id="colunas6" class="cart-success1">
+    <p class="fs-20">Pedido realizado <span class="bold">com sucesso!</span></p>
+    <p class="txt bold fs-25 obg">Obrigado!</p>
+</div>
+
+<div id="colunas6" class="cart-success2">
+    <h2 class="cor bold sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+    <br />
+<?php if ($this->getOrderId()):?>
+<?php if ($this->getCanViewOrder()) :?>
+    <p class="txt fs-16"><?php echo $this->__('Your order # is: %s.', sprintf('<a class="bold" href="%s">%s</a>', $this->escapeHtml($this->getViewOrderUrl()), $this->escapeHtml($this->getOrderId()))) ?></p>
+<?php  else :?>
+    <p class="txt fs-16"><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+<?php endif;?>
+    <p class="txt fs-16"><?php echo $this->__('You will receive an order confirmation email with details of your order and a link to track its progress.') ?></p>
+<?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) :?>
+    <p class="txt fs-16">
+        <?php echo $this->__('Clique <a style="color:#fA9600;" href="%s" onclick="this.target=\'_blank\'">aqui</a> para imprimir seu pedido.', $this->getPrintUrl()) ?>
+        <?php echo $this->getChildHtml() ?>
+    </p>
+<?php endif;?>
+
+<?php endif;?>
+
+<?php if ($this->getAgreementRefId()): ?>
+    <p><?php echo $this->__('Your billing agreement # is: %s.', sprintf('<a class="bold" href="%s">%s</a>', $this->escapeHtml($this->getAgreementUrl()), $this->escapeHtml($this->getAgreementRefId())))?></p>
+<?php endif;?>
+
+<?php if ($profiles = $this->getRecurringProfiles()):?>
+<p><?php echo $this->__('Your recurring payment profiles:'); ?></p>
+<ul class="disc">
+<?php foreach($profiles as $profile):?>
+<?php $profileIdHtml = ($this->getCanViewProfiles() ? sprintf('<a href="%s">%s</a>', $this->escapeHtml($this->getProfileUrl($profile)), $this->escapeHtml($this->getObjectData($profile, 'reference_id'))) : $this->escapeHtml($this->getObjectData($profile, 'reference_id')));?>
+    <li><?php echo $this->__('Payment profile # %s: "%s".', $profileIdHtml, $this->escapeHtml($this->getObjectData($profile, 'schedule_description')))?></li>
+<?php endforeach;?>
+</ul>
+<?php endif;?>
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-28809277-1']);
+  _gaq.push(['_trackPageview']);
+  _gaq.push(['_addTrans',
+    '<?php echo $this->escapeHtml($this->getOrderId()); ?>',           // transaction ID - required
+    'Sideral Suprimentos',  // affiliation or store name
+    '<?php echo $valortotal; ?>',          // total - required
+    '<?php echo $valorfrete; ?>',              // shipping
+    'Santo André',       // city
+    'São Paulo',     // state or province
+    'Brasil'             // country
+  ]);
+
+<?php foreach($order->getAllVisibleItems() as $item): ?>
+	// produto
+  _gaq.push(['_addItem',
+    '<?php echo $this->escapeHtml($this->getOrderId()); ?>',           // transaction ID - required
+    '<?php echo $item->getSku() ?>',           // SKU/code - required
+    '<?php echo $item->getName() ?>',        // product name
+    '<?php echo $item->getPrice() ?>',          // unit price - required
+    '<?php echo round($item->getQtyOrdered(), 0) ?>'               // quantity - required
+  ]);
+
+<?php endforeach ?> 
+
+  _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+<script>
+   /* dataLayer.push({
+        'transactionId': '<?php echo $this->escapeHtml($this->getOrderId()); ?>',
+        'transactionAffiliation': 'Sideral Suprimentos',
+        'transactionTotal': <?php echo $valortotal; ?>,
+        'transactionShipping': <?php echo $valorfrete; ?>
+    }); */
+</script>
+
+
+	<!-- Facebook Conversion Code for Finalização de Compra -->
+	<script>(function() {
+	var _fbq = window._fbq || (window._fbq = []);
+	if (!_fbq.loaded) {
+	var fbds = document.createElement('script');
+	fbds.async = true;
+	fbds.src = '//connect.facebook.net/en_US/fbds.js';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(fbds, s);
+	_fbq.loaded = true;
+	}
+	})();
+	window._fbq = window._fbq || [];
+	window._fbq.push(['track', '6023703516016', {'value':'0.00','currency':'BRL'}]);
+	</script>
+	<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?ev=6023703516016&amp;cd[value]=0.00&amp;cd[currency]=BRL&amp;noscript=1" /></noscript>
+	<div style="display:none;">
+	<script type="text/javascript">
+	var google_tag_params = {
+	ecomm_prodid: '', 
+	ecomm_pagetype: "purchase",
+	ecomm_totalvalue: ''
+	};
+	</script>
+
+	<!-- Google Code for Venda Conversion Page -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var google_conversion_id = 1039572706;
+	var google_conversion_language = "en";
+	var google_conversion_format = "2";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "bO_ICMaz7AcQ4r3a7wM";
+	var google_conversion_value = 0;
+	var google_remarketing_only = false;
+	/* ]]> */
+	</script>
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+	<div style="display:inline;">
+	<img height="1" width="1" style="border-style:none;" alt="" src="//www.googleadservices.com/pagead/conversion/1039572706/?value=0&amp;label=bO_ICMaz7AcQ4r3a7wM&amp;guid=ON&amp;script=0"/>
+	</div>
+	</noscript>
+</div>

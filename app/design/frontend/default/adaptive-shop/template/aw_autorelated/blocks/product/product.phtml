@@ -1,0 +1,121 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Autorelated
+ * @version    2.4.4
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+$abstractBlock = $this->helper('awautorelated')->getAbstractProductBlock();
+$collection = $this->getCollection();
+
+if ($this->getPosition() == AW_Autorelated_Model_Source_Position::INSTEAD_NATIVE_RELATED_BLOCK) {
+
+    $this->iterateBlock();
+
+    if ($collection && $collection->getSize()) {
+        $this->markAsShowed();
+    } elseif ($this->showNativeBlock()) {
+        echo $this->getParent()->getChildHtml('catalog-product-related');
+    }
+}
+?>
+<?php if ($collection && $collection->getSize()) : ?>
+    <?php if (Mage::helper('awautorelated')->checkVersion('1.4')): ?>
+	    <div id="colunas12">
+	        <p class="cor fs-20 bold m-auto ta-c m-top veja">Veja tamb&eacute;m<?php //echo $this->__('Related Products') ?></p>
+	    </div>
+    <?php else: ?>
+	    <div id="colunas12">
+	        <p class="cor fs-20 bold m-auto ta-c m-top veja">Veja tamb&eacute;m<?php //echo $this->__('Related Products') ?></p>
+	    </div>
+    <?php endif; ?>
+
+    <?php foreach ($collection as $product) : ?>
+        <div id="colunas3">
+	        <div class="tag-label">
+	            <?php // flag novo produto ?>
+				<?php // Limit dates for newness
+				$newFromDate = Mage::getModel('catalog/product')->load($product->getID())->getNewsFromDate();
+				$newToDate = Mage::getModel('catalog/product')->load($product->getID())->getNewsToDate();
+				// Date and time (now)
+				$now = date("Y-m-d");
+				if($newFromDate < $now && $newToDate >= $now): ?>
+					<p class="novo">novidade</p>
+				<?php endif; ?>
+	            <?php // flag promoção ?>
+				<?php
+	    		// Get the Special Price
+	    		$specialprice = Mage::getModel('catalog/product')->load($product->getId())->getSpecialPrice(); 
+	    		// Get the Special Price FROM date
+	    		$specialPriceFromDate = Mage::getModel('catalog/product')->load($product->getId())->getSpecialFromDate();
+	    		// Get the Special Price TO date
+	    		$specialPriceToDate = Mage::getModel('catalog/product')->load($product->getId())->getSpecialToDate();
+	    		// Get Current date
+	    		$today =  time(); 
+	    		if ($specialprice):
+	        		if($today >= strtotime( $specialPriceFromDate) && $today <= strtotime($specialPriceToDate) || $today >=
+	strtotime( $specialPriceFromDate) && is_null($specialPriceToDate)): ?>
+					<p class="oferta">promo&ccedil;&atilde;o</p>
+				<?php  
+	        		endif;
+	    		endif; 
+	    		?>
+	        </div>
+	        <a href="<?php echo $abstractBlock->getProductUrl($product) ?>" class="product-image trans opacity-1-5 prod">
+	        	<img class="img-prod" src="<?php echo $this->helper('catalog/image')->init($product, 'thumbnail')->resize(263) ?>" alt="<?php echo $this->htmlEscape($product->getName()) ?>" width="263" height="263" />
+	        </a>
+	        <div id="info-prod">
+	        	<a class="fs-14 txt d-b" href="<?php echo $abstractBlock->getProductUrl($product) ?>"><h2><?php echo $this->htmlEscape($product->getName()) ?></h2></a>
+	        	<?php echo $abstractBlock->getPriceHtml($product, true, '-related') ?>
+	        	<p class="cor fs-16 bold">
+				<?php // parcelamento valor ?>
+				<?php 
+				$Preco = $product->getFinalPrice();				
+				if($Preco >= 1 and $Preco <= 39.90 ){ 
+				$Parcelamento = 1;
+				}else if($Preco >= 79.90 and $Preco <= 119.80){ 
+				$Parcelamento = 2;
+				}else if($Preco >= 119.90 and $Preco <= 159.60){
+				$Parcelamento = 3; 
+				}else if($Preco >= 159.70 and $Preco <= 199.50){
+				$Parcelamento = 4; 
+				}else if($Preco >= 199.60 and $Preco <= 239.40){
+				$Parcelamento = 5; 
+				}else if($Preco >= 239.50 and $Preco <= 279.60){
+				$Parcelamento = 6; 
+				}else if($Preco >= 279.70 and $Preco <= 319.20){
+				$Parcelamento = 7; 
+				}else if($Preco >= 319.30 and $Preco <= 359.10){
+				$Parcelamento = 8; 
+				}else if($Preco >= 359.20 and $Preco <= 398.90){
+				$Parcelamento = 9; 
+				}else if($Preco >= 399){
+				$Parcelamento = 10; 
+				}
+				$Resultado = $Preco/ $Parcelamento;
+				echo 'Ou <strong>'.$Parcelamento .'x</strong> de <strong>R$'.number_format($Resultado, 2, ',', '').'</strong> sem juros.';
+				?>
+				</p>
+	        </div>
+	    </div>
+                    <?php endforeach ?>
+<?php endif;?>

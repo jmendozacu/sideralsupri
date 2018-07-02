@@ -1,0 +1,118 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<!--<div class="footer-container">
+    <div class="footer">
+        <?php //echo $this->getChildHtml() ?>
+        <p class="bugs"><?php //echo $this->__('Help Us to Keep Magento Healthy') ?> - <a href="http://www.magentocommerce.com/bug-tracking" onclick="this.target='_blank'"><strong><?php //echo $this->__('Report All Bugs') ?></strong></a> <?php //echo $this->__('(ver. %s)', Mage::getVersion()) ?></p>
+        <address><?php //echo $this->getCopyright() ?></address>
+    </div>
+</div>
+-->
+
+	<div id="full" class="footer-bg">
+		<div id="wrapper">
+
+			<div id="colunas3">
+				<h3 class="footer-h cor-sec info">Informa&ccedil;&otilde;es</h3>
+				<?php echo $this->getChildHtml('footer_links') ?>
+			</div>
+
+			<div id="colunas3">
+				<h3 class="footer-h cor-sec pag">Formas de pagamento</h3>
+				<ul id="menu-footer-flag">
+					<li class="trans opacity-1-5"><img src="<?php echo $this->getSkinUrl('images/flag/visa.png'); ?>" width="49" height="29"></li>
+					<li class="trans opacity-1-5"><img src="<?php echo $this->getSkinUrl('images/flag/mastercard.png'); ?>" width="47" height="29"></li>
+					<li class="trans opacity-1-5"><img src="<?php echo $this->getSkinUrl('images/flag/amex.png'); ?>" width="29" height="29"></li>
+					<li class="trans opacity-1-5"><img src="<?php echo $this->getSkinUrl('images/flag/bradesco.png'); ?>" width="29" height="29"></li>
+					<li class="trans opacity-1-5"><img src="<?php echo $this->getSkinUrl('images/flag/itau.png'); ?>" width="29" height="29"></li>
+					<li class="trans opacity-1-5"><img src="<?php echo $this->getSkinUrl('images/flag/bancodobrasil.png'); ?>" width="29" height="29"></li>
+					<li class="trans opacity-1-5"><img src="<?php echo $this->getSkinUrl('images/flag/boleto.png'); ?>" width="49" height="29"></li>
+				</ul>
+			</div>
+
+			<div id="colunas3">
+				<h3 class="footer-h cor-sec social">Certificados</h3>
+				<ul id="menu-footer-flag">
+					<li class="trans opacity-1-5"><a id="seloEbit" href="http://www.ebit.com.br/#sideral-suprimentos" target="_blank" onclick="redir(this.href);">Avaliação de Lojas e-bit</a>
+					<script type="text/javascript" id="getSelo" src="https://a248.e.akamai.net/f/248/52872/0s/img.ebit.com.br/ebitBR/selo-ebit/js/getSelo.js?12692" ></script></li>
+					<li class="trans opacity-1-5"><a id="google-safe" href="http://www.google.com/safebrowsing/diagnostic?site=www.sideralsupri.com.br" target="_blank"><img src="<?php echo $this->getSkinUrl('images/google_safe.png'); ?>" width="100" height="42" alt="Sideral - Google Safe" /></a></li>
+					<li class="trans opacity-1-5"><a id="clube" href="#" target="_blank"><img src="<?php echo $this->getSkinUrl('images/clube-ecommerce.png'); ?>" width="160" height="43" alt="Clube E-commerce" /></a></li>					
+				</ul>
+			</div>
+			
+			<div id="colunas3" class="fb">
+				<h3 class="footer-h cor-sec news">Fale Conosco</h3>
+				<ul id="menu-footer-flag">
+					<li><span class="d-b f-l cor-sec fs-14">televendas:&nbsp;</span><span class="cor-sec f-l fs-14">011 4428-2300</span></li>
+					<li><span class="d-b f-l cor-sec fs-14">televendas:&nbsp;</span><span class="cor-sec f-l fs-14">021 2169-6176</span></li>
+					<li><span class="d-b f-l cor-sec fs-14">televendas:&nbsp;</span><span class="cor-sec f-l fs-14">085 3052-2352</span></li>
+					<li><p class="cor-sec fs-14">msn: loja@sideralsupri.com.br</p></li>
+					<li><p class="cor-sec fs-14">skype: sideralsupri</p></li>
+					<li><p class="cor-sec fs-14"><a href="http://www.facebook.com/sideralsuprimentos" target="_blank" title="Facebook - Sideral">facebook: sideralsuprimentos</a></p></li>
+					<li><p class="cor-sec fs-14"><a href="http://www.youtube.com/sideralsuprimentos" target="_blank" title="Youtube - Sideral">youtube: sideralsuprimentos</a></p></li>
+					
+				</ul>
+				<?php //echo $this->getChildHtml('newsletter') ?>
+			</div>
+
+		</div><!-- end wrapper -->
+	</div>
+
+	<div id="full" class="foot-bg">
+		<div id="wrapper">
+			<div id="colunas12" class="no-bottom cor-sec fs-12 bold">
+				&copy; <?php echo $today = date("Y"); ?> <?php echo $this->getCopyright(); ?><br />
+				Marcas registradas de terceiro, n&atilde;o representadas e sem v&iacute;nculo com a Sideral.<br />
+				Desenvolvido por <a target="_blank" href="http://www.mucciestudio.com.br">Mucci Est&uacute;dio</a>.
+
+				<div id="mucci"><a target="_blank" href="http://www.mucciestudio.com.br" class="trans opacity-1-5"></a></div>
+
+				<div id="dispositivos"></div>
+
+			</div>		
+		</div><!-- end wrapper -->
+	</div>
+
+<div id="fb-root"></div>
+<script type="text/javascript">
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<script type="text/javascript">
+(function(d){
+  var f = d.getElementsByTagName('SCRIPT')[0], p = d.createElement('SCRIPT');
+  p.type = 'text/javascript';
+  p.async = true;
+  p.src = '//assets.pinterest.com/js/pinit.js';
+  f.parentNode.insertBefore(p, f);
+}(document));
+</script>

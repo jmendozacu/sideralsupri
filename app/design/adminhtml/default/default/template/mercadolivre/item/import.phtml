@@ -1,0 +1,265 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ *
+ */
+ 
+ 
+
+$items = $this ->getItem();
+$info = $this->getInfo();
+$post = $this->getPost();
+if(isset($post['status'])){
+	$status = $post['status'];
+} else {
+	$status =  '';
+}
+
+?>
+
+<script src="<?php echo $this->getJsUrl('jquery/jquery.js'); ?>"></script>
+<script type="text/javascript">
+//<![CDATA[
+var $j = jQuery.noConflict();
+
+
+ 	$j(document).ready(function () {
+	
+		$j(".nav").click(function() {
+			var offset = $j(this).attr("offset");
+			navegate(offset);
+		});
+		$j("#status").change(function() {
+			navegate(0);
+		});
+		
+		function navegate(offset){
+			var status = $j("#status").val();
+			var url = "<?php echo $this->getImportUrl();?>";
+
+			if(offset != -1){
+			window.location.href = url+"status"+"/"+status+"/"+"offset"+"/"+offset;
+			}
+		}
+	
+	
+	});
+
+
+
+//]]>
+</script>
+
+
+<form action="<?php echo $this -> getpostpage(); ?>" id="importform"  method="post" name="importform">
+<input name="form_key" type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+<div class="content-header"><h3 class="icon-head head-item"><?php echo $this->getHeaderText(); ?></h3> 
+<p class="form-buttons">
+<button id="back" title="Back" type="button" class="scalable back" onclick="setLocation('<?php echo $this -> getBackUrl(); ?>')" style="">
+<span>Back</span>
+</button>
+<button id="answer" title="Answer" type="submit" class="scalable save" style="">
+<span><?php echo Mage::helper('mercadolivre') -> __('Save'); ?></span>
+</button>
+</p>
+</div>
+
+   
+<div class="entry-edit">
+	  
+
+				<div id="mercadolivre_item_grid_massaction">
+				<table cellspacing="0" cellpadding="0" class="massaction">
+				<tbody>
+				<tr>
+				<td class="pager">
+            <?php echo Mage::helper('mercadolivre') -> __('From'); ?>   
+     
+            <span id='start'><?php echo $this->getStart(); ?></span>
+          	<input type="hidden" name='offset' value="<?php echo $this->getOffset(); ?>" />
+			<?php echo Mage::helper('mercadolivre') -> __('to') .' '. $this->getEnd(); ?>    
+			<img class="nav" style="cursor: pointer;" alt="<?php echo Mage::helper('mercadolivre') -> __('Go to previus page'); ?>" id='prev' offset="<?php echo $this->getPrev();?>" src="<?php echo $this->getSkinUrl('images/pager_arrow_left_off.gif', array('_secure'=>true)) ?>">
+		    <img class="nav" style="cursor: pointer;" alt="<?php echo Mage::helper('mercadolivre') -> __('Go to next page'); ?>" id='nex'  offset="<?php echo $this->getNext();?>" src="<?php echo $this->getSkinUrl('images/pager_arrow_right_off.gif', array('_secure'=>true)) ?>">
+			<span class="separator">|</span>
+             <?php echo Mage::helper('mercadolivre') -> __('View'); ?>
+           <select id='status' name="status" style="width:100px!important;">   		    
+                <option value="" <?php echo ($status=='' ? 'selected="selected"':''); ?>><?php echo Mage::helper('mercadolivre') -> __('All'); ?></option>
+                <option value="active" <?php echo ($status=='active' ? 'selected="selected"':''); ?>><?php echo Mage::helper('mercadolivre') -> __('Active'); ?></option>
+                <option value="paused" <?php echo ($status=='paused' ? 'selected="selected"':''); ?>><?php echo Mage::helper('mercadolivre') -> __('Paused'); ?></option>
+                <option value="closed" <?php echo ($status=='closed' ? 'selected="selected"':''); ?>><?php echo Mage::helper('mercadolivre') -> __('Closed'); ?></option>
+                <option value="pending"<?php echo ($status=='pending' ? 'selected="selected"':''); ?>><?php echo Mage::helper('mercadolivre') -> __('Pending'); ?></option>
+            </select>
+            <?php echo Mage::helper('mercadolivre') -> __('# ads'); ?>
+            <span class="separator">|</span>
+            <?php echo Mage::helper('mercadolivre') -> __('Showing').' '.count($items).' '.'of'.' '.$info['paging']['total']; ?>
+            <span class="no-display" id="mercadolivre_item_grid-total-count">1</span>
+            </td>	
+			</tr>	
+			</tbody>
+			</table>
+				</div>
+			
+				<div class="grid">
+    				<div class="hor-scroll">
+   						 <table cellspacing="0" id="mercadolivre_item_toimport_table" class="data">
+   							 	<colgroup>								
+								<col width="10">
+								<col width="150">
+								<col width="150">
+								<col width="10">
+								</colgroup>
+                			<thead>
+                                    <tr class="headings">
+                                         
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="item_id" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Mercadolivre Id'); ?></span></a></span></th>
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="entity_id" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Title'); ?></span></a></span></th>
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="sku" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Link'); ?></span></a></span></th>
+                                            <th><span class="nobr"><a class="not-sort" title="asc" name="item_title" href="#"><span class="sort-title"><?php echo Mage::helper('mercadolivre') -> __('Insert your Store Product Id'); ?></span></a></span></th>
+                                   </tr>                 
+                            </thead>
+              
+        <tbody id="">
+        	
+        
+        	<?php
+        	$under_review = 0;
+        	
+        	 for ($i=0;$i<count($items);$i++){ ;?>
+        		        <?php if($items[$i]['status'] != 'under_review'){ ?>  
+        		        
+                        <tr class="" id="">
+                        <td class="">
+                        <input type="hidden" name="item[<?php echo $i; ?>][id]" value="<?php echo $items[$i]['id']; ?>" />
+                        <input type="hidden" name="item[<?php echo $i; ?>][title]" value="<?php echo $items[$i]['title']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][category_id]" value="<?php echo $items[$i]['category_id']; ?>" />
+                        <input type="hidden" name="item[<?php echo $i; ?>][price]" value="<?php echo $items[$i]['price']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][available_quantity]" value="<?php echo $items[$i]['available_quantity']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][sold_quantity]" value="<?php echo $items[$i]['sold_quantity']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][start_time]" value="<?php echo $items[$i]['start_time']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][stop_time]" value="<?php echo $items[$i]['stop_time']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][permalink]" value="<?php echo $items[$i]['permalink']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][accepts_mercadopago]" value="<?php echo $items[$i]['accepts_mercadopago']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][shipping][local_pick_up]" value="<?php echo $items[$i]['shipping']['local_pick_up']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][shipping][free_shipping']" value="<?php echo $items[$i]['shipping']['free_shipping']; ?>" />	
+                        <input type="hidden" name="item[<?php echo $i; ?>][last_updated']" value="<?php echo $items[$i]['last_updated']; ?>" />	
+<!--                        <input type="hidden" name="item[--><?php //echo $i; ?><!--][subtitle]" value="--><?php //echo $items[$i]['subtitle']; ?><!--" />  -->
+                        <input type="hidden" name="item[<?php echo $i; ?>][description]" value="<?php echo htmlentities($items[$i]['description']); ?>" />
+                        <input type="hidden" name="item[<?php echo $i; ?>][item_use_product_quantity]" value="<?php echo $items[$i]['item_use_product_quantity']; ?>" />
+                        <input type="hidden" name="item[<?php echo $i; ?>][listing_type_id]" value="<?php echo $items[$i]['listing_type_id']; ?>" />              	
+                        <input type="hidden" name="item[<?php echo $i; ?>][status]" value="<?php echo $items[$i]['status']; ?>" /> 
+                        <?php echo $items[$i]['id']; ?>	
+                        </td>
+                        <td class="">
+                        <?php echo $items[$i]['title']; 
+						
+						
+							if(isset($items[$i]['seller_contact'])){
+							$items[$i]['seller_contact'] = json_encode($items[$i]['seller_contact']);
+						?>
+							<input type="hidden" name="item[<?php echo $i; ?>][seller_contact]" value="<?php echo htmlentities($items[$i]['seller_contact']) ?>" /> 
+						
+						<?php } 
+							
+							if(isset($items[$i]['location'])){
+							$items[$i]['location'] = json_encode($items[$i]['location']);
+						?>
+							<input type="hidden" name="item[<?php echo $i; ?>][location]" value="<?php echo htmlentities($items[$i]['location']) ?>" /> 	
+								
+						<?php 	
+							}
+							if(isset($items[$i]['attributes'])){
+							$items[$i]['attributes'] = json_encode($items[$i]['attributes']);
+							?>
+							<input type="hidden" name="item[<?php echo $i; ?>][attributes]" value="<?php echo htmlentities($items[$i]['attributes']) ?>" /> 			
+								
+						<?php
+							}
+                        if(count($items[$i]['variations']) > 0){
+                
+                        for ($v=0;$v<count($items[$i]['variations']);$v++){ ?>
+                        	
+                        <input type="hidden" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][id]" value="<?php echo $items[$i]['variations'][$v]['id']; ?>" /> 	
+                        <input type="hidden" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][price]" value="<?php echo $items[$i]['variations'][$v]['price']; ?>" /> 
+                        <input type="hidden" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][available_quantity]" value="<?php echo $items[$i]['variations'][$v]['available_quantity']; ?>" /> 
+                        <input type="hidden" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][sold_quantity]" value="<?php echo $items[$i]['variations'][$v]['sold_quantity']; ?>" />
+                        <input type="hidden" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][picture_ids]" value="<?php echo implode(",",$items[$i]['variations'][$v]['picture_ids']); ?>" /> 
+                        <input type="hidden" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][attribute_combinations]" value="<?php echo htmlentities(json_encode($items[$i]['variations'][$v]['attribute_combinations'])); ?>" /> 
+                        <?php
+                        $attributes = array();
+						
+                        foreach ($items[$i]['variations'][$v]['attribute_combinations'] as $atribute){
+                        	$attributes[] = $atribute['value_name'];
+                        }
+						
+						
+						echo '<div style="padding:3px;width:100%;float:left;"> ----&gt; '. implode(',',$attributes) . '</div>';
+
+						
+						?>
+ 
+                        <?php }} ?>
+                        </td>
+                        <td class="">
+                      
+                       	<a href="<?php echo $items[$i]['permalink']; ?>" target="_blank" ><?php echo $items[$i]['permalink']; ?></a>
+                        </td>
+                        <td class="">
+                        <?php if (isset($items[$i]['product_id'])){ ?>   	  
+                        <input id="product" class="input-text no-changes" style="width: 50px;" value="<?php echo $items[$i]['product_id'] ?>" type="text" name="item[<?php echo $i; ?>][product_id]" readonly />
+                       
+                        <img src="<?php echo $this->getSkinUrl('images/success_msg_icon.gif', array('_secure'=>true)) ?>" />
+                        <?php echo Mage::helper('mercadolivre') -> __('Already in your store'); ?>                  
+                      	<?   } else { ?>                    	
+                        <input id="product" class="input-text no-changes" style="width: 50px;" type="text" value="" name="item[<?php echo $i; ?>][product_id]" />
+                       	<?php }	
+                       	
+                       	if(count($items[$i]['variations']) > 0){ ?>
+                		<br />
+                		<?php 
+                        for ($v=0;$v<count($items[$i]['variations']);$v++){ 
+                       	
+                       		if (isset($items[$i]['variations'][$v]['seller_custom_field']) 
+                       		&& $items[$i]['variations'][$v]['seller_custom_field'] != null 
+                       		&& $items[$i]['variations'][$v]['seller_custom_field'] != '' )
+                       		  { ?> 
+                       		 
+						<input id="product" class="input-text no-changes" style="width: 50px;" type="text" value="<?php echo $items[$i]['variations'][$v]['seller_custom_field'] ?>" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][seller_custom_field]" />	
+						<img src="<?php echo $this->getSkinUrl('images/success_msg_icon.gif', array('_secure'=>true)) ?>" />
+                        <?php echo Mage::helper('mercadolivre') -> __('Already in your store'); ?>    <br />
+						<?php } else { ?>
+						
+						<input id="product" class="input-text no-changes" style="width: 50px;" type="text" value="" name="item[<?php echo $i; ?>][variations][<?php echo $v; ?>][seller_custom_field]" /><br />
+						<?php }}} ?>
+                       
+                       	</td> 
+                        </tr>
+                        
+          <?php }else{
+          	$under_review ++;
+          }}?>
+
+                                    </tbody>
+    </table>
+    <p><?php if($under_review >0) echo Mage::helper('mercadolivre') -> __('*%s ad(s) is not showing here, because is Under Review At Mercadolivre.',$under_review); ?></p>
+    	
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+decorateTable('mercadolivre_item_toimport_table');
+</script>
+
+
+
+
+
+
+

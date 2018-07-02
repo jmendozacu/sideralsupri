@@ -1,0 +1,27 @@
+<?php
+/*
+ * @copyright  Copyright (C) 2015 Gamuza Technologies (http://www.gamuza.com.br/)
+ * @author     Eneias Ramos de Melo <eneias@gamuza.com.br>
+ */
+?>
+
+<?php if($this->getSource() instanceof Mage_Sales_Model_Order): ?>
+
+    <?php if ((float)$this->getSource()->getFeeAmountRefunded() > 0): ?>
+        <tr>
+            <td class="label"><strong><?php echo Mage::helper('pagarme')->__('Fee refunded to customer') ?></strong></td>
+            <td><strong><?php echo $this->getSource()->getFeeAmountRefunded(); ?></strong></td>
+        </tr>
+    <?php endif; ?>
+
+<?php else: ?>
+
+    <?php if ((float)$this->getSource()->getFeeAmount()): ?>
+        <tr>
+            <td class="label"><strong><?php echo Mage::helper('pagarme')->__('Fee Refunded') ?></strong></td>
+            <td><strong><?php echo $this->getSource()->getFeeAmount(); ?></strong></td>
+        </tr>
+    <?php endif;  ?>
+
+<?php endif; ?>
+

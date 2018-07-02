@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Imagerecycle_Imagerecycle>
+			<active>true</active>
+			<codePool>community</codePool>
+		</Imagerecycle_Imagerecycle>
+	</modules>
+</config>

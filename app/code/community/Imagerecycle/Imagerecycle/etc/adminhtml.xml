@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+     <menu>
+            <system>
+                <children>                  
+					  <Imagerecycle_Index translate="title" module="imagerecycle">
+                        <title>Image Recycle</title>
+                        <action>imagerecycle/Index</action>
+                    </Imagerecycle_Index>
+                </children>
+            </system>
+        </menu>
+		
+</config>

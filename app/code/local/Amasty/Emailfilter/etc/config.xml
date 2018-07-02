@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Emailfilter
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Emailfilter>
+            <version>1.0.2</version>
+        </Amasty_Emailfilter>
+    </modules>
+    
+    
+    <admin>
+        
+    </admin>
+    
+    
+    <frontend>
+        <translate>
+            <modules>
+                <Amasty_Emailfilter>
+                    <files>
+                        <default>Amasty_Emailfilter.csv</default>
+                    </files>
+                </Amasty_Emailfilter>
+            </modules>
+        </translate>
+    </frontend>
+    
+    
+    
+    
+    <adminhtml>
+        <translate>
+            <modules>
+                <Amasty_Emailfilter>
+                    <files>
+                        <default>Amasty_Emailfilter.csv</default>
+                    </files>
+                </Amasty_Emailfilter>
+            </modules>
+        </translate>
+    </adminhtml>
+    
+    
+    
+    
+    <global>
+    
+        <models>
+            <amemailfilter>
+                <class>Amasty_Emailfilter_Model</class>
+                <resourceModel>amemailfilter_mysql4</resourceModel>
+            </amemailfilter>
+            
+            <customer>
+                <rewrite>
+                    <customer>Amasty_Emailfilter_Model_Customer</customer>
+                </rewrite>
+            </customer>
+            
+            <checkout>
+                <rewrite>
+                    <type_onepage>Amasty_Emailfilter_Model_Onepage</type_onepage>
+                </rewrite>
+            </checkout>
+        </models>
+        
+		<resources>
+             <amemailfilter_setup>
+                <setup>
+                    <module>Amasty_Emailfilter</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amemailfilter_setup>
+		    <amemailfilter_write>
+		        <connection><use>core_write</use></connection>
+		    </amemailfilter_write>
+		    <amemailfilter_read>
+		        <connection><use>core_read</use></connection>
+		    </amemailfilter_read>
+		</resources>
+		  
+        <blocks>
+            <amemailfilter>
+                <class>Amasty_Emailfilter_Block</class>
+            </amemailfilter>
+            
+        </blocks>
+        
+        <helpers>
+            <amemailfilter>
+                <class>Amasty_Emailfilter_Helper</class>
+            </amemailfilter>
+        </helpers>
+        
+    </global>
+    
+    <default>
+        <customer>
+            <amemailfilter>
+                <filters></filters>
+                <forreg>1</forreg>
+                <forcheckout>1</forcheckout>
+            </amemailfilter>
+        </customer>
+    </default>
+    
+</config>

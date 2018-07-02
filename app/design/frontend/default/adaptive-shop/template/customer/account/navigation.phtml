@@ -1,0 +1,32 @@
+<?php
+/**
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<div id="colunas3">
+	<!--<h2 class="cor bold">&nbsp;&nbsp;Minha conta</h2>
+    <br />-->
+    <ul id="cat" class="d-b banner-bg">
+    <?php $_links = $this->getLinks(); ?>
+    <?php $_index = 1; ?>
+    <?php $_count = count($_links); ?>
+    <?php foreach ($_links as $_link): ?>
+    	<?php $_last = ($_index++ >= $_count); ?>
+        <?php if ($this->isActive($_link)): ?>
+        <li class="current<?php echo ($_last ? ' last' : '') ?> cor f-l bold fs-14"><?php echo $_link->getLabel() ?></li>
+        <?php else: ?>
+        <li<?php echo ($_last ? ' class="last"' : '') ?>>
+        	<a class="txt f-l fs-14" href="<?php echo $_link->getUrl() ?>"><?php echo $_link->getLabel() ?></a>
+        </li>
+        <?php endif; ?>
+        <?php endforeach; ?>
+        <li></li>
+    </ul>
+</div>
+
+
+

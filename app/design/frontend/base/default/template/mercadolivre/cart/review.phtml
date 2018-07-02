@@ -1,0 +1,174 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+?>
+<?php $datas = $this->getData();
+	  $order = $this->getOrder();
+ ?>	
+<script type="text/javascript" src="<?php echo $this->getJs(); ?>"></script>
+
+
+<?php echo $this->getChildHtml('global_notices') ?>
+<?php echo $this->getChildHtml('global_messages') ?>
+
+<div class="my-account">
+    <div class="page-title">
+        <h1><?php echo Mage::helper('mercadolivre')->__('Your order information') ?></h1>
+    </div>
+    
+            <div id="checkout-review-load"><div id="checkout-review-table-wrapper">
+ 
+   <table class="data-table" id="checkout-review-table">
+        <col />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <col width="1" />
+        <thead>
+            <tr>
+                <th rowspan="1"><?php echo $this->__('Product Name') ?></th>
+                <th colspan="1" class="a-center"><?php echo $this->__('Price') ?></th>
+                <th rowspan="1" class="a-center"><?php echo $this->__('Qty') ?></th>
+                <th colspan="1" class="a-center"><?php echo $this->__('Subtotal') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($this->getItems() as $item): ?>
+     	<tr class="first last odd">
+			<td>
+			<h3 class="product-name"><?php echo $item['product_name'];?></h3>
+			</td>
+			<td class="a-right">
+			<span class="cart-price">
+			<span class="price"><?php echo Mage::helper('core')->currency($item['product_unit_price'], true, false) ;?></span>
+			</span>
+			</td>
+			<td class="a-center"><?php echo $item['product_quantity'];?></td>
+			<td class="a-right last">
+			<span class="cart-price">
+			<span class="price"><?php echo Mage::helper('core')->currency($item['product_total_price'], true, false);?></span>
+			</span>
+			</td>
+		</tr>
+        <?php endforeach ?>
+        </tbody>
+        <tfoot>
+	     <tfoot>
+        <tr class="first">
+		    <td style="" class="a-right" colspan="3">
+		     <?php echo $this->__('Subtotal'); ?>   </td>
+		    <td style="" class="a-right last">
+		        <span class="price"><?php echo  Mage::helper('core')->currency($order['order_subtotal'], true, false); ?></span>    </td>
+		</tr>
+		<tr>
+		    <td style="" class="a-right" colspan="3">
+		     <?php echo $this->__('Shipping & Handling (') . ($order['shipping_description']!= null ? $order['shipping_description']:  Mage::helper('mercadolivre')->__('Free')) .')'; ?></td>
+		    <td style="" class="a-right last">
+		        <span class="price"><?php echo Mage::helper('core')->currency(($order['store_shipping_cost']!= null ? $order['store_shipping_cost']:0) , true, false); ?></span>    </td>
+		</tr>
+		    <tr class="last">
+		    <td style="" class="a-right" colspan="3">
+		        <strong><?php echo $this->__('Total') ;?> </strong>
+		    </td>
+		    <td style="" class="a-right last">
+		        <strong><span class="price"><?php echo Mage::helper('core')->currency( $order['store_total'], true, true); ?></span></strong>
+		    </td>
+		</tr>
+		<tr>
+		    <td style="" class="a-right" colspan="3">
+		     <?php echo $this->__('Total paid at Mercadolivre (by MercadoPago)'); ?></td>
+		    <td style="" class="a-right last">
+		        <span class="price"><?php echo Mage::helper('core')->currency($order['payment_amount'] , true, false) ; ?></span>    </td>
+		</tr>
+		</tr>
+		    <tr class="last">
+		    <td style="" class="a-right" colspan="3">
+		        <strong><?php echo $this->__('Total Due') ;?> </strong>
+		    </td>
+		    <td style="" class="a-right last">
+		        <strong><span class="price"><?php echo Mage::helper('core')->currency( $order['store_due'], true, true); ?></span></strong>
+		    </td>
+		</tr>
+		    </tfoot>
+	</tfoot>
+    </table>
+</div>
+
+</div>
+
+	<div class="page-title" style="margin-top: 30px;">
+        <h1><?php echo Mage::helper('mercadolivre')->__('Choose your payment Method') ?></h1>
+    </div>
+<script type="text/javascript">
+//<![CDATA[
+    var payment = new Payment('paymentform', '<?php echo $this->getSaveUrl(); ?>');
+//]]>
+</script>
+    <form action="<?php echo $this->getSaveUrl(); ?>" method="post" id="paymentform">
+  
+    
+  	<dl class="sp-methods" id="checkout-payment-method-load" >
+	<?php 
+	
+	
+	if(sizeof($this->getMethods()) > 0 ):
+	 	
+	foreach ($this->getMethods() as $_method): $_code = $_method->getCode() ?>
+	
+	<dt>
+	<?php if($_method->canUseCheckout() == true && $_code != "free"): ?>   
+     	<input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" title="<?php echo $this->htmlEscape($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>');release();"<?php if($this->getSelectedMethodCode()==$_code): ?> checked="checked"<?php endif; ?> class="radio" />
+   		<label for="p_method_<?php echo $_code ?>"><?php echo $_method->getTitle() ?> <?php echo $this->getMethodLabelAfterHtml($_method) ?></label>
+    <?php endif; ?>
+        
+    </dt>
+    <?php if ($html=$this->getPaymentMethodFormHtml($_method)): ?>
+    <dd>
+    <?php echo $html; ?>
+    </dd> 
+	<?php endif; ?>	
+    
+
+	<?php endforeach; ?>
+	
+	
+	</dl>
+	<div id="checkout-review-submit">
+    <div class="buttons-set" id="review-buttons-container">	
+    	  <button type="submit" title="<?php echo $this->__('Pay your Order') ;?>" class="button btn-checkout" ><span><span><?php echo $this->__('Pay your Order') ;?></span></span></button>
+	</form>
+	</div>
+	</div>
+	
+	
+	<?php else: ?>
+		
+	<ul class="messages"><li class="error-msg"><?php echo $this->__('No payment method available, contact store owner') ;?></li></ul>	
+	</dl>
+	
+	
+	<?php endif; ?>
+	
+
+	
+
+	
+ 
+</div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to suporte.developer@buscape-inc.com so we can send you a copy immediately.
+ *
+ * @category   Buscape
+ * @package    Buscape_PagamentoDigital
+ * @copyright  Copyright (c) 2010 Buscapé Company (http://www.buscapecompany.com)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<layout version="0.1.0">
+    <pagamentodigital_standard_payment>
+        <reference name="head">
+            <action method="addCss">
+                <stylesheet>buscape/pagamentodigital/css/styles.css</stylesheet>
+            </action> 
+        </reference>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="pagamentodigital/payment" name="payment" template="buscape/pagamentodigital/payment.phtml" />
+        </reference>
+    </pagamentodigital_standard_payment>
+    
+    <pagamentodigital_standard_return>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="pagamentodigital/return" name="return" template="buscape/pagamentodigital/return.phtml" />
+        </reference>
+    </pagamentodigital_standard_return>
+    
+    <pagamentodigital_standard_error>
+        <remove name="left"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="pagamentodigital/error" name="error" template="buscape/pagamentodigital/error.phtml" />
+        </reference>
+    </pagamentodigital_standard_error>
+</layout>

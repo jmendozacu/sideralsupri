@@ -1,0 +1,45 @@
+<!--@subject Obrigado por sua compra ! @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"skin url=\"images/logo_email.gif\" _area='frontend'":"Email Logo Image",
+"htmlescape var=$customer.name":"Customer Name",
+"store url=\"customer/account/\"":"Customer Account Url",
+"var customer.email":"Customer Email",
+"htmlescape var=$customer.password":"Customer Password"}
+@-->
+
+<!--@styles
+body,td { color:#2f2f2f; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<div style="font:11px/1.35em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:11px/1.35em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+     
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p><strong>Prezado(a) {{var name}}</strong>,<br /><br />
+                            Recebemos seu pedido realizado pelo Mercadolivre.<br /><br />
+                            Utilize seu usuário " {{var user}}" e senha que possue em nossa loja de uma compra anterior para acompanhar o andamento de seu pedido.
+                            
+                            Acesse o link com:  <a href="{{store url="customer/account/"}}" style="color:#1E7EC8;">Login</a>
+                            
+
+		
+							<br /><br />
+                  
+                           <p>Agradecemos pelo confiança.</p>
+
+
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>

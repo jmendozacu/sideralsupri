@@ -1,0 +1,134 @@
+<div id="colunas12"></div>
+    <?php 
+        echo $this->getChildHtml('customer.login');
+        echo $this->getChildHtml('customer.forgot');   
+    ?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+	<?php $seq_http   = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS']==='on'); ?>
+	<script type="text/javascript"> var http_type = '<?php if($seq_http){echo 'https';}else{echo 'http';}?>';</script>
+	<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/onepagecheckout.js') ?>"></script>
+	<script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+	<form action="" id="onepagecheckout_orderform">
+		<div id="colunas4">
+		    <?php if (!Mage::getSingleton('customer/session')->isLoggedIn()){ ?>
+		    <?php
+		    $guest_checkout1 = Mage::getStoreConfig('onepagecheckout/general/guest_checkout1');
+		    if ($guest_checkout1 == 1) : ?>
+		        <p class="onepagecheckout_loginarea fs-16 cor bold">
+		            <?php //echo $this->__('Already registered? Click here to login') ?>
+		            J&aacute; comprou com a gente?
+			    </p>
+			    <p style="display:inline-block;height:45px;">
+			    	<a class="bt2 button fs-14 cor-sec bold f-l radius td-n" href="javascript:void(0)" class="onepagecheckout_loginlink" onclick='open_login();'>Fa&ccedil;a seu login</a>
+			    </p>
+			    <br />
+				<div class="h-r f-l d-b"></div>
+				<br />
+				<p class="txt bold fs-14">Se for sua primeira vez, por favor, preencha os campos abaixo:</p>
+				<br />
+		    <?php endif; ?>
+		
+		    <?php
+		    $guest_checkout2 = Mage::getStoreConfig('onepagecheckout/general/guest_checkout2');    
+		    if ($guest_checkout2 === '1') : ?>
+		    <p class="onepagecheckout_loginarea">
+		        <a href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB)?>customer/account/login/" class="onepagecheckout_loginlink" >
+		            <?php echo $this->__('Already registered? Click here to login') ?>
+		        </a>
+		    </p>
+		    <?php endif; } ?>
+		    
+			<?php 
+		    $logged = $this->isCustomerLoggedIn(); 
+			if ($logged): ?>
+			<p class="onepagecheckout_loginarea fs-16 cor bold">
+			Ol&aacute;, <?php echo $customerName = Mage::helper('customer')->getCustomerName(); ?>!<br />
+			</p>
+			<div class="h-r f-l d-b"></div>
+			<br />
+			<?php endif; ?>		    
+			 
+			<div class="onepagecheckout_datafields">
+		        <?php echo $this->getChildHtml('billing.address') ?>
+		        <?php echo $this->getChildHtml('shipping.address') ?>
+			</div>
+		</div>
+		
+		<div id="colunas4">
+			<div class="onepagecheckout_datafields">
+		        <?php echo $this->getChildHtml('shipping.method') ?>
+		        <?php echo $this->getChildHtml('payment.method') ?>
+		         <div id="checkout-coupon-discount-load">
+		            <?php echo $this->getChildHtml('coupon') ?>
+		        </div>
+		
+		        <?php if (Mage::getStoreConfig('onepagecheckout/general/comment')) : ?>
+		        <div class="op_block_title cor fs-16 bold">
+		            <?php echo $this->helper('sales')->__('Comment') ?>
+		        </div>        
+		        <div class="form_fields">
+		            <div class="full">
+		                <div class="data_area" id='comment-block'>
+		                    <textarea name="order-comment" id="order-comment" class="d-b op-t txt fs-14"><?php echo trim(Mage::getSingleton('customer/session')->getOrderCustomerComment()) ?></textarea>
+		                </div>
+		            </div>
+		        </div>
+		        <?php endif; ?>
+		        <!--<input type="hidden" checked="checked" id="newsletter-signup" name="newsletter" value="1" title="<?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?>" class="checkbox" />-->
+		        
+		        <?php if (Mage::helper('onepagecheckout')->isSubscribeNewAllowed()) : ?>
+		            <p class="newsletter">
+		                <input type="checkbox" id="newsletter-signup" name="newsletter"  title="<?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?>" class="checkbox" />
+		                <label class="fs-14 bold txt" for="newsletter-signup">Desejo receber ofertas por email</label>
+		            </p>
+		        <?php endif; ?>
+			</div>
+		</div>
+		
+		<div id="colunas4">
+			<div class="onepagecheckout_datafields">
+		        <?php echo $this->getChildHtml('review') ?>
+			</div>
+		</div>
+	</form>
+
+<script type="text/javascript">
+//<![CDATA[
+    var checkout = new OPC('onepagecheckout_orderform', {
+        save    : '<?php echo $this->getUrl('onepagecheckout/index/saveOrder', array('_secure'=>$seq_http)) ?>',
+        update  : '<?php echo $this->getUrl('onepagecheckout/index/updateCheckout', array('_secure'=>$seq_http)) ?>',
+        success : '<?php echo $this->getUrl('onepagecheckout/index/success', array('_secure'=>$seq_http)) ?>',
+        failure : '<?php echo $this->getUrl('checkout/cart') ?>'
+    }, "<?php echo $this->__('Please agree to all the terms and conditions.') ?>");
+
+    document.observe("dom:loaded", function() {
+        var win_triggers    = Array();
+        $$('.checkout-agreements .agree a').each(function(item){
+            var obj = {
+                el: $$('.' + item.className),
+                event: 'click',
+                window: $(item.className + '-window')
+            };
+            win_triggers.push(obj);
+        });
+        opc_window  = new OPC.Window({triggers: win_triggers});
+    });
+    
+    
+    var opcDatafields=document.getElementsByClassName('no-home')[0];var opcLock=document.createElement('div');opcLock.setStyle({display:'none',position:'relative',width:'100%',height:'100%',right:'0',bottom:'0',top:'0',left:'0',backgroundColor:'#fff',opacity:'0'});opcDatafields.appendChild(opcLock);if(checkout){checkout.setLoadWaiting=function(flag){if(flag){opcLock.setStyle({display:'block',height:opcDatafields.offsetHeight+'px'});var container=$('review-buttons-container');container.addClassName('disabled');container.setStyle({opacity:1});this._disableEnableAll(container,true)}else if(this.loadWaiting){opcLock.setStyle({display:'none',height:opcDatafields.offsetHeight+'px'});var container=$('review-buttons-container');container.removeClassName('disabled');container.setStyle({opacity:1});this._disableEnableAll(container,false)}this.loadWaiting=flag}};
+
+//]]>
+</script>
+
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try{
+    var pageTracker = _gat._getTracker("<?php echo Mage::getStoreConfig('onepagecheckout/general/analytics')?>");
+    pageTracker._trackPageview();
+    } catch(err) {}
+
+</script>

@@ -1,0 +1,11 @@
+/*
+Tablet Landscape (já pega todas as configurações do desktop, usar essa mediaquery apenas para ajustes)
+*/
+
+@media only screen and (max-device-width: 1024px) and (orientation:landscape){
+
+#dispositivos {
+	background-position: center -30px;
+}
+
+}

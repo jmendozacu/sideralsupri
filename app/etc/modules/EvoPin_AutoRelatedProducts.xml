@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <EvoPin_AutoRelatedProducts>
+            <active>true</active>
+            <codePool>community</codePool>
+        </EvoPin_AutoRelatedProducts>
+    </modules>
+</config>

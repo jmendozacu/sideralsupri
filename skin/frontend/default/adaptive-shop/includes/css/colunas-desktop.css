@@ -1,0 +1,87 @@
+/*
+desktop
+*/
+@media only screen and (min-width : 1200px) {
+
+#wrapper{
+	padding: 0 18px;
+	width: 1164px;
+}
+
+#colunas12{
+	width: 1136px;
+}
+
+#wrapper-colunas9{
+	width: 873px;
+}
+
+#colunas9{
+	width: 845px
+}
+
+#wrapper-colunas8{
+	width: 776px;
+}
+
+#colunas8{
+	width: 748px
+}
+
+#colunas6{
+	width: 554px;
+}
+
+#colunas4{
+	width: 360px;
+}
+
+#colunas3{
+	width: 263px;
+}
+
+.colunas3{
+    width: 350px;
+    margin-right: 28px;
+}
+
+.news-i{
+	width: 655px;
+}
+.form-news > form{width: 66%}
+
+#dispositivos {
+background-position: center top;
+}
+#gallery, #slide-images{
+	height: 300px!important;
+}
+.product-image-zoom a, .product-image-zoom a img, .product-image-zoom .mousetrap{
+	width: 554px!important;
+	height: 554px!important;
+}
+.fb iframe {width: 263px!important;}
+
+.cart-success1{
+	height: 50px;
+}
+.cart-success2{
+	height: 115px;
+}
+.cart-empty1{
+	height: 40px;
+}
+.cart-empty2{
+	height: 105px;
+}
+
+.i-flag-view li {margin: 15px 12px 0 0;}
+.i-flag-view2 li {margin: 15px 50px 0 0;}
+#menu-footer-flag2 #clube img {max-width: 160px;height: auto;}
+.new-form-search #search {width: 1046px;display: block;}
+.new-menu li > a{margin: 0 25px;}
+.new-list-box4 li{width: 218px;height: 180px;}
+
+.c-banner-toner-po-refil ul li{width: 127px;height:85px;margin: 5px;}
+
+}

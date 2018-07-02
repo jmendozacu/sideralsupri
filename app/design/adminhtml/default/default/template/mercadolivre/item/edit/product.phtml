@@ -1,0 +1,224 @@
+<?php
+/**
+ *
+ * NOTICE OF LICENSE
+ *
+ * Todos direitos reservados para Thirdlevel | ThirdLevel All Rights Reserved
+ *
+ * @company   	ThirdLevel
+ * @package    	MercadoLivre
+ * @author      André Fuhrman (andrefuhrman@gmail.com)
+ * @copyright  	Copyright (c) ThirdLevel [http://www.thirdlevel.com.br]
+ * 
+ */
+
+ $product = $this->getProduct();
+ $quantity = $this->getQuantity();
+ $price =  $this->getPrice();
+ $exists = $this->getExist();
+ $variable = $this->getVariable();
+ 
+
+?>
+
+<div class="entry-edit">
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo Mage::helper('mercadolivre')->__('Products') ?></h4>
+    </div>
+    <fieldset id="grop_fields">
+    	
+    	
+    	<?php if ($exists): ?>
+    			
+    		 <?php if ($variable): // has variable ?>
+	         	
+	         	
+	         	<?php for($i=0;$i<count($product);$i++): ?>
+	         		<input id="product_id" type="hidden" value="<?php echo $this->getProductId(); ?>" name="product_id" />
+	         		<input type="hidden" value="<?php echo $product[$i]['id']; ?>" name="item[variation][<?php echo $i; ?>][id]" />
+	         		
+	         		<table class="form-list" cellspacing="0">
+	         			<tr>
+			                <td class="label">
+			                <?php $n = $i+1;  ?>
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Variation: ').$n ?></label>    
+			                
+			                </td>
+			                <td class="value">
+			                <?php 
+			                	$attr = array();
+								$position = 0;
+
+								foreach($product[$i]['attribute_combinations'] as $attributes){
+								$attr[] = $attributes->value_name;			
+								echo '<input class="" type="hidden" value="'. $attributes->id.'" name="item[variation]['.$i.'][attribute_combinations]['.$position.'][id]" />';
+								echo '<input class="" type="hidden" value="'. $attributes->value_id .'" name="item[variation]['.$i.'][attribute_combinations]['.$position.'][value_id]" />';
+								$position ++;
+								}
+						        echo implode(' , ',$attr);
+			                 ?>
+			                <?php if(isset($product[$i]['picture_ids'])){?>
+			                <input type="hidden" value="<?php echo implode(',',$product[$i]['picture_ids']); ?>" name="item[variation][<?php echo $i; ?>][picture_ids]" />
+			                <?php }?>
+			                </td>
+			            </tr> 
+	         			<tr>
+			                <td class="label">
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Product Id') ?></label>    
+			                </td>
+			                <td class="value">
+			                <input id="product_id_variation" class="input-text required-entry" type="text" value="<?php echo $product[$i]['seller_custom_field']; ?>" name="item[variation][<?php echo $i; ?>][seller_custom_field]" />
+			                </td>
+			            </tr>
+			            <tr>
+			                <td class="label">
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Item Quantity') ?></label>    
+			                </td>
+			                <td class="value">
+			                <input id="product_id" class="input-text required-entry" type="text" value="<?php echo $product[$i]['available_quantity']; ?>" name="item[variation][<?php echo $i; ?>][available_quantity]" />
+			                </td>
+			            </tr>
+			             <tr>
+			                <td class="label">
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('price') ?></label>    
+			                </td>
+			                <td class="value">
+			                <input id="product_id" class="input-text required-entry" type="text" value="<?php echo $product[$i]['price']; ?>" name="item[variation][<?php echo $i; ?>][price]" />
+			                </td>
+			            </tr>      
+	         		 </table>
+	         		 <br />
+	         	<?php endfor ;?>
+	
+	         
+	         
+	         
+	         
+	         
+         	 <?php else: // don't have variable ?> 
+         	  <table class="form-list" cellspacing="0">
+	        
+	            <tr>
+	                <td class="label">
+	                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Product Id') ?></label>    
+	                </td>
+	                <td class="value">
+	                <input id="product_id" class="input-text required-entry" type="text" value="<?php echo $product['product_id']; ?>" name="product_id" />
+	                </td>
+	            </tr>    			
+	             <tr>
+	                <td class="label">
+	                <label for="item_price"><?php echo Mage::helper('mercadolivre')->__('Item Price') ?></label>    
+	                </td>
+	                <td class="value">
+	                <input  id="item_price" class="input-text required-entry" type="text" value="<?php echo $product['item_price']; ?>" name="item_price" />
+	                </td>
+	            </tr>
+	             <tr>
+	                <td class="label">
+	                <label for="item_qtd"><?php echo Mage::helper('mercadolivre')->__('Item Quantity') ?></label>    
+	                </td>
+	                <td class="value">
+	                <input <?php  echo $product['item_use_product_quantity'] == 1 ? 'disabled=""' : '' ; ?>  id="item_qtd" class="input-text required-entry" type="text" value="<?php echo round($product['item_qtd'],0); ?>" name="item_qtd" /> 
+	                <input id="item_use_product_quantity" class="checkbox" type="checkbox" onclick="toggleValueElements(this, this.parentNode);" <?php echo $product['item_use_product_quantity']== 1 ? 'checked="checked"' : '' ; ?> value="1" name="item_use_product_quantity">
+	                <label class="normal" for="item_use_product_quantity"><?php echo Mage::helper('mercadolivre')->__('Get from Store Product Stock') ?></label>
+	                </td>
+	            </tr>
+	         </table>	
+         	 <?php endif; // end of dont'have variable ?>
+         
+         <?php else: // NEW ITEM ?> 
+         
+         	<?php if ($variable):  // has variable ?>
+         		
+         		<input id="product_id" type="hidden" value="<?php echo $this->getProductId(); ?>" name="product_id" />
+         		<?php for($i=0;$i<count($product);$i++): ?>
+	         		
+	         		<table class="form-list" cellspacing="0">
+	         			<tr>
+			                <td class="label">
+			                <?php $n = $i+1;  ?>
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Variation: ').$n ?></label>    
+			                
+			                </td>
+			                <td class="value">
+			                <?php 
+			                	$attr = array();
+								$position = 0;
+
+								foreach($product[$i]['attribute_combinations'] as $attributes){
+								$attr[] = $attributes['store_name'];			
+								echo '<input id="product_id" class="" type="hidden" value="'. $attributes['id'].'" name="item[variation]['.$i.'][attribute_combinations]['.$position.'][id]" />';
+								echo '<input id="product_id" class="" type="hidden" value="'. $attributes['value_id'] .'" name="item[variation]['.$i.'][attribute_combinations]['.$position.'][value_id]" />';
+								$position ++;
+								}
+						        echo implode(' , ',$attr);
+			                 ?>
+			                <input id="product_id" type="hidden" value="<?php echo implode(',',$product[$i]['picture_ids']); ?>" name="item[variation][<?php echo $i; ?>][picture_ids]" />
+			                </td>
+			            </tr> 
+	         			<tr>
+			                <td class="label">
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Product Id') ?></label>    
+			                </td>
+			                <td class="value">
+			                <input id="product_id" class="input-text required-entry" type="text" value="<?php echo $product[$i]['seller_custom_field']; ?>" name="item[variation][<?php echo $i; ?>][seller_custom_field]" />
+			                </td>
+			            </tr>
+			            <tr>
+			                <td class="label">
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Item Quantity') ?></label>    
+			                </td>
+			                <td class="value">
+			                <input id="product_id" class="input-text required-entry" type="text" value="<?php echo $product[$i]['available_quantity']; ?>" name="item[variation][<?php echo $i; ?>][available_quantity]" />
+			                </td>
+			            </tr>
+			             <tr>
+			                <td class="label">
+			                <label for="item_product_name"><?php echo Mage::helper('mercadolivre')->__('Item Price') ?></label>    
+			                </td>
+			                <td class="value">
+			                <input id="product_id" class="input-text required-entry" type="text" value="<?php echo $product[$i]['price']; ?>" name="item[variation][<?php echo $i; ?>][price]" />
+			                <input id="product_id" class="input-text required-entry" type="hidden" value="<?php echo $product[$i]['price']; ?>" name="item_price" />
+			                </td>
+			            </tr>      
+	         		 </table>
+	         		 <br />
+	         	<?php endfor ;?>
+         	         		
+         	<?php else: // don't have variable ?>   
+            <table class="form-list" cellspacing="0">
+	            <tr>
+	                <td class="label">
+	                <label for="item_product_id"><?php echo Mage::helper('mercadolivre')->__('Product Id') ?></label>    
+	                </td>
+	                <td class="value">
+	                <input id="product_id" class="input-text required-entry" type="text" value="<?php echo $product['entity_id']; ?>" name="product_id" />
+	                </td>
+	            </tr>    			
+	             <tr>
+	                <td class="label">
+	                <label for="item_price"><?php echo Mage::helper('mercadolivre')->__('Item Price') ?></label>    
+	                </td>
+	                <td class="value">
+	                <input  id="item_price" class="input-text required-entry" type="text" value="<?php echo $price?>" name="item_price" />
+	                </td>
+	            </tr>
+	             <tr>
+	                <td class="label">
+	                <label for="item_qtd"><?php echo Mage::helper('mercadolivre')->__('Quantity') ?></label>    
+	                </td>
+	                <td class="value">
+	                <input disabled id="item_qtd" class="input-text required-entry" type="text" value="<?php echo round($quantity,0); ?>" name="item_qtd" /> 
+	                <input id="item_use_product_quantity" class="checkbox" type="checkbox" onclick="toggleValueElements(this, this.parentNode);" <?php echo 'checked="checked'; ?> value="1" name="item_use_product_quantity">
+	                <label class="normal" for="item_use_product_quantity"><?php echo Mage::helper('mercadolivre')->__('Get from Store Product Stock') ?></label>
+	                </td>
+	            </tr>
+	         </table>
+            <?php endif; // end of dont't have varable  ?>
+   		 <?php endif; // end of new item ?>
+        
+    </fieldset>
+</div>
+
+
